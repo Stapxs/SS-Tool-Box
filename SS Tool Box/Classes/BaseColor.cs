@@ -21,6 +21,7 @@ namespace SS_Tool_Box.Classes
         public SolidColorBrush DBg = new SolidColorBrush();       //深背景色
         public BitmapImage Bgp;                                   //主背景图
         public BitmapImage Bgpa;                                  //背景图
+        public BitmapImage Bgps;                                  //主背景小图
         public FontFamily Fonts;                                  //字体
         public bool DarkMode;
 
@@ -58,6 +59,7 @@ namespace SS_Tool_Box.Classes
                         DBg = defaultColor.DBgbrush;
                         Bgp = defaultColor.Bgp;
                         Bgpa = defaultColor.Bgpa;
+                        Bgps = defaultColor.Bgps;
                     }
                     break;
             }

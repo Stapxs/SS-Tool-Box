@@ -165,6 +165,9 @@ namespace SS_Tool_Box_By_WPF
             BG.BeginInit();
             BG.Source = baseColor.Bgp;
             BG.EndInit();
+            SBG.BeginInit();
+            SBG.Source = baseColor.Bgps;
+            SBG.EndInit();
 
             //加载主页
             PageMain main = new PageMain();
@@ -384,7 +387,7 @@ namespace SS_Tool_Box_By_WPF
 
         private bool LoadingColor()
         {
-            baseColor.setColor(3, true);
+            baseColor.setColor(3, false);
             return true;
         }
     }

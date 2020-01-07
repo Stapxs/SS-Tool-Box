@@ -18,6 +18,7 @@ namespace SS_Tool_Box.Classes.BaseUIColor
         public SolidColorBrush Bgbrush = new SolidColorBrush();        //背景色
         public SolidColorBrush DBgbrush = new SolidColorBrush();       //深背景色
         public BitmapImage Bgp;                                        //主背景图
+        public BitmapImage Bgps;                                        //主背景小图
         public BitmapImage Bgpa;                                       //背景图
         public FontFamily font;                                        //字体
 
@@ -38,8 +39,8 @@ namespace SS_Tool_Box.Classes.BaseUIColor
             }
             else
             {
-                Cardbrush.Color = Color.FromArgb(204, 255, 255, 255);
-                Fontbrush.Color = Color.FromArgb(255, 255, 255, 255);
+                Cardbrush.Color = Color.FromArgb(190, 255, 255, 255);
+                Fontbrush.Color = Color.FromArgb(255, 0, 0, 0);
                 Mainbrush.Color = Color.FromArgb(255, 17, 112, 207);
                 FontMbrush.Color = Color.FromArgb(255, 255, 255, 255);
                 Fgbrush = Fontbrush;
@@ -47,6 +48,7 @@ namespace SS_Tool_Box.Classes.BaseUIColor
                 DBgbrush.Color = Bgbrush.Color;
                 Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BGForTheams/LTCatBlue.png"));
                 Bgpa = new BitmapImage(new Uri("pack://application:,,,/Resource/BGLight.png"));
+                Bgps = new BitmapImage(new Uri("pack://application:,,,/Resource/BGForTheams/LTCatBlueS.png"));
                 font = new FontFamily("方正兰亭简黑");
             }
         }

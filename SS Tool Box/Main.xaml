@@ -43,7 +43,7 @@
                 </TransformGroup>
             </materialDesign:Card.RenderTransform>
         </materialDesign:Card>
-        <Image Grid.Column="0" Grid.Row="0" Source="/Resource/BGtop.bmp">
+        <Image x:Name="SBG" Grid.Column="0" Grid.Row="0" Source="/Resource/BGtop.bmp">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.8" ShadowDepth="3"/>
             </Image.Effect>
