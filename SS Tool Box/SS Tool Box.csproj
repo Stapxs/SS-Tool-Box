@@ -227,7 +227,6 @@
     <Resource Include="Resource\BGTop.bmp" />
     <Resource Include="Resource\ICONAbout_128.ico" />
     <Resource Include="Resource\ICONMain_128.ico" />
-    <Resource Include="Resource\ICONMain_128_FG.ico" />
     <Resource Include="Resource\ICONSet_128.ico" />
     <Resource Include="Resource\SS.png" />
   </ItemGroup>
