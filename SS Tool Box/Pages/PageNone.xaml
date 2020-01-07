@@ -1,0 +1,34 @@
+﻿<Page x:Class="SS_Tool_Box.PageNone"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SS_Tool_Box"
+      xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="441" d:DesignWidth="600"
+      Title="Page1 - 批量打开文件">
+
+    <Grid Margin="10">
+        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7">
+            <StackPanel>
+                <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Margin="5" Width="548">
+                    <StackPanel>
+                        <Grid>
+                            <TextBlock x:Name="Title" Text="主标题" Margin="34,25,34,5" Width="Auto" Height="26"/>
+                        </Grid>
+                        <TextBlock x:Name="Says" Margin="34,0,34,15" Height="Auto" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card x:Name="CD2" Background="#CCFFFFFF" Margin="5,10,5,5" Width="548">
+                    <StackPanel>
+                        <pu:Loading x:Name="Load" Height="50" Width="50" LoadingStyle="Wave" IsRunning="True" Margin="0,15,0,5"/>
+                        <TextBlock x:Name="T1" Text="加载啊加载啊……" HorizontalAlignment="Center" Margin="0,5,0,15"/>
+                    </StackPanel>
+                </materialDesign:Card>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</Page>
