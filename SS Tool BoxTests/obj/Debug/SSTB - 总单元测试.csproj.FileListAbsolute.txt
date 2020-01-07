@@ -1,0 +1,28 @@
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\SS Tool BoxTests.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\SS Tool BoxTests.pdb
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\SS Tool Box.exe
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Panuon.UI.Silver.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\MaterialDesignColors.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\SS Tool Box.pdb
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\SS Tool Box.exe.config
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\obj\Debug\SSTB - 总单元测试.csprojAssemblyReference.cache
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\obj\Debug\SSTB - 总单元测试.csproj.CoreCompileInputs.cache
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\obj\Debug\SSTB - 总单元测试.csproj.CopyComplete
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\obj\Debug\SS Tool BoxTests.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool BoxTests\obj\Debug\SS Tool BoxTests.pdb

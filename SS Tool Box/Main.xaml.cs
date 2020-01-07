@@ -21,6 +21,7 @@ using Windows.Foundation;
 using Windows.UI;
 using SS_Tool_Box.Classes;
 using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace SS_Tool_Box_By_WPF
 {
@@ -30,13 +31,14 @@ namespace SS_Tool_Box_By_WPF
 
     public partial class Main : WindowX
     {
-        int NowPage = 0;
+        public static BaseColor baseColor = new BaseColor();
+        public static JObject Settings;
 
+        int NowPage = 0;
         public static int NowChoice = 0;
         public int WindowNew;
         Error error = new Error();
         DateTime loadingtime;
-        public static BaseColor baseColor = new BaseColor();
 
         public class Update
         {
@@ -63,19 +65,22 @@ namespace SS_Tool_Box_By_WPF
         public Main()
         {
             //初始化颜色
-            LoadingColor();
+            if(!LoadingMain())
+            {
+                Application.Current.Shutdown();
+            }
 
             //写入log日期
-            if (!Directory.Exists("Log"))
+            if (!Directory.Exists("SSTB/Log"))
             {
-                Directory.CreateDirectory("Log");
+                Directory.CreateDirectory("SSTB/Log");
             }
-            if (File.Exists("Log/log.log"))
+            if (File.Exists("SSTB/Log/log.log"))
             {
                 String line = "";
                 try
                 {
-                    using (StreamReader sr = new StreamReader("Log/log.log"))
+                    using (StreamReader sr = new StreamReader("SSTB/Log/log.log"))
                     {
                         line = sr.ReadLine();
                         sr.Close();
@@ -89,7 +94,7 @@ namespace SS_Tool_Box_By_WPF
                 {
                     while (line != null)
                     {
-                        File.Move("Log/log.log", "Log/log_" + line + ".log");
+                        File.Move("SSTB/Log/log.log", "SSTB/Log/log_" + line + ".log");
                     }
                 }
                 catch
@@ -99,9 +104,9 @@ namespace SS_Tool_Box_By_WPF
             }
             try
             {
-                using (StreamWriter sw = new StreamWriter("Log/log.log"))
+                using (StreamWriter sw = new StreamWriter("SSTB/Log/log.log"))
                 {
-                    sw.WriteLine(DateTime.Now.ToString("yyyy_MM_dd") + DateTime.Now.ToString("_ss"));
+                    sw.WriteLine(DateTime.Now.ToString("yyyy_MM_dd") + DateTime.Now.ToString("_HH_ss"));
                     sw.Close();
                 }
             }
@@ -385,9 +390,27 @@ namespace SS_Tool_Box_By_WPF
             UpdateList.ItemsSource = listallGetEnd;
         }
 
-        private bool LoadingColor()
+        private bool LoadingMain()
         {
-            baseColor.setColor(3, false);
+            LoadingSetter Set = new LoadingSetter();
+            if (Set.fistUsed())
+            {
+                Set.newSetup();
+            }
+            else
+            {
+                Settings = Set.ReadSetup();
+            }
+            try
+            {
+                baseColor.setColor(int.Parse(Settings["Exterior"]["Themes"]["MainTheme"].ToString()), bool.Parse(Settings["Exterior"]["Themes"]["DarkMode"].ToString()));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("[ 崩溃 ] 初始化数据错误：" + ex);
+                error.logWriter("[ 崩溃 ] 初始化数据错误：" + ex, false);
+                return false;
+            }
             return true;
         }
     }

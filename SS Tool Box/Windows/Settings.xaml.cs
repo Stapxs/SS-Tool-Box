@@ -122,7 +122,7 @@ namespace SS_Tool_Box_By_WPF
             Theams.ItemsSource = customList;
             Theams.DisplayMemberPath = "Name";
             Theams.SelectedValuePath = "ID";
-            Theams.SelectedValue = 1;
+            Theams.SelectedValue = baseColora.Theme;
             if(baseColora.DarkMode)
             {
                 this.C11.IsChecked = true;

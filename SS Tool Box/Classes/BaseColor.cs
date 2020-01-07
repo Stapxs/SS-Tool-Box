@@ -23,11 +23,15 @@ namespace SS_Tool_Box.Classes
         public BitmapImage Bgpa;                                  //背景图
         public BitmapImage Bgps;                                  //主背景小图
         public FontFamily Fonts;                                  //字体
+
         public bool DarkMode;
+        public int Theme;
 
         public bool setColor(int ColorID, bool DarkMode)
         {
             this.DarkMode = DarkMode;
+            this.Theme = ColorID;
+
             this.Tran.Color = Color.FromArgb(0, 0, 0, 0);
             switch (ColorID)
             {
