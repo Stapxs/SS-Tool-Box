@@ -8,12 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/bg.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/bgtop.bmp")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/iconabout_128.ico")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/iconmain_128.ico")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/iconmain_128_fg.ico")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/iconset_128.ico")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/ss.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/bgfortheams/ltcatblues.png")]
 
 

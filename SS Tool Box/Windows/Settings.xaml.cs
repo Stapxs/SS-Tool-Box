@@ -33,8 +33,8 @@ namespace SS_Tool_Box_By_WPF
         {
             InitializeComponent();
 
-            WindowXCaption.SetBackground(this, baseColora.Bg);
-            WindowXCaption.SetForeground(this, baseColora.Fg);
+            WindowXCaption.SetBackground(this, baseColora.Main);
+            WindowXCaption.SetForeground(this, baseColora.FontM);
 
             BG.BeginInit();
             BG.Source = baseColora.Bgpa;
@@ -112,9 +112,13 @@ namespace SS_Tool_Box_By_WPF
             this.S11.Foreground = baseColora.Fg;
             SliderHelper.SetThemeBrush(S11, baseColora.Fg);
 
+            this.S11.Background = baseColora.DBg;
+
             //初始化主题
             IList<customer> customList = new List<customer>();
             customList.Add(new customer() { ID = 1, Name = "林槐白" });
+            customList.Add(new customer() { ID = 2, Name = "坏猫橙" });
+            customList.Add(new customer() { ID = 3, Name = "龙猫蓝" });
             Theams.ItemsSource = customList;
             Theams.DisplayMemberPath = "Name";
             Theams.SelectedValuePath = "ID";

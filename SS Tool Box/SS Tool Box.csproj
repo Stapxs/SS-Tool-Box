@@ -255,5 +255,8 @@
   <ItemGroup>
     <Resource Include="Resource\BGForTheams\LTCatBlue.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\BGForTheams\LTCatBlueS.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
