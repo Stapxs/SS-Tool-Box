@@ -90,15 +90,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Panges\PageHD1.xaml">
+    <Page Include="Pages\PageHD1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panges\Page5.xaml">
+    <Page Include="Pages\Page5.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panges\Page4.xaml">
+    <Page Include="Pages\Page4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,23 +114,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panges\Page3.xaml">
+    <Page Include="Pages\Page3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panges\Page2.xaml">
+    <Page Include="Pages\Page2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panges\PageNone.xaml">
+    <Page Include="Pages\PageNone.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panges\Page1.xaml">
+    <Page Include="Pages\Page1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panges\PageMain.xaml">
+    <Page Include="Pages\PageMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,14 +149,14 @@
     <Compile Include="Classes\DesktopNotificationManagerCompat.cs" />
     <Compile Include="Classes\Error.cs" />
     <Compile Include="Classes\HttpUitls.cs" />
-    <Compile Include="Classes\Setter.cs" />
-    <Compile Include="Panges\PageHD1.xaml.cs">
+    <Compile Include="Classes\LoadingSetter.cs" />
+    <Compile Include="Pages\PageHD1.xaml.cs">
       <DependentUpon>PageHD1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panges\Page5.xaml.cs">
+    <Compile Include="Pages\Page5.xaml.cs">
       <DependentUpon>Page5.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panges\Page4.xaml.cs">
+    <Compile Include="Pages\Page4.xaml.cs">
       <DependentUpon>Page4.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Settings.xaml.cs">
@@ -169,19 +169,19 @@
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panges\Page3.xaml.cs">
+    <Compile Include="Pages\Page3.xaml.cs">
       <DependentUpon>Page3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panges\Page2.xaml.cs">
+    <Compile Include="Pages\Page2.xaml.cs">
       <DependentUpon>Page2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panges\PageNone.xaml.cs">
+    <Compile Include="Pages\PageNone.xaml.cs">
       <DependentUpon>PageNone.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panges\Page1.xaml.cs">
+    <Compile Include="Pages\Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panges\PageMain.xaml.cs">
+    <Compile Include="Pages\PageMain.xaml.cs">
       <DependentUpon>PageMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\OpenInWindow.xaml.cs">
@@ -233,7 +233,6 @@
   <ItemGroup>
     <Folder Include="DLL\" />
     <Folder Include="Fonts\" />
-    <Folder Include="GetColor\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

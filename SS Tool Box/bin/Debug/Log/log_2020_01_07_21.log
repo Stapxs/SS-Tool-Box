@@ -1,8 +1,0 @@
-2020_01_07_21
-
-[17:11:21.60] 开始加载UI
-[17:11:22.49] 发现错误（MAN - 002）：获取一言失败，错误内容为：System.Net.WebException: 未能解析此远程名称: 'v1.hitokoto.cn'
-   在 System.Net.HttpWebRequest.GetResponse()
-   在 SS_Tool_Box.Classes.HttpUitls.Get(String Url) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Classes\HttpUitls.cs:行号 23
-   在 SS_Tool_Box_By_WPF.PageMain..ctor() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Panges\PageMain.xaml.cs:行号 49
-[17:11:22.50] UI加载完成，耗时：00:00:00.8974445

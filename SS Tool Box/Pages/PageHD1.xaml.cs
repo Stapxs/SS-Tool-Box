@@ -102,7 +102,7 @@ namespace SS_Tool_Box
                 this.RunCard.Visibility = Visibility.Visible;
                 return;
             }
-
+            
             try
             {
                 string url = "https://setting.smartisan.com/app/icon";
@@ -110,7 +110,6 @@ namespace SS_Tool_Box
 
                 string GetJson = HttpUitls.Post(url, packageof, "", "application/json");
 
-                //GetJson = GetJson.Substring(GetJson.IndexOf('[') + 1, GetJson.IndexOf('}') - GetJson.IndexOf('['));
                 JObject obj = JObject.Parse(GetJson);
 
                 JToken record = obj["body"]["app_icon"][PackageIn.Text];
@@ -118,9 +117,9 @@ namespace SS_Tool_Box
                 JToken recorda = obj["body"]["app_icon"][PackageIn.Text];
                 int num = -1;
                 int numa = 0;
-                if (!Directory.Exists("Logo"))
+                if (!Directory.Exists("SSTB/Files/Logo"))
                 {
-                    Directory.CreateDirectory("Logo");
+                    Directory.CreateDirectory("SSTB/Files/Logo");
                 }
                 if (!fist)
                 {
@@ -141,13 +140,13 @@ namespace SS_Tool_Box
                     foreach (JObject jp in record)
                 {
                     num++;
-                    if (!Directory.Exists("Logo/" + num))
+                    if (!Directory.Exists("SSTB/Files/Logo/" + num))
                     {
-                        Directory.CreateDirectory("Logo/" + num);
+                        Directory.CreateDirectory("SSTB/Files/Logo/" + num);
                     }
-                    string filepath = "Logo/" + num + "/logo.png";
-                    string filepatha = "Logo/" + num + "/md5.xml";
-                    string filepathb = "Logo/logo" + num + ".png";
+                    string filepath = "SSTB/Files/Logo/" + num + "/logo.png";
+                    string filepatha = "SSTB/Files/Logo/" + num + "/md5.xml";
+                    string filepathb = "SSTB/Files/Logo/logo" + num + ".png";
 
                     WebClient mywebclient = new WebClient();
 
@@ -178,7 +177,7 @@ namespace SS_Tool_Box
                     img.Source = new BitmapImage(new Uri(urlPng));
                     //this.T.Source = new BitmapImage(new Uri(urlPng));
                 }
-                T5.Text = "原图以及MD5检验文件已保存在程序所在目录的Logo文件夹下";
+                T5.Text = "原图以及MD5检验文件已保存在程序所在目录的File/Logo文件夹下";
                 this.IconCard.Visibility = Visibility.Visible;
 
                 this.RunCard.Visibility = Visibility.Collapsed;

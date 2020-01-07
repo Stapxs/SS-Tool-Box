@@ -55,13 +55,13 @@ namespace SS_Tool_Box.Classes
         {
             String nowTime = DateTime.Now.TimeOfDay.ToString();
             logString = "[" + nowTime.Substring(0, nowTime.IndexOf(".") + 3) + "] " + logString;
-            if (!Directory.Exists("Log"))
+            if (!Directory.Exists("SSTB/Log"))
             {
-                Directory.CreateDirectory("Log");
+                Directory.CreateDirectory("SSTB/Log");
             }
             try
             {
-                File.AppendAllText("Log/log.log", "\r\n" + logString);
+                File.AppendAllText("SSTB/Log/log.log", "\r\n" + logString);
             }
             catch(Exception ex)
             {
