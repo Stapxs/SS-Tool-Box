@@ -27,11 +27,7 @@
 
         <Image x:Name="BG" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4" Source="/Resource/BG.png" Stretch="Fill"/>
         <!-- 这是List的Card -->
-        <materialDesign:Card x:Name="CD1" RenderTransformOrigin="0.495,0.424" Background="#CCFFFFFF" Padding="0" Height="319" Margin="0,117,0,0" Grid.RowSpan="3" >
-            <materialDesign:Card.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.8"/>
-            </materialDesign:Card.Effect>
-        </materialDesign:Card>
+        <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Padding="0" Height="426" Margin="0,10,0,0" Grid.RowSpan="3" />
         <!-- 这是UnderBar的Card -->
         <materialDesign:Card x:Name="CD2" Height="27" Margin="0,5,0,-5" RenderTransformOrigin="0.495,0.424" Grid.Row="3" Background="#CCFFFFFF" Padding="0">
             <materialDesign:Card.RenderTransform>
@@ -43,11 +39,7 @@
                 </TransformGroup>
             </materialDesign:Card.RenderTransform>
         </materialDesign:Card>
-        <Image x:Name="SBG" Grid.Column="0" Grid.Row="0" Source="/Resource/BGtop.bmp">
-            <Image.Effect>
-                <DropShadowEffect BlurRadius="10" Opacity="0.8" ShadowDepth="3"/>
-            </Image.Effect>
-        </Image>
+        <Image x:Name="SBG" Grid.Column="0" Grid.Row="0" Source="/Resource/BGtop.bmp" /> 
 
         <ListView x:Name="UpdateList" Grid.Column="0" Grid.Row="1" Margin="0,0,0,15" pu:ListBoxHelper.ItemHeight="10" Grid.RowSpan="2" Opacity="0.9">
             <ListView.View>

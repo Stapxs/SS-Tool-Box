@@ -156,7 +156,7 @@ namespace SS_Tool_Box_By_WPF
             SH1.Background = baseColor.Card;
 
             SH1.Foreground = baseColor.Font;
-            UpdateList.Background = baseColor.Card;
+            UpdateList.Background = baseColor.Tran;
             Versionon.Foreground = baseColor.Fg;
             UpdateList.ContextMenu.Background = baseColor.Card;
             UpdateList.ContextMenu.Foreground = baseColor.Fg;
