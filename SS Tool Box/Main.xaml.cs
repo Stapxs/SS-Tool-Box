@@ -135,14 +135,21 @@ namespace SS_Tool_Box_By_WPF
             this.Versionon.FontFamily = baseColor.Fonts;
             this.Versionon.FontSize = 12;
 
-            //顶栏按钮样式
-            this.Feedback.Foreground = baseColor.Fg;
+            //按钮样式
+            this.Feedback.Foreground = baseColor.FontM;
             this.Feedback.FontFamily = baseColor.Fonts;
             this.Feedback.FontSize = 14;
+            this.OpenButton.Foreground = baseColor.FontM;
+            this.OpenButton.Background = baseColor.Main;
+            this.B1.Foreground = baseColor.Fg;
+            this.B2.Foreground = baseColor.Fg;
+            this.TopIcon.Background = baseColor.Main;
+            ButtonHelper.SetHoverBrush(TopIcon, baseColor.Main);
+            ButtonHelper.SetClickCoverOpacity(TopIcon, 1);
 
             //初始化卡片颜色
-            WindowXCaption.SetBackground(this, baseColor.Bg);
-            WindowXCaption.SetForeground(this, baseColor.Fg);
+            WindowXCaption.SetBackground(this, baseColor.Main);
+            WindowXCaption.SetForeground(this, baseColor.FontM);
 
             CD1.Background = baseColor.Card;
             CD2.Background = baseColor.Card;
@@ -377,7 +384,7 @@ namespace SS_Tool_Box_By_WPF
 
         private bool LoadingColor()
         {
-            baseColor.setColor(1, true);
+            baseColor.setColor(3, true);
             return true;
         }
     }

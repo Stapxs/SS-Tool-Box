@@ -79,8 +79,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock x:Name="Versionon" Margin="15,5,5,5" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" />
-            <Button Grid.Column="1" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" Margin="0,0,10,0" Click="Button_About"/>
-            <Button Grid.Column="1" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" Margin="0,0,10,0" HorizontalAlignment="Right" Width="33" Grid.ColumnSpan="2" Click="Button_Set"/>
+            <Button x:Name="B1" Grid.Column="1" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" Margin="0,0,10,0" Click="Button_About"/>
+            <Button x:Name="B2" Grid.Column="1" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" Margin="0,0,10,0" HorizontalAlignment="Right" Width="33" Grid.ColumnSpan="2" Click="Button_Set"/>
 
         </Grid>
 

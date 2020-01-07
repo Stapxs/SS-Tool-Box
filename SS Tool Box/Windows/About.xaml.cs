@@ -28,8 +28,8 @@ namespace SS_Tool_Box_By_WPF
         {
             InitializeComponent();
 
-            WindowXCaption.SetBackground(this, baseColora.Bg);
-            WindowXCaption.SetForeground(this, baseColora.Fg);
+            WindowXCaption.SetBackground(this, baseColora.Main);
+            WindowXCaption.SetForeground(this, baseColora.FontM);
 
             BG.BeginInit();
             BG.Source = baseColora.Bgpa;
