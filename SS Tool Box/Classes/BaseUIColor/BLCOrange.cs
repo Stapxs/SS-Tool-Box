@@ -35,20 +35,21 @@ namespace SS_Tool_Box.Classes.BaseUIColor
                 DBgbrush.Color = Color.FromArgb(255, 37, 37, 37);
                 Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BGDrck.png"));
                 Bgpa = new BitmapImage(new Uri("pack://application:,,,/Resource/BGDrck.png"));
+                Bgps = new BitmapImage(new Uri("pack://application:,,,/Resource/BGForTheams/BLCOrangeDS.png"));
                 font = new FontFamily("方正兰亭简黑");
             }
             else
             {
                 Cardbrush.Color = Color.FromArgb(190, 255, 255, 255);
-                Fontbrush.Color = Color.FromArgb(255, 0, 0, 0);
+                Fontbrush.Color = Color.FromArgb(255, 100, 100, 100);
                 Mainbrush.Color = Color.FromArgb(255, 255, 204, 0);
-                FontMbrush.Color = Color.FromArgb(255, 255, 255, 255);
+                FontMbrush.Color = Color.FromArgb(255, 240, 240, 240);
                 Fgbrush = Fontbrush;
                 Bgbrush.Color = Color.FromArgb(255, 255, 255, 255);
                 DBgbrush.Color = Bgbrush.Color;
-                Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BGForTheams/LTCatBlue.png"));
+                Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BGForTheams/BLCOrange.png"));
                 Bgpa = new BitmapImage(new Uri("pack://application:,,,/Resource/BGLight.png"));
-                Bgps = new BitmapImage(new Uri("pack://application:,,,/Resource/BGForTheams/LTCatBlueS.png"));
+                Bgps = new BitmapImage(new Uri("pack://application:,,,/Resource/BGForTheams/BLCOrangeS.png"));
                 font = new FontFamily("方正兰亭简黑");
             }
         }

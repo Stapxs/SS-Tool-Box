@@ -31,6 +31,8 @@
                         <TreeView x:Name="UpdateList" Background="Transparent" Margin="15,0,15,15" Opacity="0.8" pu:TreeViewHelper.TreeViewStyle="Modern" pu:TreeViewHelper.ItemHeight="30" pu:TreeViewHelper.SelectMode="Disabled" pu:TreeViewHelper.ExpandMode="SingleClick">
                             <TreeViewItem Header="更新记录 [ 2019.02.22 - 项目成立 ] " pu:TreeViewHelper.ItemIcon="&#xF187;" pu:IconHelper.FontSize="15"/>
                             <TreeViewItem Header="           Verson - 1.0 [ 功能制作阶段 ]">
+                                <TreeViewItem Header="               + 2020.01.08 - 设置可以保存进SetUp.json文件中了" />
+                                <TreeViewItem Header="               * 2020.01.08 - 修了一堆你也不知道的BUG" />
                                 <TreeViewItem Header="               + 2020.01.07 - 设置可以从SetUp.json文件中读取并加载了" />
                                 <TreeViewItem Header="               * 2020.01.07 - BUG：主界面列表卡片阴影错误" />
                                 <TreeViewItem Header="               + 2020.01.06 - 偷偷完成了暂时还不能选的龙猫蓝" />
