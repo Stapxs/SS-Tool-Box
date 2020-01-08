@@ -53,6 +53,23 @@ namespace SS_Tool_Box.Classes
                     }
                     break;
 
+                case 2:
+                    {
+                        BLCOrange defaultColor = new BLCOrange(DarkMode);
+                        Card = defaultColor.Cardbrush;
+                        Main = defaultColor.Mainbrush;
+                        Font = defaultColor.Fontbrush;
+                        FontM = defaultColor.FontMbrush;
+                        Fg = defaultColor.Fgbrush;
+                        Bg = defaultColor.Bgbrush;
+                        Fonts = defaultColor.font;
+                        DBg = defaultColor.DBgbrush;
+                        Bgp = defaultColor.Bgp;
+                        Bgpa = defaultColor.Bgpa;
+                        Bgps = defaultColor.Bgps;
+                    }
+                    break;
+
                 case 3:
                     {
                         LTCatBlue defaultColor = new LTCatBlue(DarkMode);

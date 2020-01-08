@@ -23,7 +23,15 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="578*"/>
                             </Grid.ColumnDefinitions>
-                            <materialDesign:Card x:Name="CD11" Margin="0,-9,0,0" Grid.Column="1">
+                            <materialDesign:Card x:Name="CD1" Margin="0,-9,0,0" Grid.Column="1">
+                                <StackPanel>
+                                    <Grid Height="47">
+                                        <TextBlock x:Name="T1" Text="保存设置" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="48,17,0,12" RenderTransformOrigin="0.519,-0.311" Width="77"/>
+                                        <Button x:Name="SaveButton" Margin="0,10,23,10" HorizontalAlignment="Right" Width="80" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="" Content="保存  " Click="Save" pu:ButtonHelper.WaitingContent=" 保存 " IsDefault="True"/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="CD11" Margin="0,43,0,0" Grid.Column="1">
                                 <StackPanel>
                                     <TextBlock x:Name="MT11" Text="主题" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid Height="42">
@@ -42,7 +50,7 @@
                                     </Grid>
                                 </StackPanel>
                             </materialDesign:Card>
-                            <materialDesign:Card x:Name="CD12" Grid.Column="1" Margin="0,157,0,0">
+                            <materialDesign:Card x:Name="CD12" Grid.Column="1" Margin="0,213,0,0">
                                 <StackPanel>
                                     <TextBlock x:Name="MT12" Text="背景" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                 </StackPanel>
@@ -94,5 +102,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
+
+        <Button x:Name="TopIcon" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="17" Margin="2,-29,422,464" Height="36" VerticalAlignment="Bottom"/>
     </Grid>
 </pu:WindowX>

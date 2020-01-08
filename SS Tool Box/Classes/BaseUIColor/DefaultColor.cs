@@ -49,12 +49,13 @@ namespace SS_Tool_Box.Classes.BaseUIColor
                 Cardbrush.Color = Color.FromArgb(204, 255, 255, 255);
                 Fontbrush.Color = Color.FromArgb(255, 100, 100, 100);
                 Fgbrush = Fontbrush;
-                FontMbrush = Fontbrush;
+                FontMbrush.Color = Color.FromArgb(255, 255, 255, 255);
                 Bgbrush.Color = Color.FromArgb(255, 255, 255, 255);
                 Mainbrush = Fontbrush;
                 DBgbrush.Color = Color.FromArgb(255, 234, 234, 234);
                 Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BG.png"));
                 Bgpa = new BitmapImage(new Uri("pack://application:,,,/Resource/BGLight.png"));
+                Bgps = new BitmapImage(new Uri("pack://application:,,,/Resource/BGtop.bmp"));
                 font = new FontFamily("方正兰亭简黑");
             }
         }

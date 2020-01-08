@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json.Linq;
 using Panuon.UI.Silver;
 using SS_Tool_Box.Classes;
 
@@ -33,6 +34,40 @@ namespace SS_Tool_Box_By_WPF
         {
             InitializeComponent();
 
+            UpdateUI();
+
+            //初始化主题
+            IList<customer> customList = new List<customer>();
+            customList.Add(new customer() { ID = 1, Name = "林槐白" });
+            customList.Add(new customer() { ID = 2, Name = "坏猫橙" });
+            customList.Add(new customer() { ID = 3, Name = "龙猫蓝" });
+            Theams.ItemsSource = customList;
+            Theams.DisplayMemberPath = "Name";
+            Theams.SelectedValuePath = "ID";
+            Theams.SelectedValue = baseColora.Theme;
+
+            if(baseColora.DarkMode)
+            {
+                this.C11.IsChecked = true;
+            }
+
+            S11.Value = double.Parse(Main.Settings["Exterior"]["Themes"]["WindowTran"].ToString());
+        }
+
+        private void Save(object sebder, RoutedEventArgs s)
+        {
+            String DMIsclick = "False";
+            if(this.C11.IsChecked == true)
+            {
+                DMIsclick = "True";
+            }
+            Main.Settings["Exterior"]["Themes"]["WindowTran"] = this.S11.Value;
+            Main.Settings["Exterior"]["Themes"]["MainTheme"] = Theams.SelectedValue.ToString();
+            Main.Settings["Exterior"]["Themes"]["DarkMode"] = DMIsclick;
+        }
+
+        private bool UpdateUI()
+        {
             WindowXCaption.SetBackground(this, baseColora.Main);
             WindowXCaption.SetForeground(this, baseColora.FontM);
 
@@ -50,6 +85,9 @@ namespace SS_Tool_Box_By_WPF
             BG3.EndInit();
 
             //样式
+            this.T1.Foreground = baseColora.Fg;
+            this.T1.FontFamily = baseColora.Fonts;
+            this.T1.FontSize = 13;
             this.T11.Foreground = baseColora.Fg;
             this.T11.FontFamily = baseColora.Fonts;
             this.T11.FontSize = 13;
@@ -75,6 +113,7 @@ namespace SS_Tool_Box_By_WPF
             this.MT32.FontFamily = baseColora.Fonts;
             this.MT32.FontSize = 15;
 
+            this.CD1.Background = baseColora.Bg;
             this.CD11.Background = baseColora.Bg;
             this.CD12.Background = baseColora.Bg;
             this.CD31.Background = baseColora.Bg;
@@ -89,9 +128,9 @@ namespace SS_Tool_Box_By_WPF
             CheckBoxHelper.SetGlyphBrush(C11, baseColora.DBg);
             CheckBoxHelper.SetGlyphBrush(C31, baseColora.DBg);
             CheckBoxHelper.SetGlyphBrush(C32, baseColora.DBg);
-            CheckBoxHelper.SetCheckedGlyphBrush(C11, baseColora.Fg);
-            CheckBoxHelper.SetCheckedGlyphBrush(C31, baseColora.Fg);
-            CheckBoxHelper.SetCheckedGlyphBrush(C32, baseColora.Fg);
+            CheckBoxHelper.SetCheckedGlyphBrush(C11, baseColora.Main);
+            CheckBoxHelper.SetCheckedGlyphBrush(C31, baseColora.Main);
+            CheckBoxHelper.SetCheckedGlyphBrush(C32, baseColora.Main);
 
             this.MainTab.Background = baseColora.Bg;
             this.MainTab.Foreground = baseColora.Fg;
@@ -108,25 +147,16 @@ namespace SS_Tool_Box_By_WPF
             ComboBoxHelper.SetSelectedBackground(Theams, baseColora.DBg);
             ComboBoxHelper.SetSelectedForeground(Theams, baseColora.Fg);
 
-            this.S11.Background = baseColora.Bg;
-            this.S11.Foreground = baseColora.Fg;
-            SliderHelper.SetThemeBrush(S11, baseColora.Fg);
-
             this.S11.Background = baseColora.DBg;
+            this.S11.Foreground = baseColora.Fg;
+            SliderHelper.SetThemeBrush(S11, baseColora.Main);
 
-            //初始化主题
-            IList<customer> customList = new List<customer>();
-            customList.Add(new customer() { ID = 1, Name = "林槐白" });
-            customList.Add(new customer() { ID = 2, Name = "坏猫橙" });
-            customList.Add(new customer() { ID = 3, Name = "龙猫蓝" });
-            Theams.ItemsSource = customList;
-            Theams.DisplayMemberPath = "Name";
-            Theams.SelectedValuePath = "ID";
-            Theams.SelectedValue = baseColora.Theme;
-            if(baseColora.DarkMode)
-            {
-                this.C11.IsChecked = true;
-            }
+            this.TopIcon.Background = baseColora.Main;
+            this.TopIcon.Foreground = baseColora.FontM;
+            ButtonHelper.SetHoverBrush(TopIcon, baseColora.Main);
+            ButtonHelper.SetClickCoverOpacity(TopIcon, 1);
+
+            return true;
         }
     }
 }
