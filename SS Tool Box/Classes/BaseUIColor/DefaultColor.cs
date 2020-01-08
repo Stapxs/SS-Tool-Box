@@ -42,6 +42,7 @@ namespace SS_Tool_Box.Classes.BaseUIColor
                 DBgbrush.Color = Color.FromArgb(255, 37, 37, 37);
                 Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BGDrck.png"));
                 Bgpa = new BitmapImage(new Uri("pack://application:,,,/Resource/BGDrck.png"));
+                Bgps = new BitmapImage(new Uri("pack://application:,,,/Resource/BGtop.bmp"));
                 font = new FontFamily("方正兰亭简黑");
             }
             else

@@ -1,9 +1,9 @@
 {
   "Exterior": {
     "Themes": {
-      "WindowTran": "0",
-      "MainTheme": "1",
-      "DarkMode": "False"
+      "WindowTran": 60.0,
+      "MainTheme": "2",
+      "DarkMode": "True"
     }
   }
 }

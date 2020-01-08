@@ -33,7 +33,7 @@ namespace SS_Tool_Box_By_WPF
 
             String stTitle;
             String UserName = Environment.UserName;
-            if (DateTime.Now.ToString("MM").Equals("01"))
+            if (DateTime.Now.ToString("MM").Equals("01") && int.Parse(DateTime.Now.ToString("dd")) < 8)
             {
                 stTitle = DateTime.Now.ToString("yyyy") + "年快乐，" + UserName + "。";
             }

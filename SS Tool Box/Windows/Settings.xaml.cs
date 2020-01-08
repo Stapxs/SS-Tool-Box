@@ -64,6 +64,9 @@ namespace SS_Tool_Box_By_WPF
             Main.Settings["Exterior"]["Themes"]["WindowTran"] = this.S11.Value;
             Main.Settings["Exterior"]["Themes"]["MainTheme"] = Theams.SelectedValue.ToString();
             Main.Settings["Exterior"]["Themes"]["DarkMode"] = DMIsclick;
+
+            LoadingSetter setter = new LoadingSetter();
+            setter.writeJsom(Main.Settings);
         }
 
         private bool UpdateUI()
@@ -155,6 +158,9 @@ namespace SS_Tool_Box_By_WPF
             this.TopIcon.Foreground = baseColora.FontM;
             ButtonHelper.SetHoverBrush(TopIcon, baseColora.Main);
             ButtonHelper.SetClickCoverOpacity(TopIcon, 1);
+            IconHelper.SetForeground(SaveButton, baseColora.Fg);
+            this.SaveButton.Foreground = baseColora.Fg;
+            this.SaveButton.Background = baseColora.Tran;
 
             return true;
         }
