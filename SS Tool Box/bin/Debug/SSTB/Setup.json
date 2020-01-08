@@ -2,8 +2,8 @@
   "Exterior": {
     "Themes": {
       "WindowTran": 70.0,
-      "MainTheme": "2",
-      "DarkMode": "True"
+      "MainTheme": "3",
+      "DarkMode": "False"
     }
   }
 }

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/bgfortheams/blcorangeds.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/bgfortheams/ltcatblues.png")]
 
 
