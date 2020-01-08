@@ -64,12 +64,6 @@ namespace SS_Tool_Box_By_WPF
 
         public Main()
         {
-            //初始化颜色
-            if(!LoadingMain())
-            {
-                Application.Current.Shutdown();
-            }
-
             //写入log日期
             if (!Directory.Exists("SSTB/Log"))
             {
@@ -123,63 +117,13 @@ namespace SS_Tool_Box_By_WPF
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
 
-            //版本号
-            String stVersion = "Version - 1.0.8";
-            Versionon.Text = stVersion;
-
-            //刷新工具列表
-            UpdateList.ItemsSource = listall;
-
-            //工具列表样式
-            this.UpdateList.Foreground = baseColor.Fg;
-            this.UpdateList.FontFamily = baseColor.Fonts;
-            this.UpdateList.FontSize = 14;
-
-            //版本号样式
-            this.Versionon.Foreground = baseColor.Fg;
-            this.Versionon.FontFamily = baseColor.Fonts;
-            this.Versionon.FontSize = 12;
-
-            //按钮样式
-            this.Feedback.Foreground = baseColor.FontM;
-            this.Feedback.FontFamily = baseColor.Fonts;
-            this.Feedback.FontSize = 14;
-            this.OpenButton.Foreground = baseColor.FontM;
-            this.OpenButton.Background = baseColor.Main;
-            this.B1.Foreground = baseColor.Fg;
-            this.B2.Foreground = baseColor.Fg;
-            this.TopIcon.Background = baseColor.Main;
-            ButtonHelper.SetHoverBrush(TopIcon, baseColor.Main);
-            ButtonHelper.SetClickCoverOpacity(TopIcon, 1);
-
-            //初始化卡片颜色
-            WindowXCaption.SetBackground(this, baseColor.Main);
-            WindowXCaption.SetForeground(this, baseColor.FontM);
-
-            CD1.Background = baseColor.Card;
-            CD2.Background = baseColor.Card;
-            SH1.Background = baseColor.Card;
-
-            SH1.Foreground = baseColor.Font;
-            UpdateList.Background = baseColor.Tran;
-            Versionon.Foreground = baseColor.Fg;
-            UpdateList.ContextMenu.Background = baseColor.Card;
-            UpdateList.ContextMenu.Foreground = baseColor.Fg;
-            ContextMenuHelper.SetShadowColor(UpdateList.ContextMenu, baseColor.DBg.Color);
-
-            BG.BeginInit();
-            BG.Source = baseColor.Bgp;
-            BG.EndInit();
-            SBG.BeginInit();
-            SBG.Source = baseColor.Bgps;
-            SBG.EndInit();
-
-            //加载主页
-            PageMain main = new PageMain();
-            Page.Content = new Frame()
+            //初始化颜色
+            if (!LoadingMain(true))
             {
-                Content = main
-            };
+                Application.Current.Shutdown();
+            }
+
+            UpdateUI();
 
             //加载完成
             error.logWriter("UI加载完成，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
@@ -329,13 +273,13 @@ namespace SS_Tool_Box_By_WPF
 
         private void Button_Set(object sender, RoutedEventArgs e)
         {
-            //打开窗口About
+            //打开窗口Set
             Settings about = new Settings();
             about.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             about.Owner = this;
             IsMaskVisible = true;
             about.ShowDialog();
-            IsMaskVisible = false;
+            UpdateUI();
         }
 
         private void SearchBox_OnKeyDown(object sender, KeyEventArgs e)
@@ -390,17 +334,21 @@ namespace SS_Tool_Box_By_WPF
             UpdateList.ItemsSource = listallGetEnd;
         }
 
-        private bool LoadingMain()
+        private bool LoadingMain(bool isRead)
         {
-            LoadingSetter Set = new LoadingSetter();
-            if (Set.fistUsed())
+            if (isRead)
             {
-                Set.newSetup();
+                LoadingSetter Set = new LoadingSetter();
+                if (Set.fistUsed())
+                {
+                    Settings = Set.newSetup();
+                }
+                else
+                {
+                    Settings = Set.ReadSetup();
+                }
             }
-            else
-            {
-                Settings = Set.ReadSetup();
-            }
+       
             try
             {
                 baseColor.setColor(int.Parse(Settings["Exterior"]["Themes"]["MainTheme"].ToString()), bool.Parse(Settings["Exterior"]["Themes"]["DarkMode"].ToString()));
@@ -411,6 +359,78 @@ namespace SS_Tool_Box_By_WPF
                 error.logWriter("[ 崩溃 ] 初始化数据错误：" + ex, false);
                 return false;
             }
+            return true;
+        }
+
+        private bool UpdateUI()
+        {
+            IsMaskVisible = false;
+
+            //初始化颜色
+            if (!LoadingMain(false))
+            {
+                Application.Current.Shutdown();
+            }
+
+            //版本号
+            String stVersion = "Version - 1.0.8";
+            Versionon.Text = stVersion;
+
+            //刷新工具列表
+            UpdateList.ItemsSource = listall;
+
+            //工具列表样式
+            this.UpdateList.Foreground = baseColor.Fg;
+            this.UpdateList.FontFamily = baseColor.Fonts;
+            this.UpdateList.FontSize = 14;
+
+            //版本号样式
+            this.Versionon.Foreground = baseColor.Fg;
+            this.Versionon.FontFamily = baseColor.Fonts;
+            this.Versionon.FontSize = 12;
+
+            //按钮样式
+            this.Feedback.Foreground = baseColor.FontM;
+            this.Feedback.FontFamily = baseColor.Fonts;
+            this.Feedback.FontSize = 14;
+            this.OpenButton.Foreground = baseColor.FontM;
+            this.OpenButton.Background = baseColor.Main;
+            this.B1.Foreground = baseColor.Fg;
+            this.B2.Foreground = baseColor.Fg;
+            this.TopIcon.Background = baseColor.Main;
+            this.TopIcon.Foreground = baseColor.FontM;
+            ButtonHelper.SetHoverBrush(TopIcon, baseColor.Main);
+            ButtonHelper.SetClickCoverOpacity(TopIcon, 1);
+
+            //初始化卡片颜色
+            WindowXCaption.SetBackground(this, baseColor.Main);
+            WindowXCaption.SetForeground(this, baseColor.FontM);
+
+            CD1.Background = baseColor.Card;
+            CD2.Background = baseColor.Card;
+            SH1.Background = baseColor.Card;
+
+            SH1.Foreground = baseColor.Font;
+            UpdateList.Background = baseColor.Tran;
+            Versionon.Foreground = baseColor.Fg;
+            UpdateList.ContextMenu.Background = baseColor.Card;
+            UpdateList.ContextMenu.Foreground = baseColor.Fg;
+            ContextMenuHelper.SetShadowColor(UpdateList.ContextMenu, baseColor.DBg.Color);
+
+            BG.BeginInit();
+            BG.Source = baseColor.Bgp;
+            BG.EndInit();
+            SBG.BeginInit();
+            SBG.Source = baseColor.Bgps;
+            SBG.EndInit();
+
+            //加载主页
+            PageMain main = new PageMain();
+            Page.Content = new Frame()
+            {
+                Content = main
+            };
+
             return true;
         }
     }

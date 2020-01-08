@@ -15,7 +15,7 @@ namespace SS_Tool_Box.Classes
 
         Error error = new Error();
 
-        public bool newSetup()
+        public JObject newSetup()
         {
             JObject SetUps = new JObject();     //主json
             JObject Exterior = new JObject();   //外观设置
@@ -23,7 +23,7 @@ namespace SS_Tool_Box.Classes
             Exterior.Add("Themes", Themes);
             SetUps.Add("Exterior", Exterior);
             writeJsom(SetUps);
-            return true;
+            return SetUps;
         }
 
         public JObject ReadSetup()
@@ -59,9 +59,7 @@ namespace SS_Tool_Box.Classes
             }
             catch(Exception ex)
             {
-                MessageBox.Show("写入设置文件错误：" + ex);
                 error.logWriter("写入设置文件错误：" + ex, false);
-                return false;
             }
             return true;
         }
