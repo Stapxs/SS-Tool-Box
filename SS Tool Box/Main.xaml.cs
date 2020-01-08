@@ -149,6 +149,7 @@ namespace SS_Tool_Box_By_WPF
             this.B1.Foreground = baseColor.Fg;
             this.B2.Foreground = baseColor.Fg;
             this.TopIcon.Background = baseColor.Main;
+            this.TopIcon.Foreground = baseColor.FontM;
             ButtonHelper.SetHoverBrush(TopIcon, baseColor.Main);
             ButtonHelper.SetClickCoverOpacity(TopIcon, 1);
 

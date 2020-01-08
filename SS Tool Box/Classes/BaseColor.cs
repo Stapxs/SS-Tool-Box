@@ -40,13 +40,16 @@ namespace SS_Tool_Box.Classes
                     {
                         DefaultColor defaultColor = new DefaultColor(DarkMode);
                         Card = defaultColor.Cardbrush;
+                        Main = defaultColor.Mainbrush;
                         Font = defaultColor.Fontbrush;
+                        FontM = defaultColor.FontMbrush;
                         Fg = defaultColor.Fgbrush;
                         Bg = defaultColor.Bgbrush;
                         Fonts = defaultColor.font;
                         DBg = defaultColor.DBgbrush;
                         Bgp = defaultColor.Bgp;
                         Bgpa = defaultColor.Bgpa;
+                        Bgps = defaultColor.Bgps;
                     }
                     break;
 

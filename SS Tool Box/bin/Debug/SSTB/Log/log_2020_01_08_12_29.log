@@ -1,0 +1,6 @@
+2020_01_08_12_29
+
+[12:39:29.80] 开始加载UI
+[12:39:30.65] UI加载完成，耗时：00:00:00.8514768
+[12:39:36.57] [ 崩溃 ] 初始化数据错误：System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 SS_Tool_Box_By_WPF.Main.LoadingMain() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Main.xaml.cs:行号 406
