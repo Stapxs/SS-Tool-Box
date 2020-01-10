@@ -76,8 +76,12 @@
             </TabItem>
             <TabItem Header="免责声明" >
                 <Grid>
-                    <Image x:Name="BG2" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
-                    <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="327*"/>
+                        <ColumnDefinition Width="17*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="BG2" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0" Grid.ColumnSpan="2"/>
+                    <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Grid.ColumnSpan="2">
                         <StackPanel>
                             <materialDesign:Card  x:Name="CD1" Margin="0,0,0,0">
                                 <Grid>

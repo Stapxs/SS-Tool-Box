@@ -27,13 +27,17 @@ namespace SS_Tool_Box_By_WPF
         Error error = new Error();
         BaseColor baseColora = Main.baseColor;
 
+        DateTime loadingtime;
+
         public PageMain()
         {
             InitializeComponent();
 
             String stTitle;
             String UserName = Environment.UserName;
-            if (DateTime.Now.ToString("MM").Equals("01"))
+            error.logWriter("开始获取一言", false);
+            loadingtime = DateTime.Now;
+            if (DateTime.Now.ToString("MM").Equals("01") && int.Parse(DateTime.Now.ToString("dd")) < 8)
             {
                 stTitle = DateTime.Now.ToString("yyyy") + "年快乐，" + UserName + "。";
             }
@@ -51,16 +55,17 @@ namespace SS_Tool_Box_By_WPF
                 {
                     JObject obj = JObject.Parse(GetJson);
                     stSays = "     " + obj["hitokoto"].ToString() + " —— " + obj["from"].ToString();
+                    error.logWriter("获取一言成功，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
                 }
                 else
                 {
-                    error.logWriter("发现错误（MAN - 001）：获取一言内容为空。", false);
+                    error.logWriter("发现错误（MAN - 001）：获取一言内容为空，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
                     stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
                 }
             }
             catch(Exception ex)
             {
-                error.logWriter("发现错误（MAN - 002）：获取一言失败，错误内容为：" + ex, false);
+                error.logWriter("发现错误（MAN - 002）：获取一言失败，错误内容为：" + ex + "，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
                 stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
             }
             this.Says.Foreground = baseColora.Fg;

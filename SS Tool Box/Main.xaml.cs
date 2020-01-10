@@ -180,7 +180,14 @@ namespace SS_Tool_Box_By_WPF
         private void Button_Open(object sender, RoutedEventArgs e)
         {
             Update upd = UpdateList.SelectedItem as Update;
-            error.logWriter("加载工具：" + upd.Line, false);
+            if(upd == null)
+            {
+                error.logWriter("你什么都没选就想开工具……", false);
+            }
+            else
+            {
+                error.logWriter("加载工具：" + upd.Line, false);
+            }
             if (upd != null && upd is Update)
             {
                 if (upd.Line == "    1 . 批量打开文件")
@@ -373,7 +380,7 @@ namespace SS_Tool_Box_By_WPF
             }
 
             //版本号
-            String stVersion = "Version - 1.0.8";
+            String stVersion = "Version - 1.0.10";
             Versionon.Text = stVersion;
 
             //刷新工具列表

@@ -251,6 +251,18 @@
     <Resource Include="Resource\BGLight.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\BGForTheams\LTCatBlueDS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\BGForTheams\BLCOrangeS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\BGForTheams\BLCOrange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\BGForTheams\BLCOrangeDS.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resource\BGForTheams\LTCatBlue.png" />
   </ItemGroup>
   <ItemGroup>

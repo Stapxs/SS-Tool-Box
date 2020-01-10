@@ -1,9 +1,0 @@
-2020_01_08_16_06
-
-[16:26:06.21] 开始加载UI
-[16:26:07.47] UI加载完成，耗时：00:00:01.2612229
-[16:26:29.64] [ 崩溃 ] 初始化数据错误：System.FormatException: 输入字符串的格式不正确。
-   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-   在 System.Int32.Parse(String s)
-   在 SS_Tool_Box_By_WPF.Main.LoadingMain(Boolean isRead) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Main.xaml.cs:行号 355
