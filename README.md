@@ -12,6 +12,8 @@ GPL - 3.0 适用于本项目，请遵守并在使用时保留作者信息。
 Stapx Steve
 ### 鸣谢
 Bad Laugh Cat
+### 开源API
+- 一言 - Hitokoto（https://hitokoto.cn/）
 ### 开源项目
 - Material Design In XAML Toolkit （https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit）
 - Newtonsoft.Json （https://www.newtonsoft.com/json）
