@@ -13,12 +13,12 @@ Stapx Steve
 ### 鸣谢
 Bad Laugh Cat
 ### 开源API
-- 一言 - Hitokoto（https://hitokoto.cn/）
+- 一言 - Hitokoto（https://hitokoto.cn/ ）
 ### 开源项目
-- Material Design In XAML Toolkit （https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit）
-- Newtonsoft.Json （https://www.newtonsoft.com/json）
-- Panuon.UI.Silver （https://github.com/Panuon/PanuonUI.Silver）
-- Font Awesome （http://www.fontawesome.com.cn）
+- Material Design In XAML Toolkit （https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit ）
+- Newtonsoft.Json （https://www.newtonsoft.com/json ）
+- Panuon.UI.Silver （https://github.com/Panuon/PanuonUI.Silver ）
+- Font Awesome （http://www.fontawesome.com.cn ）
 
 ## 意见与建议
 如果对于这个项目有意见或建议，请按如下方式联系。
