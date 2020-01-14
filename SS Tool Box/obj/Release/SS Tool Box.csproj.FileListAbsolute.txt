@@ -88,3 +88,56 @@ C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Release\Pange
 C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Release\Panges\PageHD1.baml
 C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Release\Windows\Settings.g.cs
 C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Release\Windows\Settings.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\SS Tool Box.exe.config
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\SS Tool Box.exe.manifest
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\SS Tool Box.application
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\SS Tool Box.exe
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\SS Tool Box.pdb
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\MaterialDesignColors.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\MaterialDesignThemes.Wpf.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\Newtonsoft.Json.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\Panuon.UI.Silver.dll
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\MaterialDesignColors.pdb
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\MaterialDesignThemes.Wpf.pdb
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\MaterialDesignThemes.Wpf.xml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\Newtonsoft.Json.xml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.csprojAssemblyReference.cache
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\PageHD1.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page5.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page4.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\Settings.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\AddIcons.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Main.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page3.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page2.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\PageNone.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page1.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\PageMain.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\OpenInWindow.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\About.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\App.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box_MarkupCompile.cache
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box_MarkupCompile.lref
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\App.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\PageHD1.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page5.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page4.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\Settings.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\AddIcons.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Main.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page3.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page2.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\PageNone.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page1.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\PageMain.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\OpenInWindow.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\About.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.g.resources
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS_Tool_Box.Properties.Resources.resources
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.csproj.GenerateResource.cache
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.csproj.CoreCompileInputs.cache
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.exe.manifest
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.application
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.csproj.CopyComplete
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.exe
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\SS Tool Box.pdb

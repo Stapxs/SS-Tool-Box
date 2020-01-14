@@ -380,7 +380,7 @@ namespace SS_Tool_Box_By_WPF
             }
 
             //版本号
-            String stVersion = "Version - 1.0.10";
+            String stVersion = "Version - 1.0.15";
             Versionon.Text = stVersion;
 
             //刷新工具列表

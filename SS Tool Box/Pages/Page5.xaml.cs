@@ -132,7 +132,7 @@ namespace SS_Tool_Box
 
             try
             {
-                String iduri = "https://api.toubiec.cn/qq?qq=" + QQ.Text;
+                String iduri = "https://api.toubiec.cn/qq?qq=" + QQ.Text + "&size=300";
                 string GetJson = HttpUitls.Get(iduri, "DEFALT");
                 JObject obj = JObject.Parse(GetJson);
                 MT3.Text = "其他操作" + " —— " + obj["name"].ToString();

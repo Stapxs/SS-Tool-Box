@@ -35,8 +35,7 @@ namespace SS_Tool_Box_By_WPF
             InitializeComponent();
             //title文本
             String stTitle;
-            String UserName = Environment.UserName;
-            error.logWriter("开始获取假期表", false);
+            String UserName = Environment.UserName; 
             loadingtime = DateTime.Now;
             if (DateTime.Now.ToString("MM").Equals("01") && int.Parse(DateTime.Now.ToString("dd")) < 8)
             {
