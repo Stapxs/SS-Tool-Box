@@ -39,7 +39,7 @@ namespace SS_Tool_Box_By_WPF
             //初始化主题
             IList<customer> customList = new List<customer>();
             customList.Add(new customer() { ID = 1, Name = "  林槐白" });
-            customList.Add(new customer() { ID = 2, Name = "  坏猫橙" });
+            customList.Add(new customer() { ID = 2, Name = "  坏猫黄" });
             customList.Add(new customer() { ID = 3, Name = "  龙猫蓝" });
             Theams.ItemsSource = customList;
             Theams.DisplayMemberPath = "Name";

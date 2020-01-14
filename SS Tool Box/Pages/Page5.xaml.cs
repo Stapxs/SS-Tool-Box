@@ -133,7 +133,7 @@ namespace SS_Tool_Box
             try
             {
                 String iduri = "https://api.toubiec.cn/qq?qq=" + QQ.Text;
-                string GetJson = HttpUitls.Get(iduri);
+                string GetJson = HttpUitls.Get(iduri, "DEFALT");
                 JObject obj = JObject.Parse(GetJson);
                 MT3.Text = "其他操作" + " —— " + obj["name"].ToString();
                 this.ColCard.Visibility = Visibility.Visible;
