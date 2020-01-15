@@ -440,5 +440,13 @@ namespace SS_Tool_Box_By_WPF
 
             return true;
         }
+
+        private void Onsizechanged(object sender, SizeChangedEventArgs e)
+        {
+            System.Windows.Rect r = new System.Windows.Rect(e.NewSize);
+            int radius = 5;
+            RectangleGeometry gm = new RectangleGeometry(r, radius, radius); // 40 is radius here
+            ((UIElement)sender).Clip = gm;
+        }
     }
 }

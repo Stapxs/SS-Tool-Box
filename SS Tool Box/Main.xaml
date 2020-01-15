@@ -9,8 +9,11 @@
         mc:Ignorable="d"
         Title="| 林槐工具箱 - SS Tool Box" Height="500" Width="820"
         Icon="/Resource/ICONMain_128.ico"
-        ResizeMode = "CanMinimize"
+        ResizeMode="CanMinimize"
         Foreground="#000000"
+        SizeChanged="Onsizechanged"
+        Background="#00000000"
+        WindowStyle="None"
         >
     <Grid>
         <Grid.ColumnDefinitions>
