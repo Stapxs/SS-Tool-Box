@@ -40,26 +40,26 @@ namespace SS_Tool_Box_By_WPF
         Error error = new Error();
         DateTime loadingtime;
 
-        public class Update
+        public class ListTool
         {
             public string Line { get; set; }
         }
 
 
         //工具列表
-        Update[] listall = new Update[]
+        ListTool[] listall = new ListTool[]
         {
-                new Update(){Line="    1 . 批量打开文件"},
-                new Update(){Line="    2 . 调色板"},
-                new Update(){Line="    3 . 快速启动器"},
-                new Update(){Line="    4 . 倒计时"},
-                new Update(){Line="    5 . Fuck QQ"},
+                new ListTool(){Line="    1 . 批量打开文件"},
+                new ListTool(){Line="    2 . 调色板"},
+                new ListTool(){Line="    3 . 快速启动器"},
+                new ListTool(){Line="    4 . 倒计时"},
+                new ListTool(){Line="    5 . Fuck QQ"},
         };
         //隐藏的工具列表
-        Update[] listallHidden = new Update[]
+        ListTool[] listallHidden = new ListTool[]
         {
-                new Update(){Line="    * . SOS 图标获取"},
-                new Update(){Line="    回到主页"},
+                new ListTool(){Line="    * . SOS 图标获取"},
+                new ListTool(){Line="    回到主页"},
         };
 
         public Main()
@@ -132,8 +132,8 @@ namespace SS_Tool_Box_By_WPF
 
         private void ListMenu_Open(object sebder, RoutedEventArgs s)
         {
-            Update upd = UpdateList.SelectedItem as Update;
-            if (upd != null && upd is Update)
+            ListTool upd = UpdateList.SelectedItem as ListTool;
+            if (upd != null && upd is ListTool)
             {
                 WindowState = WindowState.Minimized;
                 if (upd.Line == "    1 . 批量打开文件")
@@ -179,7 +179,7 @@ namespace SS_Tool_Box_By_WPF
 
         private void Button_Open(object sender, RoutedEventArgs e)
         {
-            Update upd = UpdateList.SelectedItem as Update;
+            ListTool upd = UpdateList.SelectedItem as ListTool;
             if(upd == null)
             {
                 error.logWriter("你什么都没选就想开工具……", false);
@@ -188,7 +188,7 @@ namespace SS_Tool_Box_By_WPF
             {
                 error.logWriter("加载工具：" + upd.Line, false);
             }
-            if (upd != null && upd is Update)
+            if (upd != null && upd is ListTool)
             {
                 if (upd.Line == "    1 . 批量打开文件")
                 {
@@ -292,10 +292,10 @@ namespace SS_Tool_Box_By_WPF
         private void SearchBox_OnKeyDown(object sender, KeyEventArgs e)
         {
             int nowget = 0;
-            Update[] listallGet = new Update[10];
-            Update[] listallnull = new Update[]
+            ListTool[] listallGet = new ListTool[10];
+            ListTool[] listallnull = new ListTool[]
             {
-                new Update(){Line=" "},
+                new ListTool(){Line=" "},
             };
             bool get = false;
 
@@ -328,7 +328,7 @@ namespace SS_Tool_Box_By_WPF
                     nowget++;
                 }
             }
-            Update[] listallGetEnd = new Update[nowget];
+            ListTool[] listallGetEnd = new ListTool[nowget];
             for(int i=0; i<nowget; i++)
             {
                 listallGetEnd[i] = listallGet[i];

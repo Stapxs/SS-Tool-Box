@@ -12,26 +12,19 @@
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         >
-    <Grid >
+    <!-- Height="500" -->
+    <Grid>
         <TabControl x:Name="MainTab" Height="Auto" Width="Auto" pu:TabControlHelper.ItemHeight="30" pu:TabControlHelper.CanRemove="False" pu:TabControlHelper.ItemsAlignment="Center">
             <TabItem Header="外观设置" >
                 <Grid>
                     <Image x:Name="BG" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
-                    <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
+                    <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7">
                         <Grid Margin="0 10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="578*"/>
                             </Grid.ColumnDefinitions>
-                            <materialDesign:Card x:Name="CD1" Margin="0,-9,0,0" Grid.Column="1">
-                                <StackPanel>
-                                    <Grid Height="47">
-                                        <TextBlock x:Name="T1" Text="保存设置" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="48,17,0,12" RenderTransformOrigin="0.519,-0.311" Width="77"/>
-                                        <Button x:Name="SaveButton" Margin="0,10,23,10" HorizontalAlignment="Right" Width="80" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="" Content="保存  " Click="Save" pu:ButtonHelper.WaitingContent=" 保存 " IsDefault="True"/>
-                                    </Grid>
-                                </StackPanel>
-                            </materialDesign:Card>
-                            <materialDesign:Card x:Name="CD11" Margin="0,43,0,0" Grid.Column="1">
+                            <materialDesign:Card x:Name="CD11" Margin="0,0,0,556" Grid.Column="1">
                                 <StackPanel>
                                     <TextBlock x:Name="MT11" Text="主题" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid Height="42">
@@ -41,7 +34,7 @@
                                     </Grid>
                                     <Grid>
                                         <TextBlock x:Name="T12" Text="主题色" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="48,15,0,12" RenderTransformOrigin="0.519,-0.311" Width="77"/>
-                                        <ComboBox x:Name="Theams" Height="25" pu:ComboBoxHelper.ItemHeight="30" Margin="322,10,25,10" ToolTip="官方推荐主题色，你值得拥有。（可自定义）">
+                                        <ComboBox x:Name="Theams" DropDownClosed="ChangeTheams" Height="25" pu:ComboBoxHelper.ItemHeight="30" Margin="322,10,25,10" ToolTip="官方推荐主题色，你值得拥有。（可自定义）">
                                         </ComboBox>
                                     </Grid>
                                     <Grid>
@@ -50,9 +43,34 @@
                                     </Grid>
                                 </StackPanel>
                             </materialDesign:Card>
-                            <materialDesign:Card x:Name="CD12" Grid.Column="1" Margin="0,213,0,0">
+                            <materialDesign:Card x:Name="CD13" Grid.Column="1" Margin="0,170,0,370">
                                 <StackPanel>
+                                    <TextBlock x:Name="MT13" Text="主题色" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid Height="42">
+                                        <TextBlock x:Name="T14" Text="R" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                                        <Slider x:Name="S12" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1"/>
+                                    </Grid>
+                                    <Grid Height="42">
+                                        <TextBlock x:Name="T15" Text="G" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                                        <Slider x:Name="S13" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1"/>
+                                    </Grid>
+                                    <Grid Height="42">
+                                        <TextBlock x:Name="T16" Text="B" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                                        <Slider x:Name="S14" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1"/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="CD12" Grid.Column="1" Margin="0,356,0,188">
+                                <StackPanel Margin="0,0,0,-26">
                                     <TextBlock x:Name="MT12" Text="背景" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid>
+                                        <TextBlock x:Name="T17" Text="主背景图" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,23,0,14" />
+                                        <TextBox x:Name="BGT" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,10" Height="28" Opacity="100" ToolTip="被操作/获取的QQ号。"/>
+                                    </Grid>
+                                    <Grid Height="61">
+                                        <TextBlock x:Name="T18" Text="顶栏小图" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,20,0,20" />
+                                        <TextBox x:Name="BGTS" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,15" Height="28" Opacity="100" ToolTip="你的QQ号，某些操作需要使用到你的QQ号。"/>
+                                    </Grid>
                                 </StackPanel>
                             </materialDesign:Card>
                         </Grid>
@@ -73,7 +91,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="578*"/>
                             </Grid.ColumnDefinitions>
-                            <materialDesign:Card x:Name="CD31" Margin="0,-9,0,0" Grid.Column="1">
+                            <materialDesign:Card x:Name="CD31" Margin="0,-9,0,380" Grid.Column="1">
                                 <StackPanel>
                                     <TextBlock x:Name="MT31" Text="开发者" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid Height="42">
@@ -82,7 +100,7 @@
                                     </Grid>
                                 </StackPanel>
                             </materialDesign:Card>
-                            <materialDesign:Card x:Name="CD32" Margin="0,83,0,0" Grid.Column="1">
+                            <materialDesign:Card x:Name="CD32" Margin="0,84,0,288" Grid.Column="1">
                                 <StackPanel>
                                     <TextBlock x:Name="MT32" Text="调试" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid Height="42">
@@ -103,6 +121,6 @@
             </TabItem>
         </TabControl>
 
-        <Button x:Name="TopIcon" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="17" Margin="2,-29,422,464" Height="36" VerticalAlignment="Bottom"/>
+        <Button x:Name="TopIcon" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="17" Margin="0,-23,424,767" Height="36" VerticalAlignment="Bottom"/>
     </Grid>
 </pu:WindowX>
