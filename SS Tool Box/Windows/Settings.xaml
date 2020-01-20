@@ -38,7 +38,7 @@
                                         </ComboBox>
                                     </Grid>
                                     <Grid>
-                                        <CheckBox x:Name="C11" pu:CheckBoxHelper.CheckBoxStyle="Standard" Margin="49,0,377,10" RenderTransformOrigin="0.5,0.0" />
+                                        <CheckBox x:Name="C11" pu:CheckBoxHelper.CheckBoxStyle="Standard" Margin="49,0,377,10" RenderTransformOrigin="0.5,0.0" Click="DackModeChanged"/>
                                         <TextBlock x:Name="T13" Text="全局暗黑模式" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="71,5,0,10" Width="126"/>
                                     </Grid>
                                 </StackPanel>
@@ -48,15 +48,15 @@
                                     <TextBlock x:Name="MT13" Text="主题色" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid Height="42">
                                         <TextBlock x:Name="T14" Text="R" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
-                                        <Slider x:Name="S12" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1"/>
+                                        <Slider x:Name="S12" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
                                     </Grid>
                                     <Grid Height="42">
                                         <TextBlock x:Name="T15" Text="G" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
-                                        <Slider x:Name="S13" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1"/>
+                                        <Slider x:Name="S13" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
                                     </Grid>
                                     <Grid Height="42">
                                         <TextBlock x:Name="T16" Text="B" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
-                                        <Slider x:Name="S14" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1"/>
+                                        <Slider x:Name="S14" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
                                     </Grid>
                                 </StackPanel>
                             </materialDesign:Card>

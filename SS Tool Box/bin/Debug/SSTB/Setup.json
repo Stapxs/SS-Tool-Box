@@ -1,9 +1,14 @@
 {
   "Exterior": {
     "Themes": {
-      "WindowTran": 70.0,
-      "MainTheme": "1",
-      "DarkMode": "False"
+      "WindowTran": 0.0,
+      "MainTheme": "3",
+      "DarkMode": "True"
+    },
+    "OwnColor": {
+      "R": 0.0,
+      "G": 255.0,
+      "B": 2.0
     }
   }
 }

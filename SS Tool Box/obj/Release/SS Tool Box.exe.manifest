@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Resource\ICONSet_128.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="SS Tool Box" version="1.0.15.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="SS Tool Box" version="1.0.16.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="SS Tool Box.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -92,13 +92,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SS Tool Box.exe" size="2297808">
-      <assemblyIdentity name="SS Tool Box" version="1.0.15.0" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="SS Tool Box" version="1.0.16.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>InkTHdzmOvZKHKdzOMxySRziBz5XX22J9InwsjRtTws=</dsig:DigestValue>
+        <dsig:DigestValue>EBsnMQt90liCVU5vAOnBL4Zt4TctP1kWDVoVfU3Q5pQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

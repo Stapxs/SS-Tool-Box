@@ -29,13 +29,14 @@ namespace SS_Tool_Box_By_WPF
         }
 
         BaseColor baseColora = Main.baseColor;
+        bool fistLoad = true;
 
         public Settings()
         {
             InitializeComponent();
-
+            
             UpdateUI();
-
+            
             //初始化主题
             IList<customer> customList = new List<customer>();
             customList.Add(new customer() { ID = 1, Name = "  林槐白" });
@@ -52,13 +53,20 @@ namespace SS_Tool_Box_By_WPF
                 this.C11.IsChecked = true;
             }
 
-            if (!Theams.SelectedValue.ToString().Equals("4"))
+            if (!baseColora.Theme.ToString().Equals("4"))
             {
                 this.CD12.Visibility = Visibility.Collapsed;
                 this.CD13.Visibility = Visibility.Collapsed;
             }
-
+            
             S11.Value = double.Parse(Main.Settings["Exterior"]["Themes"]["WindowTran"].ToString());
+            if (baseColora.Theme.ToString().Equals("4"))
+            {
+                S12.Value = double.Parse(Main.Settings["Exterior"]["OwnColor"]["R"].ToString());
+                S13.Value = double.Parse(Main.Settings["Exterior"]["OwnColor"]["G"].ToString());
+                S14.Value = double.Parse(Main.Settings["Exterior"]["OwnColor"]["B"].ToString());
+                fistLoad = false;
+            }
         }
 
         private bool UpdateUI()
@@ -183,7 +191,23 @@ namespace SS_Tool_Box_By_WPF
             return true;
         }
 
-        void ChangeTheams(object sender, EventArgs e)       //当下拉框关闭时触发
+        void DackModeChanged(object sender, EventArgs e)
+        {
+            LoadingSetter setter = new LoadingSetter();
+            SaveSet();
+            JObject newSettings = setter.ReadSetup();
+            if (!Theams.SelectedValue.ToString().Equals("4"))
+            {
+                baseColora.setColor(int.Parse(newSettings["Exterior"]["Themes"]["MainTheme"].ToString()), bool.Parse(newSettings["Exterior"]["Themes"]["DarkMode"].ToString()));
+            }
+            else
+            {
+                baseColora.setColor(int.Parse(this.S12.Value.ToString()), int.Parse(this.S13.Value.ToString()), int.Parse(this.S14.Value.ToString()), "", "", bool.Parse(this.C11.IsChecked.ToString()));
+            }
+            UpdateUI();
+        }
+
+        void ChangeTheams(object sender, EventArgs e)
         {
             LoadingSetter setter = new LoadingSetter();
             SaveSet();
@@ -198,10 +222,24 @@ namespace SS_Tool_Box_By_WPF
                 this.CD13.Visibility = Visibility.Collapsed;
             }
             JObject newSettings = setter.ReadSetup();
-            baseColora.setColor(int.Parse(newSettings["Exterior"]["Themes"]["MainTheme"].ToString()), bool.Parse(newSettings["Exterior"]["Themes"]["DarkMode"].ToString()));
+            if (!Theams.SelectedValue.ToString().Equals("4"))
+            {
+                baseColora.setColor(int.Parse(newSettings["Exterior"]["Themes"]["MainTheme"].ToString()), bool.Parse(newSettings["Exterior"]["Themes"]["DarkMode"].ToString()));
+            }
             UpdateUI();
         }
-        
+
+        void UpdateColor(object sender, EventArgs e)
+        {
+            if (fistLoad)
+            {
+                return;
+            }
+            LoadingSetter setter = new LoadingSetter();
+            SaveSet();
+            baseColora.setColor(int.Parse(this.S12.Value.ToString()), int.Parse(this.S13.Value.ToString()), int.Parse(this.S14.Value.ToString()), "", "", bool.Parse(this.C11.IsChecked.ToString()));
+        }
+
         void SaveSet()
         {
             String DMIsclick = "False";
@@ -212,6 +250,9 @@ namespace SS_Tool_Box_By_WPF
             Main.Settings["Exterior"]["Themes"]["WindowTran"] = this.S11.Value;
             Main.Settings["Exterior"]["Themes"]["MainTheme"] = Theams.SelectedValue.ToString();
             Main.Settings["Exterior"]["Themes"]["DarkMode"] = DMIsclick;
+            Main.Settings["Exterior"]["OwnColor"]["R"] = this.S12.Value;
+            Main.Settings["Exterior"]["OwnColor"]["G"] = this.S13.Value;
+            Main.Settings["Exterior"]["OwnColor"]["B"] = this.S14.Value;
 
             LoadingSetter setter = new LoadingSetter();
             setter.writeJsom(Main.Settings);

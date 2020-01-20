@@ -358,7 +358,14 @@ namespace SS_Tool_Box_By_WPF
        
             try
             {
-                baseColor.setColor(int.Parse(Settings["Exterior"]["Themes"]["MainTheme"].ToString()), bool.Parse(Settings["Exterior"]["Themes"]["DarkMode"].ToString()));
+                if (!Settings["Exterior"]["Themes"]["MainTheme"].ToString().Equals("4"))
+                {
+                    baseColor.setColor(int.Parse(Settings["Exterior"]["Themes"]["MainTheme"].ToString()), bool.Parse(Settings["Exterior"]["Themes"]["DarkMode"].ToString()));
+                }
+                else
+                {
+                    baseColor.setColor(int.Parse(Settings["Exterior"]["OwnColor"]["R"].ToString()), int.Parse(Settings["Exterior"]["OwnColor"]["G"].ToString()), int.Parse(Settings["Exterior"]["OwnColor"]["B"].ToString()), "", "", bool.Parse(Settings["Exterior"]["Themes"]["DarkMode"].ToString()));
+                }
             }
             catch(Exception ex)
             {
@@ -380,7 +387,7 @@ namespace SS_Tool_Box_By_WPF
             }
 
             //版本号
-            String stVersion = "Version - 1.0.15";
+            String stVersion = "Version - 1.0.16";
             Versionon.Text = stVersion;
 
             //刷新工具列表
