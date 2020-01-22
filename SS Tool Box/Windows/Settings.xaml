@@ -7,14 +7,16 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:SS_Tool_Box_By_WPF"
         mc:Ignorable="d"
-        Title="| 设置 - Settings" Height="500" Width="450"
+        Title="| 设置 - Settings" Height="500" Width="458.949"
         Icon="/Resource/ICONAbout_128.ico"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         >
     <!-- Height="500" -->
     <Grid>
-        <TabControl x:Name="MainTab" Height="Auto" Width="Auto" pu:TabControlHelper.ItemHeight="30" pu:TabControlHelper.CanRemove="False" pu:TabControlHelper.ItemsAlignment="Center">
+        <Button x:Name="TopIcon" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="17" Margin="2,-26,430,467" Height="30" VerticalAlignment="Bottom"/>
+
+        <TabControl x:Name="MainTab" Height="Auto" Width="Auto" pu:TabControlHelper.ItemHeight="30" pu:TabControlHelper.CanRemove="False" pu:TabControlHelper.ItemsAlignment="Center" Grid.ColumnSpan="2">
             <TabItem Header="外观设置" >
                 <Grid>
                     <Image x:Name="BG" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
@@ -48,15 +50,15 @@
                                     <TextBlock x:Name="MT13" Text="主题色" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid Height="42">
                                         <TextBlock x:Name="T14" Text="R" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
-                                        <Slider x:Name="S12" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
+                                        <Slider x:Name="S12" IsSnapToTickEnabled="True" Margin="156,10,24,10" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
                                     </Grid>
                                     <Grid Height="42">
                                         <TextBlock x:Name="T15" Text="G" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
-                                        <Slider x:Name="S13" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
+                                        <Slider x:Name="S13" IsSnapToTickEnabled="True" Margin="156,10,24,10" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
                                     </Grid>
                                     <Grid Height="42">
                                         <TextBlock x:Name="T16" Text="B" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
-                                        <Slider x:Name="S14" IsSnapToTickEnabled="True" pu:SliderHelper.IsTickValueVisible="True" Margin="156,4,24,4" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
+                                        <Slider x:Name="S14" IsSnapToTickEnabled="True" Margin="156,10,24,10" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
                                     </Grid>
                                 </StackPanel>
                             </materialDesign:Card>
@@ -65,11 +67,12 @@
                                     <TextBlock x:Name="MT12" Text="背景" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid>
                                         <TextBlock x:Name="T17" Text="主背景图" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,23,0,14" />
-                                        <TextBox x:Name="BGT" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,10" Height="28" Opacity="100" ToolTip="被操作/获取的QQ号。"/>
+                                        <Button x:Name="MBG" pu:ButtonHelper.ButtonStyle="Hollow" Margin="337,15,0,10" HorizontalAlignment="Left" Width="88" Content="选择" Click="MBG_Click" pu:ButtonHelper.WaitingContent=" 选择 "/>
                                     </Grid>
                                     <Grid Height="61">
                                         <TextBlock x:Name="T18" Text="顶栏小图" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,20,0,20" />
-                                        <TextBox x:Name="BGTS" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,15" Height="28" Opacity="100" ToolTip="你的QQ号，某些操作需要使用到你的QQ号。"/>
+                                        <Button x:Name="TopIcon_Copy" pu:ButtonHelper.Icon="&#xF0C9;" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="18" Margin="0,-140,420,179"/>
+                                        <Button x:Name="SBG" pu:ButtonHelper.ButtonStyle="Hollow" Margin="337,10,0,20" HorizontalAlignment="Left" Width="88" Content="选择" Click="SBG_Click"  pu:ButtonHelper.WaitingContent=" 选择 "/>
                                     </Grid>
                                 </StackPanel>
                             </materialDesign:Card>
@@ -91,18 +94,13 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="578*"/>
                             </Grid.ColumnDefinitions>
-                            <materialDesign:Card x:Name="CD31" Margin="0,-9,0,380" Grid.Column="1">
+                            <materialDesign:Card x:Name="CD32" Margin="0,0,0,372" Grid.Column="1">
                                 <StackPanel>
-                                    <TextBlock x:Name="MT31" Text="开发者" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <TextBlock x:Name="MT31" Text="调试" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid Height="42">
                                         <CheckBox x:Name="C31" pu:CheckBoxHelper.CheckBoxStyle="Standard" Margin="49,0,377,10" RenderTransformOrigin="0.5,0.0" />
                                         <TextBlock x:Name="T31" Text="开发者模式" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="71,5,0,10" Width="126"/>
                                     </Grid>
-                                </StackPanel>
-                            </materialDesign:Card>
-                            <materialDesign:Card x:Name="CD32" Margin="0,84,0,288" Grid.Column="1">
-                                <StackPanel>
-                                    <TextBlock x:Name="MT32" Text="调试" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
                                     <Grid Height="42">
                                         <CheckBox x:Name="C32" pu:CheckBoxHelper.CheckBoxStyle="Standard" Margin="49,0,377,10" RenderTransformOrigin="0.5,0.0" />
                                         <TextBlock x:Name="T32" Text="演示模式" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="71,5,0,10" Width="126"/>
@@ -120,7 +118,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-
-        <Button x:Name="TopIcon" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="17" Margin="0,-23,424,767" Height="36" VerticalAlignment="Bottom"/>
     </Grid>
 </pu:WindowX>

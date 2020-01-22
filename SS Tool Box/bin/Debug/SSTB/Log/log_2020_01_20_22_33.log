@@ -1,0 +1,28 @@
+2020_01_20_22_33
+
+[22:34:33.54] 开始加载UI
+[22:34:35.73] 开始获取一言
+[22:34:36.09] 获取一言成功，耗时：00:00:00.3607754
+[22:34:36.11] UI加载完成，耗时：00:00:02.5614103
+[22:34:58.05] 开始获取一言
+[22:34:58.26] 获取一言成功，耗时：00:00:00.2058723
+[22:35:05.94] 开始获取一言
+[22:35:06.08] 获取一言成功，耗时：00:00:00.1389121
+[22:35:18.37] 写入设置文件错误：System.IO.IOException: 文件“C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SSTB\Setup.json”正由另一进程使用，因此该进程无法访问此文件。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   在 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   在 System.IO.StreamWriter..ctor(String path)
+   在 SS_Tool_Box.Classes.LoadingSetter.writeJsom(JObject obj) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Classes\LoadingSetter.cs:行号 56
+[22:35:34.02] 写入设置文件错误：System.IO.IOException: 文件“C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SSTB\Setup.json”正由另一进程使用，因此该进程无法访问此文件。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   在 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   在 System.IO.StreamWriter..ctor(String path)
+   在 SS_Tool_Box.Classes.LoadingSetter.writeJsom(JObject obj) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Classes\LoadingSetter.cs:行号 56
+[22:35:41.71] 开始获取一言
+[22:35:41.90] 获取一言成功，耗时：00:00:00.1958806

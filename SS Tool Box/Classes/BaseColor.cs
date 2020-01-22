@@ -126,9 +126,9 @@ namespace SS_Tool_Box.Classes
             Bg = defaultColor.Bgbrush;
             Fonts = defaultColor.font;
             DBg = defaultColor.DBgbrush;
-            //Bgp = defaultColor.Bgp;
-            //Bgpa = bgpa;
-            //Bgps = bgps;
+            Bgp = defaultColor.Bgp;
+            Bgpa = defaultColor.Bgpa;
+            Bgps = defaultColor.Bgps;
             return true;
         }
 

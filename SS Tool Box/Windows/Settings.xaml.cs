@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -128,13 +129,10 @@ namespace SS_Tool_Box_By_WPF
             this.MT31.Foreground = baseColora.Fg;
             this.MT31.FontFamily = baseColora.Fonts;
             this.MT31.FontSize = 15;
-            this.MT32.FontFamily = baseColora.Fonts;
-            this.MT32.FontSize = 15;
 
             this.CD11.Background = baseColora.Bg;
             this.CD12.Background = baseColora.Bg;
             this.CD13.Background = baseColora.Bg;
-            this.CD31.Background = baseColora.Bg;
             this.CD32.Background = baseColora.Bg;
 
             this.C11.Background = baseColora.DBg;
@@ -182,11 +180,12 @@ namespace SS_Tool_Box_By_WPF
             this.TopIcon.Foreground = baseColora.FontM;
             ButtonHelper.SetHoverBrush(TopIcon, baseColora.Main);
             ButtonHelper.SetClickCoverOpacity(TopIcon, 1);
-
-            this.BGT.Background = baseColora.Bg;
-            this.BGTS.Background = baseColora.Bg;
-            this.BGT.Foreground = baseColora.Fg;
-            this.BGTS.Foreground = baseColora.Fg;
+            this.MBG.Foreground = baseColora.Fg;
+            this.MBG.Background = baseColora.DBg;
+            this.SBG.Foreground = baseColora.Fg;
+            this.SBG.Background = baseColora.DBg;
+            ButtonHelper.SetHoverBrush(MBG, baseColora.DBg);
+            ButtonHelper.SetHoverBrush(SBG, baseColora.DBg);
 
             return true;
         }
@@ -256,6 +255,26 @@ namespace SS_Tool_Box_By_WPF
 
             LoadingSetter setter = new LoadingSetter();
             setter.writeJsom(Main.Settings);
+        }
+
+        private void MBG_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Title = "选择图片";
+            dialog.Filter = "图片文件(*.jpg,*.jpeg,*.png,*.bmp)|*.jpg;*.jpeg;*.png;*.bmp";
+            if (dialog.ShowDialog() == true)
+            {
+                if (File.Exists(dialog.FileName))
+                {
+                    string[] sArray = dialog.FileName.Split('.');
+                    File.Copy(dialog.FileName, "SSTB/Background/MBG" + sArray[1], true);
+                }
+            }
+        }
+
+        private void SBG_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
