@@ -106,6 +106,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Windows\KillSTL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageHD2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PageHD1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +174,12 @@
     <Compile Include="Classes\Error.cs" />
     <Compile Include="Classes\HttpUitls.cs" />
     <Compile Include="Classes\LoadingSetter.cs" />
+    <Compile Include="Windows\KillSTL.xaml.cs">
+      <DependentUpon>KillSTL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageHD2.xaml.cs">
+      <DependentUpon>PageHD2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PageHD1.xaml.cs">
       <DependentUpon>PageHD1.xaml</DependentUpon>
     </Compile>

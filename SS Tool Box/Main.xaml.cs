@@ -59,6 +59,7 @@ namespace SS_Tool_Box_By_WPF
         ListTool[] listallHidden = new ListTool[]
         {
                 new ListTool(){Line="    * . SOS 图标获取"},
+                new ListTool(){Line="    CMD"},
                 new ListTool(){Line="    回到主页"},
         };
 
@@ -164,6 +165,10 @@ namespace SS_Tool_Box_By_WPF
                 {
                     NowChoice = -2;
                 }
+                else if (upd.Line == "    CMD")
+                {
+                    NowChoice = -3;
+                }
                 else
                 {
                     NowChoice = -999;
@@ -253,6 +258,15 @@ namespace SS_Tool_Box_By_WPF
                     Page.Content = new Frame()
                     {
                         Content = pageMain
+                    };
+                }
+                else if (upd.Line == "    CMD")
+                {
+                    NowPage = -3;
+                    PageHD2 pageHD2 = new PageHD2();
+                    Page.Content = new Frame()
+                    {
+                        Content = pageHD2
                     };
                 }
                 else
@@ -387,7 +401,7 @@ namespace SS_Tool_Box_By_WPF
             }
 
             //版本号
-            String stVersion = "Version - 1.0.16";
+            String stVersion = "Version - 1.0.17";
             Versionon.Text = stVersion;
 
             //刷新工具列表

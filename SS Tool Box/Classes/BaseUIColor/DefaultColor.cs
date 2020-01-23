@@ -51,7 +51,7 @@ namespace SS_Tool_Box.Classes.BaseUIColor
                 Fontbrush.Color = Color.FromArgb(255, 100, 100, 100);
                 Fgbrush = Fontbrush;
                 FontMbrush.Color = Color.FromArgb(255, 255, 255, 255);
-                Bgbrush.Color = Color.FromArgb(255, 255, 255, 255);
+                Bgbrush.Color = Color.FromArgb(255, 196, 196, 196);
                 Mainbrush = Fontbrush;
                 DBgbrush = Bgbrush;
                 Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BG.png"));
