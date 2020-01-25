@@ -42,8 +42,8 @@
                             <ProgressBar x:Name="Health" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,0,10,112" Grid.ColumnSpan="2"/>
                             <TextBlock x:Name="T4" Text="好感" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="19" VerticalAlignment="Bottom" Margin="0,0,118.685,75"/>
                             <ProgressBar x:Name="Love" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,35,10,78" Grid.ColumnSpan="2"/>
-                            <TextBlock x:Name="T7" Text="心情" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="19" VerticalAlignment="Bottom" Margin="0,0,118.685,42"/>
-                            <ProgressBar x:Name="Fuck" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,69,10,44" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="T7" Text="饥饿" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="19" VerticalAlignment="Bottom" Margin="0,0,118.685,42"/>
+                            <ProgressBar x:Name="Hug" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,69,10,44" Grid.ColumnSpan="2"/>
                             <TextBlock x:Name="T8" Text="防御" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="20" VerticalAlignment="Bottom" Margin="0,0,119,10"/>
                             <ProgressBar x:Name="Duang" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,103,10,10" Grid.ColumnSpan="2"/>
                         </Grid>
@@ -79,8 +79,8 @@
                                         <ProgressBar x:Name="yHealth" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,59,46,148" Grid.Column="1"/>
                                         <TextBlock x:Name="T10" Text="好感" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="20" VerticalAlignment="Bottom" Margin="211,0,0,113"/>
                                         <ProgressBar x:Name="yLove" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,94,46,113" Grid.Column="1"/>
-                                        <TextBlock x:Name="T11" Text="心情" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="211,0,0,78"/>
-                                        <ProgressBar x:Name="yFuck" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,129,46,78" Grid.Column="1"/>
+                                        <TextBlock x:Name="T11" Text="饥饿" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="211,0,0,78"/>
+                                        <ProgressBar x:Name="yHug" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,129,46,78" Grid.Column="1"/>
                                         <TextBlock x:Name="T12" Text="防御" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="20" VerticalAlignment="Bottom" Margin="211,0,0,43"/>
                                         <ProgressBar x:Name="yDuang" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,164,46,43" Grid.Column="1"/>
                                     </Grid>

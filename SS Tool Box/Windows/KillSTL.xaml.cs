@@ -23,6 +23,27 @@ namespace SS_Tool_Box
     /// </summary>
     public partial class KillSTL : WindowX
     {
+        public class customerHit
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+            public int Hit { get; set; }
+            public int HitMax { get; set; }
+        }
+
+        IList<customerHit> customHit = new List<customerHit>();
+
+        public class customerGive
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+            public int Hit { get; set; }
+            public int HitMax { get; set; }
+            public int Love { get; set; }
+            public int LoveMax { get; set; }
+            public int Hug { get; set; }
+            public int HugMax { get; set; }
+        }
 
         BaseColor baseColora = Main.baseColor;
         string version = "Dev.0.1.5";
@@ -30,12 +51,12 @@ namespace SS_Tool_Box
         //初始化数据
         int health = 100;
         int love = 40;
-        int fuck = 90;
+        int hug = 90;
         int duang = 10;
 
         int yhealth = 100;
         int ylove = 50;
-        int yfuck = 100;
+        int yhug = 100;
         int yduang = 10;
 
         string logs = "STL：你好！\n";
@@ -150,8 +171,8 @@ namespace SS_Tool_Box
             this.Health.Foreground = baseColora.Main;
             this.Love.Background = baseColora.DBg;
             this.Love.Foreground = baseColora.Main;
-            this.Fuck.Background = baseColora.DBg;
-            this.Fuck.Foreground = baseColora.Main;
+            this.Hug.Background = baseColora.DBg;
+            this.Hug.Foreground = baseColora.Main;
             this.Duang.Background = baseColora.DBg;
             this.Duang.Foreground = baseColora.Main;
 
@@ -159,8 +180,8 @@ namespace SS_Tool_Box
             this.yHealth.Foreground = baseColora.Main;
             this.yLove.Background = baseColora.DBg;
             this.yLove.Foreground = baseColora.Main;
-            this.yFuck.Background = baseColora.DBg;
-            this.yFuck.Foreground = baseColora.Main;
+            this.yHug.Background = baseColora.DBg;
+            this.yHug.Foreground = baseColora.Main;
             this.yDuang.Background = baseColora.DBg;
             this.yDuang.Foreground = baseColora.Main;
 
@@ -179,6 +200,13 @@ namespace SS_Tool_Box
                 you = "SS";
                 op = true;
             }
+
+            customHit.Add(new customerHit() { ID = 0, Name = "  - 空 -", Hit = 0, HitMax = 0 });
+            customHit.Add(new customerHit() { ID = 1, Name = "  - 轻拳 -", Hit = 5, HitMax = 10});
+            Hit.ItemsSource = customHit;
+            Hit.DisplayMemberPath = "Name";
+            Hit.SelectedValuePath = "ID";
+            Hit.SelectedValue = 0;
         }
 
         private void setTitle(String title)
@@ -206,12 +234,12 @@ namespace SS_Tool_Box
 
             ProgressBarHelper.SetAnimateTo(Health, health);
             ProgressBarHelper.SetAnimateTo(Love, love);
-            ProgressBarHelper.SetAnimateTo(Fuck, fuck);
+            ProgressBarHelper.SetAnimateTo(Hug, hug);
             ProgressBarHelper.SetAnimateTo(Duang, duang);
 
             ProgressBarHelper.SetAnimateTo(yHealth, yhealth);
             ProgressBarHelper.SetAnimateTo(yLove, ylove);
-            ProgressBarHelper.SetAnimateTo(yFuck, yfuck);
+            ProgressBarHelper.SetAnimateTo(yHug, yhug);
             ProgressBarHelper.SetAnimateTo(yDuang, yduang);
 
             CMD.Text = logs;
@@ -226,24 +254,101 @@ namespace SS_Tool_Box
             return CMD.Text + addtext;
         }
 
-        private void Pass_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             ForceClose();
         }
 
+        private void Pass_Click(object sender, RoutedEventArgs e)
+        {
+            pass += 1;
+            TPASS.Text = "第" + pass + "回合";
+            //刷新血量
+            health -= BuffHitPass(health) - HealthPass(health, 1);
+            ProgressBarHelper.SetAnimateTo(Health, health);
+        }
+
         private void Hit_Click(object sender, RoutedEventArgs e)
         {
+            pass += 1;
+            TPASS.Text = "第" + pass + "回合";
 
+            //刷新血量
+            health -= BuffHitPass(health) - HealthPass(health, 0);
+            ProgressBarHelper.SetAnimateTo(Health, health);
         }
 
         private void Hit_DropDownClosed(object sender, EventArgs e)
         {
 
+        }
+
+        private int HealthPass(int health, int nMode)        //扣血判定算法
+        {
+            int rehealth = 0;
+            switch (nMode)
+            {
+                //跳过回合
+                case 1:
+                    {
+                        /* 逻辑
+                         * buff 优先扣血
+                         * 血量大于30小于80每回合定量扣血 -1
+                         * 血量小于30每回合定量扣血 -3
+                         */
+
+                        //buff会单独写函数扣，所以这儿就用不着
+                        if(health > 30 && health <= 80)
+                        {
+                            rehealth = health - 1;
+                        }
+                        else if(health <= 30)
+                        {
+                            rehealth = health - 3;
+                        }
+                    }
+                    break;
+                //操作计算
+                case 0:
+                    {
+                        rehealth = health - HitPass(health, int.Parse(Hit.SelectedValue.ToString()));
+                    }
+                    break;
+            }
+            return rehealth;
+        }
+
+        public int BuffHitPass(int health)          //Buff判定算法
+        {
+            int rehealth = 0;
+            rehealth = health;
+            return rehealth;
+        }
+
+        public int HitPass(int health, int ID)          //攻击判定算法
+        {
+            int rehealth = 0;
+            switch(ID)
+            {
+                case 1:
+                    {
+                        dynamic temp = customHit[1];
+                        rehealth = RandomInt(temp.Hit, temp.HitMax);
+                    }
+                    break;
+                default:
+                    {
+                        rehealth = health;
+                    }
+                    break;
+            }
+            return rehealth;
+        }
+
+        private int RandomInt(int Min, int Max)
+        {
+            Random random = new Random();
+            return random.Next(Min, Max);
         }
     }
 }

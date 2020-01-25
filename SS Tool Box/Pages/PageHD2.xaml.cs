@@ -62,7 +62,7 @@ namespace SS_Tool_Box
                 else
                 {
                     loading = true;
-                    CMD.Text = addtext("\n输入Y继续>");
+                    CMD.Text = Addtext("\n输入Y继续>");
                     CMD.SelectionStart = CMD.Text.Length;
                     loading = false;
                     return;
@@ -76,7 +76,7 @@ namespace SS_Tool_Box
                     if (strin.Equals("help"))
                     {
                         loading = true;
-                        CMD.Text = addtext("cls\t\t清屏\ndev\t\t开发者选项\nexit\t\t退出\nhelp\t\t查看所有的帮助\nrun\t\t运行程式\n\n");
+                        CMD.Text = Addtext("cls\t\t清屏\ndev\t\t开发者选项\nexit\t\t退出\nhelp\t\t查看所有的帮助\nrun\t\t运行程式\n\n");
                         loading = false;
                         runpass = true;
                     }
@@ -90,7 +90,7 @@ namespace SS_Tool_Box
                     if (strin.Equals("run"))
                     {
                         loading = true;
-                        CMD.Text = addtext("run -<appname> -[parameter]\n运行一个程式，这个程式可以是工具箱内含的工具。\n-<appname> \t\t程式名：程式的名字或者工具箱工具的全称。\n-[parameter]\t\t运行参数：传递给程式的参数。\n\n");
+                        CMD.Text = Addtext("run -<appname> -[parameter]\n运行一个程式，这个程式可以是工具箱内含的工具。\n-<appname> \t\t程式名：程式的名字或者工具箱工具的全称。\n-[parameter]\t\t运行参数：传递给程式的参数。\n\n");
                         loading = false;
                         runpass = true;
                     }
@@ -129,7 +129,7 @@ namespace SS_Tool_Box
                     loading = true;
                     strin = "";
                     CMD.Text = CMD.Text.Substring(0, CMD.Text.Length - 1);
-                    CMD.Text = addtext("\nX:\\User\\Admin>");
+                    CMD.Text = Addtext("\nX:\\User\\Admin>");
                     loading = false;
                     CMD.SelectionStart = CMD.Text.Length;
 
@@ -148,15 +148,15 @@ namespace SS_Tool_Box
         private void Run()
         {
             loading = true;
-            CMD.Text = addtext("\n正在初始化线程……");
-            CMD.Text = addtext("\n开始加载资源……");
-            CMD.Text = addtext("\n载入文件X:\\MainUI\\Admin\\UserData");
+            CMD.Text = Addtext("\n正在初始化线程……");
+            CMD.Text = Addtext("\n开始加载资源……");
+            CMD.Text = Addtext("\n载入文件X:\\MainUI\\Admin\\UserData");
             for (int i = 0; i <= 20; i++)
             {
-                CMD.Text = addtext("\n载入文件X:\\MainUI\\Admin\\GameData\\" + i);
+                CMD.Text = Addtext("\n载入文件X:\\MainUI\\Admin\\GameData\\" + i);
             }
-            CMD.Text = addtext("\n开始运行。");
-            CMD.Text = addtext("\n线程已结束。\n\n");
+            CMD.Text = Addtext("\n开始运行。");
+            CMD.Text = Addtext("\n线程已结束。\n\n");
             loading = false;
             KillSTL openInWindow = new KillSTL();
             openInWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -164,7 +164,7 @@ namespace SS_Tool_Box
             Errorsay.Text = "线程已关闭。";
         }
 
-        private String addtext(String addtext)
+        private String Addtext(String addtext)
         {
             return CMD.Text + addtext;
         }
