@@ -29,8 +29,15 @@ namespace SS_Tool_Box
             public string Name { get; set; }
             public int Hit { get; set; }
             public int HitMax { get; set; }
+            public int Love { get; set; }
+            public int LoveMax { get; set; }
+            public int Hug { get; set; }
+            public int HugMax { get; set; }
+            public int Duang { get; set; }
+            public int DuangMax { get; set; }
+            public string Buff { get; set; }
+            public int BuffPes { get; set; }
         }
-
         IList<customerHit> customHit = new List<customerHit>();
 
         public class customerGive
@@ -43,7 +50,27 @@ namespace SS_Tool_Box
             public int LoveMax { get; set; }
             public int Hug { get; set; }
             public int HugMax { get; set; }
+            public int Duang { get; set; }
+            public int DuangMax { get; set; }
+            public string Buff { get; set; }
+            public int BuffPes { get; set; }
         }
+        IList<customerGive> customGive = new List<customerGive>();
+
+        public class customerDo
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+            public int Hit { get; set; }
+            public int HitMax { get; set; }
+            public int Love { get; set; }
+            public int LoveMax { get; set; }
+            public int Hug { get; set; }
+            public int HugMax { get; set; }
+            public string Buff { get; set; }
+            public int BuffPes { get; set; }
+        }
+        IList<customerDo> customDo = new List<customerDo>();
 
         BaseColor baseColora = Main.baseColor;
         string version = "Dev.0.1.5";
@@ -59,9 +86,9 @@ namespace SS_Tool_Box
         int yhug = 100;
         int yduang = 10;
 
-        string logs = "STL：你好！\n";
+        string logs = "ShanTianLun：你好！\n";
         string cmd = "Stapx Steve Tool Box [ 版本 1.0.16.33 ] \n(c) Stapx Steve Team.  保留所有权利。\n";
-        string you = "youself";
+        string you = "Youself";
         int pass = 0;
 
         bool op = false;
@@ -197,15 +224,113 @@ namespace SS_Tool_Box
 
             if(PageHD2.opin)
             {
-                you = "SS";
+                you = "Stapx Steve";
                 op = true;
             }
 
-            customHit.Add(new customerHit() { ID = 0, Name = "  - 空 -", Hit = 0, HitMax = 0 });
-            customHit.Add(new customerHit() { ID = 1, Name = "  - 轻拳 -", Hit = 5, HitMax = 10});
+            customHit.Add(new customerHit() { ID = 0, Name = "  - 空 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Duang = 0, DuangMax = 0 });
+            customHit.Add(new customerHit() { ID = 1, Name = "  - 轻拳 -", Hit = -10, HitMax = -5, Love = -1, LoveMax = 0, Hug = -45, HugMax = -25, Duang = 1, DuangMax = 2 });
             Hit.ItemsSource = customHit;
             Hit.DisplayMemberPath = "Name";
             Hit.SelectedValuePath = "ID";
+            Hit.SelectedValue = 0;
+
+            customGive.Add(new customerGive() { ID = 0, Name = "  - 空 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Buff = "", BuffPes = 0 });
+            customGive.Add(new customerGive() { ID = 1, Name = "  - 面包 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 2, Hug = 10, HugMax = 10, Buff = "吃撑", BuffPes = 5 });
+            Give.ItemsSource = customGive;
+            Give.DisplayMemberPath = "Name";
+            Give.SelectedValuePath = "ID";
+            Give.SelectedValue = 0;
+
+            customDo.Add(new customerDo() { ID = 0, Name = "  - 空 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Buff = "", BuffPes = 0 });
+            customDo.Add(new customerDo() { ID = 1, Name = "  - 捏捏 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 2, Hug = -5, HugMax = -2, Buff = "", BuffPes = 0 });
+            Do.ItemsSource = customDo;
+            Do.DisplayMemberPath = "Name";
+            Do.SelectedValuePath = "ID";
+            Do.SelectedValue = 0;
+        }
+
+        private bool workPass(int nMode)           //游戏过程判定
+        {
+            //基础判定
+            if(health > 30 && health < 85)
+            {
+                health -= 1;
+            }
+            else if(health <= 30)
+            {
+                health -= 3;
+            }
+            if (yhealth > 30 && yhealth < 85)
+            {
+                yhealth -= 1;
+            }
+            else if (yhealth <= 30)
+            {
+                yhealth -= 3;
+            }
+            hug -= 1;
+            yhug -= 1;
+            if(nMode == 0)
+            {
+                return true;
+            }
+            //攻击判定
+            
+            return true;
+        }
+        private bool ClickPass(int nMode)
+        {
+            bool error = false;
+            TPASS.Text = "第" + ++pass + "回合";         //刷新回合数
+            error = workPass(nMode);                    //游戏过程判定（ 数据判定 & BUFF获取判定 ）
+            You.IsSelected = true;                      //跳转到信息界面
+            updatePBar();                               //刷新数据条
+            return error;
+        }
+
+        private void Pass_Click(object sender, RoutedEventArgs e)
+        {
+            ClickPass(0);
+        }
+
+        private void Hit_Click(object sender, RoutedEventArgs e)
+        {
+            ClickPass(1);
+        }
+
+        private void updatePBar()            //刷新进度条
+        {
+            ProgressBarHelper.SetAnimateTo(Health, health);
+            ProgressBarHelper.SetAnimateTo(yHealth, yhealth);
+            ProgressBarHelper.SetAnimateTo(Hug, hug);
+            ProgressBarHelper.SetAnimateTo(yHug, yhug);
+            ProgressBarHelper.SetAnimateTo(Duang, duang);
+            ProgressBarHelper.SetAnimateTo(yDuang, yduang);
+            ProgressBarHelper.SetAnimateTo(Love, love);
+            ProgressBarHelper.SetAnimateTo(yLove, ylove);
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            ForceClose();
+        }
+
+        private void Hit_DropDownClosed(object sender, EventArgs e)
+        {
+            Do.SelectedValue = 0;
+            Give.SelectedValue = 0;
+        }
+
+        private void Do_DropDownClosed(object sender, EventArgs e)
+        {
+            Hit.SelectedValue = 0;
+            Give.SelectedValue = 0;
+        }
+
+        private void Give_DropDownClosed(object sender, EventArgs e)
+        {
+            Do.SelectedValue = 0;
             Hit.SelectedValue = 0;
         }
 
@@ -216,9 +341,8 @@ namespace SS_Tool_Box
 
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
-            if(op)
+            if (op)
             {
-                MessageBoxX.Show("你好！管理员权限已为你打开。", "你好");
                 CMDIN.Visibility = Visibility.Visible;
             }
             this.MainPage.Visibility = Visibility.Collapsed;        //隐藏主页
@@ -249,106 +373,20 @@ namespace SS_Tool_Box
             TPASS.Text = "第" + pass + "回合";
         }
 
-        private String addtext(String addtext)
-        {
-            return CMD.Text + addtext;
-        }
 
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            ForceClose();
-        }
-
-        private void Pass_Click(object sender, RoutedEventArgs e)
-        {
-            pass += 1;
-            TPASS.Text = "第" + pass + "回合";
-            //刷新血量
-            health -= BuffHitPass(health) - HealthPass(health, 1);
-            ProgressBarHelper.SetAnimateTo(Health, health);
-        }
-
-        private void Hit_Click(object sender, RoutedEventArgs e)
-        {
-            pass += 1;
-            TPASS.Text = "第" + pass + "回合";
-
-            //刷新血量
-            health -= BuffHitPass(health) - HealthPass(health, 0);
-            ProgressBarHelper.SetAnimateTo(Health, health);
-        }
-
-        private void Hit_DropDownClosed(object sender, EventArgs e)
-        {
-
-        }
-
-        private int HealthPass(int health, int nMode)        //扣血判定算法
-        {
-            int rehealth = 0;
-            switch (nMode)
-            {
-                //跳过回合
-                case 1:
-                    {
-                        /* 逻辑
-                         * buff 优先扣血
-                         * 血量大于30小于80每回合定量扣血 -1
-                         * 血量小于30每回合定量扣血 -3
-                         */
-
-                        //buff会单独写函数扣，所以这儿就用不着
-                        if(health > 30 && health <= 80)
-                        {
-                            rehealth = health - 1;
-                        }
-                        else if(health <= 30)
-                        {
-                            rehealth = health - 3;
-                        }
-                    }
-                    break;
-                //操作计算
-                case 0:
-                    {
-                        rehealth = health - HitPass(health, int.Parse(Hit.SelectedValue.ToString()));
-                    }
-                    break;
-            }
-            return rehealth;
-        }
-
-        public int BuffHitPass(int health)          //Buff判定算法
-        {
-            int rehealth = 0;
-            rehealth = health;
-            return rehealth;
-        }
-
-        public int HitPass(int health, int ID)          //攻击判定算法
-        {
-            int rehealth = 0;
-            switch(ID)
-            {
-                case 1:
-                    {
-                        dynamic temp = customHit[1];
-                        rehealth = RandomInt(temp.Hit, temp.HitMax);
-                    }
-                    break;
-                default:
-                    {
-                        rehealth = health;
-                    }
-                    break;
-            }
-            return rehealth;
-        }
+        /* 无关算法
+         * 下面是功能无关的辅助算法
+         */
 
         private int RandomInt(int Min, int Max)
         {
             Random random = new Random();
             return random.Next(Min, Max);
+        }
+
+        private String addtext(String addtext)
+        {
+            return CMD.Text + addtext;
         }
     }
 }

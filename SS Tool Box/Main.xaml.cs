@@ -445,6 +445,11 @@ namespace SS_Tool_Box_By_WPF
             UpdateList.ContextMenu.Foreground = baseColor.Fg;
             ContextMenuHelper.SetShadowColor(UpdateList.ContextMenu, baseColor.DBg.Color);
 
+            BorderBut.Background = baseColor.DBg;
+            BorderTop.Background = baseColor.Main;
+            BorderTop1.Background = baseColor.Main;
+            BorderTop2.Background = baseColor.Main;
+
             BG.BeginInit();
             BG.Source = baseColor.Bgp;
             BG.EndInit();
@@ -466,7 +471,7 @@ namespace SS_Tool_Box_By_WPF
         {
             System.Windows.Rect r = new System.Windows.Rect(e.NewSize);
             int radius = 5;
-            RectangleGeometry gm = new RectangleGeometry(r, radius, radius); // 40 is radius here
+            RectangleGeometry gm = new RectangleGeometry(r, radius, radius);
             ((UIElement)sender).Clip = gm;
         }
     }

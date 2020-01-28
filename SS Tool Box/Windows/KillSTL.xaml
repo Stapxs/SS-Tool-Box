@@ -59,16 +59,16 @@
                                         <Grid>
                                             <ComboBox x:Name="Hit" DropDownClosed="Hit_DropDownClosed" pu:ComboBoxHelper.ItemHeight="30" Margin="340,84,285,116" RenderTransformOrigin="0.232,0.522" />
                                             <TextBlock x:Name="T13" Text="攻击" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="260,0,398,123"/>
-                                            <ComboBox x:Name="Do" DropDownClosed="Hit_DropDownClosed" pu:ComboBoxHelper.ItemHeight="30" Margin="340,129,285,71" RenderTransformOrigin="0.232,0.522" />
+                                            <ComboBox x:Name="Do" DropDownClosed="Do_DropDownClosed"  pu:ComboBoxHelper.ItemHeight="30" Margin="340,129,285,71" RenderTransformOrigin="0.232,0.522" />
                                             <TextBlock x:Name="T15" Text="行动" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="260,0,398,78"/>
-                                            <ComboBox x:Name="Give" DropDownClosed="Hit_DropDownClosed" pu:ComboBoxHelper.ItemHeight="30" Margin="340,175,285,25" RenderTransformOrigin="0.232,0.522" />
-                                            <TextBlock x:Name="T16" Text="攻击" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="260,0,398,32"/>
+                                            <ComboBox x:Name="Give" DropDownClosed="Give_DropDownClosed"  pu:ComboBoxHelper.ItemHeight="30" Margin="340,175,285,25" RenderTransformOrigin="0.232,0.522" />
+                                            <TextBlock x:Name="T16" Text="给予" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="260,0,398,32"/>
                                             <Button x:Name="Hits" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="" Content="确定  " Click="Hit_Click"  pu:ButtonHelper.WaitingContent=" 确定 " Margin="574,26,49,169"/>
                                             <TextBlock x:Name="T14" Text="选择操作" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="235,0,423,173"/>
                                         </Grid>
                                     </Grid>
                                 </TabItem>
-                                <TabItem Header="你的状态">
+                                <TabItem Header="你的状态" x:Name="You">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="197*"/>
