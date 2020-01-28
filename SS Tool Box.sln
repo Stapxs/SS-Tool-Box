@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS Tool Box", "SS Tool Box\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTB - 总单元测试", "SS Tool BoxTests\SSTB - 总单元测试.csproj", "{7F84F2CE-F0BF-45E3-8265-8630500C87E4}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SSTB Instsaller", "SSTB Instsaller\SSTB Instsaller.vdproj", "{0B790FE7-D5A3-42E8-84C9-90CA4C6EFB66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,12 @@ Global
 		{7F84F2CE-F0BF-45E3-8265-8630500C87E4}.Release|x64.Build.0 = Release|Any CPU
 		{7F84F2CE-F0BF-45E3-8265-8630500C87E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{7F84F2CE-F0BF-45E3-8265-8630500C87E4}.Release|x86.Build.0 = Release|Any CPU
+		{0B790FE7-D5A3-42E8-84C9-90CA4C6EFB66}.Debug|Any CPU.ActiveCfg = Debug
+		{0B790FE7-D5A3-42E8-84C9-90CA4C6EFB66}.Debug|x64.ActiveCfg = Debug
+		{0B790FE7-D5A3-42E8-84C9-90CA4C6EFB66}.Debug|x86.ActiveCfg = Debug
+		{0B790FE7-D5A3-42E8-84C9-90CA4C6EFB66}.Release|Any CPU.ActiveCfg = Release
+		{0B790FE7-D5A3-42E8-84C9-90CA4C6EFB66}.Release|x64.ActiveCfg = Release
+		{0B790FE7-D5A3-42E8-84C9-90CA4C6EFB66}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

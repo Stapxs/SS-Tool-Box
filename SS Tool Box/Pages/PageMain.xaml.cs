@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -32,10 +33,9 @@ namespace SS_Tool_Box_By_WPF
         public PageMain()
         {
             InitializeComponent();
-
+            //title文本
             String stTitle;
-            String UserName = Environment.UserName;
-            error.logWriter("开始获取一言", false);
+            String UserName = Environment.UserName; 
             loadingtime = DateTime.Now;
             if (DateTime.Now.ToString("MM").Equals("01") && int.Parse(DateTime.Now.ToString("dd")) < 8)
             {
@@ -45,12 +45,31 @@ namespace SS_Tool_Box_By_WPF
             {
                 stTitle = "你好，" + UserName + "。";
             }
+
+            /*
+            try
+            {
+                string wnlurl = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query=" + DateTime.Now.ToString("yyyy") + "年" + DateTime.Now.ToString("MM") + "月&resource_id=6018&format=json";
+                string GetJsonwnl = HttpUitls.Get(wnlurl, "DEFALT");
+
+                GetJsonwnl = HttpUtility.UrlEncode(GetJsonwnl, Encoding.UTF8);
+                GetJsonwnl = HttpUtility.UrlDecode(GetJsonwnl);
+                MessageBox.Show(GetJsonwnl);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("" + ex);
+            }
+            */
+
             String stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
 
+            //一言
+            error.logWriter("开始获取一言", false);
             try
             {
                 String saysuri = "https://v1.hitokoto.cn/";
-                string GetJson = HttpUitls.Get(saysuri);
+                string GetJson = HttpUitls.Get(saysuri, "DEFALT");
                 if (GetJson.IndexOf("hitokoto") != -1)
                 {
                     JObject obj = JObject.Parse(GetJson);
@@ -109,6 +128,29 @@ namespace SS_Tool_Box_By_WPF
             this.UpdateList.FontFamily = baseColora.Fonts;
             this.UpdateList.FontSize = 10;
 
+        }
+
+        /*
+         * 以下是程序无关的辅助算法 
+         */
+
+        private string GB2312ToUTF8(string str)
+        {
+            try
+            {
+                Encoding utf8 = Encoding.UTF8;
+                Encoding gb2312 = Encoding.GetEncoding("GB2312");
+                byte[] unicodeBytes = gb2312.GetBytes(str);
+                byte[] asciiBytes = Encoding.Convert(gb2312, utf8, unicodeBytes);
+                char[] asciiChars = new char[utf8.GetCharCount(asciiBytes, 0, asciiBytes.Length)];
+                utf8.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0);
+                string result = new string(asciiChars);
+                return result;
+            }
+            catch
+            {
+                return "Error";
+            }
         }
     }
 }

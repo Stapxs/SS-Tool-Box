@@ -10,14 +10,21 @@ namespace SS_Tool_Box.Classes
 {
     public class HttpUitls
     {
-        public static string Get(string Url)
+        public static string Get(string Url, string ContentType)
         {
             //System.GC.Collect();
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
             request.Proxy = null;
             request.KeepAlive = false;
             request.Method = "GET";
-            request.ContentType = "application/json; charset=UTF-8";
+            if (ContentType.Equals("DEFALT"))      //垃圾html post轮子不支持自定义Content-Type
+            {
+                request.ContentType = "application/json; charset=UTF-8";
+            }
+            else
+            {
+                request.ContentType = ContentType;
+            }
             request.AutomaticDecompression = DecompressionMethods.GZip;
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -46,7 +53,7 @@ namespace SS_Tool_Box.Classes
             request.Method = "POST";
             request.Referer = Referer;
             byte[] bytes = Encoding.UTF8.GetBytes(Data);
-            if(ContentType.Equals("NONE"))      //垃圾html post轮子不支持自定义Content-Type
+            if(ContentType.Equals("DEFALT"))      //垃圾html post轮子不支持自定义Content-Type
             {
                 request.ContentType = "application/x-www-form-urlencoded";
             }

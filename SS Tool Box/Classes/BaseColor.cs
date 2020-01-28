@@ -90,6 +90,48 @@ namespace SS_Tool_Box.Classes
             return true;
         }
 
+        public bool setColor(int r, int g, int b, String bgpa, String bgps, bool DarkMode)
+        {
+            this.DarkMode = DarkMode;
+            this.Theme = 4;
+
+            this.Tran.Color = Color.FromArgb(0, 0, 0, 0);
+            DefaultColor defaultColor = new DefaultColor(DarkMode);
+            if(DarkMode)
+            {
+                Card.Color = Color.FromArgb(204, 62, 62, 66);
+            }
+            else
+            {
+                Card.Color = Color.FromArgb(204, 255, 255, 255);
+            }
+            Main.Color = Color.FromArgb(255, byte.Parse(r.ToString()), byte.Parse(g.ToString()), byte.Parse(b.ToString()));
+            if (r * 0.299 + g * 0.578 + b * 0.114 >= 192)
+            { //浅色
+                FontM.Color = Color.FromArgb(255, 0, 0, 0);
+            }
+            else
+            {  //深色
+                FontM.Color = Color.FromArgb(255, 255, 255, 255);
+            }
+            if (DarkMode)
+            {
+                Font.Color = Color.FromArgb(255, 255, 255, 255);
+            }
+            else
+            {
+                Font.Color = Color.FromArgb(255, 0, 0, 0);
+            }
+            Fg = defaultColor.Fgbrush;
+            Bg = defaultColor.Bgbrush;
+            Fonts = defaultColor.font;
+            DBg = defaultColor.DBgbrush;
+            Bgp = defaultColor.Bgp;
+            Bgpa = defaultColor.Bgpa;
+            Bgps = defaultColor.Bgps;
+            return true;
+        }
+
         public BaseColor()
         {
             DefaultColor defaultColor = new DefaultColor(false);

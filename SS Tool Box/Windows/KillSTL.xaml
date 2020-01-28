@@ -1,0 +1,143 @@
+﻿<pu:WindowX x:Class="SS_Tool_Box.KillSTL"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SS_Tool_Box_By_WPF"
+        mc:Ignorable="d"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="| Kill STL" Height="500" Width="820"
+        Icon="/Resource/ICONMain_128.ico"
+        ResizeMode = "CanMinimize"
+        Foreground="#000000"
+        >
+    <Grid>
+        <Button x:Name="TopIcon" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="17" Margin="2,-30,793,466"/>
+        <TabControl x:Name="MainTab" Height="Auto" Width="Auto" pu:TabControlHelper.ItemHeight="30" pu:TabControlHelper.CanRemove="False" TabStripPlacement="Left">
+            <TabItem Header="    主页    ">
+                <Grid>
+                    <Image x:Name="BG" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
+                    <Grid x:Name="MainPage">
+                        <Grid>
+                            <TextBlock x:Name="T1" Text="K i l l  S T L" TextAlignment="Center" Margin="0,67,0,340" FontFamily="方正兰亭简黑" FontSize="50px"/>
+                            <TextBlock x:Name="T2" Text="Version - 1.0.0" TextAlignment="Center" Margin="0,136,0,302" FontFamily="方正兰亭简黑" FontSize="15px"/>
+                        </Grid>
+                        <Grid>
+                            <Button x:Name="RunButton" Margin="300,229,300,189" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="" Content="开始游戏  " Click="RunButton_Click"  pu:ButtonHelper.WaitingContent=" 开始游戏 " IsDefault="True"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock x:Name="T3" Text="By Stapx Steve [ 林槐 ] @2019 / 版权所有" TextAlignment="Center" Margin="0,371,0,77" FontFamily="方正兰亭简黑" FontSize="10px"/>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="MainGame">
+                        <TextBlock x:Name="T5" Text="ShanTianLun" TextAlignment="Center" Margin="0,25,504,416" FontFamily="方正兰亭简黑" FontSize="20px"/>
+                        <Image x:Name="Hand" Margin="52,55,555,299"/>
+                        <Grid Margin="217,45,33,284">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="197*"/>
+                                <ColumnDefinition Width="286*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="T6" Text="生命" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="0,0,118.685,109"/>
+                            <ProgressBar x:Name="Health" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,0,10,112" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="T4" Text="好感" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="19" VerticalAlignment="Bottom" Margin="0,0,118.685,75"/>
+                            <ProgressBar x:Name="Love" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,35,10,78" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="T7" Text="饥饿" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="19" VerticalAlignment="Bottom" Margin="0,0,118.685,42"/>
+                            <ProgressBar x:Name="Hug" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,69,10,44" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="T8" Text="防御" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="20" VerticalAlignment="Bottom" Margin="0,0,119,10"/>
+                            <ProgressBar x:Name="Duang" pu:ProgressBarHelper.IsPercentVisible="True" Margin="83,103,10,10" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <Grid Margin="0,204,0,0">
+                            <TabControl x:Name="GameTab" Height="Auto" Width="Auto" pu:TabControlHelper.ItemHeight="30" pu:TabControlHelper.CanRemove="False" TabStripPlacement="Bottom">
+                                <TabItem Header="可用操作">
+                                    <Grid>
+                                        <Grid>
+                                            <TextBlock x:Name="TPASS" Text="" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="20px" Margin="0,40,525,148"/>
+                                            <Button x:Name="Pass" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="" Content="跳过回合  " Click="Pass_Click"  pu:ButtonHelper.WaitingContent=" 跳过回合 " Margin="49,105,574,90"/>
+                                            <Button x:Name="Exit" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="" Content="结束游戏  " Click="Exit_Click"  pu:ButtonHelper.WaitingContent=" 结束游戏 " Margin="49,152,574,44" RenderTransformOrigin="0.496,0.894"/>
+                                        </Grid>
+                                        <Grid>
+                                            <ComboBox x:Name="Hit" DropDownClosed="Hit_DropDownClosed" pu:ComboBoxHelper.ItemHeight="30" Margin="340,84,285,116" RenderTransformOrigin="0.232,0.522" />
+                                            <TextBlock x:Name="T13" Text="攻击" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="260,0,398,123"/>
+                                            <ComboBox x:Name="Do" DropDownClosed="Do_DropDownClosed"  pu:ComboBoxHelper.ItemHeight="30" Margin="340,129,285,71" RenderTransformOrigin="0.232,0.522" />
+                                            <TextBlock x:Name="T15" Text="行动" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="260,0,398,78"/>
+                                            <ComboBox x:Name="Give" DropDownClosed="Give_DropDownClosed"  pu:ComboBoxHelper.ItemHeight="30" Margin="340,175,285,25" RenderTransformOrigin="0.232,0.522" />
+                                            <TextBlock x:Name="T16" Text="给予" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="260,0,398,32"/>
+                                            <Button x:Name="Hits" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="" Content="确定  " Click="Hit_Click"  pu:ButtonHelper.WaitingContent=" 确定 " Margin="574,26,49,169"/>
+                                            <TextBlock x:Name="T14" Text="选择操作" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="235,0,423,173"/>
+                                        </Grid>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="你的状态" x:Name="You">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="197*"/>
+                                            <ColumnDefinition Width="286*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="TYN" Text="" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="20px" Margin="0,40,73,148"/>
+                                        <TextBlock x:Name="T9" Text="生命" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="211,0,0,153"/>
+                                        <ProgressBar x:Name="yHealth" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,59,46,148" Grid.Column="1"/>
+                                        <TextBlock x:Name="T10" Text="好感" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="20" VerticalAlignment="Bottom" Margin="211,0,0,113"/>
+                                        <ProgressBar x:Name="yLove" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,94,46,113" Grid.Column="1"/>
+                                        <TextBlock x:Name="T11" Text="饥饿" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="18" VerticalAlignment="Bottom" Margin="211,0,0,78"/>
+                                        <ProgressBar x:Name="yHug" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,129,46,78" Grid.Column="1"/>
+                                        <TextBlock x:Name="T12" Text="防御" TextAlignment="Center" FontFamily="方正兰亭简黑" FontSize="15px" Height="20" VerticalAlignment="Bottom" Margin="211,0,0,43"/>
+                                        <ProgressBar x:Name="yDuang" pu:ProgressBarHelper.IsPercentVisible="True" Margin="0,164,46,43" Grid.Column="1"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="日志记录">
+                                    <Grid>
+                                        <TextBox Name="CMD"
+                                                 Background="#00000000" 
+                                                 TextWrapping="Wrap"
+                                                 AcceptsReturn="True"
+                                                 VerticalScrollBarVisibility="Visible"
+                                                 pu:TextBoxHelper.FocusedShadowColor="{x:Null}"
+                                                 VerticalContentAlignment="Top"
+                                                 InputMethod.IsInputMethodEnabled="False" Margin="10"
+                                        />
+                                    </Grid>
+                                </TabItem>
+                                <TabItem x:Name="CMDIN" Header="后台控制">
+                                    <Grid>
+                                        <TextBox x:Name="CMDCOL"
+                                                 Background="#00000000" 
+                                                 TextWrapping="Wrap"
+                                                 AcceptsReturn="True"
+                                                 VerticalScrollBarVisibility="Visible"
+                                                 pu:TextBoxHelper.FocusedShadowColor="{x:Null}"
+                                                 VerticalContentAlignment="Top"
+                                                 InputMethod.IsInputMethodEnabled="False" Margin="10,10,10,49"
+                                        />
+                                        <TextBox
+                                                x:Name="Run"
+                                                 pu:TextBoxHelper.Watermark="Run……"
+                                                 pu:TextBoxHelper.Icon=""
+                                                 pu:TextBoxHelper.IsClearButtonVisible ="True" Margin="10,193,10,9"
+                                        />
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="    设置    " >
+                <Grid>
+                    <Image x:Name="BG2" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
+                    <pu:Loading x:Name="TT" Height="50" Width="50" LoadingStyle="Classic" IsRunning="True"/>
+                    <TextBlock x:Name="T" Text="敬请期待" TextAlignment="Center" Margin="0,276,0,163" FontFamily="方正兰亭简黑" FontSize="15px"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="    关于    " >
+                <Grid>
+                    <Image x:Name="BG1" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
+                    <TextBlock x:Name="T17" Text="K i l l  S T L" TextAlignment="Center" Margin="0,67,0,340" FontFamily="方正兰亭简黑" FontSize="50px"/>
+                    <TextBlock x:Name="T18" Text="Version - 1.0.0" TextAlignment="Center" Margin="0,136,0,302" FontFamily="方正兰亭简黑" FontSize="15px"/>
+                    <TextBlock x:Name="T19" Text="By Stapx Steve [ 林槐 ] @2019 / 版权所有" TextAlignment="Center" Margin="0,371,0,27" FontFamily="方正兰亭简黑" FontSize="10px"/>
+                    <TextBlock x:Name="T20" Height="Auto" TextWrapping="Wrap" Margin="133,183,133,121" FontFamily="方正兰亭简黑" FontSize="16px"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</pu:WindowX>

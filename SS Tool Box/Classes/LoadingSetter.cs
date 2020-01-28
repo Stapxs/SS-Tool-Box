@@ -20,7 +20,9 @@ namespace SS_Tool_Box.Classes
             JObject SetUps = new JObject();     //主json
             JObject Exterior = new JObject();   //外观设置
             JObject Themes = new JObject { { "WindowTran", "0" }, { "MainTheme", "1" }, { "DarkMode", "False"} };
+            JObject OwnColor = new JObject { { "R", "" }, { "G", "" }, { "B", "" } };
             Exterior.Add("Themes", Themes);
+            Exterior.Add("OwnColor", OwnColor);
             SetUps.Add("Exterior", Exterior);
             writeJsom(SetUps);
             return SetUps;

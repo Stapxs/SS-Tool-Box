@@ -1,0 +1,41 @@
+﻿<Page x:Class="SS_Tool_Box.PageHD2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SS_Tool_Box"
+      xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" d:DesignWidth="600"
+      Title="PH2" Height="441">
+    <!-- Height 441 -->
+
+    <Grid Margin="10">
+        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
+            <StackPanel>
+                <materialDesign:Card x:Name="RunCard" Margin="5,10,5,5" Width="540" Background="#CCFFFFFF">
+                    <StackPanel>
+                        <Grid>
+                            <ProgressBar x:Name="Percent" Margin="36,34,36,34" Height="30"  pu:ProgressBarHelper.CornerRadius="2" pu:ProgressBarHelper.IsPercentVisible="True" VerticalAlignment="Top"/>
+                            <TextBlock x:Name="Errorsay" Text="Error" HorizontalAlignment="Left" TextWrapping="Wrap" Width="334" Margin="48,69,0,5" Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card x:Name="IconCard" Margin="5" Width="540" Background="#CCFFFFFF" Height="282">
+                    <Grid Margin="34,15,34,15" >
+                        <TextBox Name="CMD"
+                                 Background="#00000000" 
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Visible"
+                                 pu:TextBoxHelper.FocusedShadowColor="{x:Null}"
+                                 VerticalContentAlignment="Top"
+                                 TextChanged="CMD_TextChanged"
+                                 InputMethod.IsInputMethodEnabled="False"
+                                 />
+                    </Grid>
+                </materialDesign:Card>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
