@@ -54,6 +54,7 @@ namespace SS_Tool_Box_By_WPF
                 new ListTool(){Line="    3 . 快速启动器"},
                 new ListTool(){Line="    4 . 倒计时"},
                 new ListTool(){Line="    5 . Fuck QQ"},
+                new ListTool(){Line="    6 . QQ 消息制作"},
         };
         //隐藏的工具列表
         ListTool[] listallHidden = new ListTool[]
@@ -157,6 +158,10 @@ namespace SS_Tool_Box_By_WPF
                 {
                     NowChoice = 5;
                 }
+                else if (upd.Line == "    6 . QQ 消息制作")
+                {
+                    NowChoice = 6;
+                }
                 else if (upd.Line == "    * . SOS 图标获取")
                 {
                     NowChoice = -1;
@@ -240,6 +245,15 @@ namespace SS_Tool_Box_By_WPF
                     Page.Content = new Frame()
                     {
                         Content = page5
+                    };
+                }
+                else if (upd.Line == "    6 . QQ 消息制作")
+                {
+                    NowPage = 6;
+                    Page6 page6 = new Page6();
+                    Page.Content = new Frame()
+                    {
+                        Content = page6
                     };
                 }
                 else if (upd.Line == "    * . SOS 图标获取")

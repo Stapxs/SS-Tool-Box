@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/bgfortheams/ltcatblues.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/pops/%e6%b8%a9%e6%9f%94%e5%8d%b7%e7%ba%b8%20-%20l.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/pops/%e6%b8%a9%e6%9f%94%e5%8d%b7%e7%ba%b8%20-%20m.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/pops/%e6%b8%a9%e6%9f%94%e5%8d%b7%e7%ba%b8%20-%20r.png")]
 
 

@@ -86,3 +86,12 @@ C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SS Tool 
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SS Tool Box.application
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.exe.manifest
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.application
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page6.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\KillSTL.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageHD2.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page6.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\KillSTL.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageHD2.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Controls\QQChats.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Controls\QQChats.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\GeneratedInternalTypeHelper.g.cs

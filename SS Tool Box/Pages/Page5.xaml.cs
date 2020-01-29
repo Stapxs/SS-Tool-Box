@@ -1,24 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Panuon.UI.Silver;
-using SS_Tool_Box;
-using System.Runtime;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Data;
-using Windows.Foundation;
-using Windows.UI;
 using System.Net;
 using SS_Tool_Box.Classes;
 using Newtonsoft.Json.Linq;
@@ -113,13 +97,13 @@ namespace SS_Tool_Box
             try
             {
                 string url = "http://q1.qlogo.cn/g?b=qq&nk=" + QQ.Text + "&s=5";
-                string filepath = "hand.jpg";
+                string filepath = "SSTB/Files/Head/Head" + QQ.Text + ".jpg";
                 WebClient mywebclient = new WebClient();
                 mywebclient.DownloadFile(url, filepath);
 
                 string urls = "http://q1.qlogo.cn/g?b=qq&nk=" + QQ.Text + "&s=3";
                 this.Hand.Source = new BitmapImage(new Uri(urls));
-                T5.Text = "高清头像已保存到程序所在位置";
+                T5.Text = "高清头像已保存到程序File所在位置";
                 this.HandCard.Visibility = Visibility.Visible;
                 this.RunCard.Visibility = Visibility.Collapsed;
             }

@@ -1,0 +1,13 @@
+2020_01_29_11_52
+
+[11:55:52.95] 开始加载UI
+[11:55:54.38] 开始获取一言
+[11:56:16.62] 发现错误（MAN - 002）：获取一言失败，错误内容为：System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 218.93.204.35:443
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 SS_Tool_Box.Classes.HttpUitls.Get(String Url, String ContentType) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Classes\HttpUitls.cs:行号 30
+   在 SS_Tool_Box_By_WPF.PageMain..ctor() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 71，耗时：00:00:22.2063019
+[11:56:16.63] UI加载完成，耗时：00:00:23.6768030
+[11:56:29.01] 加载工具：    6 . QQ 消息制作

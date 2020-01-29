@@ -41,7 +41,6 @@
                             <TextBlock x:Name="T3" Text="你的QQ" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,25,0,15" />
                             <TextBox x:Name="QQY" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,15" Height="28" Opacity="100" ToolTip="你的QQ号，某些操作需要使用到你的QQ号。"/>
                         </Grid>
-
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card x:Name="HandCard" Margin="5" Width="540" Background="#CCFFFFFF">
