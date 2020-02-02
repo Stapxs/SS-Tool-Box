@@ -28,7 +28,7 @@ namespace SS_Tool_Box
         JObject Notes = new JObject();
         bool err = false;
         IList<listMain> AddWhereList = new List<listMain>();
-        int FileVersion = 2;
+        int FileVersion = 4;
         ListView list = new ListView();
         ListViewItem listi = new ListViewItem();
 
@@ -206,13 +206,25 @@ namespace SS_Tool_Box
                     }
                 }
 
-
+                int delCard = 0;
                 if (!err && int.Parse(Notes["Stat"]["NumOfDef"].ToString()) != 0)
                 {
                     for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
                     {
+                        if(int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()) == 0)
+                        {
+                            Notes["Cards"]["Def"][i.ToString()].Parent.Remove();
+                            Notes["Stat"]["NumOfDef"] = (int.Parse(Notes["Stat"]["NumOfDef"].ToString()) - 1).ToString();
+                            delCard++;
+                            continue;
+                        }
                         AddColtrols(1, i, -1, Notes["Cards"]["Def"][i.ToString()]["Title"].ToString());
                     }
+                }
+                SaveData(Notes);
+                if (delCard > 0)
+                {
+                    MT1.Text = "存在的卡片（已忽略空卡片 " + delCard + " 个）：";
                 }
             }
         }
@@ -245,6 +257,7 @@ namespace SS_Tool_Box
                     num += 1;
                     CardItem["Title"] = What.Text;
                     CardItem["Stat"] = "0";
+                    CardItem["Finished"] = "0";
                     Notes["Cards"]["Def"][num.ToString()] = CardItem;
                     SaveData(Notes);
                     AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), int.Parse(Notes["Stat"]["NumOfDef"].ToString()), -1, What.Text);
@@ -472,14 +485,13 @@ namespace SS_Tool_Box
 
         void ME_Fin(object sender, MouseButtonEventArgs e)
         {
-            list.Items.Remove(listi);
-            listi = new ListViewItem();
+            
+            DeleteItem(0, false, false,true);
         }
 
         void ME_Del(object sender, MouseButtonEventArgs e)
         {
-            list.Items.Remove(listi);
-            listi = new ListViewItem();
+            DeleteItem(0, true, true, false);
         }
 
 
@@ -530,6 +542,55 @@ namespace SS_Tool_Box
             this.CD1.Visibility = Visibility.Visible;
             this.LOAD.Visibility = Visibility.Collapsed;
             this.MT1.Visibility = Visibility.Collapsed;
+        }
+
+        private bool DeleteItem(int nMode, bool IsDelInFile, bool IsDelInNotes, bool IsFinish)
+        {
+            if(nMode == 0)
+            {
+                list.Items.Remove(listi);
+
+                Card Card = (Card)VisualTreeHelper.GetParent((Grid)VisualTreeHelper.GetParent((ContentPresenter)VisualTreeHelper.GetParent((StackPanel)VisualTreeHelper.GetParent(list))));
+
+                string CardName = Card.Name;
+
+                if(CardName[2] == 'D')          //普通卡片
+                {
+                    string CardType = "Def";
+                    string CardID = CardName.Substring(3, CardName.Length - 3);
+                    int DelWho = int.Parse(listi.Name.Substring(CardName.Length + 2, listi.Name.Length - (CardName.Length + 2)));
+
+                    if(!IsDelInFile && IsFinish)
+                    {
+                        int FinishNum = int.Parse(Notes["Cards"][CardType][CardID]["Finished"].ToString()) - 1;
+                        Notes["Cards"][CardType][CardID]["Finished"] = FinishNum.ToString();
+                        Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Finished"] = true;
+                        Notes["Cards"][CardType][CardID]["Notes" + FinishNum + "Title"] = Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Title"];
+                        Notes["Cards"][CardType][CardID]["Notes" + FinishNum + "Finished"] = true;
+                        Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Title"].Parent.Remove();
+                        Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Finished"].Parent.Remove();
+                        Notes["Cards"][CardType][CardID]["Stat"] = (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) - 1).ToString();
+                        SaveData(Notes);
+                        listi = new ListViewItem();
+                        return true;
+                    }
+
+                    for(int i = DelWho; i < int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()); i++)
+                    {
+                        Notes["Cards"][CardType][CardID]["Notes" + i + "Title"] = Notes["Cards"][CardType][CardID]["Notes" + (i + 1) + "Title"];
+                        Notes["Cards"][CardType][CardID]["Notes" + i + "Finished"] = Notes["Cards"][CardType][CardID]["Notes" + (i + 1) + "Finished"];
+                    }
+                    Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Title"].Parent.Remove();
+                    Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Finished"].Parent.Remove();
+                    Notes["Cards"][CardType][CardID]["Stat"] = (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) - 1).ToString();
+                }
+            }
+            if (IsDelInFile)
+            {
+                SaveData(Notes);
+            }
+            listi = new ListViewItem();
+            return true;
         }
     }
 }

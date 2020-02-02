@@ -292,12 +292,19 @@ namespace SS_Tool_Box_By_WPF
         {
             if (PassWord.Visibility == Visibility.Visible)
             {
-                this.PassWord.Visibility = Visibility.Collapsed;
                 if (!String.IsNullOrWhiteSpace(Password.Password))
                 {
+                    if(Password.Password == "NULL" || Password.Password == "null")
+                    {
+                        Password.Password = "";
+                        PasswordBoxHelper.SetWatermark(Password, " ( 这不是个合法的密码！ ) ");
+                        return;
+                    }
                     Main.Settings["Features"]["Privacy"]["Password"] = Password.Password;
                     SaveSet();
+                    Password.Password = "";
                 }
+                this.PassWord.Visibility = Visibility.Collapsed;
             }
             else
             {
