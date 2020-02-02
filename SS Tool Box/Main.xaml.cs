@@ -55,6 +55,7 @@ namespace SS_Tool_Box_By_WPF
                 new ListTool(){Line="    4 . 倒计时"},
                 new ListTool(){Line="    5 . Fuck QQ"},
                 new ListTool(){Line="    6 . QQ 消息制作"},
+                new ListTool(){Line="    7 . 记事簿"},
         };
         //隐藏的工具列表
         ListTool[] listallHidden = new ListTool[]
@@ -162,6 +163,10 @@ namespace SS_Tool_Box_By_WPF
                 {
                     NowChoice = 6;
                 }
+                else if (upd.Line == "    7 . 记事簿")
+                {
+                    NowChoice = 7;
+                }
                 else if (upd.Line == "    * . SOS 图标获取")
                 {
                     NowChoice = -1;
@@ -256,6 +261,16 @@ namespace SS_Tool_Box_By_WPF
                         Content = page6
                     };
                 }
+                else if (upd.Line == "    7 . 记事簿")
+                {
+                    NowPage = 7;
+                    Page7 page7 = new Page7();
+                    page7.ParentWindow = this;
+                    Page.Content = new Frame()
+                    {
+                        Content = page7
+                    };
+                }
                 else if (upd.Line == "    * . SOS 图标获取")
                 {
                     NowPage = -1;
@@ -310,6 +325,7 @@ namespace SS_Tool_Box_By_WPF
         {
             //打开窗口Set
             Settings about = new Settings();
+            about.ParentWindow = this;
             about.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             about.Owner = this;
             IsMaskVisible = true;
@@ -382,6 +398,13 @@ namespace SS_Tool_Box_By_WPF
                 {
                     Settings = Set.ReadSetup();
                 }
+                if(int.Parse(Settings["Version"].ToString()) != LoadingSetter.FileVersion)
+                {
+                    MessageBoxX.Show("我们发现设置文件版本不符，将对设置文件进行重写。", "设置文件版本不符");
+                    error.logWriter("设置文件版本不符。", false);
+                    File.Delete("SSTB/Setup.json");
+                    Settings = Set.newSetup();
+                }
             }
        
             try
@@ -415,7 +438,7 @@ namespace SS_Tool_Box_By_WPF
             }
 
             //版本号
-            String stVersion = "Version - 1.0.17";
+            String stVersion = "Version - 1.0.18";
             Versionon.Text = stVersion;
 
             //刷新工具列表

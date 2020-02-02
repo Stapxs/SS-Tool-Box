@@ -106,11 +106,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\Page7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Page6.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\QQChats.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PassWordEnterF7.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,11 +190,17 @@
     <Compile Include="Classes\Error.cs" />
     <Compile Include="Classes\HttpUitls.cs" />
     <Compile Include="Classes\LoadingSetter.cs" />
+    <Compile Include="Pages\Page7.xaml.cs">
+      <DependentUpon>Page7.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Page6.xaml.cs">
       <DependentUpon>Page6.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\QQChats.xaml.cs">
       <DependentUpon>QQChats.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PassWordEnterF7.xaml.cs">
+      <DependentUpon>PassWordEnterF7.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\KillSTL.xaml.cs">
       <DependentUpon>KillSTL.xaml</DependentUpon>

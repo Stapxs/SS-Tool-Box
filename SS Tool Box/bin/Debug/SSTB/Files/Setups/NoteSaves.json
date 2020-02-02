@@ -1,0 +1,28 @@
+{
+  "Stat": {
+    "Version": "2",
+    "NumOfDef": "2"
+  },
+  "Cards": {
+    "Def": {
+      "1": {
+        "Title": "SSTB To Do",
+        "Stat": "4",
+        "Notes1Title": "完成普通事件的不可删除事件",
+        "Notes1Finished": false,
+        "Notes2Title": "完成普通事件的右击事件",
+        "Notes2Finished": false,
+        "Notes3Title": "完成统计卡片创建",
+        "Notes3Finished": false,
+        "Notes4Title": "完成统计事件创建",
+        "Notes4Finished": false
+      },
+      "2": {
+        "Title": "要改掉的坏毛病",
+        "Stat": "1",
+        "Notes1Title": "起床刷牙洗脸",
+        "Notes1Finished": false
+      }
+    }
+  }
+}

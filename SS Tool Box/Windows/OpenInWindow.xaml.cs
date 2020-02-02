@@ -92,6 +92,15 @@ namespace SS_Tool_Box_By_WPF
                         };
                     }
                     break;
+                case 7:
+                    {
+                        Page7 page7 = new Page7();
+                        Page.Content = new Frame()
+                        {
+                            Content = page7
+                        };
+                    }
+                    break;
                 case -1:
                     {
                         PageHD1 pageHD1 = new PageHD1();

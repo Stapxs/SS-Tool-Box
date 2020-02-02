@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Newtonsoft.Json.Linq;
 using Panuon.UI.Silver;
+using SS_Tool_Box;
 using SS_Tool_Box.Classes;
 
 namespace SS_Tool_Box_By_WPF
@@ -28,6 +19,8 @@ namespace SS_Tool_Box_By_WPF
             public int ID { get; set; }
             public string Name { get; set; }
         }
+
+        public Main ParentWindow { get; set; }
 
         BaseColor baseColora = Main.baseColor;
         bool fistLoad = true;
@@ -68,6 +61,8 @@ namespace SS_Tool_Box_By_WPF
                 S14.Value = double.Parse(Main.Settings["Exterior"]["OwnColor"]["B"].ToString());
                 fistLoad = false;
             }
+
+            this.PassWord.Visibility = Visibility.Collapsed;
         }
 
         private bool UpdateUI()
@@ -113,6 +108,12 @@ namespace SS_Tool_Box_By_WPF
             this.T18.Foreground = baseColora.Fg;
             this.T18.FontFamily = baseColora.Fonts;
             this.T18.FontSize = 13;
+            this.T21.Foreground = baseColora.Fg;
+            this.T21.FontFamily = baseColora.Fonts;
+            this.T21.FontSize = 13;
+            this.T22.Foreground = baseColora.Fg;
+            this.T22.FontFamily = baseColora.Fonts;
+            this.T22.FontSize = 13;
             this.T31.Foreground = baseColora.Fg;
             this.T31.FontFamily = baseColora.Fonts;
             this.T31.FontSize = 13;
@@ -126,6 +127,9 @@ namespace SS_Tool_Box_By_WPF
             this.MT13.Foreground = baseColora.Fg;
             this.MT13.FontFamily = baseColora.Fonts;
             this.MT13.FontSize = 15;
+            this.MT21.Foreground = baseColora.Fg;
+            this.MT21.FontFamily = baseColora.Fonts;
+            this.MT21.FontSize = 15;
             this.MT31.Foreground = baseColora.Fg;
             this.MT31.FontFamily = baseColora.Fonts;
             this.MT31.FontSize = 15;
@@ -133,6 +137,7 @@ namespace SS_Tool_Box_By_WPF
             this.CD11.Background = baseColora.Bg;
             this.CD12.Background = baseColora.Bg;
             this.CD13.Background = baseColora.Bg;
+            this.CD21.Background = baseColora.Bg;
             this.CD32.Background = baseColora.Bg;
 
             this.C11.Background = baseColora.DBg;
@@ -186,7 +191,13 @@ namespace SS_Tool_Box_By_WPF
             this.SBG.Background = baseColora.DBg;
             ButtonHelper.SetHoverBrush(MBG, baseColora.DBg);
             ButtonHelper.SetHoverBrush(SBG, baseColora.DBg);
+            this.B21.Foreground = baseColora.Fg;
+            this.B21.Background = baseColora.DBg;
+            ButtonHelper.SetHoverBrush(B21, baseColora.DBg);
 
+            this.Password.Background = baseColora.Bg;
+            this.Password.Foreground = baseColora.Fg;
+                 
             return true;
         }
 
@@ -275,6 +286,48 @@ namespace SS_Tool_Box_By_WPF
         private void SBG_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void B21_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassWord.Visibility == Visibility.Visible)
+            {
+                this.PassWord.Visibility = Visibility.Collapsed;
+                if (!String.IsNullOrWhiteSpace(Password.Password))
+                {
+                    Main.Settings["Features"]["Privacy"]["Password"] = Password.Password;
+                    SaveSet();
+                }
+            }
+            else
+            {
+                if (Main.Settings["Features"]["Privacy"]["Password"].ToString() != "NULL")
+                {
+                    PassWordEnterF7 EP = new PassWordEnterF7();
+                    this.IsMaskVisible = true;
+                    EP.ShowDialog();
+                    this.IsMaskVisible = false;
+                }
+                else
+                {
+                    LoadingSetter.PasswordPass = true;
+                }
+                if (!LoadingSetter.PasswordPass)
+                {
+                    return;
+                }
+                LoadingSetter.PasswordPass = false;
+                this.PassWord.Visibility = Visibility.Visible;
+                PasswordBoxHelper.SetWatermark(Password, " ( 再次点击设置按钮确定 ) ");
+                if (Main.Settings["Features"]["Privacy"]["Password"].ToString() != "NULL")
+                {
+                    PasswordBoxHelper.SetWatermark(Password, " ( 空白将保持已设置的密码 ) ");
+                }
+                else
+                {
+                    MessageBoxX.Show("私隐密码为弱密码，以 <明文> 记录在设置文件中，这意味着这个密码仅用于警告，没有任何安全性，请不要把重要信息存储在 SSTB 内。", "提示");
+                }
+            }
         }
     }
 }
