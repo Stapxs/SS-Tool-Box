@@ -10,18 +10,10 @@
       Title="Page7 - Nots" Height="478">
     <!-- Height 441 -->
 
-    <Grid Margin="10">
+    <Grid Margin="10, 0, 10, 10">
         <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
             <StackPanel x:Name="MainIn">
-                <materialDesign:Card x:Name="LOAD" Background="#CCFFFFFF" Margin="5,10,5,5" Width="540">
-                    <StackPanel>
-                        <pu:Loading x:Name="Load" Height="50" Width="50" LoadingStyle="Wave" IsRunning="True" Margin="0,15,0,5"/>
-                        <TextBlock x:Name="T6" Text="点击按钮加载数据" HorizontalAlignment="Center" Margin="0,5,0,15"/>
-                        <Button x:Name="Start" Margin="236,18,0,11" HorizontalAlignment="Left" Width="79" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="&#xF00C;" Content="加载  " Click="RunButton_Click_1"  pu:ButtonHelper.WaitingContent=" 加载 " IsDefault="True" Height="29" ToolTip="别问我为什么要再点一下。"/>
-                    </StackPanel>
-                </materialDesign:Card>
-                <TextBlock x:Name="MT1" Text="存在的卡片：" HorizontalAlignment="Center" Margin="0,10,0,0" Width="536" Height="22"/>
-                <materialDesign:Card x:Name="RunCard" Margin="5,10,5,5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="RunCard" Margin="5,15,5,5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -34,7 +26,15 @@
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD1" Margin="5,10,5,5" Width="540" Height="Auto" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="LOAD" Background="#CCFFFFFF" Margin="5,10,5,5" Width="540">
+                    <StackPanel>
+                        <pu:Loading x:Name="Load" Height="50" Width="50" LoadingStyle="Wave" IsRunning="True" Margin="0,15,0,5"/>
+                        <TextBlock x:Name="T6" Text="点击按钮加载数据" HorizontalAlignment="Center" Margin="0,5,0,15"/>
+                        <Button x:Name="Start" Margin="236,18,0,11" HorizontalAlignment="Left" Width="79" pu:ButtonHelper.ButtonStyle="Hollow" pu:ButtonHelper.CornerRadius="2" pu:ButtonHelper.Icon="&#xF00C;" Content="加载  " Click="RunButton_Click_1"  pu:ButtonHelper.WaitingContent=" 加载 " Height="29" ToolTip="别问我为什么要再点一下。"/>
+                    </StackPanel>
+                </materialDesign:Card>
+                <TextBlock x:Name="MT1" Text="存在的卡片：" HorizontalAlignment="Center" Margin="0,10,0,0" Width="536" Height="22"/>
+                <materialDesign:Card x:Name="CD1" Margin="5,15,5,5" Width="540" Height="Auto" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="Title" Text="主标题" Margin="34,25,34,5" Width="Auto" Height="26"/>

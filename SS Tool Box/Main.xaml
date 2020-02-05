@@ -114,18 +114,18 @@
         <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Margin="0,0,1,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5px" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5px" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="0" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="5px" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="5px" />
+                <RowDefinition Height="0" />
+                <RowDefinition />
+                <RowDefinition Height="0" />
             </Grid.RowDefinitions>
 
 
 
-            <ContentControl Grid.Column="1" Grid.Row="1" Name="Page" Margin="10px"/>
+            <ContentControl Grid.Column="1" Grid.Row="1" Name="Page" Margin="10,0,0,0"/>
         </Grid>
 
         <Button x:Name="Feedback" Grid.Column="2" Margin="402,-27,74,132" Content="提交问题" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" pu:IconHelper.FontSize="15"/>

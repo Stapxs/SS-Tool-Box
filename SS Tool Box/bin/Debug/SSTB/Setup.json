@@ -3,13 +3,13 @@
   "Exterior": {
     "Themes": {
       "WindowTran": 0.0,
-      "MainTheme": "4",
+      "MainTheme": "2",
       "DarkMode": "True"
     },
     "OwnColor": {
-      "R": 166.0,
-      "G": 192.0,
-      "B": 165.0
+      "R": 0.0,
+      "G": 0.0,
+      "B": 0.0
     }
   },
   "Features": {

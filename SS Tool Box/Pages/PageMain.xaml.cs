@@ -109,8 +109,6 @@ namespace SS_Tool_Box_By_WPF
             this.MT2.FontFamily = baseColora.Fonts;
             this.MT2.FontSize = 15;
 
-            this.UpdateList.FontFamily = baseColora.Fonts;
-
             BaseColor baseColor = new BaseColor();
 
             CD1.Background = baseColora.Card;
@@ -122,12 +120,30 @@ namespace SS_Tool_Box_By_WPF
             MT2.Foreground = baseColora.Fg;
             Says.Foreground = baseColora.Fg;
             Tips.Foreground = baseColora.Fg;
-            UpdateList.Foreground = baseColora.Fg;
 
-            this.UpdateList.Foreground = baseColora.Fg;
-            this.UpdateList.FontFamily = baseColora.Fonts;
-            this.UpdateList.FontSize = 10;
+            this.UpdateList.ItemLineBrush = baseColora.Font;
+            this.UpdateList.ItemToggleStroke = baseColora.Tran;
+            this.UpdateList.ItemToggleFill = baseColora.Main;
+            this.U0.Foreground = baseColora.Font;
+            this.U1.Foreground = baseColora.Font;
+            this.U2.Foreground = baseColora.Font;
+            this.U3.Foreground = baseColora.Font;
+            this.U4.Foreground = baseColora.Font;
+            this.U5.Foreground = baseColora.Font;
+            this.U6.Foreground = baseColora.Font;
+            this.U7.Foreground = baseColora.Font;
+            this.U8.Foreground = baseColora.Font;
+            this.U9.Foreground = baseColora.Font;
+            this.U10.Foreground = baseColora.Font;
+            this.U11.Foreground = baseColora.Font;
+            this.U12.Foreground = baseColora.Font;
+            this.U13.Foreground = baseColora.Font;
+            this.U14.Foreground = baseColora.Font;
+            this.U15.Foreground = baseColora.Font;
+            this.U16.Foreground = baseColora.Font;
+            this.U17.Foreground = baseColora.Font;
 
+            this.Height = 500;
         }
 
         /*

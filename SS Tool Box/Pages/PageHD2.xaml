@@ -10,10 +10,10 @@
       Title="PH2" Height="441">
     <!-- Height 441 -->
 
-    <Grid Margin="10">
+    <Grid Margin="10, 0, 10, 10">
         <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
             <StackPanel>
-                <materialDesign:Card x:Name="RunCard" Margin="5,10,5,5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="RunCard" Margin="5,15,5,5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <ProgressBar x:Name="Percent" Margin="36,34,36,34" Height="30"  pu:ProgressBarHelper.CornerRadius="2" pu:ProgressBarHelper.IsPercentVisible="True" VerticalAlignment="Top"/>

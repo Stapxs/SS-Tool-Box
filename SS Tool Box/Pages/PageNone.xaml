@@ -10,10 +10,10 @@
       d:DesignHeight="441" d:DesignWidth="600"
       Title="Page1 - 批量打开文件">
 
-    <Grid Margin="10">
+    <Grid Margin="10, 0, 10, 10">
         <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7">
             <StackPanel>
-                <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Margin="5" Width="548">
+                <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Margin="5, 15, 5, 5" Width="547">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="Title" Text="主标题" Margin="34,25,34,5" Width="Auto" Height="26"/>

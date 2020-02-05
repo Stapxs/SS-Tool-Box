@@ -25,8 +25,6 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
             BG.BeginInit();
             BG.Source = baseColora.Bgpa;
             BG.EndInit();
@@ -58,6 +56,18 @@ namespace SS_Tool_Box
         private void updateUI()
         {
             timePass++;
+            if (!String.IsNullOrWhiteSpace(Password.Password))
+            {
+                if (Password.Password.Equals(Main.Settings["Features"]["Privacy"]["Password"].ToString()))
+                {
+                    LoadingSetter.PasswordPass = true;
+                    ForceClose();
+                }
+                else
+                {
+                    LoadingSetter.PasswordPass = false;
+                }
+            }
             ProgressBarHelper.SetAnimateTo(Time, timePass * 10);
             if(timePass == 11)
             {

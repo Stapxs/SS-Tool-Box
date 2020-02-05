@@ -35,6 +35,9 @@ namespace SS_Tool_Box
         public Page2()
         {
             InitializeComponent();
+
+            this.Height = 500;
+
             ButtonHelper.SetIsWaiting(RunButton, false);
             this.Color.Fill = baseColora.Card;
 

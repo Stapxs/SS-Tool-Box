@@ -35,7 +35,7 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.Height = 441;
+            this.Height = 500;
 
             String stTitle = "倒计时";
             this.Title.Foreground =

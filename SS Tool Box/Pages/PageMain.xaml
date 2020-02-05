@@ -6,14 +6,13 @@
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:SS_Tool_Box_By_WPF"
-      mc:Ignorable="d" 
-      d:DesignHeight="441" d:DesignWidth="441"
-      Title="PageMain - 主页">
+      mc:Ignorable="d" d:DesignWidth="441"
+      Title="PageMain - 主页" Height="1540.475">
 
-    <Grid Margin="10">
-        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7">
+    <Grid Margin="10, 0, 10, 10">
+        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Padding="0">
             <StackPanel>
-                <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Margin="5" >
+                <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Margin="5, 15, 5, 5" >
                     <StackPanel>
                         <TextBlock x:Name="Title" Text="主标题" HorizontalAlignment="Left" Margin="34,25,0,5" Width="362" Height="26"/>
                         <TextBlock x:Name="Says" Margin="34,0,-132,10" Height="Auto" Width="496" TextWrapping="Wrap" HorizontalAlignment="Left"/>
@@ -25,41 +24,100 @@
                         <TextBlock x:Name="Tips" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD3" Background="#CCFFFFFF" Margin="5" >
+                <materialDesign:Card x:Name="CD3" Background="#CCFFFFFF" Margin="5,5,5,20" >
                     <StackPanel>
                         <TextBlock x:Name="MT1" Text="更新记录" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
-                        <TreeView x:Name="UpdateList" Background="Transparent" Margin="15,0,15,15" Opacity="0.8" pu:TreeViewHelper.TreeViewStyle="Modern" pu:TreeViewHelper.ItemHeight="30" pu:TreeViewHelper.SelectMode="Disabled" pu:TreeViewHelper.ExpandMode="SingleClick">
-                            <TreeViewItem Header="更新记录 [ 2019.02.22 - 项目成立 ] " pu:TreeViewHelper.ItemIcon="&#xF187;" pu:IconHelper.FontSize="15"/>
-                            <TreeViewItem Header="           Verson - 1.0 [ 功能制作阶段 ]">
-                                <TreeViewItem Header="               + 2020.01.08 - 设置可以保存进SetUp.json文件中了" />
-                                <TreeViewItem Header="               * 2020.01.08 - 修了一堆你也不知道的BUG" />
-                                <TreeViewItem Header="               + 2020.01.07 - 设置可以从SetUp.json文件中读取并加载了" />
-                                <TreeViewItem Header="               * 2020.01.07 - BUG：主界面列表卡片阴影错误" />
-                                <TreeViewItem Header="               + 2020.01.06 - 偷偷完成了暂时还不能选的龙猫蓝" />
-                                <TreeViewItem Header="               + 2020.01.05 - 全局主题色同步" />
-                                <TreeViewItem Header="               * 2020.01.03 - BUG：报错行和进度条错位" />
-                                <TreeViewItem Header="               + 2020.01.03 - 增加了第一个隐藏功能" />
-                                <TreeViewItem Header="               * 2020.01.03 - 一言不换行(Main)" />
-                                <TreeViewItem Header="               + 2020.01.02 - 主页面随机显示一言" />
-                                <TreeViewItem Header="               * 2020.01.02 - BUG：十六进制转换在有0时有误（TOOL2）" />
-                                <TreeViewItem Header="               * 2019.12.28 - 修改更新记录列表格式" />
-                                <TreeViewItem Header="               + 2019.12.28 - 制作功能一" />
-                                <TreeViewItem Header="               * 2019.11.35 - BUG：填充颜色条偏移(TOOL2)" />
-                                <TreeViewItem Header="               * 2019.11.30 - 修改全局透明方式" />
-                                <TreeViewItem Header="               + 2019.11.27 - 制作功能二" />
-                                <TreeViewItem Header="               - 2019.11.27 - 搁置功能一" />
-                                <TreeViewItem Header="               + 2019.11.27 - 制作功能一" />
-                                <TreeViewItem Header="               + 2019.11.25 - 制作关于界面" />
-                            </TreeViewItem>
-                            <TreeViewItem Header="           Verson - 0.0 [ 界面制作阶段 ]">
-                                <TreeViewItem Header="               * 2019.11.25 - 窗口宽了30px" />
-                                <TreeViewItem Header="               + 2019.11.25 - 增加了标题栏Feedback按钮" />
-                                <TreeViewItem Header="               * 2019.11.25 - BUG：憨憨卡片阴影不显示" />
-                                <TreeViewItem Header="               * 2019.11.24 - BUG：按钮在框架下变形" />
-                                <TreeViewItem Header="               + 2019.11.24 - 完成主界面制作" />
-                                <TreeViewItem Header="               + 2019.11.24 - 项目改为WPF制作" />
-                            </TreeViewItem>
-                        </TreeView>
+                        <pu:Timeline x:Name="UpdateList" Margin="35,0,35,5" Height="Auto" Width="Auto" >
+                            <pu:TimelineItem x:Name="U17"
+                                             Header="2020.02.0"
+    			                             Content="= 全新的MessageBox！&#13;+ 记事簿普通卡片删除" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U16"
+                                             Header="2020.02.03"
+    			                             Content="= 更改了更新记录的样式&#13;= 修改了Page嵌入布局" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U15"
+                                             Header="2020.02.02"
+    			                             Content="+ 制作功能七&#xA;+ 记事簿普通事件&#xA;+ 记事簿普通卡片&#xA;+ 私隐密码设置&#xA;+ 设置文件版本确认&#xA;+ 普通事件的右击菜单" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U14"
+                                             Header="2020.01.25"
+    			                             Content="+ 增加了一个隐藏功能" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U13"
+                                             Header="2020.01.20 [ 1.0.10 ]"
+    			                             Content="= 修改部分UI布局&#xA;= 去除手动保存按钮&#xA;+ 自动保存设置&#xA;+ 自动刷新主题&#xA;+ 主题可以自定义颜色了" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U12"
+                                             Header="2020.01.08"
+    			                             Content="+ 设置可以保存进SetUp.json文件中了&#xA;=BUG：修了一堆你也不知道的BUG" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U11"
+                                             Header="2020.01.07"
+    			                             Content="+ 设置可以从SetUp.json文件中读取并加载了&#xA;= BUG：主界面列表卡片阴影错误&#xA;+ SSTB 同步至Github&#xA;= 列表卡片阴影错误 (UI - MAIN)"
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U10"
+                                             Header="2020.01.06"
+    			                             Content="+ 偷偷完成了暂时还不能选的龙猫蓝" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U9"
+                                             Header="2020.01.05"
+    			                             Content="+ 全局主题色同步" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U8"
+                                             Header="2020.01.03"
+    			                             Content="= BUG：报错行和进度条错位&#xA;= 修改更新记录列表格式&#xA;= BUG：一言不换行(Main)" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U7"
+                                             Header="2020.01.02 [ 1.0 ]"
+    			                             Content="+ 主页面随机显示一言&#xA;= BUG：十六进制转换在有0时有误（TOOL2）" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U6"
+                                             Header="2019.12.28"
+    			                             Content="+ 制作功能一&#xA;= 修改更新记录列表格式" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U5"
+                                             Header="2019.11.35"
+    			                             Content="= BUG：填充颜色条偏移(TOOL2)" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U4"
+                                             Header="2019.11.30"
+    			                             Content="= 修改全局卡片透明方式" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U3"
+                                             Header="2019.11.27"
+    			                             Content="+ 制作功能一&#xA;- 搁置功能一&#xA;+ 制作功能二" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U2"
+                                             Header="2019.11.25"
+    			                             Content="= BUG：憨憨卡片阴影不显示&#xA;+ 增加了标题栏Feedback按钮&#xA;= 窗口宽了30px&#xA;+ 制作关于界面" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U1"
+                                             Header="2019.11.24"
+    			                             Content="+ 项目改为WPF制作&#xA;= BUG：按钮在框架下变形&#xA;= 完成主界面制作" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                            <pu:TimelineItem x:Name="U0"
+                                             Header="2019.02.22 [ 项目建立 ]"
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
+                        </pu:Timeline>
                     </StackPanel>
                 </materialDesign:Card>
             </StackPanel>

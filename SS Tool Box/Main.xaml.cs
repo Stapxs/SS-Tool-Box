@@ -22,6 +22,7 @@ using Windows.UI;
 using SS_Tool_Box.Classes;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using static SS_Tool_Box.SSMessageBox;
 
 namespace SS_Tool_Box_By_WPF
 {
@@ -53,7 +54,7 @@ namespace SS_Tool_Box_By_WPF
                 new ListTool(){Line="    2 . 调色板"},
                 new ListTool(){Line="    3 . 快速启动器"},
                 new ListTool(){Line="    4 . 倒计时"},
-                new ListTool(){Line="    5 . Fuck QQ"},
+                new ListTool(){Line="    5 . QQ 头像获取"},
                 new ListTool(){Line="    6 . QQ 消息制作"},
                 new ListTool(){Line="    7 . 记事簿"},
         };
@@ -155,7 +156,7 @@ namespace SS_Tool_Box_By_WPF
                 {
                     NowChoice = 4;
                 }
-                else if (upd.Line == "    5 . Fuck QQ")
+                else if (upd.Line == "    5 . QQ 头像获取")
                 {
                     NowChoice = 5;
                 }
@@ -243,7 +244,7 @@ namespace SS_Tool_Box_By_WPF
                         Content = page4
                     };
                 }
-                else if (upd.Line == "    5 . Fuck QQ")
+                else if (upd.Line == "    5 . QQ 头像获取")
                 {
                     NowPage = 5;
                     Page5 page5 = new Page5();
@@ -293,6 +294,7 @@ namespace SS_Tool_Box_By_WPF
                 {
                     NowPage = -3;
                     PageHD2 pageHD2 = new PageHD2();
+                    pageHD2.ParentWindow = this;
                     Page.Content = new Frame()
                     {
                         Content = pageHD2
@@ -400,10 +402,25 @@ namespace SS_Tool_Box_By_WPF
                 }
                 if(int.Parse(Settings["Version"].ToString()) != LoadingSetter.FileVersion)
                 {
-                    MessageBoxX.Show("我们发现设置文件版本不符，将对设置文件进行重写。", "设置文件版本不符");
-                    error.logWriter("设置文件版本不符。", false);
-                    File.Delete("SSTB/Setup.json");
-                    Settings = Set.newSetup();
+                    SSMessageHelper.noNo = false;
+                    ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                    SSMessageHelper.Title = "设置文件版本不符";
+                    SSMessageHelper.Says = "我们发现设置文件版本不符，将对设置文件进行重写。选择取消将退出程序。";
+                    SSMessageBox MB = new SSMessageBox();
+                    this.IsMaskVisible = true;
+                    MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    MB.ShowDialog();
+                    this.IsMaskVisible = false;
+                    error.logWriter("设置文件版本不符", false);
+                    if (SSMessageHelper.buttonNO)
+                    {
+                        Application.Current.Shutdown();
+                    }
+                    else
+                    {
+                        File.Delete("SSTB/Setup.json");
+                        Settings = Set.newSetup();
+                    }
                 }
             }
        
@@ -438,7 +455,7 @@ namespace SS_Tool_Box_By_WPF
             }
 
             //版本号
-            String stVersion = "Version - 1.0.18";
+            String stVersion = "Version - 1.0.20";
             Versionon.Text = stVersion;
 
             //刷新工具列表

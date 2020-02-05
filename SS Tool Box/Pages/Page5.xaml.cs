@@ -21,6 +21,8 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
+            this.Height = 500;
+
             String stTitle = "Fuck QQ";
             this.Title.Foreground = baseColora.Fg;
             this.Title.FontFamily = baseColora.Fonts;;

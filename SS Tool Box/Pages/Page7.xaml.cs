@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Panuon.UI.Silver.Core;
+using static SS_Tool_Box.SSMessageBox;
 
 namespace SS_Tool_Box
 {
@@ -31,6 +32,7 @@ namespace SS_Tool_Box
         int FileVersion = 4;
         ListView list = new ListView();
         ListViewItem listi = new ListViewItem();
+        Card card = new Card();
 
         public class listMain
         {
@@ -44,7 +46,7 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.Height = 441;
+            this.Height = 500;
 
             String stTitle = "记事簿";
             this.Title.Foreground = baseColora.Fg;
@@ -289,6 +291,26 @@ namespace SS_Tool_Box
                 StackPanel stackPanel = new StackPanel();
                 TextBlock textBlock = new TextBlock();
                 ListView listView = new ListView();
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem menuItem1 = new MenuItem();
+                MenuItem menuItem2 = new MenuItem();
+                MenuItem menuItem3 = new MenuItem();
+
+                menuItem1.Name = "MenuItem1";
+                menuItem1.Header = "删除卡片";
+                menuItem1.Icon = "";
+                menuItem1.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(CD_Del);
+                contextMenu.Items.Add(menuItem1);
+
+                contextMenu.Width = 150;
+                contextMenu.Background = baseColora.Card;
+                contextMenu.Foreground = baseColora.Fg;
+                ContextMenuHelper.SetShadowColor(contextMenu, baseColora.DBg.Color);
+                ContextMenuHelper.SetItemHeight(contextMenu, 30);
+
+                textBlock.ContextMenu = contextMenu;
+                card.ContextMenu = contextMenu;
+                card.PreviewMouseRightButtonDown += WhatFuckOpenMeMe;
 
                 textBlock.Text = another1 + ". " + anothers1;
                 textBlock.HorizontalAlignment = HorizontalAlignment.Left;
@@ -341,6 +363,7 @@ namespace SS_Tool_Box
                 ContextMenu contextMenu = new ContextMenu();
                 MenuItem menuItem1 = new MenuItem();
                 MenuItem menuItem2 = new MenuItem();
+                MenuItem menuItem3 = new MenuItem();
 
                 menuItem1.Name = "MenuItem1";
                 menuItem1.Header = "完成";
@@ -349,9 +372,14 @@ namespace SS_Tool_Box
                 contextMenu.Items.Add(menuItem1);
                 menuItem2.Name = "MenuItem2";
                 menuItem2.Header = "删除";
-                menuItem2.Icon = "";
+                menuItem2.Icon = "";
                 menuItem2.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(ME_Del);
                 contextMenu.Items.Add(menuItem2);
+                menuItem3.Name = "MenuItem3";
+                menuItem3.Header = "置顶";
+                menuItem3.Icon = "";
+                menuItem3.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(ME_Top);
+                contextMenu.Items.Add(menuItem3);
 
                 contextMenu.Width = 150;
                 contextMenu.Background = baseColora.Card;
@@ -387,6 +415,11 @@ namespace SS_Tool_Box
             ScrollViewer scroll1 = (ScrollViewer)VisualTreeHelper.GetParent(border);
             list = (ListView)VisualTreeHelper.GetParent(scroll1);
             listi = sender as ListViewItem;
+        }
+
+        private void WhatFuckOpenMeMe(object sender, MouseButtonEventArgs e)
+        {
+            card = sender as Card;
         }
 
         private void CanDel_Checked(object sender, RoutedEventArgs e)
@@ -485,8 +518,12 @@ namespace SS_Tool_Box
 
         void ME_Fin(object sender, MouseButtonEventArgs e)
         {
-            
             DeleteItem(0, false, false,true);
+        }
+
+        void ME_Top(object sender, MouseButtonEventArgs e)
+        {
+
         }
 
         void ME_Del(object sender, MouseButtonEventArgs e)
@@ -494,6 +531,23 @@ namespace SS_Tool_Box
             DeleteItem(0, true, true, false);
         }
 
+        void CD_Del(object sender, MouseButtonEventArgs e)
+        {
+            SSMessageHelper.noNo = false;
+            ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+            SSMessageHelper.Title = "确认一下";
+            SSMessageHelper.Says = "确认要删除卡片嘛，它和它里面的事件们将消失很久！（真的很久很久……）";
+            SSMessageBox MB = new SSMessageBox();
+            ParentWindow.IsMaskVisible = true;
+            MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            MB.Owner = ParentWindow;
+            MB.ShowDialog();
+            ParentWindow.IsMaskVisible = false;
+            if(SSMessageHelper.buttonOK)
+            {
+                DeleteItem(1, true, true, false);
+            }
+        }
 
         private void RunButton_Click_1(object sender, RoutedEventArgs e)
         {
@@ -501,6 +555,8 @@ namespace SS_Tool_Box
             {
                 PassWordEnterF7 EP = new PassWordEnterF7();
                 ParentWindow.IsMaskVisible = true;
+                EP.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                EP.Owner = ParentWindow;
                 EP.ShowDialog();
                 ParentWindow.IsMaskVisible = false;
             }
@@ -517,7 +573,17 @@ namespace SS_Tool_Box
             {
                 if (Notes["Stat"]["Version"].ToString() != FileVersion.ToString())
                 {
-                    MessageBoxX.Show("我们将取消读取档案，请至 File/Setups 文件夹下备份 NoteSaves.json 文件并删除以继续使用。", "存档版本不符");
+                    SSMessageHelper.noNo = true;
+                    ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                    SSMessageHelper.Title = "存档版本不符";
+                    SSMessageHelper.Says = "我们将取消读取档案，请至 File/Setups 文件夹下备份 NoteSaves.json 文件并删除以继续使用。\n（为什么要你手动删除而不自动？因为我想确保你确实去备份了，并且顺便删了。）";
+                    SSMessageBox MB = new SSMessageBox();
+                    ParentWindow.IsMaskVisible = true;
+                    MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    MB.Owner = ParentWindow;
+                    MB.ShowDialog();
+                    ParentWindow.IsMaskVisible = false;
+
                     this.RunCard.Visibility = Visibility.Visible;
                     error.ErrorTo("存档版本不符。", Percent, Errorsay);
                     error.logWriter("Tool7:存档版本不符。", false);
@@ -584,6 +650,19 @@ namespace SS_Tool_Box
                     Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Finished"].Parent.Remove();
                     Notes["Cards"][CardType][CardID]["Stat"] = (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) - 1).ToString();
                 }
+            }
+            else if(nMode == 1)
+            {
+                Card Card = card;
+                string CardName = Card.Name;
+                string CardType = "Def";
+                string CardID = CardName.Substring(3, CardName.Length - 3);
+                if (CardName[2] == 'D')          //普通卡片
+                {
+                    Notes["Cards"][CardType][CardID].Parent.Remove();
+                    Notes["Stat"]["NumOfDef"] = (int.Parse(Notes["Stat"]["NumOfDef"].ToString()) - 1).ToString();
+                }
+                MainIn.Children.Remove(Card);
             }
             if (IsDelInFile)
             {

@@ -34,6 +34,7 @@ namespace SS_Tool_Box
         public Page1()
         {
             InitializeComponent();
+            this.Height = 500;
 
             String stTitle = "批量打开文件";
             this.Title.Foreground = baseColora.Fg;
