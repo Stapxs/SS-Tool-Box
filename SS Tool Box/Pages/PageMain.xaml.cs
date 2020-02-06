@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SS_Tool_Box_By_WPF
 {
@@ -29,6 +31,7 @@ namespace SS_Tool_Box_By_WPF
         BaseColor baseColora = Main.baseColor;
 
         DateTime loadingtime;
+        String stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
 
         public PageMain()
         {
@@ -62,31 +65,38 @@ namespace SS_Tool_Box_By_WPF
             }
             */
 
-            String stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
-
             //一言
-            error.logWriter("开始获取一言", false);
-            try
-            {
-                String saysuri = "https://v1.hitokoto.cn/";
-                string GetJson = HttpUitls.Get(saysuri, "DEFALT");
-                if (GetJson.IndexOf("hitokoto") != -1)
+            Action action = new Action(() => {
+                error.logWriter("开始获取一言", false);
+                try
                 {
-                    JObject obj = JObject.Parse(GetJson);
-                    stSays = "     " + obj["hitokoto"].ToString() + " —— " + obj["from"].ToString();
-                    error.logWriter("获取一言成功，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
+                    String saysuri = "https://v1.hitokoto.cn/";
+                    string GetJson = HttpUitls.Get(saysuri, "DEFALT");
+                    if (GetJson.IndexOf("hitokoto") != -1)
+                    {
+                        JObject obj = JObject.Parse(GetJson);
+                        stSays = "     " + obj["hitokoto"].ToString() + " —— " + obj["from"].ToString();
+                        error.logWriter("获取一言成功，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
+                    }
+                    else
+                    {
+                        error.logWriter("发现错误（MAN - 001）：获取一言内容为空，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
+                        stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    error.logWriter("发现错误（MAN - 001）：获取一言内容为空，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
+                    error.logWriter("发现错误（MAN - 002）：获取一言失败，错误内容为：" + ex + "，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
                     stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
                 }
-            }
-            catch(Exception ex)
-            {
-                error.logWriter("发现错误（MAN - 002）：获取一言失败，错误内容为：" + ex + "，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
-                stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
-            }
+                
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Says.Text = stSays;
+                }), DispatcherPriority.SystemIdle, null);
+            });
+            action.BeginInvoke(null, null);
+
             this.Says.Foreground = baseColora.Fg;
             this.Says.FontFamily = baseColora.Fonts;
             this.Says.FontSize = 14;
@@ -142,6 +152,7 @@ namespace SS_Tool_Box_By_WPF
             this.U15.Foreground = baseColora.Font;
             this.U16.Foreground = baseColora.Font;
             this.U17.Foreground = baseColora.Font;
+            this.U18.Foreground = baseColora.Font;
 
             this.Height = 500;
         }

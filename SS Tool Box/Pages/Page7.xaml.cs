@@ -246,7 +246,7 @@ namespace SS_Tool_Box
             }
             else                    //关闭添加卡片并且开始添加操作
             {
-                if (String.IsNullOrWhiteSpace(What.Text) && int.Parse(AddWhat.SelectedValue.ToString()) == 0 && int.Parse(AddWhere.SelectedValue.ToString()) == 0)
+                if (String.IsNullOrWhiteSpace(What.Text) || int.Parse(AddWhat.SelectedValue.ToString()) == 0 || int.Parse(AddWhere.SelectedValue.ToString()) == 0)
                 {
                     this.CD2.Visibility = Visibility.Collapsed;
                     return;
@@ -432,7 +432,7 @@ namespace SS_Tool_Box
             AddWhereList = new List<listMain>();
             AddWhereList.Add(new listMain() { ID = 0, Name = "  < 空 >" });
 
-            if (int.Parse(AddWhat.SelectedValue.ToString()) != 1)
+            if (int.Parse(AddWhat.SelectedValue.ToString()) != 1 && int.Parse(AddWhat.SelectedValue.ToString()) != 0)
             {
                 for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
                 {
@@ -663,6 +663,7 @@ namespace SS_Tool_Box
                     Notes["Stat"]["NumOfDef"] = (int.Parse(Notes["Stat"]["NumOfDef"].ToString()) - 1).ToString();
                 }
                 MainIn.Children.Remove(Card);
+                MainIn.UnregisterName(Card.Name);
             }
             if (IsDelInFile)
             {

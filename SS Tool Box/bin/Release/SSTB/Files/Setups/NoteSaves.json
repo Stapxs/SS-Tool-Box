@@ -1,0 +1,27 @@
+{
+  "Stat": {
+    "Version": "4",
+    "NumOfDef": "1"
+  },
+  "Cards": {
+    "Def": {
+      "1": {
+        "Title": "工具箱更新计划",
+        "Stat": "3",
+        "Finished": "-3",
+        "Notes1Title": "普通事件置顶",
+        "Notes1Finished": false,
+        "Notes2Title": "普通事件不可删除",
+        "Notes2Finished": false,
+        "Notes3Title": "打卡事件",
+        "Notes3Finished": false,
+        "Notes-1Title": "普通事件完成",
+        "Notes-1Finished": true,
+        "Notes-2Title": "普通事件删除",
+        "Notes-2Finished": true,
+        "Notes-3Title": "普通卡片删除",
+        "Notes-3Finished": true
+      }
+    }
+  }
+}

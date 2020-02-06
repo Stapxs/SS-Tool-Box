@@ -7,7 +7,7 @@
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" d:DesignWidth="600"
-      Title="Page7 - Nots" Height="478">
+      Title="Page7 - Nots" Height="691">
     <!-- Height 441 -->
 
     <Grid Margin="10, 0, 10, 10">

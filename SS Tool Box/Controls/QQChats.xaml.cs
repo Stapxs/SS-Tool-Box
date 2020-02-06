@@ -39,10 +39,13 @@ namespace SS_Tool_Box
         private static void OnQQChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             string QQ = e.NewValue.ToString();
-            String iduri = "https://api.toubiec.cn/qq?qq=" + QQ + "&size=300";
-            string GetJson = HttpUitls.Get(iduri, "DEFALT");
-            JObject obj = JObject.Parse(GetJson);
-            Info.QQName = obj["name"].ToString();
+            Action action = new Action(() => {
+                String iduri = "https://api.toubiec.cn/qq?qq=" + QQ + "&size=300";
+                string GetJson = HttpUitls.Get(iduri, "DEFALT");
+                JObject obj = JObject.Parse(GetJson);
+                Info.QQName = obj["name"].ToString();
+            });
+            action.BeginInvoke(null, null);
         }
 
         public static readonly DependencyProperty QQSayProperty =

@@ -31,6 +31,8 @@ namespace SS_Tool_Box
             public static Button Icon = new Button();
             public static string Title = "主标题";
             public static string Says = "内容，初始化内容得长到足以可以让我看见自动换行的效果才行，看起来应该够长了吧……emmm再长一点好了，就再长亿点。";
+            public static string bOKtext = "好的";
+            public static string bNOtext = "不要";
             public static bool noNo = false;
         }
 
@@ -48,10 +50,12 @@ namespace SS_Tool_Box
             this.ICON.Foreground = baseColora.Fg;
             ButtonHelper.SetHoverBrush(ICON, baseColora.Fg);
             ButtonHelper.SetIcon(ICON, ButtonHelper.GetIcon(SSMessageHelper.Icon));
+            this.OK.Content = SSMessageHelper.bOKtext;
             this.OK.Foreground = baseColora.Fg;
             this.OK.Background = baseColora.Bg;
             ButtonHelper.SetHoverBrush(OK, baseColora.Main);
             ButtonHelper.SetCornerRadius(OK, new CornerRadius(3, 3, 3, 3));
+            this.CANC.Content = SSMessageHelper.bNOtext;
             this.CANC.Foreground = baseColora.Fg;
             this.CANC.Background = baseColora.Bg;
             ButtonHelper.SetHoverBrush(CANC, baseColora.Main);
@@ -67,7 +71,7 @@ namespace SS_Tool_Box
             this.SAY.Foreground = baseColora.Fg;
             this.SAY.Background = baseColora.Tran;
             this.SAY.FontFamily = baseColora.Fonts;
-            this.SAY.FontSize = 15;
+            this.SAY.FontSize = 16;
 
             if(SSMessageHelper.noNo)
             {

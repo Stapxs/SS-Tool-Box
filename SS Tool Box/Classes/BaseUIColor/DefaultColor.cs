@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Panuon.UI.Silver;
 
 namespace SS_Tool_Box.Classes.BaseUIColor
 {
@@ -35,10 +28,10 @@ namespace SS_Tool_Box.Classes.BaseUIColor
             {
                 Cardbrush.Color = Color.FromArgb(204, 62, 62, 66);
                 Fontbrush.Color = Color.FromArgb(255, 255, 255, 255);
+                FontMbrush.Color = Fontbrush.Color;
                 Fgbrush = Fontbrush;
-                FontMbrush = Fontbrush;
                 Bgbrush.Color = Color.FromArgb(255, 62, 62, 62);
-                Mainbrush = Bgbrush;
+                Mainbrush.Color = Bgbrush.Color;
                 DBgbrush.Color = Color.FromArgb(255, 37, 37, 37);
                 Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BGDrck.png"));
                 Bgpa = new BitmapImage(new Uri("pack://application:,,,/Resource/BGDrck.png"));
@@ -47,13 +40,13 @@ namespace SS_Tool_Box.Classes.BaseUIColor
             }
             else
             {
-                Cardbrush.Color = Color.FromArgb(204, 255, 255, 255);
+                Cardbrush.Color = Color.FromArgb(190, 255, 255, 255);
                 Fontbrush.Color = Color.FromArgb(255, 100, 100, 100);
+                Mainbrush.Color = Fontbrush.Color;
+                FontMbrush.Color = Color.FromArgb(255, 240, 240, 240);
                 Fgbrush = Fontbrush;
-                FontMbrush.Color = Color.FromArgb(255, 255, 255, 255);
-                Bgbrush.Color = Color.FromArgb(255, 196, 196, 196);
-                Mainbrush = Fontbrush;
-                DBgbrush = Bgbrush;
+                Bgbrush.Color = Color.FromArgb(255, 255, 255, 255);
+                DBgbrush.Color = Bgbrush.Color;
                 Bgp = new BitmapImage(new Uri("pack://application:,,,/Resource/BG.png"));
                 Bgpa = new BitmapImage(new Uri("pack://application:,,,/Resource/BGLight.png"));
                 Bgps = new BitmapImage(new Uri("pack://application:,,,/Resource/BGtop.bmp"));

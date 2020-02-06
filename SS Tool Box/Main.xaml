@@ -12,6 +12,7 @@
         ResizeMode="CanMinimize"
         Foreground="#000000"
         SizeChanged="Onsizechanged"
+        ContentRendered="WContentRendered"
         Background="#00000000"
         WindowStyle="None"
         >
