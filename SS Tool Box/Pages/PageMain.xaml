@@ -6,8 +6,8 @@
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:SS_Tool_Box_By_WPF"
-      mc:Ignorable="d" d:DesignWidth="441"
-      Title="PageMain - 主页" Height="1540.475">
+      mc:Ignorable="d"
+      Title="PageMain - 主页" Height="1540.475" Width="600">
 
     <Grid Margin="10, 0, 10, 10">
         <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Padding="0">
@@ -24,13 +24,44 @@
                         <TextBlock x:Name="Tips" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
                     </StackPanel>
                 </materialDesign:Card>
+                <materialDesign:Card x:Name="CDY" Background="#CCFFFFFF" Margin="5" >
+                    <StackPanel>
+                        <TextBlock x:Name="MTY" Text="疫情查询" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,5"/>
+                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10" Height="58" >
+                            <Grid HorizontalAlignment="Left" Width="62" Margin="0,0,20,0">
+                                <TextBlock x:Name="NYES" Text="0" TextWrapping="Wrap" Margin="0,10,0,28" TextAlignment="Center"/>
+                                <TextBlock x:Name="MTYES" Text="确诊" TextWrapping="Wrap" Margin="0,40,0,0" TextAlignment="Center"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Left" Width="62" Margin="0,0,20,0">
+                                <TextBlock x:Name="NMAY" Text="0" TextWrapping="Wrap" Margin="0,10,0,30" TextAlignment="Center"/>
+                                <TextBlock x:Name="MTMAY" Text="疑似" TextWrapping="Wrap" Margin="0,40,0,0" TextAlignment="Center"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Left" Width="62" Margin="0,0,20,0">
+                                <TextBlock x:Name="NMAYD" Text="0" TextWrapping="Wrap" Margin="0,10,0,30" TextAlignment="Center"/>
+                                <TextBlock x:Name="MTMAYD" Text="重症" TextWrapping="Wrap" Margin="0,40,0,0" TextAlignment="Center"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Left" Width="62" Margin="0,0,20,0">
+                                <TextBlock x:Name="NDIE" Text="0" TextWrapping="Wrap" Margin="0,10,0,30" TextAlignment="Center"/>
+                                <TextBlock x:Name="MTDIE" Text="死亡" TextWrapping="Wrap" Margin="0,40,0,0" TextAlignment="Center"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Left" Width="62" Margin="0,0,20,0">
+                                <TextBlock x:Name="NALIVE" Text="0" TextWrapping="Wrap" Margin="0,10,0,30" TextAlignment="Center"/>
+                                <TextBlock x:Name="MTALIVE" Text="治愈" TextWrapping="Wrap" Margin="0,40,0,0" TextAlignment="Center"/>
+                            </Grid>
+                        </WrapPanel>
+                        <Grid HorizontalAlignment="Center">
+                            <TextBox x:Name="NC" Margin="0,18,0,15" Height="28" Width="400" pu:TextBoxHelper.Watermark="输入要查找的城镇，输入全国回到全国。"/>
+                            <Button x:Name="N" Margin="370,17,-1,14" pu:ButtonHelper.Icon="" Click="N_Click" Width="30"/>
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
                 <materialDesign:Card x:Name="CD3" Background="#CCFFFFFF" Margin="5,5,5,20" >
                     <StackPanel>
                         <TextBlock x:Name="MT1" Text="更新记录" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
                         <pu:Timeline x:Name="UpdateList" Margin="35,0,35,5" Height="Auto" Width="Auto" >
                             <pu:TimelineItem x:Name="U19"
                                              Header="2020.02.07"
-    			                             Content="= BUG：主界面布局错误&#13;+ 第二更新源&#13;+ 记事簿卡片不可删除功能" 
+    			                             Content="+ 疫情查询&#13;= 更换更新源主次&#13;= BUG：主界面布局错误&#13;+ 第二更新源&#13;+ 记事簿卡片不可删除功能" 
                                              FontFamily="方正兰亭简黑"
                                              FontSize="15"/>
                             <pu:TimelineItem x:Name="U18"

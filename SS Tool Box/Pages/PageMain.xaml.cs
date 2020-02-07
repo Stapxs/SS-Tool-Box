@@ -1,8 +1,11 @@
 ﻿using Newtonsoft.Json.Linq;
+using Panuon.UI.Silver;
 using SS_Tool_Box.Classes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -32,6 +35,7 @@ namespace SS_Tool_Box_By_WPF
 
         DateTime loadingtime;
         String stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
+        bool errN = false;
 
         public PageMain()
         {
@@ -156,6 +160,119 @@ namespace SS_Tool_Box_By_WPF
             this.U19.Foreground = baseColora.Font;
 
             this.Height = 477;
+
+            //疫情查询板块
+            this.CDY.Background = baseColora.Card;
+            this.MTY.Foreground = baseColora.Fg;
+            this.MTY.FontFamily = baseColora.Fonts;
+            this.MTY.FontSize = 15;
+            this.MTYES.Foreground = baseColora.Fg;
+            this.MTYES.FontFamily = baseColora.Fonts;
+            this.MTYES.FontSize = 15;
+            this.NYES.Foreground = baseColora.Fg;
+            this.NYES.FontFamily = baseColora.Fonts;
+            this.NYES.FontSize = 20;
+            this.MTMAY.Foreground = baseColora.Fg;
+            this.MTMAY.FontFamily = baseColora.Fonts;
+            this.MTMAY.FontSize = 15;
+            this.NMAY.Foreground = baseColora.Fg;
+            this.NMAY.FontFamily = baseColora.Fonts;
+            this.NMAY.FontSize = 20;
+            this.MTMAYD.Foreground = baseColora.Fg;
+            this.MTMAYD.FontFamily = baseColora.Fonts;
+            this.MTMAYD.FontSize = 15;
+            this.NMAYD.Foreground = baseColora.Fg;
+            this.NMAYD.FontFamily = baseColora.Fonts;
+            this.NMAYD.FontSize = 20;
+            this.MTDIE.Foreground = baseColora.Fg;
+            this.MTDIE.FontFamily = baseColora.Fonts;
+            this.MTDIE.FontSize = 15;
+            this.NDIE.Foreground = baseColora.Fg;
+            this.NDIE.FontFamily = baseColora.Fonts;
+            this.NDIE.FontSize = 20;
+            this.MTALIVE.Foreground = baseColora.Fg;
+            this.MTALIVE.FontFamily = baseColora.Fonts;
+            this.MTALIVE.FontSize = 15;
+            this.NALIVE.Foreground = baseColora.Fg;
+            this.NALIVE.FontFamily = baseColora.Fonts;
+            this.NALIVE.FontSize = 20;
+
+            this.NC.Background = baseColora.Bg;
+            this.NC.Foreground = baseColora.Fg;
+
+            Action actionyq = new Action(() => {
+                try
+                {
+                    error.logWriter("尝试下载丁香园界面……", false);
+                    string url = "https://ncov.dxy.cn/ncovh5/view/pneumonia?scene=2&clicktime=1579582238&enterid=1579582238&from=timeline&isappinstalled=0";
+                    string filepath = "SSTB/Files/Ncov.txt";
+                    WebClient mywebclient = new WebClient();
+                    mywebclient.DownloadFile(url, filepath);
+                }
+                catch(Exception ex)
+                {
+                    error.logWriter("下载丁香园界面失败，" + ex, false);
+                    errN = true;
+                    return;
+                }
+                try
+                {
+                    string content = File.ReadAllText("SSTB/Files/Ncov.txt");
+                    int i = content.IndexOf("getStatisticsService");
+                    content = content.Substring(i + "getStatisticsService".Length);
+                    i = content.IndexOf("confirmedCount");
+                    content = content.Substring(i + "confirmedCount".Length + 2);
+                    i = content.IndexOf(",");
+                    string inl = content;
+                    int inp = i;
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        NYES.Text = inl.Substring(0, inp);
+                    }), DispatcherPriority.SystemIdle, null);
+                    i = content.IndexOf(":");
+                    content = content.Substring(i + 1);
+                    i = content.IndexOf(",");
+                    string inl1 = content;
+                    int inp1 = i;
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        NMAY.Text = inl1.Substring(0, inp1);
+                    }), DispatcherPriority.SystemIdle, null);
+                    i = content.IndexOf(":");
+                    content = content.Substring(i + 1);
+                    i = content.IndexOf(",");
+                    string inl2 = content;
+                    int inp2 = i;
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        NALIVE.Text = inl2.Substring(0, inp2);
+                    }), DispatcherPriority.SystemIdle, null);
+                    i = content.IndexOf(":");
+                    content = content.Substring(i + 1);
+                    i = content.IndexOf(",");
+                    string inl3 = content;
+                    int inp3 = i;
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        NDIE.Text = inl3.Substring(0, inp3);
+                    }), DispatcherPriority.SystemIdle, null);
+                    i = content.IndexOf(":");
+                    content = content.Substring(i + 1);
+                    i = content.IndexOf(",");
+                    string inl4 = content;
+                    int inp4 = i;
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        NMAYD.Text = inl4.Substring(0, inp4);
+                    }), DispatcherPriority.SystemIdle, null);
+                }
+                catch (Exception ex)
+                {
+                    error.logWriter("处理丁香园界面失败，" + ex, false);
+                    return;
+                }
+            });
+            actionyq.BeginInvoke(null, null);
         }
 
         /*
@@ -178,6 +295,97 @@ namespace SS_Tool_Box_By_WPF
             catch
             {
                 return "Error";
+            }
+        }
+
+        private void N_Click(object sender, RoutedEventArgs e)
+        {
+            string inpa = NC.Text;
+            if (!String.IsNullOrWhiteSpace(inpa) && !errN)
+            {
+                if (!inpa.Equals("全国"))
+                {
+                    try
+                    {
+                        string content = File.ReadAllText("SSTB/Files/Ncov.txt");
+                        int i = content.IndexOf(inpa);
+                        content = content.Substring(i - 13);
+                        i = content.IndexOf("}");
+                        content = content.Substring(0, i + 1);
+                        JObject jObject = JObject.Parse(content);
+                        MTY.Text = "疫情查询 - " + inpa;
+                        NYES.Text = jObject["confirmedCount"].ToString();
+                        NDIE.Text = jObject["deadCount"].ToString();
+                        NALIVE.Text = jObject["curedCount"].ToString();
+                        NMAY.Text = jObject["suspectedCount"].ToString();
+                        NMAYD.Text = "无数据";
+                    }
+                    catch (Exception ex)
+                    {
+                        error.logWriter("处理丁香园界面失败，" + ex, false);
+                        return;
+                    }
+                }
+                else
+                {
+                    MTY.Text = "疫情查询";
+                    try
+                    {
+                        string content = File.ReadAllText("SSTB/Files/Ncov.txt");
+                        int i = content.IndexOf("getStatisticsService");
+                        content = content.Substring(i + "getStatisticsService".Length);
+                        i = content.IndexOf("confirmedCount");
+                        content = content.Substring(i + "confirmedCount".Length + 2);
+                        i = content.IndexOf(",");
+                        string inl = content;
+                        int inp = i;
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            NYES.Text = inl.Substring(0, inp);
+                        }), DispatcherPriority.SystemIdle, null);
+                        i = content.IndexOf(":");
+                        content = content.Substring(i + 1);
+                        i = content.IndexOf(",");
+                        string inl1 = content;
+                        int inp1 = i;
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            NMAY.Text = inl1.Substring(0, inp1);
+                        }), DispatcherPriority.SystemIdle, null);
+                        i = content.IndexOf(":");
+                        content = content.Substring(i + 1);
+                        i = content.IndexOf(",");
+                        string inl2 = content;
+                        int inp2 = i;
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            NALIVE.Text = inl2.Substring(0, inp2);
+                        }), DispatcherPriority.SystemIdle, null);
+                        i = content.IndexOf(":");
+                        content = content.Substring(i + 1);
+                        i = content.IndexOf(",");
+                        string inl3 = content;
+                        int inp3 = i;
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            NDIE.Text = inl3.Substring(0, inp3);
+                        }), DispatcherPriority.SystemIdle, null);
+                        i = content.IndexOf(":");
+                        content = content.Substring(i + 1);
+                        i = content.IndexOf(",");
+                        string inl4 = content;
+                        int inp4 = i;
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            NMAYD.Text = inl4.Substring(0, inp4);
+                        }), DispatcherPriority.SystemIdle, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        error.logWriter("处理丁香园界面失败，" + ex, false);
+                        return;
+                    }
+                }
             }
         }
     }

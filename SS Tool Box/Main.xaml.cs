@@ -629,9 +629,10 @@ namespace SS_Tool_Box_By_WPF
                 try
                 {
                     error.logWriter("尝试第一更新源……", false);
-                    string url = "https://raw.githubusercontent.com/Stapxs/SS-Updater/master/SSTB-NowVersion.txt";
+                    string url = "https://stapxs.neocities.org/SSTB-NowVersion.txt";
                     string filepath = "SSTB/Update.txt";
                     WebClient mywebclient = new WebClient();
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     mywebclient.DownloadFile(url, filepath);
                 }
                 catch (Exception ex)
@@ -640,7 +641,7 @@ namespace SS_Tool_Box_By_WPF
                     error.logWriter("尝试第二更新源……", false);
                     try
                     {
-                        string url = "https://stapxs.neocities.org/SSTB-NowVersion.txt";
+                        string url = "https://raw.githubusercontent.com/Stapxs/SS-Updater/master/SSTB-NowVersion.txt";
                         string filepath = "SSTB/Update.txt";
                         WebClient mywebclient = new WebClient();
                         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
