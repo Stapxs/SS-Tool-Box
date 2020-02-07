@@ -1,38 +1,9 @@
-2020_02_06_20_17
+2020_02_07_16_07
 
-[20:40:17.36] 开始加载UI
-[20:40:17.84] UI加载完成，耗时：00:00:00.4837014
-[20:40:17.84] 开始获取一言
-[20:40:17.85] 检查更新……
-[20:40:18.17] 获取一言成功，耗时：00:00:00.3307960
-[20:40:19.58] 下载更新文件错误：System.Net.WebException: 基础连接已经关闭: 发送时发生错误。 ---> System.IO.IOException: 无法从传输连接中读取数据: 远程主机强迫关闭了一个现有的连接。。 ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
-   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
-   在 System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
-   在 System.Net.FixedSizeReader.ReadPacket(Byte[] buffer, Int32 offset, Int32 count)
-   在 System.Net.Security.SslState.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
-   在 System.Net.Security.SslState.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   在 System.Net.Security.SslState.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   在 System.Net.Security.SslState.ForceAuthentication(Boolean receiveFirst, Byte[] buffer, AsyncProtocolRequest asyncRequest)
-   在 System.Net.Security.SslState.ProcessAuthentication(LazyAsyncResult lazyResult)
-   在 System.Net.TlsStream.CallProcessAuthentication(Object state)
-   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
-   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
-   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
-   在 System.Net.TlsStream.ProcessAuthentication(LazyAsyncResult result)
-   在 System.Net.TlsStream.Write(Byte[] buffer, Int32 offset, Int32 size)
-   在 System.Net.PooledStream.Write(Byte[] buffer, Int32 offset, Int32 size)
-   在 System.Net.ConnectStream.WriteHeaders(Boolean async)
-   --- 内部异常堆栈跟踪的结尾 ---
-   在 System.Net.WebClient.DownloadFile(Uri address, String fileName)
-   在 System.Net.WebClient.DownloadFile(String address, String fileName)
-   在 SS_Tool_Box_By_WPF.Main.UpdateRight() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Main.xaml.cs:行号 635
-[20:40:19.58] 打开更新文件错误：System.IO.FileNotFoundException: 未能找到文件“C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\SSTB\Update.txt”。
-文件名:“C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\SSTB\Update.txt”
-   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   在 System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
-   在 System.IO.StreamReader..ctor(String path, Encoding encoding)
-   在 SS_Tool_Box_By_WPF.Main.UpdateRight() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Main.xaml.cs:行号 645
+[16:40:07.20] 开始加载UI
+[16:40:08.25] UI加载完成，耗时：00:00:01.0403562
+[16:40:08.25] 开始获取一言
+[16:40:08.28] 检查更新……
+[16:40:08.29] 尝试第一更新源……
+[16:40:08.97] 获取一言成功，耗时：00:00:00.7225512
+[16:40:11.45] 检查更新完成。

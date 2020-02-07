@@ -36,7 +36,7 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.Height = 500;
+            this.Height = 477;
 
             ButtonHelper.SetIsWaiting(RunButton, false);
             this.Color.Fill = baseColora.Card;

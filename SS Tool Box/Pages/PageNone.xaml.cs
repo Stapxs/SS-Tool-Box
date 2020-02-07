@@ -28,7 +28,7 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.Height = 500;
+            this.Height = 477;
 
             String stTitle = "哎呦喂！";
             this.Title.Foreground = baseColora.Fg;

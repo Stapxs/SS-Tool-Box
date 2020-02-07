@@ -57,7 +57,7 @@
                             <TextBlock x:Name="T1" Text="添加内容" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,25,0,15" />
                             <TextBox x:Name="What" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,15" Height="28" Opacity="100" ToolTip="添加啥。"/>
                         </Grid>
-                        <Grid>
+                        <Grid x:Name="HID">
                             <TextBlock x:Name="T5" Text="不可删除" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,25,0,15" />
                             <CheckBox x:Name="CanDel" pu:CheckBoxHelper.CheckBoxStyle="Switch2" Margin="462,10,29,19" Checked="CanDel_Checked"  ToolTip="不可删除。（ 永 久 提 醒 ）"/>
                         </Grid>

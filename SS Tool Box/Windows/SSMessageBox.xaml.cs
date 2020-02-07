@@ -40,6 +40,9 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
+            SSMessageHelper.buttonOK = false;
+            SSMessageHelper.buttonNO = false;
+
             BG.BeginInit();
             BG.Source = baseColora.Bgpa;
             BG.EndInit();

@@ -29,7 +29,7 @@ namespace SS_Tool_Box_By_WPF
         DateTime loadingtime;
         Error error = new Error();
 
-        String stVersion = "1.0.21";
+        String stVersion = "1.0.22";
         int NowPage = 0;
         public static int NowChoice = 0;
         public int WindowNew;
@@ -620,15 +620,15 @@ namespace SS_Tool_Box_By_WPF
                         passdow = true;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    error.logWriter("打开更新文件错误：" + ex, false);
                 }
             }
             if (!passdow)
             {
                 try
                 {
+                    error.logWriter("尝试第一更新源……", false);
                     string url = "https://raw.githubusercontent.com/Stapxs/SS-Updater/master/SSTB-NowVersion.txt";
                     string filepath = "SSTB/Update.txt";
                     WebClient mywebclient = new WebClient();
@@ -636,8 +636,22 @@ namespace SS_Tool_Box_By_WPF
                 }
                 catch (Exception ex)
                 {
-                    error.logWriter("下载更新文件错误：" + ex, false);
+                    error.logWriter("下载更新文件错误（第一更新源）：" + ex, false);
+                    error.logWriter("尝试第二更新源……", false);
+                    try
+                    {
+                        string url = "https://stapxs.neocities.org/SSTB-NowVersion.txt";
+                        string filepath = "SSTB/Update.txt";
+                        WebClient mywebclient = new WebClient();
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        mywebclient.DownloadFile(url, filepath);
+                    }
+                    catch (Exception exc)
+                    {
+                        error.logWriter("下载更新文件错误（第二更新源）：" + exc, false);
+                    }
                 }
+                error.logWriter("检查更新完成。", false);
             }
             try
             {

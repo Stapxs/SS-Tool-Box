@@ -31,7 +31,7 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.Height = 500;
+            this.Height = 477;
 
             SolidColorBrush GetColor = new SolidColorBrush();
             GetColor.Color = System.Windows.Media.Color.FromArgb(255, 100, 100, 100);

@@ -29,7 +29,7 @@ namespace SS_Tool_Box
         JObject Notes = new JObject();
         bool err = false;
         IList<listMain> AddWhereList = new List<listMain>();
-        int FileVersion = 4;
+        int FileVersion = 6;
         ListView list = new ListView();
         ListViewItem listi = new ListViewItem();
         Card card = new Card();
@@ -46,7 +46,7 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.Height = 500;
+            this.Height = 477;
 
             String stTitle = "记事簿";
             this.Title.Foreground = baseColora.Fg;
@@ -128,6 +128,7 @@ namespace SS_Tool_Box
             this.CD1.Visibility = Visibility.Collapsed;
             this.CD2.Visibility = Visibility.Collapsed;
             this.AdW.Visibility = Visibility.Collapsed;
+            this.HID.Visibility = Visibility.Collapsed;
 
             //初始化列表
             IList<listMain> AddWhatList = new List<listMain>();
@@ -209,6 +210,7 @@ namespace SS_Tool_Box
                 }
 
                 int delCard = 0;
+                int[] things = new int[1];
                 if (!err && int.Parse(Notes["Stat"]["NumOfDef"].ToString()) != 0)
                 {
                     for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
@@ -220,7 +222,8 @@ namespace SS_Tool_Box
                             delCard++;
                             continue;
                         }
-                        AddColtrols(1, i, -1, Notes["Cards"]["Def"][i.ToString()]["Title"].ToString());
+                        things[0] = i;
+                        AddColtrols(1, things, Notes["Cards"]["Def"][i.ToString()]["Title"].ToString());
                     }
                 }
                 SaveData(Notes);
@@ -246,10 +249,27 @@ namespace SS_Tool_Box
             }
             else                    //关闭添加卡片并且开始添加操作
             {
-                if (String.IsNullOrWhiteSpace(What.Text) || int.Parse(AddWhat.SelectedValue.ToString()) == 0 || int.Parse(AddWhere.SelectedValue.ToString()) == 0)
+                if((String.IsNullOrWhiteSpace(What.Text) && int.Parse(AddWhat.SelectedValue.ToString()) == 1) || (int.Parse(AddWhat.SelectedValue.ToString()) == 0) || (int.Parse(AddWhat.SelectedValue.ToString()) == 2 && String.IsNullOrWhiteSpace(What.Text) && (int.Parse(AddWhere.SelectedValue.ToString()) == 0)))
                 {
                     this.CD2.Visibility = Visibility.Collapsed;
                     return;
+                }
+                if(bool.Parse(CanDel.IsChecked.ToString()))
+                {
+                    SSMessageHelper.noNo = false;
+                    ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                    SSMessageHelper.Title = "确认一下";
+                    SSMessageHelper.Says = "真的要选择无法删除嘛，这会导致此记录无法选择删除。（你只能通过“完成”选项来消除此记录，我希望你可以好好利用这个功能来督促自己）";
+                    SSMessageBox MB = new SSMessageBox();
+                    ParentWindow.IsMaskVisible = true;
+                    MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    MB.Owner = ParentWindow;
+                    MB.ShowDialog();
+                    ParentWindow.IsMaskVisible = false;
+                    if(SSMessageHelper.buttonNO)
+                    {
+                        return;
+                    }
                 }
                 if(int.Parse(AddWhat.SelectedValue.ToString()) == 1)
                 {
@@ -262,7 +282,9 @@ namespace SS_Tool_Box
                     CardItem["Finished"] = "0";
                     Notes["Cards"]["Def"][num.ToString()] = CardItem;
                     SaveData(Notes);
-                    AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), int.Parse(Notes["Stat"]["NumOfDef"].ToString()), -1, What.Text);
+                    int[] things = new int[1];
+                    things[0] = int.Parse(Notes["Stat"]["NumOfDef"].ToString());
+                    AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), things, What.Text);
                 }
                 if (int.Parse(AddWhat.SelectedValue.ToString()) == 2)
                 {
@@ -271,15 +293,27 @@ namespace SS_Tool_Box
                     num += 1;
                     Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "Title"] = What.Text;
                     Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "Finished"] = false;
+                    Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "CantDel"] = bool.Parse(CanDel.IsChecked.ToString());
                     SaveData(Notes);
-                    AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString()), int.Parse(AddWhere.SelectedValue.ToString()), What.Text);
+                    int[] things = new int[3];
+                    things[0] = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
+                    things[1] = int.Parse(AddWhere.SelectedValue.ToString());
+                    if(bool.Parse(CanDel.IsChecked.ToString()))
+                    {
+                        things[2] = 1;
+                    }
+                    else
+                    {
+                        things[2] = 0;
+                    }
+                    AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), things, What.Text);
                 }
                 this.CD2.Visibility = Visibility.Collapsed;
                 this.AdW.Visibility = Visibility.Collapsed;
             }
         }
 
-        private bool AddColtrols(int addWhat, int another1, int another2, String anothers1)
+        private bool AddColtrols(int addWhat, int[] things, String anothers1)
         {
             /* addWhat - 创建什么, another,anothers - 其他数据
              * 1 - 普通卡片
@@ -312,7 +346,7 @@ namespace SS_Tool_Box
                 card.ContextMenu = contextMenu;
                 card.PreviewMouseRightButtonDown += WhatFuckOpenMeMe;
 
-                textBlock.Text = another1 + ". " + anothers1;
+                textBlock.Text = things[0] + ". " + anothers1;
                 textBlock.HorizontalAlignment = HorizontalAlignment.Left;
                 textBlock.TextWrapping = TextWrapping.Wrap;
                 textBlock.Margin = new Thickness(34, 25, 34, 10);
@@ -320,7 +354,7 @@ namespace SS_Tool_Box
                 textBlock.FontFamily = baseColora.Fonts;
                 textBlock.FontSize = 15;
 
-                card.Name = "CDD" + another1;
+                card.Name = "CDD" + things[0];
                 card.Margin = new Thickness(5);
                 card.Width = 540;
                 card.Background = baseColora.Card;
@@ -332,16 +366,16 @@ namespace SS_Tool_Box
                 stackPanel.Children.Add(listView);
                 MainIn.Children.Add(card);
 
-                RegisterName("CDD" + another1, card);
+                RegisterName("CDD" + things[0], card);
             }
             else if(addWhat == 2)
             {
-                Card card = GetChildObjects<Card>(MainIn, "CDD" + another2.ToString());
+                Card card = GetChildObjects<Card>(MainIn, "CDD" + things[1].ToString());
                 if(card == null)
                 {
                     this.RunCard.Visibility = Visibility.Visible;
                     error.ErrorTo("创建控件失败，未找到分类卡片。", Percent, Errorsay);
-                    error.logWriter("Tool -7:未找到分类卡片。卡片名称：CDD" + another2, false);
+                    error.logWriter("Tool -7:未找到分类卡片。卡片名称：CDD" + things[1], false);
                     return false;
                 }
                 List<StackPanel> lstControl = GetChildObjects<StackPanel>(card, typeof(StackPanel));
@@ -349,7 +383,7 @@ namespace SS_Tool_Box
                 {
                     this.RunCard.Visibility = Visibility.Visible;
                     error.ErrorTo("创建控件失败，未找到分类卡片中的StackPanel控件。", Percent, Errorsay);
-                    error.logWriter("Tool -7:未找到分类卡片中的StackPanel控件。卡片名称：CDD" + another2, false);
+                    error.logWriter("Tool -7:未找到分类卡片中的StackPanel控件。卡片名称：CDD" + things[1], false);
                     return false;
                 }
                 List<ListView> lstControl1 = GetChildObjects<ListView>(lstControl[0], typeof(ListView));
@@ -357,7 +391,7 @@ namespace SS_Tool_Box
                 {
                     this.RunCard.Visibility = Visibility.Visible;
                     error.ErrorTo("创建控件失败，未找到分类卡片中的StackPanel控件中的列表控件。", Percent, Errorsay);
-                    error.logWriter("Tool -7:未找到分类卡片中的StackPanel控件中的列表控件。卡片名称：CDD" + another2, false);
+                    error.logWriter("Tool -7:未找到分类卡片中的StackPanel控件中的列表控件。卡片名称：CDD" + things[1], false);
                     return false;
                 }
                 ContextMenu contextMenu = new ContextMenu();
@@ -374,7 +408,10 @@ namespace SS_Tool_Box
                 menuItem2.Header = "删除";
                 menuItem2.Icon = "";
                 menuItem2.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(ME_Del);
-                contextMenu.Items.Add(menuItem2);
+                if(things[2] == 1)
+                {
+                    menuItem2.IsEnabled = false;
+                }
                 menuItem3.Name = "MenuItem3";
                 menuItem3.Header = "置顶";
                 menuItem3.Icon = "";
@@ -388,7 +425,7 @@ namespace SS_Tool_Box
                 ContextMenuHelper.SetItemHeight(contextMenu, 30);
 
                 ListViewItem listViewItem = new ListViewItem();
-                listViewItem.Name = "CDD" + another2 + "IT" + another1;
+                listViewItem.Name = "CDD" + things[1] + "IT" + things[0];
                 listViewItem.ContextMenu = contextMenu;
                 listViewItem.PreviewMouseRightButtonDown += WhatFuckOpenMe;
                 TextBlock textBlock = new TextBlock();
@@ -432,6 +469,14 @@ namespace SS_Tool_Box
             AddWhereList = new List<listMain>();
             AddWhereList.Add(new listMain() { ID = 0, Name = "  < 空 >" });
 
+            if(int.Parse(AddWhat.SelectedValue.ToString()) != 1 && int.Parse(AddWhat.SelectedValue.ToString()) != 0)
+            {
+                this.HID.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.HID.Visibility = Visibility.Collapsed;
+            }
             if (int.Parse(AddWhat.SelectedValue.ToString()) != 1 && int.Parse(AddWhat.SelectedValue.ToString()) != 0)
             {
                 for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
@@ -592,6 +637,7 @@ namespace SS_Tool_Box
                 }
             }
 
+            int[] things = new int[3];
             if (!err && int.Parse(Notes["Stat"]["NumOfDef"].ToString()) != 0)
             {
                 for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
@@ -600,7 +646,17 @@ namespace SS_Tool_Box
                     {
                         for (int j = 1; j <= int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()); j++)
                         {
-                            AddColtrols(2, j, i, Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "Title"].ToString());
+                            things[0] = j;
+                            things[1] = i;
+                            if (bool.Parse(Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "CantDel"].ToString()))
+                            {
+                                things[2] = 1;
+                            }
+                            else
+                            {
+                                things[2] = 0;
+                            }
+                            AddColtrols(2, things, Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "Title"].ToString());
                         }
                     }
                 }

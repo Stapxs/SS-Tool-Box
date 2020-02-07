@@ -28,6 +28,11 @@
                     <StackPanel>
                         <TextBlock x:Name="MT1" Text="更新记录" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
                         <pu:Timeline x:Name="UpdateList" Margin="35,0,35,5" Height="Auto" Width="Auto" >
+                            <pu:TimelineItem x:Name="U19"
+                                             Header="2020.02.07"
+    			                             Content="= BUG：主界面布局错误&#13;+ 第二更新源&#13;+ 记事簿卡片不可删除功能" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
                             <pu:TimelineItem x:Name="U18"
                                              Header="2020.02.06"
     			                             Content="+ 今日人品&#13;+ 自动检查更新&#13;= BUG：林槐白配色错误" 

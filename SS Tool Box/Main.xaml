@@ -126,7 +126,7 @@
 
 
 
-            <ContentControl Grid.Column="1" Grid.Row="1" Name="Page" Margin="10,0,0,0"/>
+            <ContentControl Grid.Column="1" Grid.Row="1" Name="Page" Margin="10,0,0,0" Padding="0,0,0,3"/>
         </Grid>
 
         <Button x:Name="Feedback" Grid.Column="2" Margin="402,-27,74,132" Content="提交问题" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" pu:IconHelper.FontSize="15"/>

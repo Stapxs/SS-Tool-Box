@@ -27,7 +27,7 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.Height = 500;
+            this.Height = 477;
 
             this.RunCard.Background = baseColora.Card;
             this.IconCard.Background = baseColora.Card;

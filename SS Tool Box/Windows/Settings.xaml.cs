@@ -312,6 +312,8 @@ namespace SS_Tool_Box_By_WPF
                 {
                     PassWordEnterF7 EP = new PassWordEnterF7();
                     this.IsMaskVisible = true;
+                    EP.Owner = this;
+                    EP.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     EP.ShowDialog();
                     this.IsMaskVisible = false;
                 }

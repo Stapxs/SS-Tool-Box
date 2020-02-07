@@ -22,7 +22,7 @@ namespace SS_Tool_Box
         {
             InitializeComponent();
 
-            this.Height = 500;
+            this.Height = 477;
 
             String stTitle = "QQ 消息生成";
             this.Title.Foreground = baseColora.Fg;
