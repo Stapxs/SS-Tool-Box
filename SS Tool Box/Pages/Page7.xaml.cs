@@ -1,19 +1,17 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Panuon.UI.Silver;
+using SS_Tool_Box.Classes;
+using SS_Tool_Box_By_WPF;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using Panuon.UI.Silver;
-using System.Net;
-using SS_Tool_Box.Classes;
-using Newtonsoft.Json.Linq;
-using SS_Tool_Box_By_WPF;
-using System.IO;
-using Newtonsoft.Json;
-using MaterialDesignThemes.Wpf;
-using System.Windows.Media;
-using System.Collections.Generic;
 using System.Windows.Input;
-using Panuon.UI.Silver.Core;
+using System.Windows.Media;
 using static SS_Tool_Box.SSMessageBox;
 
 namespace SS_Tool_Box
@@ -271,42 +269,70 @@ namespace SS_Tool_Box
                         return;
                     }
                 }
-                if(int.Parse(AddWhat.SelectedValue.ToString()) == 1)
+                try
                 {
-                    JObject CardItem = new JObject();
-                    int num = int.Parse(Notes["Stat"]["NumOfDef"].ToString());
-                    Notes["Stat"]["NumOfDef"] = (num + 1).ToString();
-                    num += 1;
-                    CardItem["Title"] = What.Text;
-                    CardItem["Stat"] = "0";
-                    CardItem["Finished"] = "0";
-                    Notes["Cards"]["Def"][num.ToString()] = CardItem;
-                    SaveData(Notes);
-                    int[] things = new int[1];
-                    things[0] = int.Parse(Notes["Stat"]["NumOfDef"].ToString());
-                    AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), things, What.Text);
+                    if (int.Parse(AddWhat.SelectedValue.ToString()) == 1)
+                    {
+                        JObject CardItem = new JObject();
+                        int num = int.Parse(Notes["Stat"]["NumOfDef"].ToString());
+                        Notes["Stat"]["NumOfDef"] = (num + 1).ToString();
+                        num += 1;
+                        CardItem["Title"] = What.Text;
+                        CardItem["Stat"] = "0";
+                        CardItem["Finished"] = "0";
+                        Notes["Cards"]["Def"][num.ToString()] = CardItem;
+                        SaveData(Notes);
+                        int[] things = new int[1];
+                        things[0] = int.Parse(Notes["Stat"]["NumOfDef"].ToString());
+                        AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), things, What.Text);
+                    }
+                    if (int.Parse(AddWhat.SelectedValue.ToString()) == 2)
+                    {
+                        int num = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
+                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"] = (num + 1).ToString();
+                        num += 1;
+                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "Title"] = What.Text;
+                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "Finished"] = false;
+                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "CantDel"] = bool.Parse(CanDel.IsChecked.ToString());
+                        SaveData(Notes);
+                        int[] things = new int[3];
+                        things[0] = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
+                        things[1] = int.Parse(AddWhere.SelectedValue.ToString());
+                        if (bool.Parse(CanDel.IsChecked.ToString()))
+                        {
+                            things[2] = 1;
+                        }
+                        else
+                        {
+                            things[2] = 0;
+                        }
+                        AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), things, What.Text);
+                    }
                 }
-                if (int.Parse(AddWhat.SelectedValue.ToString()) == 2)
+                catch (Exception ex)
                 {
-                    int num = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
-                    Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"] = (num + 1).ToString();
-                    num += 1;
-                    Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "Title"] = What.Text;
-                    Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "Finished"] = false;
-                    Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "CantDel"] = bool.Parse(CanDel.IsChecked.ToString());
-                    SaveData(Notes);
-                    int[] things = new int[3];
-                    things[0] = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
-                    things[1] = int.Parse(AddWhere.SelectedValue.ToString());
-                    if(bool.Parse(CanDel.IsChecked.ToString()))
+                    SSMessageHelper.noNo = false;
+                    ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                    SSMessageHelper.Title = "读取JSON错误";
+                    SSMessageHelper.bNOtext = "不用不用";
+                    SSMessageHelper.bOKtext = "打开日志";
+                    SSMessageHelper.Says = "我们发现了一个崩溃性的错误，是否反馈它，如果不反馈，这个错误将永远得不到修复！\n" + ex;
+                    SSMessageBox MB = new SSMessageBox();
+                    ParentWindow.IsMaskVisible = true;
+                    MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    MB.Owner = ParentWindow;
+                    MB.ShowDialog();
+                    ParentWindow.IsMaskVisible = false;
+
+                    error.logWriter("Tool7:读取JSON错误。" + ex, false);
+                    if (SSMessageHelper.buttonOK)
                     {
-                        things[2] = 1;
+                        string where = Directory.GetCurrentDirectory();
+                        where = where + @"\SSTB\Log\log.log";
+                        Process process;
+                        process = System.Diagnostics.Process.Start(@where);
                     }
-                    else
-                    {
-                        things[2] = 0;
-                    }
-                    AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), things, What.Text);
+                    Application.Current.Shutdown();
                 }
                 this.CD2.Visibility = Visibility.Collapsed;
                 this.AdW.Visibility = Visibility.Collapsed;
@@ -323,7 +349,9 @@ namespace SS_Tool_Box
             {
                 Card card = new Card();
                 StackPanel stackPanel = new StackPanel();
+                Grid grid = new Grid();
                 TextBlock textBlock = new TextBlock();
+                Button button = new Button();
                 ListView listView = new ListView();
                 ContextMenu contextMenu = new ContextMenu();
                 MenuItem menuItem1 = new MenuItem();
@@ -354,13 +382,24 @@ namespace SS_Tool_Box
                 textBlock.FontFamily = baseColora.Fonts;
                 textBlock.FontSize = 15;
 
+                button.Foreground = baseColora.Fg;
+                button.Margin = new Thickness(0, 10, 15, 0);
+                button.Name = "BCDD" + things[0];
+                button.Width = 30;
+                button.Click += DelCard_Click;
+                button.HorizontalAlignment = HorizontalAlignment.Right;
+                ButtonHelper.SetIcon(button, "");
+                IconHelper.SetFontSize(button, 16);
+                ButtonHelper.SetButtonStyle(button, ButtonStyle.Link);
+
                 card.Name = "CDD" + things[0];
                 card.Margin = new Thickness(5);
                 card.Width = 540;
                 card.Background = baseColora.Card;
-                
 
-                stackPanel.Children.Add(textBlock);
+                grid.Children.Add(textBlock);
+                grid.Children.Add(button);
+                stackPanel.Children.Add(grid);
                 card.Content = stackPanel;
                 ScrollViewerHelper.SetScrollBarCornerRadius(listView, new CornerRadius(3));
                 stackPanel.Children.Add(listView);
@@ -442,6 +481,27 @@ namespace SS_Tool_Box
             return true;
         }
 
+        private void DelCard_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            string cardname = button.Name.Substring(1);
+            card = (Card)FindName(cardname);
+            SSMessageHelper.noNo = false;
+            ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+            SSMessageHelper.Title = "确认一下";
+            SSMessageHelper.Says = "确认要删除卡片嘛，它和它里面的事件们将消失很久！（真的很久很久……）";
+            SSMessageBox MB = new SSMessageBox();
+            ParentWindow.IsMaskVisible = true;
+            MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            MB.Owner = ParentWindow;
+            MB.ShowDialog();
+            ParentWindow.IsMaskVisible = false;
+            if (SSMessageHelper.buttonOK)
+            {
+                DeleteItem(1, true, true, false);
+            }
+        }
+
         private void WhatFuckOpenMe(object sender, MouseButtonEventArgs e)
         {
             VirtualizingStackPanel virtualizing = (VirtualizingStackPanel)VisualTreeHelper.GetParent((ListViewItem)sender);
@@ -477,26 +537,55 @@ namespace SS_Tool_Box
             {
                 this.HID.Visibility = Visibility.Collapsed;
             }
-            if (int.Parse(AddWhat.SelectedValue.ToString()) != 1 && int.Parse(AddWhat.SelectedValue.ToString()) != 0)
+            try
             {
-                for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
+                if (int.Parse(AddWhat.SelectedValue.ToString()) != 1 && int.Parse(AddWhat.SelectedValue.ToString()) != 0)
                 {
-                    string str = Notes["Cards"]["Def"][i.ToString()]["Title"].ToString();
-                    if(Notes["Cards"]["Def"][i.ToString()]["Title"].ToString().Length > "四个汉字".Length)
+                    for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
                     {
-                        str = Notes["Cards"]["Def"][i.ToString()]["Title"].ToString().Substring(0, "四个汉字".Length) + "…";
+                        string str = Notes["Cards"]["Def"][i.ToString()]["Title"].ToString();
+                        if (Notes["Cards"]["Def"][i.ToString()]["Title"].ToString().Length > "四个汉字".Length)
+                        {
+                            str = Notes["Cards"]["Def"][i.ToString()]["Title"].ToString().Substring(0, "四个汉字".Length) + "…";
+                        }
+                        AddWhereList.Add(new listMain() { ID = i, Name = "  " + str });
                     }
-                    AddWhereList.Add(new listMain() { ID = i, Name = "  " + str });
+                    AddWhere.ItemsSource = AddWhereList;
+                    AddWhere.DisplayMemberPath = "Name";
+                    AddWhere.SelectedValuePath = "ID";
+                    AddWhere.SelectedValue = 0;
+                    this.AdW.Visibility = Visibility.Visible;
                 }
-                AddWhere.ItemsSource = AddWhereList;
-                AddWhere.DisplayMemberPath = "Name";
-                AddWhere.SelectedValuePath = "ID";
-                AddWhere.SelectedValue = 0;
-                this.AdW.Visibility = Visibility.Visible;
+                else
+                {
+                    this.AdW.Visibility = Visibility.Collapsed;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.AdW.Visibility = Visibility.Collapsed;
+                SSMessageHelper.noNo = false;
+                ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                SSMessageHelper.Title = "读取JSON错误";
+                SSMessageHelper.bNOtext = "不用不用";
+                SSMessageHelper.bOKtext = "打开日志";
+                SSMessageHelper.Says = "我们发现了一个崩溃性的错误，是否反馈它，如果不反馈，这个错误将永远得不到修复！\n" + ex;
+                SSMessageBox MB = new SSMessageBox();
+                ParentWindow.IsMaskVisible = true;
+                MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                MB.Owner = ParentWindow;
+                MB.ShowDialog();
+                ParentWindow.IsMaskVisible = false;
+
+                error.logWriter("Tool7:读取JSON错误。" + ex, false);
+                if (SSMessageHelper.buttonOK)
+                {
+                    string where = Directory.GetCurrentDirectory();
+                    where = where + @"\SSTB\Log\log.log";
+                    Process process;
+                    process = System.Diagnostics.Process.Start(@where);
+                    System.Diagnostics.Process.Start("https://ssteamcommunity.wordpress.com/feedback/");
+                }
+                Application.Current.Shutdown();
             }
         }
 
@@ -563,6 +652,7 @@ namespace SS_Tool_Box
 
         void ME_Fin(object sender, MouseButtonEventArgs e)
         {
+            card = (Card)VisualTreeHelper.GetParent((Grid)VisualTreeHelper.GetParent((ContentPresenter)VisualTreeHelper.GetParent((StackPanel)VisualTreeHelper.GetParent(list))));
             DeleteItem(0, false, false,true);
         }
 
@@ -573,6 +663,7 @@ namespace SS_Tool_Box
 
         void ME_Del(object sender, MouseButtonEventArgs e)
         {
+            card = (Card)VisualTreeHelper.GetParent((Grid)VisualTreeHelper.GetParent((ContentPresenter)VisualTreeHelper.GetParent((StackPanel)VisualTreeHelper.GetParent(list))));
             DeleteItem(0, true, true, false);
         }
 
@@ -638,28 +729,56 @@ namespace SS_Tool_Box
             }
 
             int[] things = new int[3];
-            if (!err && int.Parse(Notes["Stat"]["NumOfDef"].ToString()) != 0)
+            try
             {
-                for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
+                if (!err && int.Parse(Notes["Stat"]["NumOfDef"].ToString()) != 0)
                 {
-                    if (int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()) != 0)
+                    for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
                     {
-                        for (int j = 1; j <= int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()); j++)
+                        if (int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()) != 0)
                         {
-                            things[0] = j;
-                            things[1] = i;
-                            if (bool.Parse(Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "CantDel"].ToString()))
+                            for (int j = 1; j <= int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()); j++)
                             {
-                                things[2] = 1;
+                                things[0] = j;
+                                things[1] = i;
+                                if (bool.Parse(Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "CantDel"].ToString()))
+                                {
+                                    things[2] = 1;
+                                }
+                                else
+                                {
+                                    things[2] = 0;
+                                }
+                                AddColtrols(2, things, Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "Title"].ToString());
                             }
-                            else
-                            {
-                                things[2] = 0;
-                            }
-                            AddColtrols(2, things, Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "Title"].ToString());
                         }
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                SSMessageHelper.noNo = false;
+                ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                SSMessageHelper.Title = "读取JSON错误";
+                SSMessageHelper.bNOtext = "不用不用";
+                SSMessageHelper.bOKtext = "打开日志";
+                SSMessageHelper.Says = "我们发现了一个崩溃性的错误，是否反馈它，如果不反馈，这个错误将永远得不到修复！\n" + ex;
+                SSMessageBox MB = new SSMessageBox();
+                ParentWindow.IsMaskVisible = true;
+                MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                MB.Owner = ParentWindow;
+                MB.ShowDialog();
+                ParentWindow.IsMaskVisible = false;
+
+                error.logWriter("Tool7:读取JSON错误。" + ex, false);
+                if(SSMessageHelper.buttonOK)
+                {
+                    string where = Directory.GetCurrentDirectory();
+                    where = where + @"\SSTB\Log\log.log";
+                    Process process;
+                    process = System.Diagnostics.Process.Start(@where);
+                }
+                Application.Current.Shutdown();
             }
             this.CD1.Visibility = Visibility.Visible;
             this.LOAD.Visibility = Visibility.Collapsed;
@@ -672,7 +791,7 @@ namespace SS_Tool_Box
             {
                 list.Items.Remove(listi);
 
-                Card Card = (Card)VisualTreeHelper.GetParent((Grid)VisualTreeHelper.GetParent((ContentPresenter)VisualTreeHelper.GetParent((StackPanel)VisualTreeHelper.GetParent(list))));
+                Card Card = card;
 
                 string CardName = Card.Name;
 

@@ -1,0 +1,12 @@
+
+[16:23:57.14] 开始加载UI
+[16:23:58.67] 开始获取一言
+[16:23:58.67] UI加载完成，耗时：00:00:01.5250552
+[16:23:58.69] 尝试下载丁香园界面……
+[16:23:58.76] 检查更新……
+[16:23:58.79] 尝试第一更新源……
+[16:23:59.31] 获取一言成功，耗时：00:00:00.6515946
+[16:24:00.89] 检查更新完成。
+[16:24:04.00] 加载工具：    7 . 记事簿
+[16:24:32.04] Tool7:读取JSON错误。System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 SS_Tool_Box.Page7.RunButton_Click_1(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\Page7.xaml.cs:行号 746

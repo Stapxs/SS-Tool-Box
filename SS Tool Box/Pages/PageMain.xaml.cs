@@ -158,6 +158,7 @@ namespace SS_Tool_Box_By_WPF
             this.U17.Foreground = baseColora.Font;
             this.U18.Foreground = baseColora.Font;
             this.U19.Foreground = baseColora.Font;
+            this.U20.Foreground = baseColora.Font;
 
             this.Height = 477;
 

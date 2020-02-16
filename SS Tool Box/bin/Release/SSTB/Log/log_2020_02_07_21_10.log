@@ -1,0 +1,21 @@
+2020_02_07_21_10
+
+[21:15:10.56] 开始加载UI
+[21:15:10.94] 开始获取一言
+[21:15:10.94] UI加载完成，耗时：00:00:00.3866004
+[21:15:10.95] 尝试下载丁香园界面……
+[21:15:10.95] 检查更新……
+[21:15:10.95] 尝试第一更新源……
+[21:15:11.34] 获取一言成功，耗时：00:00:00.3976525
+[21:15:11.82] 检查更新完成。
+[21:42:24.04] 你什么都没选就想开工具……
+[21:42:28.54] 开始获取一言
+[21:42:28.54] 尝试下载丁香园界面……
+[21:42:28.60] 发现错误（MAN - 002）：获取一言失败，错误内容为：System.Net.WebException: 未能解析此远程名称: 'v1.hitokoto.cn'
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 SS_Tool_Box.Classes.HttpUitls.Get(String Url, String ContentType) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Classes\HttpUitls.cs:行号 30
+   在 SS_Tool_Box_By_WPF.PageMain.<.ctor>b__5_0() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 77，耗时：00:00:00.0239840
+[21:42:28.62] 下载丁香园界面失败，System.Net.WebException: 未能解析此远程名称: 'ncov.dxy.cn'
+   在 System.Net.WebClient.DownloadFile(Uri address, String fileName)
+   在 System.Net.WebClient.DownloadFile(String address, String fileName)
+   在 SS_Tool_Box_By_WPF.PageMain.<.ctor>b__5_1() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 210

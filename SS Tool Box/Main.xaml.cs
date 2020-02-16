@@ -29,7 +29,7 @@ namespace SS_Tool_Box_By_WPF
         DateTime loadingtime;
         Error error = new Error();
 
-        String stVersion = "1.0.22";
+        String stVersion = "1.0.23";
         int NowPage = 0;
         public static int NowChoice = 0;
         public int WindowNew;
@@ -69,42 +69,42 @@ namespace SS_Tool_Box_By_WPF
             }
             if (File.Exists("SSTB/Log/log.log"))
             {
-                String line = "";
-                try
+                bool[] has = new bool[3];
+                has[0] = has[1] = has[2] = false;
+                if (File.Exists("SSTB/Log/log - 1.log"))
                 {
-                    using (StreamReader sr = new StreamReader("SSTB/Log/log.log"))
-                    {
-                        line = sr.ReadLine();
-                        sr.Close();
-                    }
+                    has[0] = true;
                 }
-                catch (Exception ex)
+                if (File.Exists("SSTB/Log/log - 2.log"))
                 {
-                    MessageBox.Show("读取Log文件错误：" + ex);
+                    has[1] = true;
                 }
-                try
+                if (File.Exists("SSTB/Log/log - 3.log"))
                 {
-                    while (line != null)
-                    {
-                        File.Move("SSTB/Log/log.log", "SSTB/Log/log_" + line + ".log");
-                    }
+                    has[2] = true;
                 }
-                catch
+                if(!has[0] && !has[1] && !has[2])
                 {
-
+                    File.Move("SSTB/Log/log.log", "SSTB/Log/log - 1.log");
                 }
-            }
-            try
-            {
-                using (StreamWriter sw = new StreamWriter("SSTB/Log/log.log"))
+                else if(has[0] && !has[1] && !has[2])
                 {
-                    sw.WriteLine(DateTime.Now.ToString("yyyy_MM_dd") + DateTime.Now.ToString("_HH_ss"));
-                    sw.Close();
+                    File.Move("SSTB/Log/log - 1.log", "SSTB/Log/log - 2.log");
+                    File.Move("SSTB/Log/log.log", "SSTB/Log/log - 1.log");
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("写入Log文件错误：" + ex);
+                else if(has[0] && has[1] && !has[2])
+                {
+                    File.Move("SSTB/Log/log - 2.log", "SSTB/Log/log - 3.log");
+                    File.Move("SSTB/Log/log - 1.log", "SSTB/Log/log - 2.log");
+                    File.Move("SSTB/Log/log.log", "SSTB/Log/log - 1.log");
+                }
+                else
+                {
+                    File.Delete("SSTB/Log/log - 3.log");
+                    File.Move("SSTB/Log/log - 2.log", "SSTB/Log/log - 3.log");
+                    File.Move("SSTB/Log/log - 1.log", "SSTB/Log/log - 2.log");
+                    File.Move("SSTB/Log/log.log", "SSTB/Log/log - 1.log");
+                }
             }
 
             error.logWriter("开始加载UI", false);
@@ -501,7 +501,7 @@ namespace SS_Tool_Box_By_WPF
 
         private void Onsizechanged(object sender, SizeChangedEventArgs e)
         {
-            System.Windows.Rect r = new System.Windows.Rect(e.NewSize);
+            Rect r = new Rect(e.NewSize);
             int radius = 5;
             RectangleGeometry gm = new RectangleGeometry(r, radius, radius);
             ((UIElement)sender).Clip = gm;
@@ -718,6 +718,11 @@ namespace SS_Tool_Box_By_WPF
             {
                 error.logWriter("打开更新文件错误：" + ex, false);
             }
+        }
+
+        private void Feedback_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://ssteamcommunity.wordpress.com/feedback/");
         }
     }
 }

@@ -27,6 +27,8 @@
         <Button x:Name="CANC" Click="CANC_Click" pu:ButtonHelper.ButtonStyle="Outline" Content="不要" Margin="572,189,0,0" Height="33" VerticalAlignment="Top" HorizontalAlignment="Left" Width="85"/>
         <Button x:Name="ICON" pu:IconHelper.FontSize="28" pu:ButtonHelper.ButtonStyle="Link" Margin="0,0,701,0" Height="96" VerticalAlignment="Top" HorizontalAlignment="Right" Width="118"/>
         <TextBlock x:Name="TITLE" Margin="0,0,68,170" Text="标题" HorizontalAlignment="Right" Width="649" Height="41" VerticalAlignment="Bottom"/>
-        <TextBlock x:Name="SAY" Margin="111,83,111,63" TextWrapping="Wrap" AllowDrop="True"/>
+        <ScrollViewer Margin="111,83,0,67" HorizontalAlignment="Left" pu:ScrollViewerHelper.ScrollBarCornerRadius="2" pu:ScrollViewerHelper.ScrollBarThickness="5">
+            <TextBlock x:Name="SAY" TextWrapping="Wrap" Width="580" AllowDrop="True"/>
+        </ScrollViewer>
     </Grid>
 </pu:WindowX>

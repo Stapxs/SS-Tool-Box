@@ -59,6 +59,11 @@
                     <StackPanel>
                         <TextBlock x:Name="MT1" Text="更新记录" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
                         <pu:Timeline x:Name="UpdateList" Margin="35,0,35,5" Height="Auto" Width="Auto" >
+                            <pu:TimelineItem x:Name="U20"
+                                             Header="2020.02.16"
+    			                             Content="+ 完善报错机制&#13;= BUG：记事簿读取错误&#13;= 优化细节" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
                             <pu:TimelineItem x:Name="U19"
                                              Header="2020.02.07"
     			                             Content="+ 疫情查询&#13;= 更换更新源主次&#13;= BUG：主界面布局错误&#13;+ 第二更新源&#13;+ 记事簿卡片不可删除功能" 
