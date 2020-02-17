@@ -1,7 +1,7 @@
 {
   "Stat": {
     "Version": "6",
-    "NumOfDef": "1"
+    "NumOfDef": "2"
   },
   "Cards": {
     "Def": {
@@ -27,6 +27,17 @@
         "Notes-4Title": "普通事件不可删除",
         "Notes-4Finished": true,
         "Notes-4CantDel": false
+      },
+      "2": {
+        "Title": "KillSTL 更新计划",
+        "Stat": "2",
+        "Finished": "0",
+        "Notes1Title": "重做界面布局",
+        "Notes1Finished": false,
+        "Notes1CantDel": false,
+        "Notes2Title": "重新规划游戏方式",
+        "Notes2Finished": false,
+        "Notes2CantDel": false
       }
     }
   }

@@ -6,14 +6,14 @@
       xmlns:local="clr-namespace:SS_Tool_Box"
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" d:DesignWidth="600"
+      mc:Ignorable="d" d:DesignWidth="600" Width="600"
       Title="Page7 - Nots" Height="691">
     <!-- Height 441 -->
 
     <Grid Margin="10, 0, 10, 10">
-        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
+        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" PreviewMouseWheel="UIElement_OnPreviewMouseWheel">
             <StackPanel x:Name="MainIn">
-                <materialDesign:Card x:Name="RunCard" Margin="5,15,5,5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="RunCard" Margin="5,25,20,5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -26,7 +26,7 @@
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="LOAD" Background="#CCFFFFFF" Margin="5,10,5,5" Width="540">
+                <materialDesign:Card x:Name="LOAD" Background="#CCFFFFFF" Margin="5,25,20,5" Width="540">
                     <StackPanel>
                         <pu:Loading x:Name="Load" Height="50" Width="50" LoadingStyle="Wave" IsRunning="True" Margin="0,15,0,5"/>
                         <TextBlock x:Name="T6" Text="点击按钮加载数据" HorizontalAlignment="Center" Margin="0,5,0,15"/>
@@ -34,7 +34,7 @@
                     </StackPanel>
                 </materialDesign:Card>
                 <TextBlock x:Name="MT1" Text="存在的卡片：" HorizontalAlignment="Center" Margin="0,10,0,0" Width="536" Height="22"/>
-                <materialDesign:Card x:Name="CD1" Margin="5,15,5,5" Width="540" Height="Auto" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="CD1" Margin="5,25,20,5" Width="540" Height="Auto" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="Title" Text="主标题" Margin="34,25,34,5" Width="Auto" Height="26"/>
@@ -43,7 +43,7 @@
                         <TextBlock x:Name="Says" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD2" Margin="5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="CD2" Margin="5, 15, 20, 5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="T2" Text="添加类型" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,25,0,15" />

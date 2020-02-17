@@ -7,14 +7,14 @@
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:sc="clr-namespace:SS_Tool_Box"
-      mc:Ignorable="d" d:DesignWidth="800"
+      mc:Ignorable="d" d:DesignWidth="800" Width="600"
       Title="Page6 - QQChat" Height="942.625">
     <!-- Height="441" -->
 
     <Grid Margin="10, 0, 10, 10">
-        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
+        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" PreviewMouseWheel="UIElement_OnPreviewMouseWheel">
             <StackPanel>
-                <materialDesign:Card x:Name="RunCard" Margin="5,15,5,5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="RunCard" Margin="5,25,20,5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -27,7 +27,7 @@
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD1" Margin="5,15,5,5" Width="540" Height="Auto" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="CD1" Margin="5,25,20,5" Width="540" Height="Auto" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="Title" Text="主标题" Margin="34,25,34,5" Width="Auto" Height="26"/>
@@ -57,7 +57,7 @@
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD2" Margin="5,10,5,5" Width="540" Height="Auto" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="CD2" Margin="5,10,20,25" Width="540" Height="Auto" Background="#CCFFFFFF">
                     <StackPanel x:Name="MainCard" Margin="10">
 
                         <Grid>

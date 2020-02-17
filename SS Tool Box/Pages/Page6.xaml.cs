@@ -7,6 +7,7 @@ using System.Net;
 using SS_Tool_Box.Classes;
 using Newtonsoft.Json.Linq;
 using SS_Tool_Box_By_WPF;
+using System.Windows.Input;
 
 namespace SS_Tool_Box
 {
@@ -52,6 +53,10 @@ namespace SS_Tool_Box
             this.T5.FontFamily = baseColora.Fonts;
             this.T5.FontSize = 13;
 
+            this.CD1.Background = baseColora.Card;
+            this.CD2.Background = baseColora.Card;
+            this.RunCard.Background = baseColora.Card;
+
             this.QQ.Background = baseColora.Bg;
             this.QQ.Foreground = baseColora.Fg;
             this.QQName.Background = baseColora.Bg;
@@ -77,5 +82,23 @@ namespace SS_Tool_Box
         {
 
         }
+
+        void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            if (e.Delta > 0)
+            {
+                // 向上滚动
+                scroll.LineUp();
+                scroll.LineUp();
+            }
+            if (e.Delta < 0)
+            {
+                // 向下滚动
+                scroll.LineDown();
+                scroll.LineDown();
+            }
+        }
+
     }
 }

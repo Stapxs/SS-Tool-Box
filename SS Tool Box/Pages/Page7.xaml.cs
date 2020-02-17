@@ -393,7 +393,7 @@ namespace SS_Tool_Box
                 ButtonHelper.SetButtonStyle(button, ButtonStyle.Link);
 
                 card.Name = "CDD" + things[0];
-                card.Margin = new Thickness(5);
+                card.Margin = new Thickness(5, 15, 20, 5);
                 card.Width = 540;
                 card.Background = baseColora.Card;
 
@@ -847,5 +847,23 @@ namespace SS_Tool_Box
             listi = new ListViewItem();
             return true;
         }
+
+        void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            if (e.Delta > 0)
+            {
+                // 向上滚动
+                scroll.LineUp();
+                scroll.LineUp();
+            }
+            if (e.Delta < 0)
+            {
+                // 向下滚动
+                scroll.LineDown();
+                scroll.LineDown();
+            }
+        }
+
     }
 }

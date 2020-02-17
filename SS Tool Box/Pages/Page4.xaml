@@ -6,13 +6,13 @@
       xmlns:local="clr-namespace:SS_Tool_Box"
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="441"
+      mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="441" Width="600"
       Title="Page4 - 倒计时">
 
     <Grid Margin="10, 0, 10, 10">
-        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
+        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" PreviewMouseWheel="UIElement_OnPreviewMouseWheel">
             <StackPanel>
-                <materialDesign:Card x:Name="RunCard" Margin="5,15,5,5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="RunCard" Margin="5,25,20,5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="T4" Text="执行中" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,44,0,0" RenderTransformOrigin="0.5,2.105" Height="34" VerticalAlignment="Top" />
@@ -21,7 +21,7 @@
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD1" Margin="5,15,5,5" Width="540" Height="90" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="CD1" Margin="5,25,20,5" Width="540" Height="90" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="Title" Text="主标题" Margin="34,25,34,5" Width="Auto" Height="26"/>
@@ -31,7 +31,7 @@
                         <TextBlock x:Name="Says" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD2" Margin="5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="CD2" Margin="5, 15, 20, 5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <TextBlock x:Name="MT2" Text="自定义倒计时" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
                         <Grid>

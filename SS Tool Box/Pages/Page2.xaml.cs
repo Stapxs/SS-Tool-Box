@@ -346,5 +346,23 @@ namespace SS_Tool_Box
             }
             return RET;
         }
+
+        void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            if (e.Delta > 0)
+            {
+                // 向上滚动
+                scroll.LineUp();
+                scroll.LineUp();
+            }
+            if (e.Delta < 0)
+            {
+                // 向下滚动
+                scroll.LineDown();
+                scroll.LineDown();
+            }
+        }
+
     }
 }

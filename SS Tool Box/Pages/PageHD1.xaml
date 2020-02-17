@@ -6,14 +6,14 @@
       xmlns:local="clr-namespace:SS_Tool_Box"
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" d:DesignWidth="600"
+      mc:Ignorable="d" d:DesignWidth="600" Width="600"
       Title="PH1" Height="441">
     <!-- Height 441 -->
 
     <Grid Margin="10, 0, 10, 10">
         <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Margin="0,0,0,10">
             <StackPanel>
-                <materialDesign:Card x:Name="RunCard" Margin="5,15,5,5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="RunCard" Margin="5,25,20,5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -26,7 +26,7 @@
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD1" Margin="5,15,5,5" Width="540" Height="Auto" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="CD1" Margin="5,25,20,5" Width="540" Height="Auto" Background="#CCFFFFFF">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="Title" Text="主标题" Margin="34,25,34,5" Width="Auto" Height="26"/>
@@ -39,7 +39,7 @@
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="IconCard" Margin="5" Width="540" Background="#CCFFFFFF">
+                <materialDesign:Card x:Name="IconCard" Margin="5, 15, 20, 5" Width="540" Background="#CCFFFFFF">
                     <StackPanel>
                         <TextBlock x:Name="MT2" Text="图标" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
                         <WrapPanel x:Name="Iconall" HorizontalAlignment="Center" VerticalAlignment="Center" Width="540" >

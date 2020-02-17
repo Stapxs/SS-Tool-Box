@@ -8,6 +8,7 @@ using SS_Tool_Box.Classes;
 using Newtonsoft.Json.Linq;
 using SS_Tool_Box_By_WPF;
 using System.Threading;
+using System.Windows.Input;
 
 namespace SS_Tool_Box
 {
@@ -153,6 +154,10 @@ namespace SS_Tool_Box
                     JObject obj = JObject.Parse(GetJson);
                     this.Dispatcher.BeginInvoke(new Action(() =>
                     {
+                        if(err == 1)
+                        {
+                            return;
+                        }
                         MT3.Text = "其他操作" + " —— " + obj["name"].ToString();
                         this.ColCard.Visibility = Visibility.Visible;
                     }), System.Windows.Threading.DispatcherPriority.SystemIdle, null);
@@ -211,5 +216,23 @@ namespace SS_Tool_Box
 
             }
         }
+
+        void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            if (e.Delta > 0)
+            {
+                // 向上滚动
+                scroll.LineUp();
+                scroll.LineUp();
+            }
+            if (e.Delta < 0)
+            {
+                // 向下滚动
+                scroll.LineDown();
+                scroll.LineDown();
+            }
+        }
+
     }
 }

@@ -10,21 +10,21 @@
       Title="PageMain - 主页" Height="1540.475" Width="600">
 
     <Grid Margin="10, 0, 10, 10">
-        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" Padding="0">
+        <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" PreviewMouseWheel="UIElement_OnPreviewMouseWheel">
             <StackPanel>
-                <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Margin="5, 15, 5, 5" >
+                <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Margin="5, 25, 25, 5" >
                     <StackPanel>
                         <TextBlock x:Name="Title" Text="主标题" HorizontalAlignment="Left" Margin="34,25,0,5" Width="362" Height="26"/>
                         <TextBlock x:Name="Says" Margin="34,0,-132,10" Height="Auto" Width="496" TextWrapping="Wrap" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD2" Background="#CCFFFFFF" Margin="5" >
+                <materialDesign:Card x:Name="CD2" Background="#CCFFFFFF" Margin="5, 5, 25, 5" >
                     <StackPanel>
                         <TextBlock x:Name="MT2" Text="一点小提醒" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
                         <TextBlock x:Name="Tips" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CDY" Background="#CCFFFFFF" Margin="5" >
+                <materialDesign:Card x:Name="CDY" Background="#CCFFFFFF" Margin="5, 5, 25, 5" >
                     <StackPanel>
                         <TextBlock x:Name="MTY" Text="疫情查询" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,5"/>
                         <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10" Height="58" >
@@ -55,7 +55,7 @@
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD3" Background="#CCFFFFFF" Margin="5,5,5,20" >
+                <materialDesign:Card x:Name="CD3" Background="#CCFFFFFF" Margin="5, 5, 25, 25" >
                     <StackPanel>
                         <TextBlock x:Name="MT1" Text="更新记录" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
                         <pu:Timeline x:Name="UpdateList" Margin="35,0,35,5" Height="Auto" Width="Auto" >

@@ -124,9 +124,7 @@
                 <RowDefinition Height="0" />
             </Grid.RowDefinitions>
 
-
-
-            <ContentControl Grid.Column="1" Grid.Row="1" Name="Page" Margin="10,0,0,0" Padding="0,0,0,3"/>
+            <ContentControl Grid.Column="1" Grid.Row="1" Name="Page" Margin="15,0,0,0" Padding="0" HorizontalAlignment="Left"/>
         </Grid>
 
         <Button x:Name="Feedback" Grid.Column="2" Margin="402,-27,74,132" Content="提交问题" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" pu:IconHelper.FontSize="15" Click="Feedback_Click"/>

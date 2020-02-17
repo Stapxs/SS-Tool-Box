@@ -77,6 +77,7 @@ namespace SS_Tool_Box
             this.IconCard.Background = baseColora.Card;
 
             this.PackageIn.Background = baseColora.Bg;
+            this.PackageIn.Foreground = baseColora.Font;
 
             this.Percent.Background = baseColora.DBg;
 
