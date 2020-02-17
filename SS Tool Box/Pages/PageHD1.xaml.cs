@@ -44,6 +44,8 @@ namespace SS_Tool_Box
 
             InitializeComponent();
 
+            this.Height = 477;
+
             String stTitle = "Smartisan OS 图标获取";
             this.Title.Foreground = baseColora.Fg;
             this.Title.FontFamily = baseColora.Fonts;
@@ -75,6 +77,7 @@ namespace SS_Tool_Box
             this.IconCard.Background = baseColora.Card;
 
             this.PackageIn.Background = baseColora.Bg;
+            this.PackageIn.Foreground = baseColora.Font;
 
             this.Percent.Background = baseColora.DBg;
 

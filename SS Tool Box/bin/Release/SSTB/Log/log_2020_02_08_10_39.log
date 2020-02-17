@@ -1,0 +1,58 @@
+2020_02_08_10_39
+
+[10:58:39.58] 开始加载UI
+[10:58:39.93] UI加载完成，耗时：00:00:00.3502542
+[10:58:39.93] 开始获取一言
+[10:58:39.93] 尝试下载丁香园界面……
+[10:58:39.93] 检查更新……
+[10:58:39.94] 尝试第一更新源……
+[10:58:41.32] 获取一言成功，耗时：00:00:01.3945432
+[10:58:44.97] 检查更新完成。
+[10:58:59.87] 处理丁香园界面失败，System.ArgumentOutOfRangeException: StartIndex 不能小于 0。
+参数名: startIndex
+   在 System.String.Substring(Int32 startIndex, Int32 length)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:01.08] 处理丁香园界面失败，System.ArgumentOutOfRangeException: StartIndex 不能小于 0。
+参数名: startIndex
+   在 System.String.Substring(Int32 startIndex, Int32 length)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:01.65] 处理丁香园界面失败，System.ArgumentOutOfRangeException: StartIndex 不能小于 0。
+参数名: startIndex
+   在 System.String.Substring(Int32 startIndex, Int32 length)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:01.83] 处理丁香园界面失败，System.ArgumentOutOfRangeException: StartIndex 不能小于 0。
+参数名: startIndex
+   在 System.String.Substring(Int32 startIndex, Int32 length)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:02.02] 处理丁香园界面失败，System.ArgumentOutOfRangeException: StartIndex 不能小于 0。
+参数名: startIndex
+   在 System.String.Substring(Int32 startIndex, Int32 length)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:57.76] 处理丁香园界面失败，Newtonsoft.Json.JsonReaderException: Error reading JObject from JsonReader. Current JsonReader item is not an object: String. Path '', line 1, position 3.
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:58.44] 处理丁香园界面失败，Newtonsoft.Json.JsonReaderException: Error reading JObject from JsonReader. Current JsonReader item is not an object: String. Path '', line 1, position 3.
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:58.90] 处理丁香园界面失败，Newtonsoft.Json.JsonReaderException: Error reading JObject from JsonReader. Current JsonReader item is not an object: String. Path '', line 1, position 3.
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:59.12] 处理丁香园界面失败，Newtonsoft.Json.JsonReaderException: Error reading JObject from JsonReader. Current JsonReader item is not an object: String. Path '', line 1, position 3.
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:59.31] 处理丁香园界面失败，Newtonsoft.Json.JsonReaderException: Error reading JObject from JsonReader. Current JsonReader item is not an object: String. Path '', line 1, position 3.
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:59.52] 处理丁香园界面失败，Newtonsoft.Json.JsonReaderException: Error reading JObject from JsonReader. Current JsonReader item is not an object: String. Path '', line 1, position 3.
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310
+[10:59:59.70] 处理丁香园界面失败，Newtonsoft.Json.JsonReaderException: Error reading JObject from JsonReader. Current JsonReader item is not an object: String. Path '', line 1, position 3.
+   在 Newtonsoft.Json.Linq.JObject.Load(JsonReader reader, JsonLoadSettings settings)
+   在 Newtonsoft.Json.Linq.JObject.Parse(String json, JsonLoadSettings settings)
+   在 SS_Tool_Box_By_WPF.PageMain.N_Click(Object sender, RoutedEventArgs e) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 310

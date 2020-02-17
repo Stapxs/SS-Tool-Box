@@ -1,7 +1,0 @@
-2020_01_20_18_06
-
-[18:46:06.03] 开始加载UI
-[18:46:23.01] [ 崩溃 ] 初始化数据错误：System.NullReferenceException: 未将对象引用设置到对象的实例。
-   在 SS_Tool_Box_By_WPF.Main.LoadingMain(Boolean isRead) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Main.xaml.cs:行号 367
-[18:46:24.46] [ 崩溃 ] 初始化数据错误：System.NullReferenceException: 未将对象引用设置到对象的实例。
-   在 SS_Tool_Box_By_WPF.Main.LoadingMain(Boolean isRead) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Main.xaml.cs:行号 367

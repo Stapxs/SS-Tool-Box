@@ -14,6 +14,8 @@ namespace SS_Tool_Box
     {
         public static bool opin = false;
 
+        public Main ParentWindow { get; set; }
+
         Error error = new Error();
         BaseColor baseColora = Main.baseColor;
         String str = "";
@@ -24,6 +26,9 @@ namespace SS_Tool_Box
         public PageHD2()
         {
             InitializeComponent();
+
+            this.Height = 477;
+
             this.RunCard.Background = baseColora.Card;
             this.IconCard.Background = baseColora.Card;
 
@@ -102,9 +107,31 @@ namespace SS_Tool_Box
                     }
                     else if (strin.Equals("kill -S"))
                     {
-                        opin = true;
-                        Run();
-                        runpass = true;
+                        if (Main.Settings["Features"]["Privacy"]["Password"].ToString() != "NULL")
+                        {
+                            PassWordEnterF7 EP = new PassWordEnterF7();
+                            ParentWindow.IsMaskVisible = true;
+                            EP.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                            EP.Owner = ParentWindow;
+                            EP.ShowDialog();
+                            ParentWindow.IsMaskVisible = false;
+                        }
+                        else
+                        {
+                            LoadingSetter.PasswordPass = true;
+                        }
+                        if (LoadingSetter.PasswordPass)
+                        {
+                            LoadingSetter.PasswordPass = false;
+                            opin = true;
+                            Run();
+                            runpass = true;
+                        }
+                        else
+                        {
+                            ProgressBarHelper.SetAnimateTo(Percent, 50);
+                            Errorsay.Text = "指令 " + strin + " 执行异常。";
+                        }
                     }
                     if (strin.Equals("exit"))
                     {

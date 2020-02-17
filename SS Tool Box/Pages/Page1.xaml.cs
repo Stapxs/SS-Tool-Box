@@ -34,6 +34,7 @@ namespace SS_Tool_Box
         public Page1()
         {
             InitializeComponent();
+            this.Height = 477;
 
             String stTitle = "批量打开文件";
             this.Title.Foreground = baseColora.Fg;
@@ -236,5 +237,23 @@ namespace SS_Tool_Box
                 AddressAdd.Text = "*." + sArray[1];
             }
         }
+
+        void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            if (e.Delta > 0)
+            {
+                // 向上滚动
+                scroll.LineUp();
+                scroll.LineUp();
+            }
+            if (e.Delta < 0)
+            {
+                // 向下滚动
+                scroll.LineDown();
+                scroll.LineDown();
+            }
+        }
+
     }
 }

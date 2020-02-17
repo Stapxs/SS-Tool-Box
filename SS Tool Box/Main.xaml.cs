@@ -1,27 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Panuon.UI.Silver;
 using SS_Tool_Box;
-using System.Runtime;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Data;
-using Windows.Foundation;
-using Windows.UI;
 using SS_Tool_Box.Classes;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using static SS_Tool_Box.SSMessageBox;
+using System.Threading;
+using System.Net;
+using System.Windows.Threading;
 
 namespace SS_Tool_Box_By_WPF
 {
@@ -34,11 +25,15 @@ namespace SS_Tool_Box_By_WPF
         public static BaseColor baseColor = new BaseColor();
         public static JObject Settings;
 
+        LoadingSetter Set = new LoadingSetter();
+        DateTime loadingtime;
+        Error error = new Error();
+
+        String stVersion = "1.0.23";
         int NowPage = 0;
         public static int NowChoice = 0;
         public int WindowNew;
-        Error error = new Error();
-        DateTime loadingtime;
+        bool SetVerErr = false;
 
         public class ListTool
         {
@@ -53,7 +48,9 @@ namespace SS_Tool_Box_By_WPF
                 new ListTool(){Line="    2 . 调色板"},
                 new ListTool(){Line="    3 . 快速启动器"},
                 new ListTool(){Line="    4 . 倒计时"},
-                new ListTool(){Line="    5 . Fuck QQ"},
+                new ListTool(){Line="    5 . QQ 头像获取"},
+                new ListTool(){Line="    6 . QQ 消息制作"},
+                new ListTool(){Line="    7 . 记事簿"},
         };
         //隐藏的工具列表
         ListTool[] listallHidden = new ListTool[]
@@ -72,42 +69,42 @@ namespace SS_Tool_Box_By_WPF
             }
             if (File.Exists("SSTB/Log/log.log"))
             {
-                String line = "";
-                try
+                bool[] has = new bool[3];
+                has[0] = has[1] = has[2] = false;
+                if (File.Exists("SSTB/Log/log - 1.log"))
                 {
-                    using (StreamReader sr = new StreamReader("SSTB/Log/log.log"))
-                    {
-                        line = sr.ReadLine();
-                        sr.Close();
-                    }
+                    has[0] = true;
                 }
-                catch (Exception ex)
+                if (File.Exists("SSTB/Log/log - 2.log"))
                 {
-                    MessageBox.Show("读取Log文件错误：" + ex);
+                    has[1] = true;
                 }
-                try
+                if (File.Exists("SSTB/Log/log - 3.log"))
                 {
-                    while (line != null)
-                    {
-                        File.Move("SSTB/Log/log.log", "SSTB/Log/log_" + line + ".log");
-                    }
+                    has[2] = true;
                 }
-                catch
+                if(!has[0] && !has[1] && !has[2])
                 {
-
+                    File.Move("SSTB/Log/log.log", "SSTB/Log/log - 1.log");
                 }
-            }
-            try
-            {
-                using (StreamWriter sw = new StreamWriter("SSTB/Log/log.log"))
+                else if(has[0] && !has[1] && !has[2])
                 {
-                    sw.WriteLine(DateTime.Now.ToString("yyyy_MM_dd") + DateTime.Now.ToString("_HH_ss"));
-                    sw.Close();
+                    File.Move("SSTB/Log/log - 1.log", "SSTB/Log/log - 2.log");
+                    File.Move("SSTB/Log/log.log", "SSTB/Log/log - 1.log");
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("写入Log文件错误：" + ex);
+                else if(has[0] && has[1] && !has[2])
+                {
+                    File.Move("SSTB/Log/log - 2.log", "SSTB/Log/log - 3.log");
+                    File.Move("SSTB/Log/log - 1.log", "SSTB/Log/log - 2.log");
+                    File.Move("SSTB/Log/log.log", "SSTB/Log/log - 1.log");
+                }
+                else
+                {
+                    File.Delete("SSTB/Log/log - 3.log");
+                    File.Move("SSTB/Log/log - 2.log", "SSTB/Log/log - 3.log");
+                    File.Move("SSTB/Log/log - 1.log", "SSTB/Log/log - 2.log");
+                    File.Move("SSTB/Log/log.log", "SSTB/Log/log - 1.log");
+                }
             }
 
             error.logWriter("开始加载UI", false);
@@ -129,6 +126,10 @@ namespace SS_Tool_Box_By_WPF
             //加载完成
             error.logWriter("UI加载完成，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
             ButtonHelper.SetIsWaiting(OpenButton, false);
+
+            //检查更新
+            Thread thread = new Thread(UpdateRight);
+            thread.Start();
         }
 
         private void ListMenu_Open(object sebder, RoutedEventArgs s)
@@ -153,9 +154,17 @@ namespace SS_Tool_Box_By_WPF
                 {
                     NowChoice = 4;
                 }
-                else if (upd.Line == "    5 . Fuck QQ")
+                else if (upd.Line == "    5 . QQ 头像获取")
                 {
                     NowChoice = 5;
+                }
+                else if (upd.Line == "    6 . QQ 消息制作")
+                {
+                    NowChoice = 6;
+                }
+                else if (upd.Line == "    7 . 记事簿")
+                {
+                    NowChoice = 7;
                 }
                 else if (upd.Line == "    * . SOS 图标获取")
                 {
@@ -233,13 +242,32 @@ namespace SS_Tool_Box_By_WPF
                         Content = page4
                     };
                 }
-                else if (upd.Line == "    5 . Fuck QQ")
+                else if (upd.Line == "    5 . QQ 头像获取")
                 {
                     NowPage = 5;
                     Page5 page5 = new Page5();
                     Page.Content = new Frame()
                     {
                         Content = page5
+                    };
+                }
+                else if (upd.Line == "    6 . QQ 消息制作")
+                {
+                    NowPage = 6;
+                    Page6 page6 = new Page6();
+                    Page.Content = new Frame()
+                    {
+                        Content = page6
+                    };
+                }
+                else if (upd.Line == "    7 . 记事簿")
+                {
+                    NowPage = 7;
+                    Page7 page7 = new Page7();
+                    page7.ParentWindow = this;
+                    Page.Content = new Frame()
+                    {
+                        Content = page7
                     };
                 }
                 else if (upd.Line == "    * . SOS 图标获取")
@@ -264,6 +292,7 @@ namespace SS_Tool_Box_By_WPF
                 {
                     NowPage = -3;
                     PageHD2 pageHD2 = new PageHD2();
+                    pageHD2.ParentWindow = this;
                     Page.Content = new Frame()
                     {
                         Content = pageHD2
@@ -296,6 +325,7 @@ namespace SS_Tool_Box_By_WPF
         {
             //打开窗口Set
             Settings about = new Settings();
+            about.ParentWindow = this;
             about.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             about.Owner = this;
             IsMaskVisible = true;
@@ -359,7 +389,6 @@ namespace SS_Tool_Box_By_WPF
         {
             if (isRead)
             {
-                LoadingSetter Set = new LoadingSetter();
                 if (Set.fistUsed())
                 {
                     Settings = Set.newSetup();
@@ -367,6 +396,10 @@ namespace SS_Tool_Box_By_WPF
                 else
                 {
                     Settings = Set.ReadSetup();
+                }
+                if(int.Parse(Settings["Version"].ToString()) != LoadingSetter.FileVersion)
+                {
+                    SetVerErr = true;
                 }
             }
        
@@ -401,8 +434,7 @@ namespace SS_Tool_Box_By_WPF
             }
 
             //版本号
-            String stVersion = "Version - 1.0.17";
-            Versionon.Text = stVersion;
+            Versionon.Text = "Version - " + stVersion;
 
             //刷新工具列表
             UpdateList.ItemsSource = listall;
@@ -469,10 +501,228 @@ namespace SS_Tool_Box_By_WPF
 
         private void Onsizechanged(object sender, SizeChangedEventArgs e)
         {
-            System.Windows.Rect r = new System.Windows.Rect(e.NewSize);
+            Rect r = new Rect(e.NewSize);
             int radius = 5;
             RectangleGeometry gm = new RectangleGeometry(r, radius, radius);
             ((UIElement)sender).Clip = gm;
+        }
+
+        private void WContentRendered(object sender, EventArgs e)
+        {
+            if(SetVerErr)
+            {
+                SetVerErr = false;
+                SSMessageHelper.noNo = false;
+                ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                SSMessageHelper.Title = "设置文件版本不符";
+                SSMessageHelper.Says = "我们发现设置文件版本不符，将对设置文件进行重写。选择取消将退出程序。";
+                SSMessageBox MB = new SSMessageBox();
+                this.IsMaskVisible = true;
+                MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                MB.Owner = this;
+                MB.ShowDialog();
+                this.IsMaskVisible = false;
+                error.logWriter("设置文件版本不符", false);
+                if (SSMessageHelper.buttonNO)
+                {
+                    Application.Current.Shutdown();
+                }
+                else
+                {
+                    File.Delete("SSTB/Setup.json");
+                    Settings = Set.newSetup();
+                }
+            }
+            if (!Directory.Exists("SSTB/Files"))
+            {
+                Directory.CreateDirectory("SSTB/Files");
+            }
+            if (!File.Exists("SSTB/Files/jrrp.dat"))
+            {
+                try
+                {
+                    File.AppendAllText("SSTB/Files/jrrp.dat", System.DateTime.Now.ToString("yyyy-MM"));
+                }
+                catch { }
+            }
+            string temp;
+            using (StreamReader sr = new StreamReader("SSTB/Files/jrrp.dat", Encoding.Default))
+            {
+                temp = sr.ReadLine();
+            }
+            if(!temp.Equals(System.DateTime.Now.ToString("yyyy-MM-dd")))
+            {
+                try
+                {
+                    File.Delete("SSTB/Files/jrrp.dat");
+                    File.AppendAllText("SSTB/Files/jrrp.dat", System.DateTime.Now.ToString("yyyy-MM-dd"));
+                }
+                catch { }
+                Random random = new Random();
+
+                int all = 11 + 1;
+                string[] sayslist = new string[all];
+                sayslist[0] = "今天也要加油啦！";
+                sayslist[1] = "你好世界。";
+                sayslist[2] = "不挖坑，毋宁死！";
+                sayslist[3] = "人生如梦……TMD怎么还不醒啊喂！";
+                sayslist[4] = "有点自信吧，即使在深渊之中。";
+                sayslist[5] = "山城无处不飞花。";
+                sayslist[6] = "旅者的努力，或许就是为了那期待的，远处的一片风景。";
+                sayslist[7] = "现在做的事情，可能就是为了将来能在别人面前装个逼吧。";
+                sayslist[8] = "感谢遇到你。";
+                sayslist[9] = "既然身边每个人都在为之努力，那你为什么不加油呢？";
+                sayslist[10] = "人类这么优秀，一定做得到的！";
+                sayslist[11] = "遇到困难的话就一鼓作气冲好了，总之，生活不是游戏。（这话好像在哪听过）";
+
+                int num = random.Next(0, 100);
+                string say = "欢迎使用林槐工具箱！今天的人品是 " + num + " ，";
+                int numsay = random.Next(0, all - 1);
+                say = say + sayslist[numsay];
+                if(numsay == 0 || numsay == 4 || numsay == 8 || numsay == 9 || numsay == 11)
+                {
+                    SSMessageHelper.bOKtext = "谢谢";
+                }
+                SSMessageHelper.noNo = true;
+                ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                SSMessageHelper.Title = "欢迎！";
+                SSMessageHelper.Says = say;
+                SSMessageBox MB = new SSMessageBox();
+                this.IsMaskVisible = true;
+                MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                MB.Owner = this;
+                MB.ShowDialog();
+                this.IsMaskVisible = false;
+                SSMessageHelper.bOKtext = "好的";
+            }
+        }
+
+        private void UpdateRight()         //检查更新
+        {
+            error.logWriter("检查更新……", false);
+            bool pass = false;
+            bool passdow = false;
+            if (File.Exists("SSTB/Update.txt"))
+            {
+                try
+                {
+                    string temp;
+                    using (StreamReader sr = new StreamReader("SSTB/Update.txt", Encoding.Default))
+                    {
+                        temp = sr.ReadLine();
+                    }
+                    if (temp.Equals(stVersion))
+                    {
+                        File.Delete("SSTB/Update.txt");
+                    }
+                    else
+                    {
+                        passdow = true;
+                    }
+                }
+                catch
+                {
+                }
+            }
+            if (!passdow)
+            {
+                try
+                {
+                    error.logWriter("尝试第一更新源……", false);
+                    string url = "https://stapxs.neocities.org/SSTB-NowVersion.txt";
+                    string filepath = "SSTB/Update.txt";
+                    WebClient mywebclient = new WebClient();
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    mywebclient.DownloadFile(url, filepath);
+                }
+                catch (Exception ex)
+                {
+                    error.logWriter("下载更新文件错误（第一更新源）：" + ex, false);
+                    error.logWriter("尝试第二更新源……", false);
+                    try
+                    {
+                        string url = "https://raw.githubusercontent.com/Stapxs/SS-Updater/master/SSTB-NowVersion.txt";
+                        string filepath = "SSTB/Update.txt";
+                        WebClient mywebclient = new WebClient();
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        mywebclient.DownloadFile(url, filepath);
+                    }
+                    catch (Exception exc)
+                    {
+                        error.logWriter("下载更新文件错误（第二更新源）：" + exc, false);
+                    }
+                }
+                error.logWriter("检查更新完成。", false);
+            }
+            try
+            {
+                string temp;
+                using (StreamReader sr = new StreamReader("SSTB/Update.txt", Encoding.Default))
+                {
+                    temp = sr.ReadLine();
+                }
+                if (File.Exists("SSTB/NoUpdate.txt"))
+                {
+                    try
+                    {
+                        string tempa;
+                        using (StreamReader sr = new StreamReader("SSTB/NoUpdate.txt", Encoding.Default))
+                        {
+                            tempa = sr.ReadLine();
+                        }
+                        if (tempa.Equals(temp))
+                        {
+                            pass = true;
+                        }
+                        else
+                        {
+                            File.Delete("SSTB/NoUpdate.txt");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        error.logWriter("打开更新文件错误：" + ex, false);
+                    }
+                }
+                if (!temp.Equals(stVersion) && !pass)
+                {
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        SSMessageHelper.noNo = false;
+                        ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                        SSMessageHelper.bOKtext = "知道了";
+                        SSMessageHelper.bNOtext = "不再提示";
+                        SSMessageHelper.Title = "发现更新";
+                        SSMessageHelper.Says = "我们检查到了版本更新，最新版本为：" + temp + "，你可以通过SSTB发布渠道下载更新文件。";
+                        SSMessageBox MB = new SSMessageBox();
+                        this.IsMaskVisible = true;
+                        MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                        MB.Owner = this;
+                        MB.ShowDialog();
+                        this.IsMaskVisible = false;
+                        SSMessageHelper.bOKtext = "好的";
+                        SSMessageHelper.bNOtext = "不要";
+                        if(SSMessageHelper.buttonNO)
+                        {
+                            File.AppendAllText("SSTB/NoUpdate.txt", temp);
+                        }
+                    }
+                    );
+                }
+                else
+                {
+                    File.Delete("SSTB/Update.txt");
+                }
+            }
+            catch(Exception ex)
+            {
+                error.logWriter("打开更新文件错误：" + ex, false);
+            }
+        }
+
+        private void Feedback_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://ssteamcommunity.wordpress.com/feedback/");
         }
     }
 }

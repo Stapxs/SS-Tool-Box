@@ -12,7 +12,8 @@ namespace SS_Tool_Box.Classes
 {
     class LoadingSetter
     {
-
+        public static int FileVersion = 8;
+        public static bool PasswordPass = false;
         Error error = new Error();
 
         public JObject newSetup()
@@ -23,7 +24,14 @@ namespace SS_Tool_Box.Classes
             JObject OwnColor = new JObject { { "R", "" }, { "G", "" }, { "B", "" } };
             Exterior.Add("Themes", Themes);
             Exterior.Add("OwnColor", OwnColor);
+
+            JObject Features = new JObject();   //功能设置
+            JObject Privacy = new JObject { { "Password", "NULL" } };
+            Features.Add("Privacy", Privacy);
+
+            SetUps["Version"] = FileVersion.ToString();
             SetUps.Add("Exterior", Exterior);
+            SetUps.Add("Features", Features);
             writeJsom(SetUps);
             return SetUps;
         }

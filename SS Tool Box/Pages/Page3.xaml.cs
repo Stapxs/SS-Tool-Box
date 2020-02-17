@@ -1,24 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Panuon.UI.Silver;
-using SS_Tool_Box;
-using System.Runtime;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Data;
-using Windows.Foundation;
-using Windows.UI;
 
 namespace SS_Tool_Box
 {
@@ -30,6 +14,8 @@ namespace SS_Tool_Box
         public Page3()
         {
             InitializeComponent();
+
+            this.Height = 477;
 
             SolidColorBrush GetColor = new SolidColorBrush();
             GetColor.Color = System.Windows.Media.Color.FromArgb(255, 100, 100, 100);
@@ -76,6 +62,23 @@ namespace SS_Tool_Box
             add.ShowDialog();
             IsMaskVisible = false;
             */
+        }
+
+        void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            if (e.Delta > 0)
+            {
+                // 向上滚动
+                scroll.LineUp();
+                scroll.LineUp();
+            }
+            if (e.Delta < 0)
+            {
+                // 向下滚动
+                scroll.LineDown();
+                scroll.LineDown();
+            }
         }
     }
 }
