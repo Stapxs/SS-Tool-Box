@@ -26,6 +26,7 @@ namespace SS_Tool_Box
         public class customerHit
         {
             public int ID { get; set; }
+            public string ShowName { get; set; }
             public string Name { get; set; }
             public int Hit { get; set; }
             public int HitMax { get; set; }
@@ -43,6 +44,7 @@ namespace SS_Tool_Box
         public class customerGive
         {
             public int ID { get; set; }
+            public string ShowName { get; set; }
             public string Name { get; set; }
             public int Hit { get; set; }
             public int HitMax { get; set; }
@@ -60,6 +62,7 @@ namespace SS_Tool_Box
         public class customerDo
         {
             public int ID { get; set; }
+            public string ShowName { get; set; }
             public string Name { get; set; }
             public int Hit { get; set; }
             public int HitMax { get; set; }
@@ -86,7 +89,7 @@ namespace SS_Tool_Box
         int yhug = 100;
         int yduang = 10;
 
-        string logs = "ShanTianLun：你好！\n";
+        string logs = "ShanTianLun：你好！";
         string cmd = "Stapx Steve Tool Box [ 版本 1.0.16.33 ] \n(c) Stapx Steve Team.  保留所有权利。\n";
         string you = "Youself";
         int pass = 0;
@@ -96,6 +99,8 @@ namespace SS_Tool_Box
         public KillSTL()
         {
             InitializeComponent();
+            Height = 500;
+            Topmost = true;
 
             this.T20.Text = "这就是一个超级简单的、超级普通的、超级正常的养成对战类回合制文字游戏 / ？，灵感来自STL。同时这也是SSTB内涵的第一个游戏为主的彩蛋。";
             this.T19.Text = "相杀象征相爱\nBy Stapx Steve [ 林槐 ] @2019 / 版权所有";
@@ -194,6 +199,16 @@ namespace SS_Tool_Box
             ComboBoxHelper.SetSelectedBackground(Give, baseColora.DBg);
             ComboBoxHelper.SetSelectedForeground(Give, baseColora.Fg);
 
+            this.BagBD.Background = baseColora.DBg;
+            ListViewItem listViewItem = new ListViewItem();
+            listViewItem.Name = "空";
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = "  空";
+            textBlock.Foreground = baseColora.Font;
+            textBlock.FontSize = 14;
+            listViewItem.Content = textBlock;
+            Bag.Items.Add(listViewItem);
+
             this.Health.Background = baseColora.DBg;
             this.Health.Foreground = baseColora.Main;
             this.Love.Background = baseColora.DBg;
@@ -228,36 +243,36 @@ namespace SS_Tool_Box
                 op = true;
             }
 
-            customHit.Add(new customerHit() { ID = 0, Name = "  - 空 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Duang = 0, DuangMax = 0 });
-            customHit.Add(new customerHit() { ID = 1, Name = "  - 轻拳 -", Hit = -10, HitMax = -5, Love = -1, LoveMax = 0, Hug = -45, HugMax = -25, Duang = 1, DuangMax = 2 });
+            customHit.Add(new customerHit() { ID = 0, Name = "  - 空 -", ShowName = "空", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Duang = 0, DuangMax = 0 });
+            customHit.Add(new customerHit() { ID = 1, Name = "  - 轻拳 -", ShowName = "轻拳", Hit = -10, HitMax = -5, Love = -1, LoveMax = 0, Hug = -45, HugMax = -25, Duang = 1, DuangMax = 2 });
             Hit.ItemsSource = customHit;
             Hit.DisplayMemberPath = "Name";
             Hit.SelectedValuePath = "ID";
             Hit.SelectedValue = 0;
 
-            customGive.Add(new customerGive() { ID = 0, Name = "  - 空 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Buff = "", BuffPes = 0 });
-            customGive.Add(new customerGive() { ID = 1, Name = "  - 面包 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 2, Hug = 10, HugMax = 10, Buff = "吃撑", BuffPes = 5 });
+            customGive.Add(new customerGive() { ID = 0, Name = "  - 空 -", ShowName = "空", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Buff = "", BuffPes = 0 });
+            customGive.Add(new customerGive() { ID = 1, Name = "  - 面包 -", ShowName = "面包", Hit = 0, HitMax = 0, Love = 0, LoveMax = 2, Hug = 10, HugMax = 10, Buff = "吃撑", BuffPes = 5 });
             Give.ItemsSource = customGive;
             Give.DisplayMemberPath = "Name";
             Give.SelectedValuePath = "ID";
             Give.SelectedValue = 0;
 
-            customDo.Add(new customerDo() { ID = 0, Name = "  - 空 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Buff = "", BuffPes = 0 });
-            customDo.Add(new customerDo() { ID = 1, Name = "  - 捏捏 -", Hit = 0, HitMax = 0, Love = 0, LoveMax = 2, Hug = -5, HugMax = -2, Buff = "", BuffPes = 0 });
+            customDo.Add(new customerDo() { ID = 0, Name = "  - 空 -", ShowName = "空", Hit = 0, HitMax = 0, Love = 0, LoveMax = 0, Hug = 0, HugMax = 0, Buff = "", BuffPes = 0 });
+            customDo.Add(new customerDo() { ID = 1, Name = "  - 捏捏 -", ShowName = "捏捏", Hit = 0, HitMax = 0, Love = 0, LoveMax = 2, Hug = -5, HugMax = -2, Buff = "", BuffPes = 0 });
             Do.ItemsSource = customDo;
             Do.DisplayMemberPath = "Name";
             Do.SelectedValuePath = "ID";
             Do.SelectedValue = 0;
         }
 
-        private bool workPass(int nMode)           //游戏过程判定
+        private bool workPass(int nMode)                        //游戏过程判定
         {
             //基础判定
-            if(health > 30 && health < 85)
+            if(health > 30 && health < 85)          //血量在30-85每回合-1
             {
                 health -= 1;
             }
-            else if(health <= 30)
+            else if(health <= 30)                   //血量小于30每回合-3
             {
                 health -= 3;
             }
@@ -269,23 +284,55 @@ namespace SS_Tool_Box
             {
                 yhealth -= 3;
             }
-            hug -= 1;
+            hug -= 1;                               //每回合饥饿-1
             yhug -= 1;
             if(nMode == 0)
             {
                 return true;
             }
             //攻击判定
-            
+            //A
+            if(int.Parse(Hit.SelectedValue.ToString()) != 0)
+            {
+                foreach(customerHit hit in customHit)
+                {
+                    if(hit.ID == int.Parse(Hit.SelectedValue.ToString()))
+                    {
+                        if (yhug + hit.HugMax >= 0)
+                        {
+                            int hitrad = RandomInt(hit.Hit, hit.HitMax);
+                            health += hitrad;
+                            love += RandomInt(hit.Love, hit.LoveMax);
+                            yhug += RandomInt(hit.Hug, hit.HugMax);
+                            duang += RandomInt(hit.Duang, hit.DuangMax);
+                            CMD.Text = addtext(" [ 系统 ] " + you + " 打出了一击 " + hit.ShowName + " 造成 " + hitrad + " 伤害。");
+                        }
+                        else
+                        {
+                            CMD.Text = addtext(" [ 系统 ] " + you + " 肚子饿的咕咕叫了QAQ，没有成功打出攻击。");
+                        }
+                    }
+                }
+            }
+            else if (int.Parse(Do.SelectedValue.ToString()) != 0)
+            {
+
+            }
+            else
+            {
+                CMD.Text = addtext(" [ 系统 ] " + you + " 什么都没做的说。");
+            }
             return true;
         }
         private bool ClickPass(int nMode)
         {
             bool error = false;
             TPASS.Text = "第" + ++pass + "回合";         //刷新回合数
+            CMD.Text = addtext("\n第" + pass + "回合");
             error = workPass(nMode);                    //游戏过程判定（ 数据判定 & BUFF获取判定 ）
             You.IsSelected = true;                      //跳转到信息界面
             updatePBar();                               //刷新数据条
+            CMD.SelectionStart = CMD.Text.Length;       //刷新日志光标
             return error;
         }
 
@@ -341,6 +388,8 @@ namespace SS_Tool_Box
 
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
+            Set.Visibility = Visibility.Collapsed;
+            Topmost = false;
             if (op)
             {
                 CMDIN.Visibility = Visibility.Visible;
@@ -373,6 +422,47 @@ namespace SS_Tool_Box
             TPASS.Text = "第" + pass + "回合";
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            String runcmd = Run.Text;
+            Run.Text = "";
+            if (CMDIN.IsSelected)
+            {
+                CMDCOL.Text = addcmd(">" + runcmd);
+                if (String.IsNullOrWhiteSpace(Run.Text))
+                {
+                    if (runcmd.Equals("/help"))
+                    {
+                        CMDCOL.Text = addcmd("/ui - UI相关操作");
+                    }
+                    else if (runcmd.Equals("/help ui"))
+                    {
+                        CMDCOL.Text = addcmd("/ui show [UI Name] - 显示UI\n    /ui hide [UI Name] - 隐藏UI");
+                    }
+                    else if (runcmd.Equals("/ui show \"Set\""))
+                    {
+                        Set.Visibility = Visibility.Visible;
+                        CMDCOL.Text = addcmd("执行成功。(0)");
+                    }
+                    else if (runcmd.Equals("/ui hide \"Set\""))
+                    {
+                        Set.Visibility = Visibility.Collapsed;
+                        CMDCOL.Text = addcmd("执行成功。(0)");
+                    }
+                    else if (runcmd.Equals("/ui show \"MainPage\""))
+                    {
+                        this.MainPage.Visibility = Visibility.Visible;
+                        this.MainGame.Visibility = Visibility.Collapsed;
+                        CMDCOL.Text = addcmd("执行成功。(0)");
+                    }
+                    else
+                    {
+                        CMDCOL.Text = addcmd("未知命令。");
+                    }
+                }
+            }
+        }
+
 
         /* 无关算法
          * 下面是功能无关的辅助算法
@@ -381,12 +471,23 @@ namespace SS_Tool_Box
         private int RandomInt(int Min, int Max)
         {
             Random random = new Random();
+            if(Min > Max)
+            {
+                int p = Min;
+                Min = Max;
+                Max = p;
+            }
             return random.Next(Min, Max);
         }
 
-        private String addtext(String addtext)
+        private String addtext(String text)
         {
-            return CMD.Text + addtext;
+            return CMD.Text + "\n" + text;
+        }
+
+        private String addcmd(String text)
+        {
+            return CMDCOL.Text + "\n" + text;
         }
     }
 }

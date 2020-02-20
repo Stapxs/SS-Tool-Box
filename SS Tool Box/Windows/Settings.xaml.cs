@@ -63,6 +63,7 @@ namespace SS_Tool_Box_By_WPF
             }
 
             this.PassWord.Visibility = Visibility.Collapsed;
+            this.UpdateLog.Visibility = Visibility.Collapsed;
         }
 
         private bool UpdateUI()
@@ -117,6 +118,9 @@ namespace SS_Tool_Box_By_WPF
             this.T31.Foreground = baseColora.Fg;
             this.T31.FontFamily = baseColora.Fonts;
             this.T31.FontSize = 13;
+            this.T41.Foreground = baseColora.Fg;
+            this.T41.FontFamily = baseColora.Fonts;
+            this.T41.FontSize = 13;
 
             this.MT11.Foreground = baseColora.Fg;
             this.MT11.FontFamily = baseColora.Fonts;
@@ -133,12 +137,16 @@ namespace SS_Tool_Box_By_WPF
             this.MT31.Foreground = baseColora.Fg;
             this.MT31.FontFamily = baseColora.Fonts;
             this.MT31.FontSize = 15;
+            this.MT41.Foreground = baseColora.Fg;
+            this.MT41.FontFamily = baseColora.Fonts;
+            this.MT41.FontSize = 15;
 
             this.CD11.Background = baseColora.Bg;
             this.CD12.Background = baseColora.Bg;
             this.CD13.Background = baseColora.Bg;
             this.CD21.Background = baseColora.Bg;
             this.CD32.Background = baseColora.Bg;
+            this.CD41.Background = baseColora.Bg;
 
             this.C11.Background = baseColora.DBg;
             this.C31.Background = baseColora.DBg;
@@ -194,10 +202,15 @@ namespace SS_Tool_Box_By_WPF
             this.B21.Foreground = baseColora.Fg;
             this.B21.Background = baseColora.DBg;
             ButtonHelper.SetHoverBrush(B21, baseColora.DBg);
+            this.B41.Foreground = baseColora.Fg;
+            this.B41.Background = baseColora.DBg;
+            ButtonHelper.SetHoverBrush(B41, baseColora.DBg);
 
             this.Password.Background = baseColora.Bg;
             this.Password.Foreground = baseColora.Fg;
-                 
+            this.UpdateLog.Background = baseColora.Bg;
+            this.UpdateLog.Foreground = baseColora.Fg;
+
             return true;
         }
 
@@ -335,6 +348,42 @@ namespace SS_Tool_Box_By_WPF
                 else
                 {
                     MessageBoxX.Show("私隐密码为弱密码，以 <明文> 记录在设置文件中，这意味着这个密码仅用于警告，没有任何安全性，请不要把重要信息存储在 SSTB 内。", "提示");
+                }
+            }
+        }
+
+        private void B41_Click(object sender, RoutedEventArgs e)
+        {
+            if (UpdateLog.Visibility == Visibility.Collapsed)
+            {
+                UpdateLog.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                if (!String.IsNullOrWhiteSpace(UpdateLog.Text))
+                {
+                    UpdateLog.Visibility = Visibility.Collapsed;
+                    String Updtext = UpdateLog.Text;
+                    UpdateLog.Text = "";
+                    String url = "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/" + Main.szTree + "/SS%20Tool%20Box/bin/Release/SS%20Tool%20Box.exe";
+                    JObject jObject = new JObject { { "Version", "2" }, { "MainVersion", Main.stVersion }, { "Time", DateTime.Now.ToString("yyyy/MM/dd") + " " + DateTime.Now.ToShortTimeString().ToString() }, { "Url", url }, { "Logs", Updtext } };
+
+                    try
+                    {
+                        using (StreamWriter sw = new StreamWriter("SSTB/Update.txt"))
+                        {
+                            sw.WriteLine(jObject.ToString());
+                            sw.Close();
+                        }
+                        string where = Directory.GetCurrentDirectory();
+                        where = where + @"\SSTB";
+                        System.Diagnostics.Process process;
+                        process = System.Diagnostics.Process.Start(@where);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("写入文件错误：" + ex);
+                    }
                 }
             }
         }

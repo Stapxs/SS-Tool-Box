@@ -118,6 +118,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Updater.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\SSMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +206,9 @@
     </Compile>
     <Compile Include="Controls\QQChats.xaml.cs">
       <DependentUpon>QQChats.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Updater.xaml.cs">
+      <DependentUpon>Updater.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SSMessageBox.xaml.cs">
       <DependentUpon>SSMessageBox.xaml</DependentUpon>

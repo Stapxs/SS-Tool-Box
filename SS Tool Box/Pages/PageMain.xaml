@@ -14,7 +14,10 @@
             <StackPanel>
                 <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Margin="5, 25, 25, 5" >
                     <StackPanel>
-                        <TextBlock x:Name="Title" Text="主标题" HorizontalAlignment="Left" Margin="34,25,0,5" Width="362" Height="26"/>
+                        <Grid Margin="0,0,10,0">
+                            <TextBlock x:Name="Title" Text="主标题" HorizontalAlignment="Left" Margin="34,25,0,5" Width="362" Height="26"/>
+                            <Button x:Name="B1" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" Click="B1_Click" HorizontalAlignment="Right" Margin="0,5,15,0" ToolTip="打开一言页面"/>
+                        </Grid>
                         <TextBlock x:Name="Says" Margin="34,0,-132,10" Height="Auto" Width="496" TextWrapping="Wrap" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </materialDesign:Card>

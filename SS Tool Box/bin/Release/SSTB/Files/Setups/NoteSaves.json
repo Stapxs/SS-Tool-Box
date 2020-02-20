@@ -1,7 +1,7 @@
 {
   "Stat": {
     "Version": "6",
-    "NumOfDef": "1"
+    "NumOfDef": "2"
   },
   "Cards": {
     "Def": {
@@ -12,10 +12,9 @@
         "Notes1Title": "普通事件置顶",
         "Notes1Finished": false,
         "Notes1CantDel": false,
+        "Notes2Title": "打卡事件",
+        "Notes2Finished": false,
         "Notes2CantDel": false,
-        "Notes3Title": "打卡事件",
-        "Notes3Finished": false,
-        "Notes3CantDel": false,
         "Notes-1Title": "普通事件完成",
         "Notes-1Finished": true,
         "Notes-1CantDel": false,
@@ -26,7 +25,21 @@
         "Notes-3Finished": true,
         "Notes-3CantDel": false,
         "Notes-4Title": "普通事件不可删除",
-        "Notes-4Finished": true
+        "Notes-4Finished": true,
+        "Notes-4CantDel": false
+      },
+      "2": {
+        "Title": "KillSTL 更新计划",
+        "Stat": "2",
+        "Finished": "-2",
+        "Notes1CantDel": false,
+        "Notes2CantDel": false,
+        "Notes-1Title": "重做界面布局",
+        "Notes-1Finished": true,
+        "Notes-2Title": "完成普通攻击伤害判定",
+        "Notes-2Finished": true,
+        "Notes2Title": "规划AI流程",
+        "Notes2Finished": false
       }
     }
   }
