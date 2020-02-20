@@ -1,45 +1,49 @@
 {
   "Stat": {
-    "Version": "6",
+    "Version": "7",
     "NumOfDef": "2"
   },
   "Cards": {
     "Def": {
       "1": {
         "Title": "工具箱更新计划",
-        "Stat": "2",
-        "Finished": "-4",
-        "Notes1Title": "普通事件置顶",
-        "Notes1Finished": false,
-        "Notes1CantDel": false,
-        "Notes2Title": "打卡事件",
-        "Notes2Finished": false,
-        "Notes2CantDel": false,
-        "Notes-1Title": "普通事件完成",
-        "Notes-1Finished": true,
-        "Notes-1CantDel": false,
-        "Notes-2Title": "普通事件删除",
-        "Notes-2Finished": true,
-        "Notes-2CantDel": false,
-        "Notes-3Title": "普通卡片删除",
-        "Notes-3Finished": true,
-        "Notes-3CantDel": false,
-        "Notes-4Title": "普通事件不可删除",
-        "Notes-4Finished": true,
-        "Notes-4CantDel": false
+        "Stat": "1",
+        "Finished": "4",
+        "-1": {
+          "Title": "普通事件不可删除",
+          "Finished": true,
+          "CantDel": false
+        },
+        "-2": {
+          "Title": "普通卡片删除",
+          "Finished": true,
+          "CantDel": false
+        },
+        "-3": {
+          "Title": "普通事件删除",
+          "Finished": true,
+          "CantDel": false
+        },
+        "-4": {
+          "Title": "普通事件完成",
+          "Finished": true,
+          "CantDel": false
+        },
+        "1": {
+          "Title": "打卡事件",
+          "Finished": false,
+          "CantDel": false
+        }
       },
       "2": {
-        "Title": "KillSTL 更新计划",
-        "Stat": "2",
-        "Finished": "-2",
-        "Notes1CantDel": false,
-        "Notes2CantDel": false,
-        "Notes-1Title": "重做界面布局",
-        "Notes-1Finished": true,
-        "Notes-2Title": "完成普通攻击伤害判定",
-        "Notes-2Finished": true,
-        "Notes2Title": "规划AI流程",
-        "Notes2Finished": false
+        "Title": "Kill STL 更新计划",
+        "Stat": "1",
+        "Finished": "0",
+        "1": {
+          "Title": "完成基础流程",
+          "Finished": false,
+          "CantDel": false
+        }
       }
     }
   }

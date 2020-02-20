@@ -27,7 +27,7 @@ namespace SS_Tool_Box
         JObject Notes = new JObject();
         bool err = false;
         IList<listMain> AddWhereList = new List<listMain>();
-        int FileVersion = 6;
+        int FileVersion = 7;
         ListView list = new ListView();
         ListViewItem listi = new ListViewItem();
         Card card = new Card();
@@ -213,7 +213,7 @@ namespace SS_Tool_Box
                 {
                     for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
                     {
-                        if(int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()) == 0)
+                        if(int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()) == 0 && int.Parse(Notes["Cards"]["Def"][i.ToString()]["Finished"].ToString()) == 0)
                         {
                             Notes["Cards"]["Def"][i.ToString()].Parent.Remove();
                             Notes["Stat"]["NumOfDef"] = (int.Parse(Notes["Stat"]["NumOfDef"].ToString()) - 1).ToString();
@@ -291,9 +291,8 @@ namespace SS_Tool_Box
                         int num = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
                         Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"] = (num + 1).ToString();
                         num += 1;
-                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "Title"] = What.Text;
-                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "Finished"] = false;
-                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Notes" + num + "CantDel"] = bool.Parse(CanDel.IsChecked.ToString());
+                        JObject Item = new JObject { { "Title", What.Text }, { "Finished", false }, { "CantDel", bool.Parse(CanDel.IsChecked.ToString()) } };
+                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()][num.ToString()] = Item;
                         SaveData(Notes);
                         int[] things = new int[3];
                         things[0] = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
@@ -313,7 +312,7 @@ namespace SS_Tool_Box
                 {
                     SSMessageHelper.noNo = false;
                     ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
-                    SSMessageHelper.Title = "读取JSON错误";
+                    SSMessageHelper.Title = "写入JSON错误";
                     SSMessageHelper.bNOtext = "不用不用";
                     SSMessageHelper.bOKtext = "打开日志";
                     SSMessageHelper.Says = "我们发现了一个崩溃性的错误，是否反馈它，如果不反馈，这个错误将永远得不到修复！\n" + ex;
@@ -447,15 +446,10 @@ namespace SS_Tool_Box
                 menuItem2.Header = "删除";
                 menuItem2.Icon = "";
                 menuItem2.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(ME_Del);
-                if(things[2] == 1)
+                if(things[2] == 0)
                 {
-                    menuItem2.IsEnabled = false;
+                    contextMenu.Items.Add(menuItem2);
                 }
-                menuItem3.Name = "MenuItem3";
-                menuItem3.Header = "置顶";
-                menuItem3.Icon = "";
-                menuItem3.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(ME_Top);
-                contextMenu.Items.Add(menuItem3);
 
                 contextMenu.Width = 150;
                 contextMenu.Background = baseColora.Card;
@@ -498,7 +492,7 @@ namespace SS_Tool_Box
             ParentWindow.IsMaskVisible = false;
             if (SSMessageHelper.buttonOK)
             {
-                DeleteItem(1, true, true, false);
+                DeleteItem(1, new ControlItemInfo { IsDelInFile = true, IsFinish = false });
             }
         }
 
@@ -653,7 +647,7 @@ namespace SS_Tool_Box
         void ME_Fin(object sender, MouseButtonEventArgs e)
         {
             card = (Card)VisualTreeHelper.GetParent((Grid)VisualTreeHelper.GetParent((ContentPresenter)VisualTreeHelper.GetParent((StackPanel)VisualTreeHelper.GetParent(list))));
-            DeleteItem(0, false, false,true);
+            DeleteItem(0, new ControlItemInfo { IsDelInFile = false, IsFinish = true, IsDelInUI = true });
         }
 
         void ME_Top(object sender, MouseButtonEventArgs e)
@@ -664,7 +658,7 @@ namespace SS_Tool_Box
         void ME_Del(object sender, MouseButtonEventArgs e)
         {
             card = (Card)VisualTreeHelper.GetParent((Grid)VisualTreeHelper.GetParent((ContentPresenter)VisualTreeHelper.GetParent((StackPanel)VisualTreeHelper.GetParent(list))));
-            DeleteItem(0, true, true, false);
+            DeleteItem(0, new ControlItemInfo { IsDelInFile = true, IsFinish = false, IsDelInUI = true });
         }
 
         void CD_Del(object sender, MouseButtonEventArgs e)
@@ -681,12 +675,20 @@ namespace SS_Tool_Box
             ParentWindow.IsMaskVisible = false;
             if(SSMessageHelper.buttonOK)
             {
-                DeleteItem(1, true, true, false);
+                DeleteItem(1, new ControlItemInfo { IsDelInFile = true, IsFinish = false });
             }
         }
 
+
+        /// <summary>
+        /// RunButton_Click_1
+        /// RunButton按下事件，刷新列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RunButton_Click_1(object sender, RoutedEventArgs e)
         {
+            //判断私隐密码
             if(Main.Settings["Features"]["Privacy"]["Password"].ToString() != "NULL")
             {
                 PassWordEnterF7 EP = new PassWordEnterF7();
@@ -707,6 +709,7 @@ namespace SS_Tool_Box
             LoadingSetter.PasswordPass = false;
             if (!err)
             {
+                //判断存档版本
                 if (Notes["Stat"]["Version"].ToString() != FileVersion.ToString())
                 {
                     SSMessageHelper.noNo = true;
@@ -741,7 +744,7 @@ namespace SS_Tool_Box
                             {
                                 things[0] = j;
                                 things[1] = i;
-                                if (bool.Parse(Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "CantDel"].ToString()))
+                                if (bool.Parse(Notes["Cards"]["Def"][i.ToString()][j.ToString()]["CantDel"].ToString()))
                                 {
                                     things[2] = 1;
                                 }
@@ -749,7 +752,7 @@ namespace SS_Tool_Box
                                 {
                                     things[2] = 0;
                                 }
-                                AddColtrols(2, things, Notes["Cards"]["Def"][i.ToString()]["Notes" + j + "Title"].ToString());
+                                AddColtrols(2, things, Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Title"].ToString());
                             }
                         }
                     }
@@ -785,48 +788,93 @@ namespace SS_Tool_Box
             this.MT1.Visibility = Visibility.Collapsed;
         }
 
-        private bool DeleteItem(int nMode, bool IsDelInFile, bool IsDelInNotes, bool IsFinish)
+
+
+        /// <summary>
+        /// DeleteItem
+        /// 用于删除在界面上的对象并且刷新文件
+        /// 参数：
+        /// int nMode - 删除的对象种类
+        /// ControlItemInfo info - 对象操作信息
+        /// </summary>
+        struct ControlItemInfo
         {
-            if(nMode == 0)
+            public bool IsDelInUI;              //是否在UI上删除
+            public bool IsDelInFile;            //是否在文件中删除
+            public bool IsFinish;               //是否设置为完成
+        }
+        private bool DeleteItem(int nMode, ControlItemInfo info)
+        {
+            if (nMode == 0)                     //删除事件
             {
-                list.Items.Remove(listi);
+                Card Card = card;               //所属卡片
+                string CardName = Card.Name;    //卡片名
+                string CardType = "";           //卡片类型
+                string CardID = "";             //卡片编号
 
-                Card Card = card;
-
-                string CardName = Card.Name;
-
-                if(CardName[2] == 'D')          //普通卡片
+                if (CardName[2] == 'D')         //普通卡片
                 {
-                    string CardType = "Def";
-                    string CardID = CardName.Substring(3, CardName.Length - 3);
-                    int DelWho = int.Parse(listi.Name.Substring(CardName.Length + 2, listi.Name.Length - (CardName.Length + 2)));
+                    CardType = "Def";
+                    CardID = CardName.Substring(3, CardName.Length - 3);
+                }
+                else
+                {
 
-                    if(!IsDelInFile && IsFinish)
-                    {
-                        int FinishNum = int.Parse(Notes["Cards"][CardType][CardID]["Finished"].ToString()) - 1;
-                        Notes["Cards"][CardType][CardID]["Finished"] = FinishNum.ToString();
-                        Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Finished"] = true;
-                        Notes["Cards"][CardType][CardID]["Notes" + FinishNum + "Title"] = Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Title"];
-                        Notes["Cards"][CardType][CardID]["Notes" + FinishNum + "Finished"] = true;
-                        Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Title"].Parent.Remove();
-                        Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Finished"].Parent.Remove();
-                        Notes["Cards"][CardType][CardID]["Stat"] = (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) - 1).ToString();
-                        SaveData(Notes);
-                        listi = new ListViewItem();
-                        return true;
-                    }
+                    return false;
+                }
 
-                    for(int i = DelWho; i < int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()); i++)
+                //要删除的事件的编号
+                string ItemID = listi.Name.Substring(CardName.Length + 2, listi.Name.Length - (CardName.Length + 2));
+                //移除UI
+                if (info.IsDelInUI)
+                {
+                    list.Items.Remove(listi);
+                }
+                //标记为完成（不在文件中删除）
+                if (!info.IsDelInFile && info.IsFinish)
+                {
+                    //标记为完成（将编号向负数累加）
+                    Notes["Cards"][CardType][CardID][ItemID]["Finished"] = true;
+                    //将编号向负数累加
+                    int nowFinishedNum = int.Parse(Notes["Cards"][CardType][CardID]["Finished"].ToString()) + 1;                    //要累加的编号数
+                    Notes["Cards"][CardType][CardID]["Finished"] = nowFinishedNum.ToString();                                       //刷新编号数
+                    Notes["Cards"][CardType][CardID]["Stat"] = (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) - 1).ToString();
+                    JObject Item = new JObject();                                                                                   //将编号向负数累加
+                    Item.Add("Title", Notes["Cards"][CardType][CardID][ItemID]["Title"]);
+                    Item.Add("Finished", Notes["Cards"][CardType][CardID][ItemID]["Finished"]);
+                    Item.Add("CantDel", Notes["Cards"][CardType][CardID][ItemID]["CantDel"]);
+                    Notes["Cards"][CardType][CardID][(-nowFinishedNum).ToString()] = Item;
+                    Notes["Cards"][CardType][CardID][ItemID].Parent.Remove();   //移除本项
+                    listi = new ListViewItem();                                 //清空对象
+                }
+                //在文件中删除
+                if (info.IsDelInFile)
+                {
+                    //循环删除
+                    int i;
+                    for (i = int.Parse(ItemID); i < int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()); i++)
                     {
-                        Notes["Cards"][CardType][CardID]["Notes" + i + "Title"] = Notes["Cards"][CardType][CardID]["Notes" + (i + 1) + "Title"];
-                        Notes["Cards"][CardType][CardID]["Notes" + i + "Finished"] = Notes["Cards"][CardType][CardID]["Notes" + (i + 1) + "Finished"];
+                        JObject Item = new JObject();                                                                                   //将编号向负数累加
+                        Item.Add("Title", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Title"]);
+                        Item.Add("Finished", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Finished"]);
+                        Item.Add("CantDel", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["CantDel"]);
+                        Notes["Cards"][CardType][CardID][i.ToString()] = Item;
                     }
-                    Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Title"].Parent.Remove();
-                    Notes["Cards"][CardType][CardID]["Notes" + DelWho + "Finished"].Parent.Remove();
+                    //移除最后一项
+                    if (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) > 1)
+                    {
+                        Notes["Cards"][CardType][CardID][i.ToString()].Parent.Remove();
+                    }
+                    else
+                    {
+                        Notes["Cards"][CardType][CardID][ItemID].Parent.Remove();
+                    }
+                    //刷新事件总数
                     Notes["Cards"][CardType][CardID]["Stat"] = (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) - 1).ToString();
                 }
+                SaveData(Notes);
             }
-            else if(nMode == 1)
+            else if (nMode == 1)         //删除卡片
             {
                 Card Card = card;
                 string CardName = Card.Name;
@@ -839,10 +887,6 @@ namespace SS_Tool_Box
                 }
                 MainIn.Children.Remove(Card);
                 MainIn.UnregisterName(Card.Name);
-            }
-            if (IsDelInFile)
-            {
-                SaveData(Notes);
             }
             listi = new ListViewItem();
             return true;
