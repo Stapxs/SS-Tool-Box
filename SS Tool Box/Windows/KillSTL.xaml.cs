@@ -316,7 +316,7 @@ namespace SS_Tool_Box
             }
             else if (int.Parse(Do.SelectedValue.ToString()) != 0)
             {
-
+                
             }
             else
             {
