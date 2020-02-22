@@ -187,7 +187,9 @@ namespace SS_Tool_Box
             loading = false;
             KillSTL openInWindow = new KillSTL();
             openInWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            ParentWindow.WindowState = WindowState.Minimized;
             openInWindow.ShowDialog();
+            ParentWindow.WindowState = WindowState.Normal;
             Errorsay.Text = "线程已关闭。";
         }
 

@@ -36,6 +36,7 @@ namespace SS_Tool_Box_By_WPF
         DateTime loadingtime;
         String stSays = "你好丫，欢迎使用林槐工具箱！Hummm它就只是个工具箱而已。";
         bool errN = false;
+        string yyid = "NULL";
 
         public PageMain()
         {
@@ -79,6 +80,7 @@ namespace SS_Tool_Box_By_WPF
                     if (GetJson.IndexOf("hitokoto") != -1)
                     {
                         JObject obj = JObject.Parse(GetJson);
+                        yyid = obj["id"].ToString();
                         stSays = "     " + obj["hitokoto"].ToString() + " —— " + obj["from"].ToString();
                         error.logWriter("获取一言成功，耗时：" + (DateTime.Now - loadingtime).ToString(), false);
                     }
@@ -159,6 +161,9 @@ namespace SS_Tool_Box_By_WPF
             this.U18.Foreground = baseColora.Font;
             this.U19.Foreground = baseColora.Font;
             this.U20.Foreground = baseColora.Font;
+            this.U21.Foreground = baseColora.Font;
+
+            this.B1.Foreground = baseColora.Fg;
 
             this.Height = 477;
 
@@ -407,5 +412,12 @@ namespace SS_Tool_Box_By_WPF
             }
         }
 
+        private void B1_Click(object sender, RoutedEventArgs e)
+        {
+            if (!yyid.Equals("NULL"))
+            {
+                System.Diagnostics.Process.Start("https://hitokoto.cn/?id=" + yyid);
+            }
+        }
     }
 }

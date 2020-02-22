@@ -1,43 +1,19 @@
 {
   "Stat": {
     "Version": "6",
-    "NumOfDef": "2"
+    "NumOfDef": "1"
   },
   "Cards": {
     "Def": {
       "1": {
-        "Title": "工具箱更新计划",
-        "Stat": "2",
-        "Finished": "-4",
-        "Notes1Title": "普通事件置顶",
-        "Notes1Finished": false,
-        "Notes1CantDel": false,
-        "Notes2Title": "打卡事件",
-        "Notes2Finished": false,
-        "Notes2CantDel": false,
-        "Notes-1Title": "普通事件完成",
-        "Notes-1Finished": true,
-        "Notes-1CantDel": false,
-        "Notes-2Title": "普通事件删除",
-        "Notes-2Finished": true,
-        "Notes-2CantDel": false,
-        "Notes-3Title": "普通卡片删除",
-        "Notes-3Finished": true,
-        "Notes-3CantDel": false,
-        "Notes-4Title": "普通事件不可删除",
-        "Notes-4Finished": true,
-        "Notes-4CantDel": false
-      },
-      "2": {
-        "Title": "KillSTL 更新计划",
-        "Stat": "2",
-        "Finished": "0",
-        "Notes1Title": "重做界面布局",
-        "Notes1Finished": false,
-        "Notes1CantDel": false,
-        "Notes2Title": "重新规划游戏方式",
-        "Notes2Finished": false,
-        "Notes2CantDel": false
+        "Title": "233",
+        "Stat": "0",
+        "Finished": "1",
+        "-1": {
+          "Title": "2333",
+          "Finished": true,
+          "CantDel": false
+        }
       }
     }
   }

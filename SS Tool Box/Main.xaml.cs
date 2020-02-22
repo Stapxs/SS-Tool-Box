@@ -29,7 +29,10 @@ namespace SS_Tool_Box_By_WPF
         DateTime loadingtime;
         Error error = new Error();
 
-        String stVersion = "1.0.23";
+        public static int nUpdateVersion = 2;
+        public static String stVersion = "1.0.24";
+        public static String szTree = "KillSTL-Update";
+
         int NowPage = 0;
         public static int NowChoice = 0;
         public int WindowNew;
@@ -597,103 +600,79 @@ namespace SS_Tool_Box_By_WPF
             }
         }
 
+        public static bool UpdateFin = false;
         private void UpdateRight()         //检查更新
         {
+            #if DEBUG
+            return;
+            #endif
+            if (File.Exists("UpdateBash.bat"))
+            {
+                File.Delete("UpdateBash.bat");
+                if (File.Exists("run.vbs"))
+                {
+                    File.Delete("run.vbs");
+                }
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                SSMessageHelper.noNo = true;
+                ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                SSMessageHelper.Title = "更新完成";
+                SSMessageHelper.Says = "我们成功更新了 SSTB ！开始体验全新的功能吧！";
+                SSMessageBox MB = new SSMessageBox();
+                this.IsMaskVisible = true;
+                MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                MB.Owner = this;
+                MB.ShowDialog();
+                this.IsMaskVisible = false;
+            });
+            }
             error.logWriter("检查更新……", false);
-            bool pass = false;
-            bool passdow = false;
-            if (File.Exists("SSTB/Update.txt"))
-            {
-                try
-                {
-                    string temp;
-                    using (StreamReader sr = new StreamReader("SSTB/Update.txt", Encoding.Default))
-                    {
-                        temp = sr.ReadLine();
-                    }
-                    if (temp.Equals(stVersion))
-                    {
-                        File.Delete("SSTB/Update.txt");
-                    }
-                    else
-                    {
-                        passdow = true;
-                    }
-                }
-                catch
-                {
-                }
-            }
-            if (!passdow)
-            {
-                try
-                {
-                    error.logWriter("尝试第一更新源……", false);
-                    string url = "https://stapxs.neocities.org/SSTB-NowVersion.txt";
-                    string filepath = "SSTB/Update.txt";
-                    WebClient mywebclient = new WebClient();
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                    mywebclient.DownloadFile(url, filepath);
-                }
-                catch (Exception ex)
-                {
-                    error.logWriter("下载更新文件错误（第一更新源）：" + ex, false);
-                    error.logWriter("尝试第二更新源……", false);
-                    try
-                    {
-                        string url = "https://raw.githubusercontent.com/Stapxs/SS-Updater/master/SSTB-NowVersion.txt";
-                        string filepath = "SSTB/Update.txt";
-                        WebClient mywebclient = new WebClient();
-                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                        mywebclient.DownloadFile(url, filepath);
-                    }
-                    catch (Exception exc)
-                    {
-                        error.logWriter("下载更新文件错误（第二更新源）：" + exc, false);
-                    }
-                }
-                error.logWriter("检查更新完成。", false);
-            }
+            string GetJson;
+            String saysuri = "https://stapxs.neocities.org/SSTB-NowVersion.txt";
             try
             {
-                string temp;
-                using (StreamReader sr = new StreamReader("SSTB/Update.txt", Encoding.Default))
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                GetJson = HttpUitls.Get(saysuri, "DEFALT");
+            }
+            catch(Exception ex)
+            {
+                error.logWriter("检查更新错误 ：" + ex, false);
+                return;
+            }
+            if(String.IsNullOrWhiteSpace(GetJson))
+            {
+                return;
+            }
+            JObject obj = JObject.Parse(GetJson);
+            if(int.Parse(obj["Version"].ToString()) != nUpdateVersion)
+            {
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
-                    temp = sr.ReadLine();
-                }
-                if (File.Exists("SSTB/NoUpdate.txt"))
-                {
-                    try
-                    {
-                        string tempa;
-                        using (StreamReader sr = new StreamReader("SSTB/NoUpdate.txt", Encoding.Default))
-                        {
-                            tempa = sr.ReadLine();
-                        }
-                        if (tempa.Equals(temp))
-                        {
-                            pass = true;
-                        }
-                        else
-                        {
-                            File.Delete("SSTB/NoUpdate.txt");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        error.logWriter("打开更新文件错误：" + ex, false);
-                    }
-                }
-                if (!temp.Equals(stVersion) && !pass)
+                    SSMessageHelper.noNo = true;
+                    ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                    SSMessageHelper.Title = "发现更新";
+                    SSMessageHelper.Says = "我们检查到了版本更新，但是由于更新文件版本不符，我们无法确认更新的可用性，请手动确认版本更新。\n（当前软件内更新文件标记版本为 " + nUpdateVersion + " ,获取到的更新文件标记版本为 " + obj["Version"].ToString() + " )";
+                    SSMessageBox MB = new SSMessageBox();
+                    this.IsMaskVisible = true;
+                    MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    MB.Owner = this;
+                    MB.ShowDialog();
+                    this.IsMaskVisible = false;
+                });
+            }
+            else
+            {
+                if (!obj["MainVersion"].ToString().Equals(stVersion))
                 {
                     this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
                         SSMessageHelper.noNo = false;
                         ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
-                        SSMessageHelper.bOKtext = "知道了";
-                        SSMessageHelper.bNOtext = "不再提示";
+                        SSMessageHelper.bOKtext = "在线更新";
+                        SSMessageHelper.bNOtext = "知道了";
                         SSMessageHelper.Title = "发现更新";
-                        SSMessageHelper.Says = "我们检查到了版本更新，最新版本为：" + temp + "，你可以通过SSTB发布渠道下载更新文件。";
+                        SSMessageHelper.Says = "我们检查到了版本更新，最新版本为：" + obj["MainVersion"].ToString() + "，更新时间：" + obj["Time"].ToString() + "，选择在线更新将从GitHub在线下载。\n（ GitHub 有约1小时的CDN缓存延时，建议在更新时间一小时后更新 ）\n更新日志如下：\n" + obj["Logs"].ToString();
                         SSMessageBox MB = new SSMessageBox();
                         this.IsMaskVisible = true;
                         MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -701,23 +680,29 @@ namespace SS_Tool_Box_By_WPF
                         MB.ShowDialog();
                         this.IsMaskVisible = false;
                         SSMessageHelper.bOKtext = "好的";
-                        SSMessageHelper.bNOtext = "不要";
-                        if(SSMessageHelper.buttonNO)
+                        if (SSMessageHelper.buttonOK)
                         {
-                            File.AppendAllText("SSTB/NoUpdate.txt", temp);
+                            Updater UP = new Updater();
+                            UP.ParentWindow = this;
+                            UP.url = obj["Url"].ToString();
+                            this.IsMaskVisible = true;
+                            UP.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                            UP.Owner = this;
+                            UP.ShowDialog();
+                            this.IsMaskVisible = false;
+                            if (UpdateFin == true)
+                            {
+                                string where = Directory.GetCurrentDirectory();
+                                where = where + @"\run.vbs";
+                                System.Diagnostics.Process process;
+                                process = System.Diagnostics.Process.Start(@where);
+                                Application.Current.Shutdown();
+                            }
                         }
-                    }
-                    );
-                }
-                else
-                {
-                    File.Delete("SSTB/Update.txt");
+                    });
                 }
             }
-            catch(Exception ex)
-            {
-                error.logWriter("打开更新文件错误：" + ex, false);
-            }
+            error.logWriter("检查更新完成。", false);
         }
 
         private void Feedback_Click(object sender, RoutedEventArgs e)
