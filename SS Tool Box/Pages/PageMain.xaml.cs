@@ -162,6 +162,7 @@ namespace SS_Tool_Box_By_WPF
             this.U19.Foreground = baseColora.Font;
             this.U20.Foreground = baseColora.Font;
             this.U21.Foreground = baseColora.Font;
+            this.U22.Foreground = baseColora.Font;
 
             this.B1.Foreground = baseColora.Fg;
 
