@@ -62,6 +62,11 @@
                     <StackPanel>
                         <TextBlock x:Name="MT1" Text="更新记录" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
                         <pu:Timeline x:Name="UpdateList" Margin="35,0,35,5" Height="Auto" Width="Auto" >
+                            <pu:TimelineItem x:Name="U23"
+                                             Header="2020.02.23"
+    			                             Content="= BUG：删除卡片替换在了错误的位置（Tool7）&#13;= BUG：删除卡片删除对象错误（Tool7）&#13;= BUG：删除对象时替换数据错误（Tool7）&#13;= BUG：读取错误时错误得把用户数据替换成了Error（Tool7）" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
                             <pu:TimelineItem x:Name="U22"
                                              Header="2020.02.22"
     			                             Content="+ 记事簿打卡事件&#13;= 完善记事簿代码规范性" 

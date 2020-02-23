@@ -1,55 +1,30 @@
 {
   "Stat": {
     "Version": "8",
-    "NumOfDef": "3"
+    "NumOfDef": "1"
   },
   "Cards": {
     "Def": {
       "1": {
-        "Title": "测试",
+        "Title": "2333",
         "Stat": "2",
         "Finished": "0",
         "1": {
           "Type": "Clock",
-          "Title": "第一个",
+          "Title": "233333",
           "Finished": false,
           "CantDel": false,
-          "Start": "2020/2/22",
-          "Last": "2020/2/22",
+          "Start": "2020/2/23",
+          "Last": "2020/2/23",
           "Signed": 1
         },
         "2": {
           "Type": "Clock",
-          "Title": "第二个",
+          "Title": "2333",
           "Finished": false,
           "CantDel": false,
-          "Start": "2020/2/22",
+          "Start": "2020/2/23",
           "Last": "2020/2/22",
-          "Signed": 1
-        }
-      },
-      "2": {
-        "Title": "2333",
-        "Stat": "1",
-        "Finished": "0",
-        "1": {
-          "Type": "Def",
-          "Title": "再多亿点内容",
-          "Finished": false,
-          "CantDel": false
-        }
-      },
-      "3": {
-        "Title": "emmm",
-        "Stat": "1",
-        "Finished": "0",
-        "1": {
-          "Type": "Clock",
-          "Title": "oh",
-          "Finished": false,
-          "CantDel": false,
-          "Start": "2020/2/22",
-          "Last": "2020/2/21",
           "Signed": 0
         }
       }
