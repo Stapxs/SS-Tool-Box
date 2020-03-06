@@ -30,8 +30,8 @@ namespace SS_Tool_Box_By_WPF
         Error error = new Error();
 
         public static int nUpdateVersion = 2;
-        public static String stVersion = "1.0.24";
-        public static String szTree = "KillSTL-Update";
+        public static String stVersion = "1.0.26";
+        public static String szTree = "Note-Update";
 
         int NowPage = 0;
         public static int NowChoice = 0;
