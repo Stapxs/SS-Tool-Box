@@ -94,6 +94,17 @@
                                     </Grid>
                                 </StackPanel>
                             </materialDesign:Card>
+                            <materialDesign:Card x:Name="CD22" Margin="0,10,0,0" VerticalAlignment="Top">
+                                <StackPanel>
+                                    <TextBlock x:Name="MT22" Text="主页设置" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid>
+                                        <TextBlock x:Name="T23" Text="一句推荐" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,34,0,32" />
+                                        <ComboBox x:Name="whatsay" DropDownClosed="Whatsay_DropDownClosed"  Height="25" pu:ComboBoxHelper.ItemHeight="30" Margin="318,15,29,15"/>
+                                        <TextBlock x:Name="T24" Text="X-User-Token:暂未获取" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,59,31,10" TextAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

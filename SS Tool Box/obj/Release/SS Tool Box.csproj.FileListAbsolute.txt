@@ -145,10 +145,7 @@ C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\PageHD2.baml
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\KillSTL.g.cs
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\KillSTL.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Controls\QQChats.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Controls\QQChats.g.cs
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page6.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\GeneratedInternalTypeHelper.g.cs
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page6.baml
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Pages\Page7.g.cs
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Release\Windows\SSMessageBox.g.cs

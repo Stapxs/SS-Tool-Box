@@ -1,0 +1,61 @@
+
+[13:51:00.97] 开始加载UI
+[13:51:01.62] UI加载完成，耗时：00:00:00.6456008
+[13:51:01.63] 开始获取一言
+[13:51:01.63] 尝试下载丁香园界面……
+[13:51:01.64] 检查更新……
+[13:51:01.73] 下载丁香园界面失败，System.Net.WebException: 在 WebClient 请求期间发生异常。 ---> System.IO.DirectoryNotFoundException: 未能找到路径“C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Release\SSTB\Files\Ncov.txt”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   在 System.Net.WebClient.DownloadFile(Uri address, String fileName)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.WebClient.DownloadFile(Uri address, String fileName)
+   在 System.Net.WebClient.DownloadFile(String address, String fileName)
+   在 SS_Tool_Box_By_WPF.PageMain.<.ctor>b__6_0() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 298
+[13:51:08.95] 开始获取一言
+[13:51:08.96] 尝试下载丁香园界面……
+[13:51:08.99] 获取一言成功，耗时：00:00:07.3730446
+[13:51:39.15] 发现错误（MAN - 002）：获取一言失败，错误内容为：System.Net.WebException: 基础连接已经关闭: 发送时发生错误。 ---> System.IO.IOException: 由于远程方已关闭传输流，身份验证失败。
+   在 System.Net.Security.SslState.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.ForceAuthentication(Boolean receiveFirst, Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   在 System.Net.Security.SslState.ProcessAuthentication(LazyAsyncResult lazyResult)
+   在 System.Net.TlsStream.CallProcessAuthentication(Object state)
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Net.TlsStream.ProcessAuthentication(LazyAsyncResult result)
+   在 System.Net.TlsStream.Write(Byte[] buffer, Int32 offset, Int32 size)
+   在 System.Net.PooledStream.Write(Byte[] buffer, Int32 offset, Int32 size)
+   在 System.Net.ConnectStream.WriteHeaders(Boolean async)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 SS_Tool_Box.Classes.HttpUitls.Get(String Url, String ContentType) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Classes\HttpUitls.cs:行号 32
+   在 SS_Tool_Box_By_WPF.PageMain.<.ctor>b__6_1() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Pages\PageMain.xaml.cs:行号 70，耗时：00:00:30.1857099
+[13:52:41.74] 检查更新错误 ：System.Net.WebException: 操作超时
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 SS_Tool_Box.Classes.HttpUitls.Get(String Url, String ContentType) 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Classes\HttpUitls.cs:行号 32
+   在 SS_Tool_Box_By_WPF.Main.UpdateRight() 位置 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\Main.xaml.cs:行号 636

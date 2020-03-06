@@ -91,14 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SS Tool Box.exe" size="2437584">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SS Tool Box.exe" size="2441168">
       <assemblyIdentity name="SS Tool Box" version="1.0.24.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oDmJJ/h5eQXPcIHHMbLrQWjnDV0eOh7wUjZkx404loA=</dsig:DigestValue>
+        <dsig:DigestValue>UudsZ1MrSMbZQKZKk7xHwuPI+ju7gklkFfdk9FC24Rk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

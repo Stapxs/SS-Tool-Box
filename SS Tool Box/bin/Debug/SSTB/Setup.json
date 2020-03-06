@@ -15,6 +15,9 @@
   "Features": {
     "Privacy": {
       "Password": "NULL"
+    },
+    "MainPage": {
+      "SaysType": "ShiCi"
     }
   }
 }
