@@ -97,7 +97,7 @@
             </Button.Effect>
         </Button>
 
-        <TextBox x:Name="SH1" Grid.Column="0" Grid.Row="1" pu:TextBoxHelper.IsClearButtonVisible="True" VerticalContentAlignment="Center" pu:TextBoxHelper.Icon="" pu:TextBoxHelper.Watermark="搜索……" pu:IconHelper.FontSize="15" Opacity="0.8" PreviewKeyDown="SearchBox_OnKeyDown"/>
+        <TextBox x:Name="SH1" BorderThickness="0" Grid.Column="0" Grid.Row="1" pu:TextBoxHelper.IsClearButtonVisible="True" VerticalContentAlignment="Center" pu:TextBoxHelper.Icon="" pu:TextBoxHelper.Watermark="搜索……" pu:IconHelper.FontSize="15" Opacity="0.8" PreviewKeyDown="SearchBox_OnKeyDown"/>
 
         <Grid Grid.Column="0" Grid.Row="3" >
             <Grid.ColumnDefinitions>

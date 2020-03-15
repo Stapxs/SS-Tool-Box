@@ -130,7 +130,7 @@ namespace SS_Tool_Box_By_WPF
                                     error.logWriter("发现错误（MAN - 002.2）：获取诗词Token为空。", false);
                                 }
                             }
-                            catch (Exception ex)
+                            catch
                             {
                                 error.logWriter("发现错误（MAN - 002.3）：访问诗词Token失败。", false);
                             }
@@ -244,11 +244,13 @@ namespace SS_Tool_Box_By_WPF
             this.U21.Foreground = baseColora.Font;
             this.U22.Foreground = baseColora.Font;
             this.U23.Foreground = baseColora.Font;
+            this.U24.Foreground = baseColora.Font;
 
             this.B1.Foreground = baseColora.Fg;
 
             this.Height = 477;
 
+            /*
             //疫情查询板块
             this.CDY.Background = baseColora.Card;
             this.MTY.Foreground = baseColora.Fg;
@@ -361,33 +363,13 @@ namespace SS_Tool_Box_By_WPF
                 }
             });
             actionyq.BeginInvoke(null, null);
+            */
         }
 
-        /*
-         * 以下是程序无关的辅助算法 
-         */
-
-        private string GB2312ToUTF8(string str)
-        {
-            try
-            {
-                Encoding utf8 = Encoding.UTF8;
-                Encoding gb2312 = Encoding.GetEncoding("GB2312");
-                byte[] unicodeBytes = gb2312.GetBytes(str);
-                byte[] asciiBytes = Encoding.Convert(gb2312, utf8, unicodeBytes);
-                char[] asciiChars = new char[utf8.GetCharCount(asciiBytes, 0, asciiBytes.Length)];
-                utf8.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0);
-                string result = new string(asciiChars);
-                return result;
-            }
-            catch
-            {
-                return "Error";
-            }
-        }
 
         private void N_Click(object sender, RoutedEventArgs e)
         {
+            /*
             string inpa = NC.Text;
             if (!String.IsNullOrWhiteSpace(inpa) && !errN)
             {
@@ -475,6 +457,7 @@ namespace SS_Tool_Box_By_WPF
                     }
                 }
             }
+            */
         }
 
         void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -499,6 +482,29 @@ namespace SS_Tool_Box_By_WPF
             if (!yyid.Equals("NULL"))
             {
                 System.Diagnostics.Process.Start("https://hitokoto.cn/?id=" + yyid);
+            }
+        }
+
+        /*
+         * 以下是程序无关的辅助算法 
+         */
+
+        private string GB2312ToUTF8(string str)
+        {
+            try
+            {
+                Encoding utf8 = Encoding.UTF8;
+                Encoding gb2312 = Encoding.GetEncoding("GB2312");
+                byte[] unicodeBytes = gb2312.GetBytes(str);
+                byte[] asciiBytes = Encoding.Convert(gb2312, utf8, unicodeBytes);
+                char[] asciiChars = new char[utf8.GetCharCount(asciiBytes, 0, asciiBytes.Length)];
+                utf8.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0);
+                string result = new string(asciiChars);
+                return result;
+            }
+            catch
+            {
+                return "Error";
             }
         }
     }

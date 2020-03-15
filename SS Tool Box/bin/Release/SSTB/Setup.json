@@ -2,14 +2,14 @@
   "Version": "8",
   "Exterior": {
     "Themes": {
-      "WindowTran": "0",
-      "MainTheme": "1",
-      "DarkMode": "False"
+      "WindowTran": 0.0,
+      "MainTheme": "3",
+      "DarkMode": "True"
     },
     "OwnColor": {
-      "R": "",
-      "G": "",
-      "B": ""
+      "R": 0.0,
+      "G": 0.0,
+      "B": 0.0
     }
   },
   "Features": {

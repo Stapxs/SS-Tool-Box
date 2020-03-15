@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:SS_Tool_Box"
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="441" Width="600"
-      Title="Page2 - 颜色转换">
+      mc:Ignorable="d" d:DesignWidth="600" Width="600"
+      Title="Page2 - 颜色转换" Height="1016.036">
 
     <Grid Margin="10, 0, 10, 10">
         <ScrollViewer Height="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7" PreviewMouseWheel="UIElement_OnPreviewMouseWheel">
@@ -33,21 +33,84 @@
                 </materialDesign:Card>
                 <materialDesign:Card x:Name="ColorCard" Height="30" Width="540" Margin="5,10,20,5">
                     <UniformGrid x:Name="CheckeBoard" Height="40" Margin="0,0,0,0">
-                        <Rectangle x:Name="Color" Fill="Black" Margin="-32,-15,-29,0" RenderTransformOrigin="0.5,0.629" Height="55" VerticalAlignment="Top"/>
+                        <Rectangle x:Name="Color" Fill="Black" Margin="-34,-15,-29,0" RenderTransformOrigin="0.5,0.629" Height="55" VerticalAlignment="Top"/>
                     </UniformGrid>
                 </materialDesign:Card>
                 <materialDesign:Card x:Name="CD2" Opacity="0.9" Margin="5, 5, 20, 5" Width="540" Background="#E5FFFFFF">
                     <StackPanel>
                         <Grid>
                             <TextBlock x:Name="T6" Text="十六进制" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,25,0,15"/>
-                            <TextBox x:Name="J16" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,15" Height="28" Opacity="100" ToolTip="十六进制格式以井号开头六位"/>
+                            <TextBox x:Name="J16" GotFocus="J16_GotFocus" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,15" Height="28" Opacity="100" ToolTip="十六进制格式以井号开头六位"/>
                         </Grid>
                         <Grid>
                             <TextBlock x:Name="T1" Text="RGBA" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,25,0,15"/>
-                            <TextBox x:Name="RGBA" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,15" Height="28" Opacity="100" ToolTip="RGBA格式逗号分隔四段"/>
+                            <TextBox x:Name="RGBA" GotFocus="RGBA_GotFocus" pu:TextBoxHelper.IsClearButtonVisible="True" Margin="160,18,34,15" Height="28" Opacity="100" ToolTip="RGBA格式逗号分隔四段"/>
                         </Grid>
                     </StackPanel>
                 </materialDesign:Card>
+                <materialDesign:Card x:Name="CD3" Margin="5, 5, 20, 5" Width="540" Background="#CCFFFFFF">
+                    <StackPanel>
+                        <TextBlock x:Name="MT1" Text="快速调色" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
+                        <Grid Height="42">
+                            <TextBlock x:Name="T7" Text="R（红）" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                            <Slider x:Name="S1" Margin="165,10,38,10" Maximum="255" TickFrequency="1" pu:SliderHelper.IsTickValueVisible="False" ValueChanged="UpdateColor"/>
+                        </Grid>
+                        <Grid Height="42">
+                            <TextBlock x:Name="T8" Text="G（绿）" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                            <Slider x:Name="S2" Margin="165,10,38,10" Maximum="255" TickFrequency="1" pu:SliderHelper.IsTickValueVisible="False" ValueChanged="UpdateColor"/>
+                        </Grid>
+                        <Grid Height="42" Margin="0, 0, 0, 10">
+                            <TextBlock x:Name="T9" Text="B（蓝）" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                            <Slider x:Name="S3" Margin="165,10,38,10" Maximum="255" TickFrequency="1" pu:SliderHelper.IsTickValueVisible="False" ValueChanged="UpdateColor"/>
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
+                <materialDesign:Card x:Name="CD4" Margin="5, 5, 20, 5" Width="540" Background="#CCFFFFFF">
+                    <StackPanel x:Name="ColorsSukazyo">
+                        <TextBlock x:Name="MT2" Text="Sukazyo 色表" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
+                        <StackPanel x:Name="LoadColor">
+                            <pu:Loading x:Name="Load" Height="50" Width="50" LoadingStyle="Wave" IsRunning="True" Margin="0,15,0,5"/>
+                            <TextBlock x:Name="T10" Text="加载啊加载啊……" HorizontalAlignment="Center" Margin="0,5,0,15"/>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
+                <TextBlock x:Name="From" Text="色表数据来自：https://srv.sukazyo.cc/color" FontSize="11" HorizontalAlignment="Center" Margin="0, 0, 0, 5"/>
+                <materialDesign:Card x:Name="CD5" Margin="5, 5, 20, 5" Width="540" Background="#CCFFFFFF">
+                    <StackPanel>
+                        <TextBlock x:Name="MT3" Text="Stapxs 色表" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
+                        <Grid Height="60">
+                            <TextBlock FontSize="13" Text="SSTB 翠竹绿" VerticalAlignment="Top" Margin="49,10,0,0" Foreground="#FF546E36" HorizontalAlignment="Left"/>
+                            <TextBlock FontSize="13" Text="#FF546E36 / 84,110,54" Foreground="#FF546E36" VerticalAlignment="Bottom" Margin="49,0,0,10"/>
+                            <Grid Width="4" Height="36" Background=" #FF546E36" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Grid Width="250" Height="36" Background="#FF546E36" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Height="60">
+                            <TextBlock FontSize="13" Text="SSTB 冰晶蓝" VerticalAlignment="Top" Margin="49,10,0,0" Foreground="#FF9FD7EE" HorizontalAlignment="Left"/>
+                            <TextBlock FontSize="13" Text="#FF9FD7EE / 159,215,238" Foreground="#FF9FD7EE" VerticalAlignment="Bottom" Margin="49,0,0,10"/>
+                            <Grid Width="4" Height="36" Background="#FF9FD7EE" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Grid Width="250" Height="36" Background="#FF9FD7EE" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Height="60">
+                            <TextBlock FontSize="13" Text="SSTB 林槐灰" VerticalAlignment="Top" Margin="49,10,0,0" Foreground="#FFC4C4C4" HorizontalAlignment="Left"/>
+                            <TextBlock FontSize="13" Text="#FFC4C4C4 / 196,196,196" Foreground="#FFC4C4C4" VerticalAlignment="Bottom" Margin="49,0,0,10"/>
+                            <Grid Width="4" Height="36" Background="#FFC4C4C4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Grid Width="250" Height="36" Background="#FFC4C4C4" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Height="60">
+                            <TextBlock FontSize="13" Text="SSTB 坏猫黄" VerticalAlignment="Top" Margin="49,10,0,0" Foreground="#FFFFCC00" HorizontalAlignment="Left"/>
+                            <TextBlock FontSize="13" Text="#FFFFCC00 / 255,255,204" Foreground="#FFFFCC00" VerticalAlignment="Bottom" Margin="49,0,0,10"/>
+                            <Grid Width="4" Height="36" Background="#FFFFCC00" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Grid Width="250" Height="36" Background="#FFFFCC00" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Height="60">
+                            <TextBlock FontSize="13" Text="墨竹青" VerticalAlignment="Top" Margin="49,10,0,0" Foreground="#FFB1CFB2" HorizontalAlignment="Left"/>
+                            <TextBlock FontSize="13" Text="#FFB1CFB2 / 177,207,178" Foreground="#FFB1CFB2" VerticalAlignment="Bottom" Margin="49,0,0,10"/>
+                            <Grid Width="4" Height="36" Background=" #FFB1CFB2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Grid Width="250" Height="36" Background=" #FFB1CFB2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:Card>
+                <Grid Height="20"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
