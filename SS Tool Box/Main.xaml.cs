@@ -30,7 +30,7 @@ namespace SS_Tool_Box_By_WPF
         Error error = new Error();
 
         public static int nUpdateVersion = 2;
-        public static String stVersion = "1.0.28";
+        public static String stVersion = "1.0.30";
         public static String szTree = "Note-Update";
 
         int NowPage = 0;
@@ -54,6 +54,7 @@ namespace SS_Tool_Box_By_WPF
                 new ListTool(){Line="    5 . QQ 头像获取"},
                 new ListTool(){Line="    6 . QQ 消息制作"},
                 new ListTool(){Line="    7 . 记事簿"},
+                new ListTool(){Line="    8 . MC 服务器查询"},
         };
         //隐藏的工具列表
         ListTool[] listallHidden = new ListTool[]
@@ -169,6 +170,10 @@ namespace SS_Tool_Box_By_WPF
                 {
                     NowChoice = 7;
                 }
+                else if (upd.Line == "    8 . MC 服务器查询")
+                {
+                    NowChoice = 8;
+                }
                 else if (upd.Line == "    * . SOS 图标获取")
                 {
                     NowChoice = -1;
@@ -271,6 +276,16 @@ namespace SS_Tool_Box_By_WPF
                     Page.Content = new Frame()
                     {
                         Content = page7
+                    };
+                }
+                else if (upd.Line == "    8 . MC 服务器查询")
+                {
+                    NowPage = 8;
+                    Page8 page8 = new Page8();
+                    page8.ParentWindow = this;
+                    Page.Content = new Frame()
+                    {
+                        Content = page8
                     };
                 }
                 else if (upd.Line == "    * . SOS 图标获取")
@@ -485,6 +500,18 @@ namespace SS_Tool_Box_By_WPF
             BorderTop1.Background = baseColor.Main;
             BorderTop2.Background = baseColor.Main;
 
+            SolidColorBrush brush = new SolidColorBrush();
+            if(Settings["Exterior"]["Themes"]["DarkMode"].ToString() == "True")
+            {
+                brush.Color = Color.FromArgb(102, 255, 255, 255);
+                ContextMenuHelper.SetHoverBackground(MainCont, brush);
+            }
+            else
+            {
+                brush.Color = Color.FromArgb(68, 0, 0, 0);
+                ContextMenuHelper.SetHoverBackground(MainCont, brush);
+            }
+
             BG.BeginInit();
             BG.Source = baseColor.Bgp;
             BG.EndInit();
@@ -580,6 +607,11 @@ namespace SS_Tool_Box_By_WPF
 
                 int num = random.Next(0, 100);
                 string say = "欢迎使用林槐工具箱！今天的人品是 " + num + " ，";
+                if(!File.Exists("SSTB\\Files\\JrrpStatistical.txt"))
+                {
+                    File.AppendAllText("SSTB\\Files\\JrrpStatistical.txt", "每日人品统计\n");
+                }
+                File.AppendAllText("SSTB\\Files\\JrrpStatistical.txt", DateTime.Now.ToString() + "\t\t" + num + "\n");
                 int numsay = random.Next(0, all - 1);
                 say = say + sayslist[numsay];
                 if(numsay == 0 || numsay == 4 || numsay == 8 || numsay == 9 || numsay == 11)

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Panuon.UI.Silver;
 using SS_Tool_Box.Classes;
 using System;
 using System.IO;
@@ -212,7 +213,6 @@ namespace SS_Tool_Box_By_WPF
             CD3.Background = baseColora.Card;
 
             Title.Foreground = baseColora.Fg;
-            MT1.Foreground = baseColora.Fg;
             MT2.Foreground = baseColora.Fg;
             Says.Foreground = baseColora.Fg;
             Tips.Foreground = baseColora.Fg;
@@ -245,8 +245,12 @@ namespace SS_Tool_Box_By_WPF
             this.U22.Foreground = baseColora.Font;
             this.U23.Foreground = baseColora.Font;
             this.U24.Foreground = baseColora.Font;
+            this.U25.Foreground = baseColora.Font;
+            this.U26.Foreground = baseColora.Font;
 
             this.B1.Foreground = baseColora.Fg;
+
+            ExpanderHelper.SetHeaderForeground(Upd, baseColora.Font);
 
             this.Height = 477;
 

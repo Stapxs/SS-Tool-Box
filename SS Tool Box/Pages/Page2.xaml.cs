@@ -77,6 +77,9 @@ namespace SS_Tool_Box
             this.T10.Foreground = baseColora.Fg;
             this.T10.FontFamily = baseColora.Fonts;
             this.T10.FontSize = 13;
+            this.T11.Foreground = baseColora.Fg;
+            this.T11.FontFamily = baseColora.Fonts;
+            this.T11.FontSize = 13;
 
             this.From.Foreground = baseColora.Fg;
             this.From.FontFamily = baseColora.Fonts;
@@ -86,12 +89,6 @@ namespace SS_Tool_Box
             this.MT1.Foreground = baseColora.Fg;
             this.MT1.FontFamily = baseColora.Fonts;
             this.MT1.FontSize = 15;
-            this.MT2.Foreground = baseColora.Fg;
-            this.MT2.FontFamily = baseColora.Fonts;
-            this.MT2.FontSize = 15;
-            this.MT3.Foreground = baseColora.Fg;
-            this.MT3.FontFamily = baseColora.Fonts;
-            this.MT3.FontSize = 15;
 
             this.S1.Background = baseColora.DBg;
             this.S1.Foreground = baseColora.Fg;
@@ -124,11 +121,16 @@ namespace SS_Tool_Box
             this.ClearButton.Foreground = baseColora.Fg;
             this.RunButton.Background = baseColora.Tran;
             this.ClearButton.Background = baseColora.Tran;
+            this.colorFail.Foreground = baseColora.Font;
+            ButtonHelper.SetHoverBrush(colorFail, baseColora.Font);
 
             this.RunCard.Visibility = Visibility.Collapsed;
             this.Errorsay.Visibility = Visibility.Collapsed;
 
             ColorFst = this.Percent.Foreground;
+
+            ExpanderHelper.SetHeaderForeground(SuColor, baseColora.Font);
+            ExpanderHelper.SetHeaderForeground(SsColor, baseColora.Font);
 
             //开始获取 Sukazyo 收集颜色表
             Thread thread = new Thread(Sukazyo);
@@ -175,7 +177,7 @@ namespace SS_Tool_Box
                 try
                 {
                     error.logWriter("尝试下载 Sukazyo 收集颜色表界面……", false);
-                    string url = "https://srv.sukazyo.cc/color/";
+                    string url = "https://srv.sukazyo.cc/style/color/";
                     string filepath = "SSTB/Files/Sukazyo.txt";
                     WebClient mywebclient = new WebClient();
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -189,6 +191,11 @@ namespace SS_Tool_Box
                 catch (Exception ex)
                 {
                     error.logWriter("下载下载 Sukazyo 收集颜色表界面失败，" + ex, false);
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        Load.Visibility = Visibility.Collapsed;
+                        ErrorColor.Visibility = Visibility.Visible;
+                    }), DispatcherPriority.SystemIdle, null);
                     return;
                 }
             }
@@ -196,7 +203,7 @@ namespace SS_Tool_Box
             {
                 List<Colors> colors = new List<Colors>();
                 string content = File.ReadAllText("SSTB/Files/Sukazyo.txt");
-                int i = content.IndexOf("h3");
+                int i = content.IndexOf("h3 style=\"color");
                 int j;
                 while(i > 0)
                 {
@@ -229,13 +236,24 @@ namespace SS_Tool_Box
                     int b = int.Parse(RGB);
                     colors.Add(new Colors() { Name = Name, r = r, g = g, b = b});
 
-                    i = content.IndexOf("h3");
+                    i = content.IndexOf("h3 style=\"color");
                 }
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    SuColor.IsExpanded = false;
+                }), DispatcherPriority.SystemIdle, null);
+
                 CreateColorBoard(colors);
             }
-            catch
+            catch(Exception ex)
             {
-                
+                error.logWriter("处理 Sukazyo 收集颜色表界面失败，" + ex, false);
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Load.Visibility = Visibility.Collapsed;
+                    ErrorColor.Visibility = Visibility.Visible;
+                }), DispatcherPriority.SystemIdle, null);
+                return;
             }
         }
 
@@ -475,6 +493,10 @@ namespace SS_Tool_Box
             ButtonHelper.SetIsWaiting(RunButton, false);
             this.J16.Text = ColorList[0];
             this.RGBA.Text = ColorList[1];
+            int[] rgba = toRGBA(ColorList[0], 1);
+            S1.Value = rgba[1];
+            S2.Value = rgba[2];
+            S3.Value = rgba[3];
             if (!Error)
             {
                 this.Errorsay.Visibility = Visibility.Collapsed;

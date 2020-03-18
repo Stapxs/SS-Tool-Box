@@ -100,3 +100,6 @@ C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\SSMessageBox.baml
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\Updater.g.cs
 C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\Updater.baml
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page8.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page8.baml
