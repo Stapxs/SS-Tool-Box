@@ -61,7 +61,7 @@ namespace MCServerPing
 
             if (!client.Connected)
             {
-                return "ERR - 无法连接到连接服务器……";
+                return "ERR - 无法连接到服务器……";
             }
 
             _buffer = new List<byte>();

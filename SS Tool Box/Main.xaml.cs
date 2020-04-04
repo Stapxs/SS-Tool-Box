@@ -30,7 +30,7 @@ namespace SS_Tool_Box_By_WPF
         Error error = new Error();
 
         public static int nUpdateVersion = 2;
-        public static String stVersion = "1.0.30";
+        public static String stVersion = "1.0.31";
         public static String szTree = "Note-Update";
 
         int NowPage = 0;
@@ -650,7 +650,7 @@ namespace SS_Tool_Box_By_WPF
                 SSMessageHelper.noNo = true;
                 ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
                 SSMessageHelper.Title = "更新完成";
-                SSMessageHelper.Says = "我们成功更新了 SSTB ！开始体验全新的功能吧！";
+                SSMessageHelper.Says = "我们成功更新了 Stapx Steve Tool Box！开始体验全新的功能吧！";
                 SSMessageBox MB = new SSMessageBox();
                 this.IsMaskVisible = true;
                 MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -661,7 +661,7 @@ namespace SS_Tool_Box_By_WPF
             }
             error.logWriter("检查更新……", false);
             string GetJson;
-            String saysuri = "https://stapxs.neocities.org/SSTB-NowVersion.txt";
+            String saysuri = "http://go.stapx.chuhelan.com/Info/SSTB/getVersion";
             try
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -669,10 +669,20 @@ namespace SS_Tool_Box_By_WPF
             }
             catch(Exception ex)
             {
-                error.logWriter("检查更新错误 ：" + ex, false);
-                return;
+                error.logWriter("检查更新错误(官方源) ：" + ex, false);
+                saysuri = "https://stapxs.neocities.org/SSTB-NowVersion.txt";
+                try
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    GetJson = HttpUitls.Get(saysuri, "DEFALT");
+                }
+                catch (Exception exa)
+                {
+                    error.logWriter("检查更新错误 ：" + exa, false);
+                    return;
+                }
             }
-            if(String.IsNullOrWhiteSpace(GetJson))
+            if (String.IsNullOrWhiteSpace(GetJson))
             {
                 return;
             }
@@ -704,7 +714,7 @@ namespace SS_Tool_Box_By_WPF
                         SSMessageHelper.bOKtext = "在线更新";
                         SSMessageHelper.bNOtext = "知道了";
                         SSMessageHelper.Title = "发现更新";
-                        SSMessageHelper.Says = "我们检查到了版本更新，最新版本为：" + obj["MainVersion"].ToString() + "，更新时间：" + obj["Time"].ToString() + "，选择在线更新将从GitHub在线下载。\n（ GitHub 有约1小时的CDN缓存延时，建议在更新时间一小时后更新 ）\n更新日志如下：\n" + obj["Logs"].ToString();
+                        SSMessageHelper.Says = "我们检查到了版本更新，最新版本为：" + obj["MainVersion"].ToString() + "，更新时间：" + obj["Time"].ToString() + "，选择在线更新将从GitHub在线下载。\n更新日志如下：\n" + obj["Logs"].ToString();
                         SSMessageBox MB = new SSMessageBox();
                         this.IsMaskVisible = true;
                         MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;

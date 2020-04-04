@@ -45,7 +45,7 @@
                 <materialDesign:Card x:Name="CD6" Background="#CCFFFFFF" Margin="5, 5, 25, 5" Width="540" >
                     <StackPanel>
                         <TextBlock x:Name="MT3" Text="一点小提醒" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
-                        <TextBlock x:Name="Tips" Text="1.目前只支持 Java 1.5 以上版本的服务器。" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="Tips" Text="1. 目前只支持 Minecraft Java Edition 1.5 以上的服务器。" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card x:Name="CD2" Opacity="0.9" Margin="5, 5, 20, 5" Width="540" Background="#E5FFFFFF">

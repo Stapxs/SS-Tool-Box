@@ -32,10 +32,10 @@
                         <TextBlock x:Name="Says" Margin="34,0,-132,10" Height="Auto" Width="496" TextWrapping="Wrap" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </materialDesign:Card>
-                <materialDesign:Card x:Name="CD2" Background="#CCFFFFFF" Margin="5, 5, 25, 5" >
+                <materialDesign:Card x:Name="CD4" Background="#CCFFFFFF" Margin="5, 5, 25, 5">
                     <StackPanel>
-                        <TextBlock x:Name="MT2" Text="一点小提醒" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
-                        <TextBlock x:Name="Tips" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="MT3" Text="公告板" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,25,34,10"/>
+                        <TextBlock x:Name="Noticesa" Text="啥子也没有 = =" Margin="34,0,34,10" Height="Auto" TextWrapping="Wrap"/>
                     </StackPanel>
                 </materialDesign:Card>
                 <materialDesign:Card Visibility="Collapsed" x:Name="CDY" Background="#CCFFFFFF" Margin="5, 5, 25, 5" >
@@ -76,6 +76,11 @@
                         </Expander.Header>
                         <StackPanel>
                             <pu:Timeline x:Name="UpdateList" Margin="35,0,35,5" Height="Auto" Width="Auto" >
+                                <pu:TimelineItem x:Name="U27"
+                                             Header="2020.04.04"
+    			                             Content="+ 官方更新源&#13;+ 公告板" 
+                                             FontFamily="方正兰亭简黑"
+                                             FontSize="15"/>
                                 <pu:TimelineItem x:Name="U26"
                                              Header="2020.03.18"
     			                             Content="+ MC 服务器信息查询" 

@@ -57,6 +57,36 @@ namespace SS_Tool_Box_By_WPF
                 MessageBox.Show("" + ex);
             }
             */
+            //获取公告板
+            error.logWriter("获取公告板……", false);
+            string str;
+            String gg = "http://go.stapx.chuhelan.com/Info/SSTB/getNotice";
+            try
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                str = HttpUitls.Get(gg, "DEFALT");
+                if (!String.IsNullOrWhiteSpace(str))
+                {
+                    try
+                    {
+                        JObject obja = JObject.Parse(str);
+                        Noticesa.Text =obja["Messages"].ToString();
+                        error.logWriter("获取公告板成功。", false);
+                    }
+                    catch(Exception ex)
+                    {
+                        error.logWriter("处理公告板失败：" + ex, false);
+                    }
+                }
+                else
+                {
+                    error.logWriter("获取公告板失败：内容为空。", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                error.logWriter("获取公告板失败：" + ex, false);
+            }
 
             //获取主页一句话类型
             try
@@ -188,11 +218,10 @@ namespace SS_Tool_Box_By_WPF
             this.Says.FontFamily = baseColora.Fonts;
             this.Says.FontSize = 14;
             Says.Text = stSays;
-            String stTips = "      1.这个程序还在开发哦\n      2.第一次使用一定要去“设置 > Q&A”去看看使用建议啦";
-            this.Tips.Foreground = baseColora.Fg;
-            this.Tips.FontFamily = baseColora.Fonts;
-            this.Tips.FontSize = 14;
-            Tips.Text = stTips;
+
+            this.Noticesa.Foreground = baseColora.Fg;
+            this.Noticesa.FontFamily = baseColora.Fonts;
+            this.Noticesa.FontSize = 14;
 
             this.Title.Foreground = baseColora.Fg;
             this.Title.FontFamily = baseColora.Fonts;
@@ -202,20 +231,18 @@ namespace SS_Tool_Box_By_WPF
             this.MT1.Foreground = baseColora.Fg;
             this.MT1.FontFamily = baseColora.Fonts;
             this.MT1.FontSize = 15;
-            this.MT2.Foreground = baseColora.Fg;
-            this.MT2.FontFamily = baseColora.Fonts;
-            this.MT2.FontSize = 15;
+            this.MT3.Foreground = baseColora.Fg;
+            this.MT3.FontFamily = baseColora.Fonts;
+            this.MT3.FontSize = 15;
 
             BaseColor baseColor = new BaseColor();
 
             CD1.Background = baseColora.Card;
-            CD2.Background = baseColora.Card;
             CD3.Background = baseColora.Card;
+            CD4.Background = baseColora.Card;
 
             Title.Foreground = baseColora.Fg;
-            MT2.Foreground = baseColora.Fg;
             Says.Foreground = baseColora.Fg;
-            Tips.Foreground = baseColora.Fg;
 
             this.UpdateList.ItemLineBrush = baseColora.Font;
             this.UpdateList.ItemToggleStroke = baseColora.Tran;
@@ -247,6 +274,7 @@ namespace SS_Tool_Box_By_WPF
             this.U24.Foreground = baseColora.Font;
             this.U25.Foreground = baseColora.Font;
             this.U26.Foreground = baseColora.Font;
+            this.U27.Foreground = baseColora.Font;
 
             this.B1.Foreground = baseColora.Fg;
 

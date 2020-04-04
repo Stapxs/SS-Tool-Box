@@ -41,7 +41,7 @@ namespace SS_Tool_Box
 
             this.Height = 477;
 
-            String stTitle = "Minecraft 服务器信息查询";
+            String stTitle = "Minecraft 服务器信息查询（Bata）";
             this.Title.Foreground = baseColora.Fg;
             this.Title.FontFamily = baseColora.Fonts;
             this.Title.FontSize = 17;
@@ -204,7 +204,7 @@ namespace SS_Tool_Box
                     //解析图片
                     this.Dispatcher.Invoke(new Action(delegate
                     {
-                        try
+                        if (ping.IndexOf("favicon") >= 0)
                         {
                             string base64 = info["favicon"].ToString();
                             string imagebase64 = base64.Substring(base64.IndexOf(",") + 1);
@@ -219,7 +219,7 @@ namespace SS_Tool_Box
                                 CD4.Visibility = Visibility.Visible;
                             }), DispatcherPriority.SystemIdle, null);
                         }
-                        catch
+                        else
                         {
                             this.Dispatcher.BeginInvoke(new Action(() =>
                             {
@@ -390,8 +390,11 @@ namespace SS_Tool_Box
                     }
                     else
                     {
-                        T7.Visibility = Visibility.Collapsed;
-                        PlayerList.Visibility = Visibility.Collapsed;
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            T7.Visibility = Visibility.Collapsed;
+                            PlayerList.Visibility = Visibility.Collapsed;
+                        }), DispatcherPriority.SystemIdle, null);
                     }
                 }
                 catch (Exception ex)
