@@ -30,7 +30,7 @@ namespace SS_Tool_Box_By_WPF
         Error error = new Error();
 
         public static int nUpdateVersion = 2;
-        public static String stVersion = "1.0.31";
+        public static String stVersion = "1.0.32";
         public static String szTree = "Note-Update";
 
         int NowPage = 0;
@@ -661,7 +661,7 @@ namespace SS_Tool_Box_By_WPF
             }
             error.logWriter("检查更新……", false);
             string GetJson;
-            String saysuri = "http://go.stapx.chuhelan.com/Info/SSTB/getVersion";
+            String saysuri = "http://go.stapx.chuhelan.com/Info/SSTB/getVersion?dev=False&type=Desktop";
             try
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

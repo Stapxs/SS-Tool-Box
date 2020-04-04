@@ -78,7 +78,7 @@
                             <pu:Timeline x:Name="UpdateList" Margin="35,0,35,5" Height="Auto" Width="Auto" >
                                 <pu:TimelineItem x:Name="U27"
                                              Header="2020.04.04"
-    			                             Content="+ 官方更新源&#13;+ 公告板" 
+    			                             Content="+ 官方更新源&#13;+ 公告板&#13;+ 兼容了接口统计" 
                                              FontFamily="方正兰亭简黑"
                                              FontSize="15"/>
                                 <pu:TimelineItem x:Name="U26"
