@@ -1,0 +1,134 @@
+﻿<pu:WindowX x:Class="SS_Tool_Box_By_WPF.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SS_Tool_Box_By_WPF"
+        mc:Ignorable="d"
+        Title="| 林槐工具箱 - SS Tool Box" Height="500" Width="820"
+        Icon="/Resource/ICONMain_128.ico"
+        ResizeMode="CanMinimize"
+        Foreground="#000000"
+        SizeChanged="Onsizechanged"
+        ContentRendered="WContentRendered"
+        Background="#00000000"
+        WindowStyle="None"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="209px " />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="126px" />
+            <RowDefinition Height="34px" />
+            <RowDefinition />
+            <RowDefinition Height="27" />
+        </Grid.RowDefinitions>
+
+        <Border x:Name="BorderBut"
+                CornerRadius="0,0,0,0"
+                Background="Black"
+                BorderBrush="Transparent"
+                BorderThickness="1"
+                Grid.ColumnSpan="3"
+                Grid.RowSpan="4"
+                Margin="-16,0,-9,-12"/>
+
+        <Border x:Name="BorderTop"
+                CornerRadius="0,0,0,0"
+                Background="Black"
+                BorderBrush="Transparent"
+                BorderThickness="1"
+                Grid.ColumnSpan="3"
+                Margin="-16,-42,-9,160"/>
+
+        <Border x:Name="BorderTop1"
+                CornerRadius="0,0,0,0"
+                Background="Black"
+                BorderBrush="Transparent"
+                BorderThickness="1"
+                Margin="-16,-34,207,124"/>
+
+        <Border x:Name="BorderTop2"
+                CornerRadius="0,0,0,0"
+                Background="Black"
+                BorderBrush="Transparent"
+                BorderThickness="1"
+                Margin="608,-34,-9,124"
+                Grid.Column="2"/>
+
+        <Image x:Name="BG" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4" Source="/Resource/BG.png" Stretch="Fill"/>
+        <!-- 这是List的Card -->
+        <materialDesign:Card x:Name="CD1" Background="#CCFFFFFF" Padding="0" Height="426" Margin="0,10,0,0" Grid.RowSpan="3" />
+        <!-- 这是UnderBar的Card -->
+        <materialDesign:Card x:Name="CD2" Height="27" Margin="0,5,0,-5" RenderTransformOrigin="0.495,0.424" Grid.Row="3" Background="#CCFFFFFF" Padding="0">
+            <materialDesign:Card.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </materialDesign:Card.RenderTransform>
+        </materialDesign:Card>
+        <Image x:Name="SBG" Grid.Column="0" Grid.Row="0" Source="/Resource/BGtop.bmp" />
+
+        <ListView x:Name="UpdateList" Grid.Column="0" Grid.Row="1" Margin="0,0,0,15" pu:ListBoxHelper.ItemHeight="10" Grid.RowSpan="2" Opacity="0.9" Width="228">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Line}"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu x:Name="MainCont" Width="150" pu:ContextMenuHelper.ItemHeight="30">
+                    <MenuItem Name="MenuItem1" Header="隐藏此项" Icon="" />
+                    <MenuItem Name="MenuItem2" Header="单独打开" Icon="" Click="ListMenu_Open"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+
+        <Button x:Name="OpenButton" Grid.Row="2" Margin="156,222,19,18" pu:ButtonHelper.CornerRadius="40, 40, 40, 40" RenderTransformOrigin="0.665,-0.525" pu:ButtonHelper.Icon="" pu:IconHelper.FontSize="25" Click="Button_Open" pu:ButtonHelper.WaitingContent="" pu:ButtonHelper.IsWaiting="True">
+            <Button.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
+            </Button.Effect>
+        </Button>
+
+        <TextBox x:Name="SH1" BorderThickness="0, 0, 0, 1" Grid.Column="0" Grid.Row="1" pu:TextBoxHelper.IsClearButtonVisible="True" VerticalContentAlignment="Center" pu:TextBoxHelper.Icon="" pu:TextBoxHelper.Watermark="搜索……" pu:IconHelper.FontSize="15" Opacity="0.8" PreviewKeyDown="SearchBox_OnKeyDown"/>
+
+        <Grid Grid.Column="0" Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="38px" />
+                <ColumnDefinition Width="38px" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="Versionon" Margin="15,5,5,5" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Button x:Name="B1" Grid.Column="1" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" Margin="0,0,10,0" Click="Button_About"/>
+            <Button x:Name="B2" Grid.Column="1" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" Margin="0,0,10,0" HorizontalAlignment="Right" Width="33" Grid.ColumnSpan="2" Click="Button_Set"/>
+
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Margin="0,0,1,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5px" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="0" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0" />
+                <RowDefinition />
+                <RowDefinition Height="0" />
+            </Grid.RowDefinitions>
+
+            <ContentControl Grid.Column="1" Grid.Row="1" Name="Page" Margin="15,0,0,0" Padding="0" HorizontalAlignment="Left"/>
+        </Grid>
+
+        <Button x:Name="Feedback" Grid.Column="2" Margin="402,-27,74,132" Content="提交问题" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Link" pu:IconHelper.FontSize="15" Click="Feedback_Click"/>
+        <Button x:Name="TopIcon" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="18" Margin="0,-27,182,131"/>
+
+    </Grid>
+</pu:WindowX>

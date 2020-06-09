@@ -1,0 +1,161 @@
+﻿<pu:WindowX x:Class="SS_Tool_Box_By_WPF.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SS_Tool_Box_By_WPF"
+        mc:Ignorable="d"
+        Title="| 设置 - Settings" Height="500" Width="458.949"
+        Icon="/Resource/ICONAbout_128.ico"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        >
+    <!-- Height="500" -->
+    <Grid>
+        <Button x:Name="TopIcon" pu:ButtonHelper.Icon="" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="17" Margin="2,-26,430,467" Height="30" VerticalAlignment="Bottom"/>
+
+        <TabControl x:Name="MainTab" Height="Auto" Width="Auto" pu:TabControlHelper.ItemHeight="30" pu:TabControlHelper.CanRemove="False" pu:TabControlHelper.ItemsAlignment="Center" Grid.ColumnSpan="2">
+            <TabItem Header="外观设置" >
+                <Grid>
+                    <Image x:Name="BG" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
+                    <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7">
+                        <StackPanel>
+                            <materialDesign:Card x:Name="CD11" VerticalAlignment="Top" Margin="0, 10, 0, 0">
+                                <StackPanel>
+                                    <TextBlock x:Name="MT11" Text="主题" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid Height="42">
+                                        <TextBlock x:Name="T11" Text="窗口透明" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="48,10,0,12" RenderTransformOrigin="0.519,-0.311" Width="77"/>
+                                        <UniformGrid Columns="3" Rows="1" Margin="1,1,1,10"/>
+                                        <Slider x:Name="S11" IsSnapToTickEnabled="True" TickPlacement="BottomRight" pu:SliderHelper.IsTickValueVisible="False" Margin="156,4,24,4" Maximum="100" TickFrequency="10" ToolTip="让整个窗口都透明起来。"/>
+                                    </Grid>
+                                    <Grid>
+                                        <TextBlock x:Name="T12" Text="主题色" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="48,15,0,12" RenderTransformOrigin="0.519,-0.311" Width="77"/>
+                                        <ComboBox x:Name="Theams" DropDownClosed="ChangeTheams" Height="25" pu:ComboBoxHelper.ItemHeight="30" Margin="322,10,25,10" ToolTip="官方推荐主题色，你值得拥有。（可自定义）">
+                                        </ComboBox>
+                                    </Grid>
+                                    <Grid>
+                                        <CheckBox x:Name="C11" pu:CheckBoxHelper.CheckBoxStyle="Standard" Margin="49,0,377,10" RenderTransformOrigin="0.5,0.0" Click="DackModeChanged"/>
+                                        <TextBlock x:Name="T13" Text="全局暗黑模式" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="71,5,0,10" Width="126"/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="CD13" Margin="0,10,0,0" VerticalAlignment="Top">
+                                <StackPanel>
+                                    <TextBlock x:Name="MT13" Text="主题色" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid Height="42">
+                                        <TextBlock x:Name="T14" Text="R" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                                        <Slider x:Name="S12" IsSnapToTickEnabled="True" Margin="156,10,24,10" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
+                                    </Grid>
+                                    <Grid Height="42">
+                                        <TextBlock x:Name="T15" Text="G" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                                        <Slider x:Name="S13" IsSnapToTickEnabled="True" Margin="156,10,24,10" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
+                                    </Grid>
+                                    <Grid Height="42">
+                                        <TextBlock x:Name="T16" Text="B" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,10,0,0" />
+                                        <Slider x:Name="S14" IsSnapToTickEnabled="True" Margin="156,10,24,10" Maximum="255" TickFrequency="1" ValueChanged="UpdateColor"/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="CD12" Margin="0,10,0,0" VerticalAlignment="Top" Height="136">
+                                <StackPanel Margin="0,0,0,-26">
+                                    <TextBlock x:Name="MT12" Text="背景" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid>
+                                        <TextBlock x:Name="T17" Text="主背景图" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,23,0,14" />
+                                        <Button x:Name="MBG" pu:ButtonHelper.ButtonStyle="Hollow" Margin="337,15,0,10" HorizontalAlignment="Left" Width="88" Content="选择" Click="MBG_Click" pu:ButtonHelper.WaitingContent=" 选择 "/>
+                                    </Grid>
+                                    <Grid Height="61">
+                                        <TextBlock x:Name="T18" Text="顶栏小图" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,20,0,20" />
+                                        <Button x:Name="TopIcon_Copy" pu:ButtonHelper.Icon="&#xF0C9;" pu:ButtonHelper.ButtonStyle="Standard" pu:IconHelper.FontSize="18" Margin="0,-140,420,179"/>
+                                        <Button x:Name="SBG" pu:ButtonHelper.ButtonStyle="Hollow" Margin="337,10,0,20" HorizontalAlignment="Left" Width="88" Content="选择" Click="SBG_Click"  pu:ButtonHelper.WaitingContent=" 选择 "/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="功能设置" >
+                <Grid>
+                    <Image x:Name="BG1" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
+                    <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7">
+                        <StackPanel>
+                            <materialDesign:Card x:Name="CD21" Margin="0,10,0,0" VerticalAlignment="Top">
+                                <StackPanel>
+                                    <TextBlock x:Name="MT21" Text="私隐密码" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid>
+                                        <TextBlock x:Name="T21" Text="设置私隐密码" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,23,0,14" />
+                                        <Button x:Name="B21" pu:ButtonHelper.ButtonStyle="Hollow" Margin="337,15,0,10" HorizontalAlignment="Left" Width="88" Content="设置" Click="B21_Click"  pu:ButtonHelper.WaitingContent=" 设置 "/>
+                                    </Grid>
+                                    <Grid x:Name="PassWord">
+                                        <TextBlock x:Name="T22" Text="私隐密码" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,25,0,15" />
+                                        <PasswordBox x:Name="Password" pu:PasswordBoxHelper.IsShowPwdButtonVisible="True"  Margin="170,17,32,15" Opacity="100"/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+                            <materialDesign:Card x:Name="CD22" Margin="0,10,0,0" VerticalAlignment="Top">
+                                <StackPanel>
+                                    <TextBlock x:Name="MT22" Text="主页设置" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid>
+                                        <TextBlock x:Name="T23" Text="一句推荐" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,34,0,32" />
+                                        <ComboBox x:Name="whatsay" DropDownClosed="Whatsay_DropDownClosed"  Height="25" pu:ComboBoxHelper.ItemHeight="30" Margin="318,15,29,15"/>
+                                        <TextBlock x:Name="T24" Text="X-User-Token:暂未获取" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,59,31,10" TextAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="系统设置" >
+                <Grid>
+                    <Image x:Name="BG2" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
+                    <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Auto" pu:ScrollViewerHelper.ScrollBarCornerRadius="0" pu:ScrollViewerHelper.ScrollBarThickness="7">
+                        <StackPanel>
+                            <materialDesign:Card x:Name="CD32" Margin="0, 10, 0, 0" VerticalAlignment="Top">
+                                <StackPanel>
+                                    <TextBlock x:Name="MT31" Text="调试" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                    <Grid Height="42">
+                                        <CheckBox x:Name="C31" pu:CheckBoxHelper.CheckBoxStyle="Standard" Margin="49,0,377,10" RenderTransformOrigin="0.5,0.0" />
+                                        <TextBlock x:Name="T31" Text="开发者模式" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="71,5,0,10" Width="126"/>
+                                    </Grid>
+                                    <Grid Height="42">
+                                        <CheckBox x:Name="C32" pu:CheckBoxHelper.CheckBoxStyle="Standard" Margin="49,0,377,10" RenderTransformOrigin="0.5,0.0" />
+                                        <TextBlock x:Name="T32" Text="演示模式" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="71,5,0,10" Width="126"/>
+                                    </Grid>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="杂项设置" >
+                <Grid>
+                    <Image x:Name="BG3" Source="/Resource/BG.png" Stretch="Fill" Margin="0,0,0,0"/>
+                    <StackPanel>
+                        <materialDesign:Card x:Name="CD41" Margin="0,10,0,0" VerticalAlignment="Top">
+                            <StackPanel>
+                                <TextBlock x:Name="MT41" Text="生成更新文件" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="34,20,0,5" Height="20"/>
+                                <Grid>
+                                    <TextBlock x:Name="T41" Text="生成更新文件" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="49,23,0,14" />
+                                    <Button x:Name="B41" pu:ButtonHelper.ButtonStyle="Hollow" Margin="337,15,0,10" HorizontalAlignment="Left" Width="88" Content="生成" Click="B41_Click" pu:ButtonHelper.WaitingContent=" 生成 " ToolTip="生成用于检查更新的Update.txt"/>
+                                </Grid>
+                                <TextBox x:Name="UpdateLog" 
+                                         Height="100" 
+                                         Margin="10" 
+                                         Background="#00000000" 
+                                         TextWrapping="Wrap"
+                                         AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Visible"
+                                         pu:TextBoxHelper.FocusedShadowColor="{x:Null}"
+                                         VerticalContentAlignment="Top"/>
+                            </StackPanel>
+                        </materialDesign:Card>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</pu:WindowX>

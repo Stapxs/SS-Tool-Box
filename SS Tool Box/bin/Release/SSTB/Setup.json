@@ -1,0 +1,23 @@
+{
+  "Version": "8",
+  "Exterior": {
+    "Themes": {
+      "WindowTran": 0.0,
+      "MainTheme": "2",
+      "DarkMode": "True"
+    },
+    "OwnColor": {
+      "R": 0.0,
+      "G": 0.0,
+      "B": 0.0
+    }
+  },
+  "Features": {
+    "Privacy": {
+      "Password": "NULL"
+    },
+    "MainPage": {
+      "SaysType": "Hitokoto"
+    }
+  }
+}

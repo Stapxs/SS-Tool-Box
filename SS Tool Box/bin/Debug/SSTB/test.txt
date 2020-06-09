@@ -1,0 +1,144 @@
+{
+  "description": {
+    "translate": "Plain Craft Launcher 2!"
+  },
+  "players": {
+    "max": 35,
+    "online": 12,
+    "sample": [
+      {
+        "id": "edde95ae-b98b-4556-9438-4044dade0633",
+        "name": "Mr_WDNMD"
+      },
+      {
+        "id": "6971757b-a915-4280-aff7-820190d9f523",
+        "name": "Dr_Kamijou"
+      },
+      {
+        "id": "5ff06563-cd63-4f92-a787-52983e015aab",
+        "name": "RXlong"
+      },
+      {
+        "id": "956348f9-0337-43d6-869c-c4a8bcc64f8c",
+        "name": "FriedChicken_S"
+      },
+      {
+        "id": "21028289-39ed-4f74-8085-f58d3507650c",
+        "name": "sundazhuang"
+      },
+      {
+        "id": "2348897d-6b71-4617-b01d-3a877049292c",
+        "name": "Violet_Moon123"
+      },
+      {
+        "id": "62fabd60-1000-43e6-88dd-dc36de37855f",
+        "name": "September0929"
+      },
+      {
+        "id": "54aa13db-b438-4e02-8827-1585ee0f54e1",
+        "name": "02086612"
+      },
+      {
+        "id": "18df8d14-5f50-449f-abfa-881455c3ae1f",
+        "name": "lukashe0908"
+      },
+      {
+        "id": "69b4bd5b-1007-407f-a921-3ba5f9afc99a",
+        "name": "Candy_Pink"
+      },
+      {
+        "id": "ef7ee90a-8b12-4790-8a8b-eacbae1321b3",
+        "name": "SecurityApe"
+      },
+      {
+        "id": "613d1ff2-472e-4a03-830a-bf53f6caea22",
+        "name": "grofear"
+      }
+    ]
+  },
+  "version": {
+    "name": "1.12.2",
+    "protocol": 340
+  },
+  "modinfo": {
+    "type": "FML",
+    "modList": [
+      {
+        "modid": "minecraft",
+        "version": "1.12.2"
+      },
+      {
+        "modid": "mcp",
+        "version": "9.42"
+      },
+      {
+        "modid": "FML",
+        "version": "8.0.99.99"
+      },
+      {
+        "modid": "forge",
+        "version": "14.23.5.2847"
+      },
+      {
+        "modid": "bnbgamingcore",
+        "version": "0.11.0"
+      },
+      {
+        "modid": "futuremccore",
+        "version": "0.1.12"
+      },
+      {
+        "modid": "bnbgaminglib",
+        "version": "2.17.6"
+      },
+      {
+        "modid": "bookshelf",
+        "version": "2.3.588"
+      },
+      {
+        "modid": "crafttweaker",
+        "version": "4.1.19"
+      },
+      {
+        "modid": "crafttweakerjei",
+        "version": "2.0.3"
+      },
+      {
+        "modid": "gamestages",
+        "version": "2.0.115"
+      },
+      {
+        "modid": "dimstages",
+        "version": "2.0.23"
+      },
+      {
+        "modid": "minecraftfuture",
+        "version": "0.1.13"
+      },
+      {
+        "modid": "itemstages",
+        "version": "2.0.49"
+      },
+      {
+        "modid": "orestages",
+        "version": "2.0.37"
+      },
+      {
+        "modid": "silentlib",
+        "version": "3.0.13"
+      },
+      {
+        "modid": "scalinghealth",
+        "version": "1.3.37"
+      },
+      {
+        "modid": "surge",
+        "version": "2.0.77"
+      },
+      {
+        "modid": "triumph",
+        "version": "3.17.0"
+      }
+    ]
+  }
+}

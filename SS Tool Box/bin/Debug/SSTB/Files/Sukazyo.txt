@@ -1,0 +1,131 @@
+<!-- ========================================================= -->
+<!--     __   _____       __                              __   -->
+<!--     / /  / ___/__  __/ /______ _____  __  ______     / /  -->
+<!--    / /   \__ \/ / / / //_/ __ `/_  / / / / / __ \   / /   -->
+<!--   /_/   ___/ / /_/ / ,< / /_/ / / /_/ /_/ / /_/ /  /_/    -->
+<!--  (_)   /____/\__,_/_/|_|\__,_/ /___/\__, /\____/  (_)     -->
+<!--                                    /____/                 -->
+<!-- ========================================================= -->
+<!--             本站所有代码全部由 Sukazyo 一人编写             -->
+<!--         -----------------------------------------         -->
+<!--  没什么意思，Sukazyo只是想说：                              -->
+<!--        写一个php动态站点太累了=_=                          -->
+<!-- ========================================================= -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>颜色表
+ ~ Suk-Ws Services</title>
+		<link rel="shortcut icon" href="/assets/icon.png">
+		<link rel="stylesheet" href="/css/global.css" type="text/css">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="theme-color" content="#7DB9DE">
+		<!-- 自定义 head 标签的嵌入位置 -->
+			</head>
+	<body>
+		<div class = "bg header">
+			<h1>Sukazyo 收集颜色表
+</h1>
+		</div><!-- =================================================== -->
+<!--                                                     -->
+<!--                    主题色部分                        -->
+<!--                                                     -->
+<!-- =================================================== -->
+<div class="bg" style="background-image: none;">
+	<h2>主题色</h2>
+	<div class="breakline"></div>
+	<div style="height: 30px;"></div>
+	<div class="widget inpage colorpane" style="background-color: #66f5ff;">
+		<h3 style="color:#F0F8FF;">Sukazyo 冰青</h3>
+		<p style="color:#F0F8FF;">#66F4FF　　rgb(102, 244, 255)　　hsl(184, 100%, 70%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #fee1e3;">
+		<h3 style="color:#1C1C1C;">桜</h3>
+		<p style="color:#1C1C1C;">#FEDFE1　　rgb(254, 223, 225)　　　hsl(356, 94%, 94%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #fdf6e2;">	
+		<h3 style="color:#1C1C1C;">Solarized Light</h3>
+		<p style="color:#1C1C1C;">#FDF6E3　　rgb(253, 246, 227)　　hsl(44, 87%, 94%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #7cb9de;">
+		<h3 style="color:#F0F8FF;">勿忘草</h3>
+		<p style="color:#F0F8FF;">#7DB9DE　　rgb(125, 185, 222)　　hsl(203, 60%, 68%)</p>
+	</div>
+</div>
+<!-- =================================================== -->
+<!--                                                     -->
+<!--                    常用色部分                        -->
+<!--                                                     -->
+<!-- =================================================== -->
+<div class="bg" style="background-image: none;">
+	<h2>常用色</h2>
+	<div class="breakline"></div>
+	<div style="height: 30px;"></div>
+	<div class="widget inpage colorpane" style="background-color: #f0f8ff;">
+		<h3 style="color:#1C1C1C;">AliceBlue</h3>
+		<p style="color:#1C1C1C;">aliceblue　　#F0F8FF　　rgb(240, 248, 255)　　hsl(208, 100%, 97%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #d1104d;">
+		<h3 style="color:#F0F8FF;">韓紅花</h3>
+		<p style="color:#F0F8FF;">#D0104C　　rgb(208,16,76)　　hsl(341, 86%, 44%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #fbe250;">
+		<h3 style="color:#F0F8FF;">黄蘗</h3>
+		<p style="color:#F0F8FF;">#FBE251　　rgb(251,226,81)　　hsl(51, 96%, 65%);</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #30aadf;">
+		<h3 style="color:#F0F8FF;">露草</h3>
+		<p style="color:#F0F8FF;">#2EA9DF　　rgb(49, 169, 223)　　hsl(198, 73%, 53%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #3ff33f;">
+		<h3 style="color:#F0F8FF;">绿</h3>
+		<p style="color:#F0F8FF;">#3DF33D　　rgb(61, 243, 61)　　hsl(120, 88%, 60%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #1c1c1c;">
+		<h3 style="color:#F0F8FF;">墨</h3>
+		<p style="color:#F0F8FF;">#1C1C1C　　rgb(28, 28, 28)　　hsl(0, 0%, 11%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #1beed2;">
+		<h3 style="color:#F0F8FF;">Aquamarine</h3>
+		<p style="color:#F0F8FF;">#1CEED2　　rgb(28,238,210)　　hsl(172, 86%, 52%)</p>
+	</div>
+</div>
+<div class="bg" style="background-image: none;">
+	<h2>Timi 色</h2>
+	<div class="breakline"></div>
+	<div style="height: 30px;"></div>
+	<div class="widget inpage colorpane" style="background-color: #bdf7ff;">
+		<h3 style="color:#1C1C1C;">Timi 青</h3>
+		<p style="color:#1C1C1C;">#BFF8FF　　rgb(191, 248, 255)　　hsl(187, 100%, 87%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #feffbd;">
+		<h3 style="color:#1C1C1C;">Timi 黄</h3>
+		<p style="color:#1C1C1C;">#FEFFBD　　rgb(254,255,189)　　hsl(61, 100%, 87%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #ff941a;">
+		<h3 style="color:#F0F8FF;">Timi 红石灯笼</h3>
+		<p style="color:#F0F8FF;">#FF9319　　rgb(255, 148, 26)　　hsl(32, 100%, 55%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #00ff08;">
+		<h3 style="color:#F0F8FF;">Timi 绿</h3>
+		<p style="color:#F0F8FF;">#00FF0A　　rgb(0, 255, 8)　　hsl(122, 100%, 50%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #ffaa00;">
+		<h3 style="color:#F0F8FF;">Timi 红石火把</h3>
+		<p style="color:#F0F8FF;">#00FF0A　　rgb(255, 170, 0)　　hsl(40, 100%, 50%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #001190;">
+		<h3 style="color:#F0F8FF;">USB 3.0 塑料</h3>
+		<p style="color:#F0F8FF;">#001190　　rgb(0, 17, 144)　　hsl(233, 100%, 28%)</p>
+	</div>
+	<div class="widget inpage colorpane" style="background-color: #9e6742;">
+		<h3 style="color:#F0F8FF;">贴片电容色</h3>
+		<p style="color:#F0F8FF;">#9E6742　　rgb(158, 103, 66)　　hsl(24, 41%, 44%)</p>
+	</div>
+</div>
+		<div class="record fotter">
+			<p>COPYRIGHT © SUKAZYO WORKSHOP 2019 - 2020</p>
+			<p>Workshop Services | since 2020</p>
+		</div>
+			</body>
+</html>

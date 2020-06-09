@@ -1,0 +1,38 @@
+﻿<pu:WindowX x:Class="SS_Tool_Box.Updater"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SS_Tool_Box_By_WPF"
+        mc:Ignorable="d"
+        Title="| 下载更新 - UpdateDownloader" Height="94.993" Width="458.574"
+        Icon="/Resource/ICONAbout_128.ico"
+        ShowInTaskbar="False"
+        ResizeMode="CanMinimize"
+        SizeChanged="Onsizechanged"
+        WindowStyle="None"
+        >
+    <Grid>
+        <Border x:Name="Border"
+                CornerRadius="0,0,0,0"
+                Background="Black"
+                BorderBrush="Transparent"
+                BorderThickness="1"
+                Margin="-17,-47,-8,-29"/>
+        <Image x:Name="BG" Source="/Resource/BG.png" Stretch="Fill" Margin="-12,-40,-2,-24"/>
+        <StackPanel>
+            <WrapPanel>
+                <Button x:Name="ICON" pu:ButtonHelper.Icon="" pu:IconHelper.FontSize="20" pu:ButtonHelper.ButtonStyle="Link" Height="40" VerticalAlignment="Top" Margin="10,0,0,0" HorizontalAlignment="Left" Width="40"/>
+                <TextBlock x:Name="MT1" Text="更新下载" HorizontalAlignment="Left" Margin="10, 10, 0, 0"/>
+            </WrapPanel>
+            <ProgressBar x:Name="pbDown" Margin="0, 0, 0, 2"  Height="20" VerticalAlignment="Top"/>
+            <Grid>
+                <TextBlock x:Name="T1" Text="正在准备……" HorizontalAlignment="Left" Margin="10,5,0,0"/>
+                <TextBlock x:Name="T2" Text="0 %" Margin="389,5,10,0" TextAlignment="Right"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</pu:WindowX>
+
