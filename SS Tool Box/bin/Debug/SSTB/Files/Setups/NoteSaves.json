@@ -1,18 +1,31 @@
 {
   "Stat": {
-    "Version": "6",
+    "Version": "8",
     "NumOfDef": "1"
   },
   "Cards": {
     "Def": {
       "1": {
-        "Title": "233",
-        "Stat": "0",
-        "Finished": "1",
-        "-1": {
+        "Title": "2333",
+        "Stat": "2",
+        "Finished": "0",
+        "1": {
+          "Type": "Clock",
+          "Title": "233333",
+          "Finished": false,
+          "CantDel": false,
+          "Start": "2020/2/23",
+          "Last": "2020/2/23",
+          "Signed": 1
+        },
+        "2": {
+          "Type": "Clock",
           "Title": "2333",
-          "Finished": true,
-          "CantDel": false
+          "Finished": false,
+          "CantDel": false,
+          "Start": "2020/2/23",
+          "Last": "2020/2/22",
+          "Signed": 0
         }
       }
     }

@@ -7,6 +7,7 @@ using SS_Tool_Box_By_WPF;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,10 +28,11 @@ namespace SS_Tool_Box
         JObject Notes = new JObject();
         bool err = false;
         IList<listMain> AddWhereList = new List<listMain>();
-        int FileVersion = 7;
+        int FileVersion = 8;
         ListView list = new ListView();
         ListViewItem listi = new ListViewItem();
         Card card = new Card();
+        bool fistuse = false;
 
         public class listMain
         {
@@ -131,8 +133,9 @@ namespace SS_Tool_Box
             //初始化列表
             IList<listMain> AddWhatList = new List<listMain>();
             AddWhatList.Add(new listMain() { ID = 0, Name = "  < 空 >" });
-            AddWhatList.Add(new listMain() { ID = 1, Name = "  普通卡片" });
+            AddWhatList.Add(new listMain() { ID = 1, Name = "  通用卡片" });
             AddWhatList.Add(new listMain() { ID = 2, Name = "  普通事件" });
+            AddWhatList.Add(new listMain() { ID = 3, Name = "  打卡事件" });
             AddWhat.ItemsSource = AddWhatList;
             AddWhat.DisplayMemberPath = "Name";
             AddWhat.SelectedValuePath = "ID";
@@ -165,6 +168,7 @@ namespace SS_Tool_Box
                     error.logWriter("写入存储文件错误：" + ex, false);
                     err = true;
                 }
+                fistuse = true;
             }
             else
             {
@@ -223,8 +227,8 @@ namespace SS_Tool_Box
                         things[0] = i;
                         AddColtrols(1, things, Notes["Cards"]["Def"][i.ToString()]["Title"].ToString());
                     }
+                    SaveData(Notes);
                 }
-                SaveData(Notes);
                 if (delCard > 0)
                 {
                     MT1.Text = "存在的卡片（已忽略空卡片 " + delCard + " 个）：";
@@ -271,6 +275,7 @@ namespace SS_Tool_Box
                 }
                 try
                 {
+                    //普通卡片
                     if (int.Parse(AddWhat.SelectedValue.ToString()) == 1)
                     {
                         JObject CardItem = new JObject();
@@ -286,17 +291,43 @@ namespace SS_Tool_Box
                         things[0] = int.Parse(Notes["Stat"]["NumOfDef"].ToString());
                         AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), things, What.Text);
                     }
+                    //普通事件
                     if (int.Parse(AddWhat.SelectedValue.ToString()) == 2)
                     {
                         int num = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
                         Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"] = (num + 1).ToString();
                         num += 1;
-                        JObject Item = new JObject { { "Title", What.Text }, { "Finished", false }, { "CantDel", bool.Parse(CanDel.IsChecked.ToString()) } };
+                        JObject Item = new JObject { { "Type", "Def" }, { "Title", What.Text }, { "Finished", false }, { "CantDel", bool.Parse(CanDel.IsChecked.ToString()) } };
                         Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()][num.ToString()] = Item;
                         SaveData(Notes);
                         int[] things = new int[3];
                         things[0] = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
                         things[1] = int.Parse(AddWhere.SelectedValue.ToString());
+                        if (bool.Parse(CanDel.IsChecked.ToString()))
+                        {
+                            things[2] = 1;
+                        }
+                        else
+                        {
+                            things[2] = 0;
+                        }
+                        AddColtrols(int.Parse(AddWhat.SelectedValue.ToString()), things, What.Text);
+                    }
+                    //打卡事件
+                    if (int.Parse(AddWhat.SelectedValue.ToString()) == 3)
+                    {
+                        int num = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
+                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"] = (num + 1).ToString();
+                        num += 1;
+                        DateTime last = DateTime.Now - new TimeSpan(1, 0, 0, 0);
+                        JObject Item = new JObject { { "Type", "Clock" }, { "Title", What.Text }, { "Finished", false }, { "CantDel", bool.Parse(CanDel.IsChecked.ToString()) }, { "Start", DateTime.Now.ToShortDateString() }, { "Last", last.ToShortDateString() }, { "Signed", 0 } };
+                        Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()][num.ToString()] = Item;
+                        SaveData(Notes);
+                        int[] things = new int[5];
+                        things[0] = int.Parse(Notes["Cards"]["Def"][AddWhere.SelectedValue.ToString()]["Stat"].ToString());
+                        things[1] = int.Parse(AddWhere.SelectedValue.ToString());
+                        things[3] = 0;
+                        things[4] = 0;
                         if (bool.Parse(CanDel.IsChecked.ToString()))
                         {
                             things[2] = 1;
@@ -343,6 +374,7 @@ namespace SS_Tool_Box
             /* addWhat - 创建什么, another,anothers - 其他数据
              * 1 - 普通卡片
              * 2 - 普通事件
+             * 3 - 打卡事件
              */
             if (addWhat == 1)
             {
@@ -392,7 +424,7 @@ namespace SS_Tool_Box
                 ButtonHelper.SetButtonStyle(button, ButtonStyle.Link);
 
                 card.Name = "CDD" + things[0];
-                card.Margin = new Thickness(5, 15, 20, 5);
+                card.Margin = new Thickness(0, 20, 15, -5);
                 card.Width = 540;
                 card.Background = baseColora.Card;
 
@@ -405,6 +437,8 @@ namespace SS_Tool_Box
                 MainIn.Children.Add(card);
 
                 RegisterName("CDD" + things[0], card);
+
+                return true;
             }
             else if(addWhat == 2)
             {
@@ -471,8 +505,109 @@ namespace SS_Tool_Box
 
                 listViewItem.Content = textBlock;
                 lstControl1[0].Items.Add(listViewItem);
+
+                return true;
             }
-            return true;
+            else if(addWhat == 3)
+            {
+                Card card = GetChildObjects<Card>(MainIn, "CDD" + things[1].ToString());
+                if (card == null)
+                {
+                    this.RunCard.Visibility = Visibility.Visible;
+                    error.ErrorTo("创建控件失败，未找到分类卡片。", Percent, Errorsay);
+                    error.logWriter("Tool -7:未找到分类卡片。卡片名称：CDD" + things[1], false);
+                    return false;
+                }
+                List<StackPanel> lstControl = GetChildObjects<StackPanel>(card, typeof(StackPanel));
+                if (lstControl == null)
+                {
+                    this.RunCard.Visibility = Visibility.Visible;
+                    error.ErrorTo("创建控件失败，未找到分类卡片中的StackPanel控件。", Percent, Errorsay);
+                    error.logWriter("Tool -7:未找到分类卡片中的StackPanel控件。卡片名称：CDD" + things[1], false);
+                    return false;
+                }
+                List<ListView> lstControl1 = GetChildObjects<ListView>(lstControl[0], typeof(ListView));
+                if (lstControl1 == null)
+                {
+                    this.RunCard.Visibility = Visibility.Visible;
+                    error.ErrorTo("创建控件失败，未找到分类卡片中的StackPanel控件中的列表控件。", Percent, Errorsay);
+                    error.logWriter("Tool -7:未找到分类卡片中的StackPanel控件中的列表控件。卡片名称：CDD" + things[1], false);
+                    return false;
+                }
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem menuItem1 = new MenuItem();
+                MenuItem menuItem2 = new MenuItem();
+                MenuItem menuItem3 = new MenuItem();
+
+                menuItem1.Name = "MenuItem1";
+                menuItem1.Header = "打卡";
+                menuItem1.Icon = "";
+                menuItem1.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(ME_Signing);
+                contextMenu.Items.Add(menuItem1);
+                menuItem2.Name = "MenuItem2";
+                menuItem2.Header = "删除";
+                menuItem2.Icon = "";
+                menuItem2.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(ME_Del);
+                if (things[2] == 0)
+                {
+                    contextMenu.Items.Add(menuItem2);
+                }
+
+                contextMenu.Width = 150;
+                contextMenu.Background = baseColora.Card;
+                contextMenu.Foreground = baseColora.Fg;
+                ContextMenuHelper.SetShadowColor(contextMenu, baseColora.DBg.Color);
+                ContextMenuHelper.SetItemHeight(contextMenu, 30);
+
+                ListViewItem listViewItem = new ListViewItem();
+                listViewItem.Name = "CDC" + things[1] + "IT" + things[0];
+                listViewItem.ContextMenu = contextMenu;
+                listViewItem.Padding = new Thickness(0);
+                listViewItem.PreviewMouseRightButtonDown += WhatFuckOpenMe;
+                Grid grid = new Grid();
+                grid.Margin = new Thickness(0, 10, 0, 10);
+                StackPanel stack = new StackPanel();
+                stack.Margin = new Thickness(10, 0, 10, 0);
+                ProgressBar progress = new ProgressBar();
+                progress.Height = 5;
+                progress.Width = 450;
+                progress.Background = baseColora.DBg;
+                progress.Foreground = baseColora.Main;
+                progress.Margin = new Thickness(38, 0, 0, 0);
+                progress.Name = "CDC" + things[1] + "IT" + things[0] + "PB";
+                ProgressBarHelper.SetCornerRadius(progress, 2);
+                ProgressBarHelper.SetAnimateTo(progress, things[3]);
+                RegisterName("PB" + things[1] + things[0], progress);
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = anothers1;
+                textBlock.Background = baseColora.Tran;
+                textBlock.FontFamily = baseColora.Fonts;
+                textBlock.Foreground = baseColora.Font;
+                textBlock.FontSize = 15;
+                textBlock.Margin = new Thickness(38, 5, 38, 5);
+                stack.Children.Add(textBlock);
+                stack.Children.Add(progress);
+                Grid gridBG = new Grid();
+                gridBG.Width = 4;
+                if(things[4] == 0)
+                {
+                    gridBG.Background = baseColora.Tran;
+                }
+                else
+                {
+                    gridBG.Background = baseColora.Main;
+                }
+                gridBG.HorizontalAlignment = HorizontalAlignment.Left;
+                RegisterName("GD" + things[1] + things[0], gridBG);
+                grid.Children.Add(stack);
+                grid.Children.Add(gridBG);
+
+                listViewItem.Content = grid;
+                lstControl1[0].Items.Add(listViewItem);
+
+                return true;
+            }
+            return false;
         }
 
         private void DelCard_Click(object sender, RoutedEventArgs e)
@@ -533,7 +668,7 @@ namespace SS_Tool_Box
             }
             try
             {
-                if (int.Parse(AddWhat.SelectedValue.ToString()) != 1 && int.Parse(AddWhat.SelectedValue.ToString()) != 0)
+                if (int.Parse(AddWhat.SelectedValue.ToString()) == 2 || int.Parse(AddWhat.SelectedValue.ToString()) == 3)
                 {
                     for (int i = 1; i <= int.Parse(Notes["Stat"]["NumOfDef"].ToString()); i++)
                     {
@@ -661,6 +796,47 @@ namespace SS_Tool_Box
             DeleteItem(0, new ControlItemInfo { IsDelInFile = true, IsFinish = false, IsDelInUI = true });
         }
 
+        void ME_Signing(object sender, MouseButtonEventArgs e)
+        {
+            Card CardID = (Card)VisualTreeHelper.GetParent((Grid)VisualTreeHelper.GetParent((ContentPresenter)VisualTreeHelper.GetParent((StackPanel)VisualTreeHelper.GetParent(list))));
+            string ItemID = listi.Name.Substring(CardID.Name.Length + 2, listi.Name.Length - (CardID.Name.Length + 2));
+            //判断今天有没有打过了，没打就打死
+            String dts = Notes["Cards"]["Def"][CardID.Name.Substring(3, 1)][ItemID]["Last"].ToString();
+            if (!dts.Equals(DateTime.Now.ToShortDateString()))
+            {
+                //刷新Last日期
+                Notes["Cards"]["Def"][CardID.Name.Substring(3, 1)][ItemID]["Last"] = DateTime.Now.ToShortDateString();
+                //写入文件
+                Notes["Cards"]["Def"][CardID.Name.Substring(3, 1)][ItemID]["Signed"] = int.Parse(Notes["Cards"]["Def"][CardID.Name.Substring(3, 1)][ItemID]["Signed"].ToString()) + 1;
+                SaveData(Notes);
+                //更新界面
+                ListViewItem item = listi;
+                ProgressBar bar = (ProgressBar)item.FindName("PB" + CardID.Name.Substring(3, 1) + ItemID);
+                DateTime dt;
+                DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
+                dtFormat.ShortDatePattern = "yyyy/MM/dd";
+                dt = Convert.ToDateTime(Notes["Cards"]["Def"][CardID.Name.Substring(3, 1)][ItemID]["Start"].ToString(), dtFormat);
+                TimeSpan ts = DateTime.Now - dt;
+                double per = double.Parse(Notes["Cards"]["Def"][CardID.Name.Substring(3, 1)][ItemID]["Signed"].ToString()) / (double)(ts.Days + 1) * 100;
+                ProgressBarHelper.SetAnimateTo(bar, Convert.ToInt32(per));
+                Grid gridBG = (Grid)item.FindName("GD" + CardID.Name.Substring(3, 1) + ItemID);
+                gridBG.Background = baseColora.Main;
+            }
+            else
+            {
+                SSMessageHelper.noNo = true;
+                ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                SSMessageHelper.Title = "啊咧……";
+                SSMessageHelper.Says = "你今天已经打过卡啦！明天再来咯……\n（在旁边有竖线标记的事件今天已经打过卡了）";
+                SSMessageBox MB = new SSMessageBox();
+                ParentWindow.IsMaskVisible = true;
+                MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                MB.Owner = ParentWindow;
+                MB.ShowDialog();
+                ParentWindow.IsMaskVisible = false;
+            }
+        }
+
         void CD_Del(object sender, MouseButtonEventArgs e)
         {
             SSMessageHelper.noNo = false;
@@ -709,6 +885,20 @@ namespace SS_Tool_Box
             LoadingSetter.PasswordPass = false;
             if (!err)
             {
+                if (fistuse)
+                {
+                    fistuse = false;
+                    SSMessageHelper.noNo = true;
+                    ButtonHelper.SetIcon(SSMessageHelper.Icon, "");
+                    SSMessageHelper.Title = "欢迎使用记事簿";
+                    SSMessageHelper.Says = "这是一个类似于 To Do 功能的备忘簿。你可以在这里记录下你想要做的事情，写下你想要督促自己完成的任务什么的QWQ\n · 通用卡片：用来将记事分类\n · 普通事件：一般的记事\n · 打卡事件：这个事件有一个进度条，将会从你创建事件开始记录你的每天打卡，每天都完成一次，看看自己的坚持度吧";
+                    SSMessageBox MB = new SSMessageBox();
+                    ParentWindow.IsMaskVisible = true;
+                    MB.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    MB.Owner = ParentWindow;
+                    MB.ShowDialog();
+                    ParentWindow.IsMaskVisible = false;
+                }
                 //判断存档版本
                 if (Notes["Stat"]["Version"].ToString() != FileVersion.ToString())
                 {
@@ -730,8 +920,7 @@ namespace SS_Tool_Box
                     return;
                 }
             }
-
-            int[] things = new int[3];
+            
             try
             {
                 if (!err && int.Parse(Notes["Stat"]["NumOfDef"].ToString()) != 0)
@@ -742,17 +931,61 @@ namespace SS_Tool_Box
                         {
                             for (int j = 1; j <= int.Parse(Notes["Cards"]["Def"][i.ToString()]["Stat"].ToString()); j++)
                             {
-                                things[0] = j;
-                                things[1] = i;
-                                if (bool.Parse(Notes["Cards"]["Def"][i.ToString()][j.ToString()]["CantDel"].ToString()))
+                                //普通事件
+                                if (Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Type"].ToString().Equals("Def"))
                                 {
-                                    things[2] = 1;
+                                    int[] things = new int[3];
+                                    things[0] = j;
+                                    things[1] = i;
+                                    if (bool.Parse(Notes["Cards"]["Def"][i.ToString()][j.ToString()]["CantDel"].ToString()))
+                                    {
+                                        things[2] = 1;
+                                    }
+                                    else
+                                    {
+                                        things[2] = 0;
+                                    }
+                                    AddColtrols(2, things, Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Title"].ToString());
                                 }
-                                else
+                                //打卡事件
+                                if (Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Type"].ToString().Equals("Clock"))
                                 {
-                                    things[2] = 0;
+                                    int[] things = new int[5];
+                                    things[0] = j;
+                                    things[1] = i;
+                                    if (bool.Parse(Notes["Cards"]["Def"][i.ToString()][j.ToString()]["CantDel"].ToString()))
+                                    {
+                                        things[2] = 1;
+                                    }
+                                    else
+                                    {
+                                        things[2] = 0;
+                                    }
+                                    DateTime dt;
+                                    DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
+                                    dtFormat.ShortDatePattern = "yyyy/MM/dd";
+                                    dt = Convert.ToDateTime(Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Start"].ToString(), dtFormat);
+                                    TimeSpan ts = DateTime.Now - dt;
+                                    if (Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Signed"].ToString().Equals("0"))
+                                    {
+                                        things[3] = 0;
+                                    }
+                                    else
+                                    {
+                                        double per = double.Parse(Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Signed"].ToString()) / (double)(ts.Days + 1) * 100;
+                                        things[3] = Convert.ToInt32(per);
+                                    }
+                                    String dts = Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Last"].ToString();
+                                    if (dts.Equals(DateTime.Now.ToShortDateString()))
+                                    {
+                                        things[4] = 1;
+                                    }
+                                    else
+                                    {
+                                        things[4] = 0;
+                                    }
+                                    AddColtrols(3, things, Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Title"].ToString());
                                 }
-                                AddColtrols(2, things, Notes["Cards"]["Def"][i.ToString()][j.ToString()]["Title"].ToString());
                             }
                         }
                     }
@@ -840,9 +1073,29 @@ namespace SS_Tool_Box
                     Notes["Cards"][CardType][CardID]["Finished"] = nowFinishedNum.ToString();                                       //刷新编号数
                     Notes["Cards"][CardType][CardID]["Stat"] = (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) - 1).ToString();
                     JObject Item = new JObject();                                                                                   //将编号向负数累加
-                    Item.Add("Title", Notes["Cards"][CardType][CardID][ItemID]["Title"]);
-                    Item.Add("Finished", Notes["Cards"][CardType][CardID][ItemID]["Finished"]);
-                    Item.Add("CantDel", Notes["Cards"][CardType][CardID][ItemID]["CantDel"]);
+                    //普通事件
+                    if (Notes["Cards"][CardType][CardID][ItemID]["Type"].ToString().Equals("Def"))
+                    {
+                        Item.Add("Type", Notes["Cards"][CardType][CardID][ItemID]["Type"]);
+                        Item.Add("Title", Notes["Cards"][CardType][CardID][ItemID]["Title"]);
+                        Item.Add("Finished", Notes["Cards"][CardType][CardID][ItemID]["Finished"]);
+                        Item.Add("CantDel", Notes["Cards"][CardType][CardID][ItemID]["CantDel"]);
+                    }
+                    //打卡事件
+                    else if(Notes["Cards"][CardType][CardID][ItemID]["Type"].ToString().Equals("Clock"))
+                    {
+                        Item.Add("Type", Notes["Cards"][CardType][CardID][ItemID]["Type"]);
+                        Item.Add("Title", Notes["Cards"][CardType][CardID][ItemID]["Title"]);
+                        Item.Add("Finished", Notes["Cards"][CardType][CardID][ItemID]["Finished"]);
+                        Item.Add("CantDel", Notes["Cards"][CardType][CardID][ItemID]["CantDel"]);
+                        Item.Add("Start", Notes["Cards"][CardType][CardID][ItemID]["Start"]);
+                        Item.Add("Last", Notes["Cards"][CardType][CardID][ItemID]["Last"]);
+                        Item.Add("Signed", Notes["Cards"][CardType][CardID][ItemID]["Signed"]);
+                    }
+                    else
+                    {
+                        return false;
+                    }
                     Notes["Cards"][CardType][CardID][(-nowFinishedNum).ToString()] = Item;
                     Notes["Cards"][CardType][CardID][ItemID].Parent.Remove();   //移除本项
                     listi = new ListViewItem();                                 //清空对象
@@ -852,22 +1105,31 @@ namespace SS_Tool_Box
                 {
                     //循环删除
                     int i;
+                    Notes["Cards"][CardType][CardID][ItemID].Parent.Remove();
                     for (i = int.Parse(ItemID); i < int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()); i++)
                     {
                         JObject Item = new JObject();                                                                                   //将编号向负数累加
-                        Item.Add("Title", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Title"]);
-                        Item.Add("Finished", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Finished"]);
-                        Item.Add("CantDel", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["CantDel"]);
+                        //普通事件
+                        if (Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Type"].ToString().Equals("Def"))
+                        {
+                            Item.Add("Type", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Type"]);
+                            Item.Add("Title", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Title"]);
+                            Item.Add("Finished", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Finished"]);
+                            Item.Add("CantDel", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["CantDel"]);
+                        }
+                        //打卡事件
+                        else if(Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Type"].ToString().Equals("Clock"))
+                        {
+                            Item.Add("Type", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Type"]);
+                            Item.Add("Title", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Title"]);
+                            Item.Add("Finished", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Finished"]);
+                            Item.Add("CantDel", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["CantDel"]);
+                            Item.Add("Start", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Start"]);
+                            Item.Add("Last", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Last"]);
+                            Item.Add("Signed", Notes["Cards"][CardType][CardID][(i + 1).ToString()]["Signed"]);
+                        }
                         Notes["Cards"][CardType][CardID][i.ToString()] = Item;
-                    }
-                    //移除最后一项
-                    if (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) > 1)
-                    {
-                        Notes["Cards"][CardType][CardID][i.ToString()].Parent.Remove();
-                    }
-                    else
-                    {
-                        Notes["Cards"][CardType][CardID][ItemID].Parent.Remove();
+                        Notes["Cards"][CardType][CardID][(i + 1).ToString()].Parent.Remove();
                     }
                     //刷新事件总数
                     Notes["Cards"][CardType][CardID]["Stat"] = (int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()) - 1).ToString();
@@ -882,9 +1144,25 @@ namespace SS_Tool_Box
                 string CardID = CardName.Substring(3, CardName.Length - 3);
                 if (CardName[2] == 'D')          //普通卡片
                 {
+                    //删除目标项
+                    for(int j=1; j<=int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()); j++)
+                    {
+                        Notes["Cards"][CardType][CardID][j.ToString()].Parent.Remove();
+                    }
+                    for(int j=1; j<=int.Parse(Notes["Cards"][CardType][CardID]["Finished"].ToString()); j++)
+                    {
+                        Notes["Cards"][CardType][CardID][(-j).ToString()].Parent.Remove();
+                    }
+                    //循环前移
+                    int i;
+                    for (i = int.Parse(CardID); i < int.Parse(Notes["Cards"][CardType][CardID]["Stat"].ToString()); i++)
+                    {
+                        Notes["Cards"][CardType][CardID][(i + 1).ToString()].Parent.Remove();
+                    }
                     Notes["Cards"][CardType][CardID].Parent.Remove();
                     Notes["Stat"]["NumOfDef"] = (int.Parse(Notes["Stat"]["NumOfDef"].ToString()) - 1).ToString();
                 }
+                SaveData(Notes);
                 MainIn.Children.Remove(Card);
                 MainIn.UnregisterName(Card.Name);
             }

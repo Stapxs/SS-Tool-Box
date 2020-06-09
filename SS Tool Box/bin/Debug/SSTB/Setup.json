@@ -3,18 +3,21 @@
   "Exterior": {
     "Themes": {
       "WindowTran": 0.0,
-      "MainTheme": "2",
+      "MainTheme": "4",
       "DarkMode": "True"
     },
     "OwnColor": {
-      "R": 0.0,
-      "G": 0.0,
-      "B": 0.0
+      "R": 177.0,
+      "G": 207.0,
+      "B": 178.0
     }
   },
   "Features": {
     "Privacy": {
-      "Password": "61655"
+      "Password": "NULL"
+    },
+    "MainPage": {
+      "SaysType": "ShiCi"
     }
   }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -17,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Panuon.UI.Silver;
 using SS_Tool_Box.Classes;
 using SS_Tool_Box_By_WPF;
@@ -62,9 +65,46 @@ namespace SS_Tool_Box
             this.T6.Foreground = baseColora.Fg;
             this.T6.FontFamily = baseColora.Fonts;
             this.T6.FontSize = 13;
+            this.T7.Foreground = baseColora.Fg;
+            this.T7.FontFamily = baseColora.Fonts;
+            this.T7.FontSize = 13;
+            this.T8.Foreground = baseColora.Fg;
+            this.T8.FontFamily = baseColora.Fonts;
+            this.T8.FontSize = 13;
+            this.T9.Foreground = baseColora.Fg;
+            this.T9.FontFamily = baseColora.Fonts;
+            this.T9.FontSize = 13;
+            this.T10.Foreground = baseColora.Fg;
+            this.T10.FontFamily = baseColora.Fonts;
+            this.T10.FontSize = 13;
+            this.T11.Foreground = baseColora.Fg;
+            this.T11.FontFamily = baseColora.Fonts;
+            this.T11.FontSize = 13;
+
+            this.From.Foreground = baseColora.Fg;
+            this.From.FontFamily = baseColora.Fonts;
+
+            this.Load.Foreground = baseColora.Fg;
+
+            this.MT1.Foreground = baseColora.Fg;
+            this.MT1.FontFamily = baseColora.Fonts;
+            this.MT1.FontSize = 15;
+
+            this.S1.Background = baseColora.DBg;
+            this.S1.Foreground = baseColora.Fg;
+            SliderHelper.SetThemeBrush(S1, baseColora.Main);
+            this.S2.Background = baseColora.DBg;
+            this.S2.Foreground = baseColora.Fg;
+            SliderHelper.SetThemeBrush(S2, baseColora.Main);
+            this.S3.Background = baseColora.DBg;
+            this.S3.Foreground = baseColora.Fg;
+            SliderHelper.SetThemeBrush(S3, baseColora.Main);
 
             this.CD1.Background = baseColora.Card;
             this.CD2.Background = baseColora.Card;
+            this.CD3.Background = baseColora.Card;
+            this.CD4.Background = baseColora.Card;
+            this.CD5.Background = baseColora.Card;
 
             this.J16.Background = baseColora.Bg;
             this.RGBA.Background = baseColora.Bg;
@@ -81,12 +121,202 @@ namespace SS_Tool_Box
             this.ClearButton.Foreground = baseColora.Fg;
             this.RunButton.Background = baseColora.Tran;
             this.ClearButton.Background = baseColora.Tran;
+            this.colorFail.Foreground = baseColora.Font;
+            ButtonHelper.SetHoverBrush(colorFail, baseColora.Font);
 
             this.RunCard.Visibility = Visibility.Collapsed;
             this.Errorsay.Visibility = Visibility.Collapsed;
 
             ColorFst = this.Percent.Foreground;
 
+            ExpanderHelper.SetHeaderForeground(SuColor, baseColora.Font);
+            ExpanderHelper.SetHeaderForeground(SsColor, baseColora.Font);
+
+            //开始获取 Sukazyo 收集颜色表
+            Thread thread = new Thread(Sukazyo);
+            thread.Start();
+
+        }
+
+        private void Sukazyo()
+        {
+            bool download = true;
+            if (File.Exists("SSTB/Files/Sukazyodata.txt"))
+            {
+                using (StreamReader sr = new StreamReader("SSTB/Files/Sukazyodata.txt", Encoding.Default))
+                {
+                    if(sr.Peek() > 0)
+                    {
+                        string lastdate = sr.ReadLine();
+                        DateTime dt;
+                        DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
+                        dtFormat.ShortDatePattern = "yyyy/MM/dd";
+                        dt = Convert.ToDateTime(lastdate, dtFormat);
+                        TimeSpan ts = DateTime.Now - dt;
+                        if(ts.TotalDays > 10)
+                        {
+                            download = false;
+                        }
+                    }
+                }
+            }
+            if (download)
+            {
+                if (File.Exists("SSTB/Files/Sukazyodata.txt"))
+                {
+                    File.Delete("SSTB/Files/Sukazyodata.txt");
+                }
+                using (FileStream fs = new FileStream("SSTB/Files/Sukazyodata.txt", FileMode.Append, FileAccess.Write))
+                {
+                    fs.Lock(0, fs.Length);
+                    StreamWriter sw = new StreamWriter(fs);
+                    sw.WriteLine(DateTime.Now.ToShortDateString());
+                    fs.Unlock(0, fs.Length);
+                    sw.Flush();
+                }
+                try
+                {
+                    error.logWriter("尝试下载 Sukazyo 收集颜色表界面……", false);
+                    string url = "https://srv.sukazyo.cc/style/color/";
+                    string filepath = "SSTB/Files/Sukazyo.txt";
+                    WebClient mywebclient = new WebClient();
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    mywebclient.DownloadFile(url, filepath);
+                    error.logWriter("下载 Sukazyo 收集颜色表界面完成。", false);
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        LoadColor.Visibility = Visibility.Collapsed;
+                    }), DispatcherPriority.SystemIdle, null);
+                }
+                catch (Exception ex)
+                {
+                    error.logWriter("下载下载 Sukazyo 收集颜色表界面失败，" + ex, false);
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        Load.Visibility = Visibility.Collapsed;
+                        ErrorColor.Visibility = Visibility.Visible;
+                    }), DispatcherPriority.SystemIdle, null);
+                    return;
+                }
+            }
+            try
+            {
+                List<Colors> colors = new List<Colors>();
+                string content = File.ReadAllText("SSTB/Files/Sukazyo.txt");
+                int i = content.IndexOf("h3 style=\"color");
+                int j;
+                while(i > 0)
+                {
+                    content = content.Substring(i);
+                    i = content.IndexOf(">");       //标题开始位置
+                    j = content.IndexOf("<");       //标题结束位置
+                    string Name = content;
+                    Name = Name.Substring(i + 1, j - i - 1);
+                    content = content.Substring(j + 2);
+                    i = content.IndexOf("<p");
+                    content = content.Substring(i + 1);
+                    i = content.IndexOf(">");       //颜色开始位置
+                    content = content.Substring(i);
+                    i = content.IndexOf("rgb");     //rgb开始位置
+                    content = content.Substring(i);
+                    i = content.IndexOf(")");       //rgb结束位置
+                    string RGB = content;
+                    RGB = RGB.Substring(0, i);
+                    RGB = RGB.Substring(4);
+                    i = RGB.IndexOf(",");
+                    string d = RGB;
+                    d = d.Substring(0, i);
+                    RGB = RGB.Substring(i + 1);
+                    int r = int.Parse(d);
+                    i = RGB.IndexOf(",");
+                    d = RGB;
+                    d = d.Substring(0, i);
+                    RGB = RGB.Substring(i + 1);
+                    int g = int.Parse(d);
+                    int b = int.Parse(RGB);
+                    colors.Add(new Colors() { Name = Name, r = r, g = g, b = b});
+
+                    i = content.IndexOf("h3 style=\"color");
+                }
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    SuColor.IsExpanded = false;
+                }), DispatcherPriority.SystemIdle, null);
+
+                CreateColorBoard(colors);
+            }
+            catch(Exception ex)
+            {
+                error.logWriter("处理 Sukazyo 收集颜色表界面失败，" + ex, false);
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Load.Visibility = Visibility.Collapsed;
+                    ErrorColor.Visibility = Visibility.Visible;
+                }), DispatcherPriority.SystemIdle, null);
+                return;
+            }
+        }
+
+        class Colors
+        {
+            public string Name;
+            public int r;
+            public int g;
+            public int b;
+        }
+
+        private void CreateColorBoard(List<Colors> colors)
+        {
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    for (int i = 0; i <= colors.Count - 1; i++)
+                    {
+                        SolidColorBrush ColorBg = new SolidColorBrush();
+                        ColorBg.Color = System.Windows.Media.Color.FromArgb(Convert.ToByte(255), Convert.ToByte(colors[i].r), Convert.ToByte(colors[i].g), Convert.ToByte(colors[i].b));
+                        SolidColorBrush ColorFg = new SolidColorBrush();
+                        if (colors[i].r * 0.299 + colors[i].g * 0.578 + colors[i].b * 0.114 >= 192)
+                        { //浅色
+                            ColorFg.Color = System.Windows.Media.Color.FromArgb(255, 0, 0, 0);
+                        }
+                        else
+                        {  //深色
+                            ColorFg.Color = System.Windows.Media.Color.FromArgb(255, 255, 255, 255);
+                        }
+
+                        Grid grid = new Grid();
+                        grid.Height = 60;
+                        Grid gridBG = new Grid();
+                        gridBG.Width = 4;
+                        gridBG.Height = 60 * 0.6;
+                        gridBG.HorizontalAlignment = HorizontalAlignment.Left;
+                        gridBG.VerticalAlignment = VerticalAlignment.Center;
+                        gridBG.Background = ColorBg;
+                        Grid gridBGA = new Grid();
+                        gridBGA.Width = 250;
+                        gridBGA.Height = 60 * 0.6;
+                        gridBGA.HorizontalAlignment = HorizontalAlignment.Right;
+                        gridBGA.VerticalAlignment = VerticalAlignment.Center;
+                        gridBGA.Background = ColorBg;
+                        TextBlock title = new TextBlock();
+                        title.FontSize = 13;
+                        title.Text = colors[i].Name;
+                        title.VerticalAlignment = VerticalAlignment.Top;
+                        title.Margin = new Thickness(49, 10, 0, 0);
+                        title.HorizontalAlignment = HorizontalAlignment.Left;
+                        title.Foreground = ColorBg;
+                        TextBlock things = new TextBlock();
+                        things.FontSize = 13;
+                        things.Text = RGBATo(colors[i].r, colors[i].g, colors[i].b, 255, 1) + " / " + colors[i].r + "," + colors[i].g + "," + colors[i].b;
+                        things.VerticalAlignment = VerticalAlignment.Bottom;
+                        things.Margin = new Thickness(49, 0, 0, 10);
+                        things.Foreground = ColorBg;
+                        grid.Children.Add(title);
+                        grid.Children.Add(things);
+                        grid.Children.Add(gridBG);
+                        grid.Children.Add(gridBGA);
+                        ColorsSukazyo.Children.Add(grid);
+                    }
+                }), DispatcherPriority.SystemIdle, null);
         }
 
         private void RunTool(object sebder, RoutedEventArgs s)
@@ -160,7 +390,7 @@ namespace SS_Tool_Box
                             ColorList[0] = this.J16.Text;
                             int[] Color;
                             
-                            if (this.J16.Text[0] != '#' || this.J16.Text.Length != 9)
+                            if (!(this.J16.Text[0] == '#' && (this.J16.Text.Length == 9 || this.J16.Text.Length == 7)))
                             {
                                 Error = true;
                                 error.ErrorTo("发现错误（ECC - 003）：输入内容无效，请检查。错误内容为……你瞎几把输入了些什么玩意。", Percent, Errorsay);
@@ -209,7 +439,7 @@ namespace SS_Tool_Box
                             int row = sArray.GetLength(0);  //第一维的长度（即行数），结果为2
                             if (row == 4)
                             {
-                                if (int.Parse(sArray[0]) > 255 || int.Parse(sArray[1]) > 255 || int.Parse(sArray[2]) > 255 || int.Parse(sArray[3]) > 255)
+                                if (int.Parse(sArray[0]) > 255 || int.Parse(sArray[1]) > 255 || int.Parse(sArray[2]) > 255 || double.Parse(sArray[3]) <= 1? (double.Parse(sArray[3]) * 255) > 255 : int.Parse(sArray[3]) > 255)
                                 {
                                     Error = true;
                                     error.ErrorTo("发现错误（ECC - 003）：输入内容无效，请检查。错误内容为RGBA值大于255。", Percent, Errorsay);
@@ -218,7 +448,14 @@ namespace SS_Tool_Box
                                 r = byte.Parse(sArray[0]);
                                 g = byte.Parse(sArray[1]);
                                 b = byte.Parse(sArray[2]);
-                                a = byte.Parse(sArray[3]);
+                                if(double.Parse(sArray[3]) <= 1)
+                                {
+                                    a = Convert.ToByte(double.Parse(sArray[3]) * 255);
+                                }
+                                else
+                                {
+                                    a = byte.Parse(sArray[3]);
+                                }
 
                                 ChangeColor.Color = System.Windows.Media.Color.FromArgb(a, r, g, b);
                                 SolidColorBrush CardColor = new SolidColorBrush();
@@ -256,6 +493,10 @@ namespace SS_Tool_Box
             ButtonHelper.SetIsWaiting(RunButton, false);
             this.J16.Text = ColorList[0];
             this.RGBA.Text = ColorList[1];
+            int[] rgba = toRGBA(ColorList[0], 1);
+            S1.Value = rgba[1];
+            S2.Value = rgba[2];
+            S3.Value = rgba[3];
             if (!Error)
             {
                 this.Errorsay.Visibility = Visibility.Collapsed;
@@ -287,15 +528,34 @@ namespace SS_Tool_Box
             {
                 case 1:     //十六进制
                     {
-                        Color[0] = Convert.ToInt32(InPut.Substring(1, 2), 16);
-                        Color[1] = Convert.ToInt32(InPut.Substring(3, 2), 16);
-                        Color[2] = Convert.ToInt32(InPut.Substring(5, 2), 16);
-                        Color[3] = Convert.ToInt32(InPut.Substring(7, 2), 16);
-                        if (Color[0] > 255 && Color[1] > 255 && Color[2] > 255 && Color[3] > 255)
+                        if (InPut.Length == 9)
+                        {
+                            Color[0] = Convert.ToInt32(InPut.Substring(1, 2), 16);
+                            Color[1] = Convert.ToInt32(InPut.Substring(3, 2), 16);
+                            Color[2] = Convert.ToInt32(InPut.Substring(5, 2), 16);
+                            Color[3] = Convert.ToInt32(InPut.Substring(7, 2), 16);
+                        }
+                        else
+                        {
+                            Color[0] = 255;
+                            Color[1] = Convert.ToInt32(InPut.Substring(1, 2), 16);
+                            Color[2] = Convert.ToInt32(InPut.Substring(3, 2), 16);
+                            Color[3] = Convert.ToInt32(InPut.Substring(5, 2), 16);
+                        }
+                        if (Color[0] > 255 && Color[1] > 255 && Color[2] > 255)
                         {
                             Color[4] = -1;
                             error.ErrorTo("发现错误（ECC - 003）：输入内容无效，请检查。错误内容为十六进制值大于F", Percent, Errorsay);
                             return Color;
+                        }
+                        if(InPut.Length == 9)
+                        {
+                             if(Color[3] > 255)
+                            {
+                                Color[4] = -1;
+                                error.ErrorTo("发现错误（ECC - 003）：输入内容无效，请检查。错误内容为十六进制值大于F", Percent, Errorsay);
+                                return Color;
+                            }
                         }
                         Color[4] = 1;
                     }
@@ -321,6 +581,10 @@ namespace SS_Tool_Box
                         String a1, r1, g1, b1;
                         char[] zero = new char[2];
                         zero[0] = zero[1] = '0';
+                        if(a <= 1)
+                        {
+                            a = 255 * a;
+                        }
                         a1 = Convert.ToString(a, 16);
                         r1 = Convert.ToString(r, 16);
                         g1 = Convert.ToString(g, 16);
@@ -329,19 +593,35 @@ namespace SS_Tool_Box
                         {
                             a1 = new string(zero);
                         }
+                        else if(a < 16)
+                        {
+                            a1 = "0" + a1;
+                        }
                         if (r == 0)
                         {
                             r1 = new string(zero);
+                        }
+                        else if (r < 16)
+                        {
+                            r1 = "0" + r1;
                         }
                         if (g == 0)
                         {
                             g1 = new string(zero);
                         }
+                        else if (g < 16)
+                        {
+                            g1 = "0" + g1;
+                        }
                         if (b == 0)
                         {
                             b1 = new string(zero);
                         }
-                        return "#" + a1 + r1 + g1 + b1;
+                        else if (b < 16)
+                        {
+                            b1 = "0" + b1;
+                        }
+                        return "#" + a1.ToUpper() + r1.ToUpper() + g1.ToUpper() + b1.ToUpper();
                     }
             }
             return RET;
@@ -364,5 +644,23 @@ namespace SS_Tool_Box
             }
         }
 
+        private void J16_GotFocus(object sender, RoutedEventArgs e)
+        {
+            RGBA.Text = "";
+        }
+
+        private void RGBA_GotFocus(object sender, RoutedEventArgs e)
+        {
+            J16.Text = "";
+        }
+
+        private void UpdateColor(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            SolidColorBrush ChangeColor = new SolidColorBrush();
+            ChangeColor.Color = System.Windows.Media.Color.FromArgb(Convert.ToByte(255), Convert.ToByte(S1.Value), Convert.ToByte(S2.Value), Convert.ToByte(S3.Value));
+            Color.Fill = ChangeColor;
+            RGBA.Text = Convert.ToInt32(S1.Value) + "," + Convert.ToInt32(S2.Value) + "," + Convert.ToInt32(S3.Value) + ",255";
+            J16.Text = RGBATo(Convert.ToInt32(S1.Value), Convert.ToInt32(S2.Value), Convert.ToInt32(S3.Value), 255, 1);
+        }
     }
 }

@@ -28,6 +28,8 @@ namespace SS_Tool_Box.Classes
             JObject Features = new JObject();   //功能设置
             JObject Privacy = new JObject { { "Password", "NULL" } };
             Features.Add("Privacy", Privacy);
+            JObject MainPage = new JObject { { "SaysType", "Hitokoto" } };
+            Features.Add("MainPage", MainPage);
 
             SetUps["Version"] = FileVersion.ToString();
             SetUps.Add("Exterior", Exterior);

@@ -77,14 +77,14 @@
         </materialDesign:Card>
         <Image x:Name="SBG" Grid.Column="0" Grid.Row="0" Source="/Resource/BGtop.bmp" />
 
-        <ListView x:Name="UpdateList" Grid.Column="0" Grid.Row="1" Margin="0,0,0,15" pu:ListBoxHelper.ItemHeight="10" Grid.RowSpan="2" Opacity="0.9">
+        <ListView x:Name="UpdateList" Grid.Column="0" Grid.Row="1" Margin="0,0,0,15" pu:ListBoxHelper.ItemHeight="10" Grid.RowSpan="2" Opacity="0.9" Width="228">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Line}"/>
                 </GridView>
             </ListView.View>
             <ListView.ContextMenu>
-                <ContextMenu Width="150" pu:ContextMenuHelper.ItemHeight="30">
+                <ContextMenu x:Name="MainCont" Width="150" pu:ContextMenuHelper.ItemHeight="30">
                     <MenuItem Name="MenuItem1" Header="隐藏此项" Icon="" />
                     <MenuItem Name="MenuItem2" Header="单独打开" Icon="" Click="ListMenu_Open"/>
                 </ContextMenu>
@@ -97,7 +97,7 @@
             </Button.Effect>
         </Button>
 
-        <TextBox x:Name="SH1" Grid.Column="0" Grid.Row="1" pu:TextBoxHelper.IsClearButtonVisible="True" VerticalContentAlignment="Center" pu:TextBoxHelper.Icon="" pu:TextBoxHelper.Watermark="搜索……" pu:IconHelper.FontSize="15" Opacity="0.8" PreviewKeyDown="SearchBox_OnKeyDown"/>
+        <TextBox x:Name="SH1" BorderThickness="0, 0, 0, 1" Grid.Column="0" Grid.Row="1" pu:TextBoxHelper.IsClearButtonVisible="True" VerticalContentAlignment="Center" pu:TextBoxHelper.Icon="" pu:TextBoxHelper.Watermark="搜索……" pu:IconHelper.FontSize="15" Opacity="0.8" PreviewKeyDown="SearchBox_OnKeyDown"/>
 
         <Grid Grid.Column="0" Grid.Row="3" >
             <Grid.ColumnDefinitions>

@@ -42,7 +42,16 @@ namespace SS_Tool_Box_By_WPF
             Theams.SelectedValuePath = "ID";
             Theams.SelectedValue = baseColora.Theme;
 
-            if(baseColora.DarkMode)
+            //初始化一句话推荐
+            IList<customer> customListss = new List<customer>();
+            customListss.Add(new customer() { ID = 1, Name = "  一言（Hit…" });
+            customListss.Add(new customer() { ID = 2, Name = "  今日诗词" });
+            whatsay.ItemsSource = customListss;
+            whatsay.DisplayMemberPath = "Name";
+            whatsay.SelectedValuePath = "ID";
+            whatsay.SelectedValue = baseColora.Theme;
+
+            if (baseColora.DarkMode)
             {
                 this.C11.IsChecked = true;
             }
@@ -60,6 +69,43 @@ namespace SS_Tool_Box_By_WPF
                 S13.Value = double.Parse(Main.Settings["Exterior"]["OwnColor"]["G"].ToString());
                 S14.Value = double.Parse(Main.Settings["Exterior"]["OwnColor"]["B"].ToString());
                 fistLoad = false;
+            }
+            LoadingSetter setter = new LoadingSetter();
+            try
+            {
+                string now = Main.Settings["Features"]["MainPage"]["SaysType"].ToString();
+                if (now.Equals("Hitokoto"))
+                {
+                    whatsay.SelectedValue = 1;
+                    T24.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    whatsay.SelectedValue = 2;
+                    T24.Visibility = Visibility.Visible;
+                    if (SSUserClass.Reg.IsRegeditItemExist("SOFTWARE", "SSTB"))
+                    {
+                        if (SSUserClass.Reg.IsRegeditKeyExit("SOFTWARE\\SSTB", "ShiciToken"))
+                        {
+                            T24.Text = "X-User-Token:" + SSUserClass.Reg.GetRegKey("SOFTWARE\\SSTB", "ShiciToken");
+                        }
+                        else
+                        {
+                            T24.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                    else
+                    {
+                        T24.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+            catch
+            {
+                //新建设置项
+                JObject MainPage = new JObject { { "SaysType", "Hitokoto" } };
+                Main.Settings["Features"]["MainPage"] = MainPage;
+                setter.writeJsom(Main.Settings);
             }
 
             this.PassWord.Visibility = Visibility.Collapsed;
@@ -115,6 +161,12 @@ namespace SS_Tool_Box_By_WPF
             this.T22.Foreground = baseColora.Fg;
             this.T22.FontFamily = baseColora.Fonts;
             this.T22.FontSize = 13;
+            this.T23.Foreground = baseColora.Fg;
+            this.T23.FontFamily = baseColora.Fonts;
+            this.T23.FontSize = 13;
+            this.T24.Foreground = baseColora.Fg;
+            this.T24.FontFamily = baseColora.Fonts;
+            this.T24.FontSize = 11;
             this.T31.Foreground = baseColora.Fg;
             this.T31.FontFamily = baseColora.Fonts;
             this.T31.FontSize = 13;
@@ -134,6 +186,9 @@ namespace SS_Tool_Box_By_WPF
             this.MT21.Foreground = baseColora.Fg;
             this.MT21.FontFamily = baseColora.Fonts;
             this.MT21.FontSize = 15;
+            this.MT22.Foreground = baseColora.Fg;
+            this.MT22.FontFamily = baseColora.Fonts;
+            this.MT22.FontSize = 15;
             this.MT31.Foreground = baseColora.Fg;
             this.MT31.FontFamily = baseColora.Fonts;
             this.MT31.FontSize = 15;
@@ -145,6 +200,7 @@ namespace SS_Tool_Box_By_WPF
             this.CD12.Background = baseColora.Bg;
             this.CD13.Background = baseColora.Bg;
             this.CD21.Background = baseColora.Bg;
+            this.CD22.Background = baseColora.Bg;
             this.CD32.Background = baseColora.Bg;
             this.CD41.Background = baseColora.Bg;
 
@@ -175,6 +231,13 @@ namespace SS_Tool_Box_By_WPF
             ComboBoxHelper.SetHoverForeground(Theams, baseColora.Fg);
             ComboBoxHelper.SetSelectedBackground(Theams, baseColora.DBg);
             ComboBoxHelper.SetSelectedForeground(Theams, baseColora.Fg);
+            this.whatsay.Background = baseColora.DBg;
+            this.whatsay.Foreground = baseColora.Fg;
+            ComboBoxHelper.SetShadowColor(whatsay, baseColora.Bg.Color);
+            ComboBoxHelper.SetHoverBackground(whatsay, baseColora.Bg);
+            ComboBoxHelper.SetHoverForeground(whatsay, baseColora.Fg);
+            ComboBoxHelper.SetSelectedBackground(whatsay, baseColora.DBg);
+            ComboBoxHelper.SetSelectedForeground(whatsay, baseColora.Fg);
 
             this.S11.Background = baseColora.DBg;
             this.S11.Foreground = baseColora.Fg;
@@ -386,6 +449,48 @@ namespace SS_Tool_Box_By_WPF
                     }
                 }
             }
+        }
+
+        private void Whatsay_DropDownClosed(object sender, EventArgs e)
+        {
+            LoadingSetter setter = new LoadingSetter();
+            try
+            {
+                string now = Main.Settings["Features"]["MainPage"]["SaysType"].ToString();
+                if (whatsay.SelectedValue.ToString().Equals("1"))
+                {
+                    Main.Settings["Features"]["MainPage"]["SaysType"] = "Hitokoto";
+                    T24.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    Main.Settings["Features"]["MainPage"]["SaysType"] = "ShiCi";
+                    T24.Visibility = Visibility.Visible;
+                    if (SSUserClass.Reg.IsRegeditItemExist("SOFTWARE", "SSTB"))
+                    {
+                        if (SSUserClass.Reg.IsRegeditKeyExit("SOFTWARE\\SSTB", "ShiciToken"))
+                        {
+                            T24.Text = "X-User-Token:" + SSUserClass.Reg.GetRegKey("SOFTWARE\\SSTB", "ShiciToken");
+                        }
+                        else
+                        {
+                            T24.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                    else
+                    {
+                        T24.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+            catch
+            {
+                //新建设置项
+                JObject MainPage = new JObject { { "SaysType", "Hitokoto" } };
+                Main.Settings["Features"]["MainPage"] = MainPage;
+                setter.writeJsom(Main.Settings);
+            }
+        SaveSet();
         }
     }
 }

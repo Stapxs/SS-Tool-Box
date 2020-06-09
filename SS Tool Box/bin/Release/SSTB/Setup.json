@@ -3,7 +3,7 @@
   "Exterior": {
     "Themes": {
       "WindowTran": 0.0,
-      "MainTheme": "3",
+      "MainTheme": "2",
       "DarkMode": "True"
     },
     "OwnColor": {
@@ -14,7 +14,10 @@
   },
   "Features": {
     "Privacy": {
-      "Password": "61655"
+      "Password": "NULL"
+    },
+    "MainPage": {
+      "SaysType": "Hitokoto"
     }
   }
 }

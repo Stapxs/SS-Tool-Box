@@ -1,0 +1,7 @@
+{
+  "Version": "2",
+  "MainVersion": "1.0.30",
+  "Time": "2020/04/04 下午3:12",
+  "Url": "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/Note-Update/SS%20Tool%20Box/bin/Release/SS%20Tool%20Box.exe",
+  "Logs": "233"
+}

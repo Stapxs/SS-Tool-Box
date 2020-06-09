@@ -14,6 +14,7 @@ Stapx Steve
 Bad Laugh Cat
 ### 开源API
 - 一言 - Hitokoto（https://hitokoto.cn/ ）
+- 今日诗词 （https://www.jinrishici.com/ ）
 ### 开源项目
 - Material Design In XAML Toolkit （https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit ）
 - Newtonsoft.Json （https://www.newtonsoft.com/json ）

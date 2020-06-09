@@ -1,50 +1,9 @@
 {
   "Stat": {
-    "Version": "7",
-    "NumOfDef": "2"
+    "Version": "8",
+    "NumOfDef": "0"
   },
   "Cards": {
-    "Def": {
-      "1": {
-        "Title": "工具箱更新计划",
-        "Stat": "1",
-        "Finished": "4",
-        "-1": {
-          "Title": "普通事件不可删除",
-          "Finished": true,
-          "CantDel": false
-        },
-        "-2": {
-          "Title": "普通卡片删除",
-          "Finished": true,
-          "CantDel": false
-        },
-        "-3": {
-          "Title": "普通事件删除",
-          "Finished": true,
-          "CantDel": false
-        },
-        "-4": {
-          "Title": "普通事件完成",
-          "Finished": true,
-          "CantDel": false
-        },
-        "1": {
-          "Title": "打卡事件",
-          "Finished": false,
-          "CantDel": false
-        }
-      },
-      "2": {
-        "Title": "Kill STL 更新计划",
-        "Stat": "1",
-        "Finished": "0",
-        "1": {
-          "Title": "完成基础流程",
-          "Finished": false,
-          "CantDel": false
-        }
-      }
-    }
+    "Def": {}
   }
 }
