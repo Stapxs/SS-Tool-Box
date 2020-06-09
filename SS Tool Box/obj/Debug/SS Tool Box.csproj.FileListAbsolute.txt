@@ -1,105 +1,20 @@
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.csprojAssemblyReference.cache
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Windows\OpenInWindow.g.cs
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Windows\About.g.cs
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\App.g.cs
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box_MarkupCompile.cache
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box_MarkupCompile.lref
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Panges\Page1.g.cs
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Panges\PageMain.g.cs
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\SS Tool Box.exe.config
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\SS Tool Box.exe
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\SS Tool Box.pdb
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\MaterialDesignColors.dll
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\MaterialDesignThemes.Wpf.dll
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\Panuon.UI.Silver.dll
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\MaterialDesignColors.pdb
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\MaterialDesignThemes.Wpf.pdb
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\MaterialDesignThemes.Wpf.xml
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Panges\PageNone.g.cs
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\App.baml
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Panges\Page1.baml
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Panges\PageMain.baml
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Windows\OpenInWindow.baml
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Windows\About.baml
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Panges\PageNone.baml
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.g.resources
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS_Tool_Box.Properties.Resources.resources
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.GenerateResource.cache
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.CoreCompileInputs.cache
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.CopyComplete
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.exe
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.pdb
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Main.g.cs
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Main.baml
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Panges\Page2.g.cs
-C:\Users\Stapx\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Panges\Page2.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SS Tool Box.exe.config
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SS Tool Box.exe
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SS Tool Box.pdb
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\MaterialDesignColors.dll
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\MaterialDesignThemes.Wpf.dll
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\Panuon.UI.Silver.dll
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\MaterialDesignColors.pdb
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\MaterialDesignThemes.Wpf.pdb
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\MaterialDesignThemes.Wpf.xml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.csprojAssemblyReference.cache
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\Settings.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\AddIcons.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Main.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\OpenInWindow.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\About.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\App.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box_MarkupCompile.cache
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box_MarkupCompile.lref
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\App.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\Settings.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\AddIcons.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Main.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\OpenInWindow.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\About.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.g.resources
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS_Tool_Box.Properties.Resources.resources
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.GenerateResource.cache
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.CoreCompileInputs.cache
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.CopyComplete
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.exe
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.pdb
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageHD1.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page5.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page4.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page3.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page2.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageNone.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page1.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageMain.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageHD1.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page5.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page4.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page3.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page2.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageNone.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page1.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageMain.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SS Tool Box.exe.manifest
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\bin\Debug\SS Tool Box.application
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.exe.manifest
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\SS Tool Box.application
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page6.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\KillSTL.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageHD2.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page6.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\KillSTL.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\PageHD2.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page7.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page7.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\PassWordEnterF7.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\PassWordEnterF7.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\SSMessageBox.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\SSMessageBox.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\Updater.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Windows\Updater.baml
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page8.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\Stapx\OneDrive\项目\GitHub\SS-Tool-Box\SS Tool Box\obj\Debug\Pages\Page8.baml
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\SS Tool Box.exe.config
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\SS Tool Box.exe
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\SS Tool Box.pdb
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.csprojAssemblyReference.cache
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\MainWindow.g.cs
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\App.g.cs
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box_MarkupCompile.cache
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box_MarkupCompile.lref
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\MainWindow.baml
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.g.resources
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS_Tool_Box.Properties.Resources.resources
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.GenerateResource.cache
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.CoreCompileInputs.cache
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.exe
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.pdb
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Pages\PageHome.baml
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\Pages\PageHome.g.cs
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\Newtonsoft.Json.dll
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\bin\Debug\Newtonsoft.Json.xml
+D:\Files\OneDrive\项目\WPFCode\SS Tool Box\SS Tool Box\obj\Debug\SS Tool Box.csproj.CopyComplete

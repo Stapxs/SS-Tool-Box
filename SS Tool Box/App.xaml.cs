@@ -1,7 +1,4 @@
-﻿// 林槐工具箱(SS Tool Box) By Stapx Steve  2019.02.22
-// 林槐出品，必属稽品！
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;

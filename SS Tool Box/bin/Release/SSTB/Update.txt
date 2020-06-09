@@ -1,7 +1,0 @@
-{
-  "Version": "2",
-  "MainVersion": "1.0.32",
-  "Time": "2020/04/04 下午7:53",
-  "Url": "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/Note-Update/SS%20Tool%20Box/bin/Release/SS%20Tool%20Box.exe",
-  "Logs": "+ 官方更新检测源\r\n+ 公告板\r\n+ 兼容接口统计"
-}

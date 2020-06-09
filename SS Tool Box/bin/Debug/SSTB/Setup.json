@@ -1,23 +1,9 @@
 {
-  "Version": "8",
+  "Version": "2.1",
   "Exterior": {
     "Themes": {
-      "WindowTran": 0.0,
-      "MainTheme": "4",
-      "DarkMode": "True"
-    },
-    "OwnColor": {
-      "R": 177.0,
-      "G": 207.0,
-      "B": 178.0
-    }
-  },
-  "Features": {
-    "Privacy": {
-      "Password": "NULL"
-    },
-    "MainPage": {
-      "SaysType": "ShiCi"
+      "DarkMode": true,
+      "DMFromSys": false
     }
   }
 }
