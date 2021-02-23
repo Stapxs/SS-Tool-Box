@@ -1,0 +1,396 @@
+﻿<Application x:Class="SS_Tool_Box.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SS_Tool_Box"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <!-- 
+            ///////////////////////////////
+            颜色样式
+            ///////////////////////////////
+        -->
+
+        <!-- 默认初始化暗黑主题色 -->
+        <!-- 画笔 -->
+        <SolidColorBrush x:Key="colorBg" Color="#2D2D2D"/>
+        <SolidColorBrush x:Key="colorCard" Color="#3A3A3A"/>
+        <SolidColorBrush x:Key="colorCard1" Color="#494949"/>
+        <SolidColorBrush x:Key="colorCard2" Color="#FF5F5F5F"/>
+
+        <SolidColorBrush x:Key="colorFont" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="colorFont1" Color="#FFCFCFCF"/>
+
+        <SolidColorBrush x:Key="colorMainBlue" Color="#2EAFFF"/>
+
+        <!-- 颜色 -->
+        <Color x:Key="colorShader">#5F5F5F</Color>
+
+        <!-- 
+            ///////////////////////////////
+            全局样式
+            ///////////////////////////////
+        -->
+
+        <!-- 滚动条 -->
+        <Style x:Key="VerticalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Rectangle Fill="{TemplateBinding Background}" Height="0" Width="{TemplateBinding Width}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--滚动条颜色、圆角等设置-->
+        <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <!--滚动条颜色和圆角设置-->
+                        <Rectangle Name="thumbRect" Fill="{DynamicResource colorCard1}" RadiusX="3" RadiusY="3"/>
+                        <!--鼠标拉动滚动条时的颜色
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Fill" Value="#20000000" TargetName="thumbRect" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        -->
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HorizontalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+            <!--滚动条宽度-->
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="MinWidth" Value="6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <!--滚动条背景色-->
+                        <Grid x:Name="Bg" Background="Transparent" SnapsToDevicePixels="true" Width="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollBarThumb}"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="MinWidth" Value="0"/>
+                    <Setter Property="Height" Value="6"/>
+                    <Setter Property="MinHeight" Value="6"/>
+                    <Setter Property="Background" Value="AliceBlue"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                <Grid x:Name="Bg" Background="Red" SnapsToDevicePixels="true">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Track x:Name="PART_Track"  IsEnabled="{TemplateBinding IsMouseOver}">
+                                        <Track.DecreaseRepeatButton>
+                                            <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource HorizontalScrollBarPageButton}"/>
+                                        </Track.DecreaseRepeatButton>
+                                        <Track.IncreaseRepeatButton>
+                                            <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource HorizontalScrollBarPageButton}"/>
+                                        </Track.IncreaseRepeatButton>
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource ScrollBarThumb}" />
+                                        </Track.Thumb>
+                                    </Track>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- ToolTip -->
+        <Style TargetType="{x:Type ToolTip}">
+            <Setter Property="Foreground" Value="{DynamicResource colorFont}"/>
+            <Setter Property = "Background" Value="{DynamicResource colorBg}"/>
+            <Setter Property="Placement" Value="Bottom"/>
+        </Style>
+
+        <!-- TabItem -->
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border Name="Border" Width="220" Height="45" Margin="0,0,15,0" BorderThickness="8,2,8,2">
+                                <Border Name="BorderOver" CornerRadius="5" Background="Transparent">
+                                    <Border Name="BorderOn" CornerRadius="0" Background="Transparent">
+                                        <Grid>
+                                            <TextBlock Foreground="{DynamicResource colorFont}" x:Name="mHeader" FontSize="13" HorizontalAlignment="Left" Text="{TemplateBinding Header}" VerticalAlignment="Center" Margin="12,2,12,2"/>
+                                            <Grid x:Name="mRight">
+                                                <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="7" Height="9" HorizontalAlignment="right" Margin="12,2,17,2">
+                                                    <Path.Data>
+                                                        <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
+                                                    </Path.Data>
+                                                </Path>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </Border>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsTabStop" Value="False">
+                                <Setter TargetName="mRight" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="BorderOn" Property="Background" Value="#20000000"/>
+                                <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="BorderOn" Property="Background" Value="#00000000"/>
+                                <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="mHeader" Property="HorizontalAlignment" Value="Center"/>
+                                <Setter TargetName="mRight" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.300" To="#20000000" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="BorderOver"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.200" To="#00000000" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="BorderOver"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 
+            ///////////////////////////////
+            控件样式
+            ///////////////////////////////
+        -->
+
+        <!-- 普通圆形图标按钮 -->
+        <Style x:Key="IconButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="999">
+                            <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="999" Name="PART_Background">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.300" To="#20FFFFFF" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.200" To="#00000000" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                                <Setter Property="UIElement.Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" Color="{DynamicResource colorShaderNP}" Direction="0" Opacity="0.4" RenderingBias="Performance" ShadowDepth="0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 红色圆形图标按钮 -->
+        <Style x:Key="IconButtonWarry" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="999">
+                            <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="999" Name="PART_Background">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.300" To="#FFE81123" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.200" To="#00000000" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                                <Setter Property="UIElement.Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" Color="{DynamicResource colorShaderNP}" Direction="0" Opacity="0.4" RenderingBias="Performance" ShadowDepth="0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 卡片 -->
+        <Style x:Key="BCard" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="7">
+                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 卡片(悬停效果） -->
+        <Style x:Key="BCardEx" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="7">
+                            <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="7" Name="PART_Background">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.300" To="#20FFFFFF" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.200" To="#00000000" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                                <Setter Property="UIElement.Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" Color="{DynamicResource colorShaderNP}" Direction="0" Opacity="0.4" RenderingBias="Performance" ShadowDepth="0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 普通腰圆按钮样式 - 扩展 -->
+        <Style x:Key="TextButtonEx" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="12.5">
+                            <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="12.5" Name="PART_Background">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.300" To="#20FFFFFF" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.200" To="#00000000" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                                <Setter Property="UIElement.Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" Color="{DynamicResource colorShader}" Direction="0" Opacity="0.4" RenderingBias="Performance" ShadowDepth="0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>

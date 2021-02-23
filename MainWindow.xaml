@@ -1,0 +1,122 @@
+﻿<Window x:Class="SS_Tool_Box.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        xmlns:local="clr-namespace:SS_Tool_Box"
+        mc:Ignorable="d"
+        Title="林槐工具箱 - SS Tool Box"
+        Height="580"
+        Width="890"
+        Background="Transparent"
+        ResizeMode="CanMinimize"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ContentRendered="Window_ContentRendered"
+        >
+    <!-- 窗口框架 -->
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="1,0,0,0" CornerRadius="7" ResizeBorderThickness="0,0,0,0" CaptionHeight="0" NonClientFrameEdges="None"/>
+    </WindowChrome.WindowChrome>
+    <Grid Margin="10">
+        <!-- 主背景，窗口阴影 -->
+        <Border x:Name="mainBg" CornerRadius="7" Background="{DynamicResource colorBg}">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="15" Opacity="0.5"/>
+            </Border.Effect>
+        </Border>
+        <!-- 主窗口，页面框架 -->
+        <Grid x:Name="mainBackground">
+            <Grid Margin="15,55,15,15">
+                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="2,2,616,0"/>
+                <TabControl x:Name="mainTab" SelectionChanged="mainTab_SelectionChanged"  TabStripPlacement="Left" Background="Transparent" BorderThickness="0" Height="490">
+                    <TabItem IsEnabled="False" Height="160"/>
+                    <!-- 这边只够放下六个 TabItem -->
+                    <!-- <TabItem Header="分类" IsEnabled="False"/> -->
+                    <TabItem Header="颜色工具" IsSelected="True">
+                        <ContentControl x:Name="conColorTools" Padding="0" Margin="0"/>
+                    </TabItem>
+                </TabControl>
+                <Border Background="{DynamicResource colorBg}" BorderBrush="{DynamicResource colorBg}" BorderThickness="0" CornerRadius="999" Margin="72,20,0,0" Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid>
+                        <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="35" Height="35">
+                            <Path.Data>
+                                <PathGeometry FillRule="Nonzero" Figures="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z" />
+                            </Path.Data>
+                        </Path>
+                    </Grid>
+                </Border>
+                <TextBlock Text="林槐工具箱" Block.TextAlignment="Center" FontSize="16" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,110,0,0"/>
+                <TextBlock x:Name="viewVersion" Block.TextAlignment="Center" Text="Version" FontSize="12" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,135,0,0" Width="224"/>
+                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="2,424,616,0"/>
+                <Grid Margin="12,0,0,12" Width="200" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                    <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorBg}"/>
+                    <TextBox pu:TextBoxHelper.Watermark="  搜索……" CaretBrush="{DynamicResource colorFont}" FontSize="12" pu:TextBoxHelper.FocusedShadowColor="{x:Null}" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource colorFont}" Margin="0">
+                        <TextBox.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
+                        </TextBox.Resources>
+                    </TextBox>
+                </Grid>
+            </Grid>
+            <ContentControl Name="MainCol" Padding="0" Margin="252,55,15,15"/>
+        </Grid>
+        <!-- 顶栏， 拖拽区域 -->
+        <Grid Grid.Row="0" VerticalAlignment="Top" MouseMove="Drag_MouseMove" Background="Transparent">
+            <!-- 顶栏 -->
+            <Grid Margin="15">
+                <!-- 关闭 -->
+                <Button Width="25" Height="25" Style="{Binding Source={StaticResource IconButtonWarry}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Right" Click="B_Exit" VerticalAlignment="Top" Margin="0">
+                    <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="7" Height="7">
+                        <Path.Data>
+                            <PathGeometry FillRule="Nonzero" Figures="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" />
+                        </Path.Data>
+                    </Path>
+                </Button>
+                <!-- 最小化 -->
+                <Button Width="25" Height="25" Style="{Binding Source={StaticResource IconButton}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Right" Click="B_SmallWin" VerticalAlignment="Top" Margin="0,0,35,0">
+                    <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="7" Height="2.5">
+                        <Path.Data>
+                            <PathGeometry FillRule="Nonzero" Figures="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                        </Path.Data>
+                    </Path>
+                </Button>
+                <!-- 设置 -->
+                <Button x:Name="More" Width="25" Click="B_More" Foreground="{DynamicResource colorFont}" Height="25" Style="{Binding Source={StaticResource TextButtonEx}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,70,0">
+                    <Grid>
+                        <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="9" Height="9">
+                            <Path.Data>
+                                <PathGeometry FillRule="Nonzero" Figures="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z" />
+                            </Path.Data>
+                        </Path>
+                    </Grid>
+                </Button>
+                <!-- 标题 -->
+                <Button x:Name="Title" Click="B_Back" Style="{Binding Source={StaticResource TextButtonEx}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Left" Foreground="White" Margin="0">
+                    <Grid>
+                        <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="5" Height="7" HorizontalAlignment="Left" Margin="15,0,0,0">
+                            <Path.Data>
+                                <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
+                            </Path.Data>
+                        </Path>
+                        <TextBlock x:Name="MainTitle" Foreground="{DynamicResource colorFont}" Text="林槐工具箱 - SS Tool Box" FontSize="10" Padding="15, 0" Margin="10,0,0,0"/>
+                    </Grid>
+                </Button>
+                <!-- 返回主页 -->
+                <Button x:Name="Home" Visibility="Collapsed" Click="B_Home" Width="25" Height="25" Style="{Binding Source={StaticResource IconButton}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
+                    <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="10" Height="9">
+                        <Path.Data>
+                            <PathGeometry FillRule="Nonzero" Figures="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z" />
+                        </Path.Data>
+                    </Path>
+                </Button>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
