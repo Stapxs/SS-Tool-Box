@@ -90,6 +90,16 @@ namespace SS_Tool_Box
             logList.Enqueue(logOut);
         }
 
+        public static void AddErr(string log)
+        {
+            // 获取时间
+            string time = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            // 组合字符串
+            String logOut = "[" + time + "][Error] " + log;
+            // 加入队列
+            logList.Enqueue(logOut);
+        }
+
         public static void exit()
         {
             logExit = true;

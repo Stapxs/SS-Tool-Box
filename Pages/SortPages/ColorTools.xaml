@@ -9,11 +9,10 @@
       Title="ColorTools">
 
     <StackPanel>
-        <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0,0,0,15" VerticalAlignment="Top">
-            <Grid Width="589" Height="40">
-                <TextBlock Text="颜色工具" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="10,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            </Grid>
-        </Button>
+        <Grid Height="40" Margin="0,0,0,15">
+            <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
+            <TextBlock Text="颜色工具" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Grid>
         <Grid ClipToBounds="True">
             <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0,0,407,378" VerticalAlignment="Top" HorizontalAlignment="Left" Height="115" Width="188">
                 <Grid Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="188" Height="115">

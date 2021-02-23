@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Threading;
 using SS_Tool_Box.Pages.SortPages;
 using System.Windows.Media;
+using SS_Tool_Box.Function;
 
 namespace SS_Tool_Box
 {
@@ -44,8 +45,8 @@ namespace SS_Tool_Box
         // 程序基本信息
         public class verInfo
         {
-            public static string ver = "Dev-0.1.1";         // 版本号
-            public static int verBulidTimes = 1;            // 编译编号
+            public static string ver = "Dev-0.2.5";         // 版本号
+            public static int verBulidTimes = 7;            // 编译编号
         }
 
         public MainWindow()
@@ -62,7 +63,7 @@ namespace SS_Tool_Box
             #region 0 - 初始化基础服务
 
             Log.StartLogOut();
-            // UI.ToastHelper.StartShower();
+            UI.ToastHelper.StartShower();
 
             #endregion
 
@@ -138,12 +139,10 @@ namespace SS_Tool_Box
                 if (pageStack.Count > 1)
                 {
                     Home.Visibility = Visibility.Visible;
-                    Title.Margin = new Thickness(35, 0, 0, 0);
                 }
                 else
                 {
                     Home.Visibility = Visibility.Collapsed;
-                    Title.Margin = new Thickness(0, 0, 0, 0);
                 }
             }
         }
@@ -168,6 +167,12 @@ namespace SS_Tool_Box
                 // 清空堆栈
                 pageStack.Clear();
             }
+        }
+
+        private void B_Flash(object sender, RoutedEventArgs e)
+        {
+            // 刷新页面
+            flashPage();
         }
 
         private void B_More(object sender, RoutedEventArgs e)
@@ -228,17 +233,42 @@ namespace SS_Tool_Box
                     Content = page
                 };
                 MainTitle.Text = pageTitle;
-                // 判断是否显示回到主页按钮
+                // 判断是否显示回到主页按钮和刷新按钮
                 if (pageStack.Count > 1)
                 {
                     Home.Visibility = Visibility.Visible;
-                    Title.Margin = new Thickness(35, 0, 0, 0);
+                    // Flash.Visibility = Visibility.Visible;
+                    Title.Margin = new Thickness(10, 0, 0, 0);
                 }
                 else
                 {
                     Home.Visibility = Visibility.Collapsed;
+                    // Flash.Visibility = Visibility.Collapsed;
                     Title.Margin = new Thickness(0, 0, 0, 0);
                 }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 刷新嵌入界面
+        /// </summary>
+        /// <returns></returns>
+        public bool flashPage()
+        {
+            try
+            {
+                // 不计入堆栈
+                object now = MainCol.Content;
+                string title = MainTitle.Text;
+                Home page = new Home();
+                changePage(page, MainTitle.Text);
+                changePage(now, title);
+                Log.AddLog("ui", "刷新界面" + pageStack.Peek().lastPageName + "（ " + pageStack.Peek().lastPage + " ）");
                 return true;
             }
             catch

@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,6 +61,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Function\HttpUitls.cs" />
+    <Compile Include="Windows\Toast.xaml.cs">
+      <DependentUpon>Toast.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\ColorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -71,6 +80,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\ColorView.xaml.cs">
+      <DependentUpon>ColorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Function\Features.cs" />
     <Compile Include="Function\Log.cs" />
@@ -89,7 +101,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Tools\ColorCard.xaml">
+    <Page Include="Pages\Tools\ColorCards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Toast.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,8 +114,8 @@
     <Compile Include="Pages\SortPages\ColorTools.xaml.cs">
       <DependentUpon>ColorTools.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Tools\ColorCard.xaml.cs">
-      <DependentUpon>ColorCard.xaml</DependentUpon>
+    <Compile Include="Pages\Tools\ColorCards.xaml.cs">
+      <DependentUpon>ColorCards.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

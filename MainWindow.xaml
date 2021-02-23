@@ -96,25 +96,37 @@
                         </Path>
                     </Grid>
                 </Button>
-                <!-- 标题 -->
-                <Button x:Name="Title" Click="B_Back" Style="{Binding Source={StaticResource TextButtonEx}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Left" Foreground="White" Margin="0">
-                    <Grid>
-                        <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="5" Height="7" HorizontalAlignment="Left" Margin="15,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <!-- 返回主页 -->
+                    <Button x:Name="Home" Visibility="Collapsed" Click="B_Home" Width="25" Height="25" Style="{Binding Source={StaticResource IconButton}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
+                        <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="10" Height="9">
                             <Path.Data>
-                                <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
+                                <PathGeometry FillRule="Nonzero" Figures="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z" />
                             </Path.Data>
                         </Path>
-                        <TextBlock x:Name="MainTitle" Foreground="{DynamicResource colorFont}" Text="林槐工具箱 - SS Tool Box" FontSize="10" Padding="15, 0" Margin="10,0,0,0"/>
-                    </Grid>
-                </Button>
-                <!-- 返回主页 -->
-                <Button x:Name="Home" Visibility="Collapsed" Click="B_Home" Width="25" Height="25" Style="{Binding Source={StaticResource IconButton}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
-                    <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="10" Height="9">
-                        <Path.Data>
-                            <PathGeometry FillRule="Nonzero" Figures="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z" />
-                        </Path.Data>
-                    </Path>
-                </Button>
+                    </Button>
+                    <!-- 标题 -->
+                    <Button x:Name="Title" Click="B_Back" Style="{Binding Source={StaticResource TextButtonEx}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Left" Foreground="White" Margin="0">
+                        <Grid>
+                            <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="5" Height="7" HorizontalAlignment="Left" Margin="15,0,0,0">
+                                <Path.Data>
+                                    <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
+                                </Path.Data>
+                            </Path>
+                            <TextBlock x:Name="MainTitle" Foreground="{DynamicResource colorFont}" Text="林槐工具箱 - SS Tool Box" FontSize="10" Padding="15, 0" Margin="10,0,0,0"/>
+                        </Grid>
+                    </Button>
+                    <!-- 刷新 -->
+                    <Button x:Name="Flash" Width="25" Click="B_Flash"  Foreground="{DynamicResource colorFont}" Height="25" Style="{Binding Source={StaticResource TextButtonEx}}" Background="{DynamicResource colorCard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Visibility="Collapsed">
+                        <Grid>
+                            <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="9" Height="9">
+                                <Path.Data>
+                                    <PathGeometry FillRule="Nonzero" Figures="M256.455 8c66.269.119 126.437 26.233 170.859 68.685l35.715-35.715C478.149 25.851 504 36.559 504 57.941V192c0 13.255-10.745 24-24 24H345.941c-21.382 0-32.09-25.851-16.971-40.971l41.75-41.75c-30.864-28.899-70.801-44.907-113.23-45.273-92.398-.798-170.283 73.977-169.484 169.442C88.764 348.009 162.184 424 256 424c41.127 0 79.997-14.678 110.629-41.556 4.743-4.161 11.906-3.908 16.368.553l39.662 39.662c4.872 4.872 4.631 12.815-.482 17.433C378.202 479.813 319.926 504 256 504 119.034 504 8.001 392.967 8 256.002 7.999 119.193 119.646 7.755 256.455 8z" />
+                                </Path.Data>
+                            </Path>
+                        </Grid>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Grid>
 
