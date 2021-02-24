@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
-        xmlns:local="clr-namespace:SS_Tool_Box"
+        xmlns:local="clr-namespace:SS_Tool_Box.Controls"
         mc:Ignorable="d"
         Title="林槐工具箱 - SS Tool Box"
         Height="580"
@@ -50,10 +50,19 @@
                 </Border>
                 <TextBlock Text="林槐工具箱" Block.TextAlignment="Center" FontSize="16" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,110,0,0"/>
                 <TextBlock x:Name="viewVersion" Block.TextAlignment="Center" Text="Version" FontSize="12" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,135,0,0" Width="224"/>
-                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="2,424,616,0"/>
+                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="5,0,0,0" Height="64" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Width="217">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
                 <Grid Margin="12,0,0,12" Width="200" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorBg}"/>
-                    <TextBox pu:TextBoxHelper.Watermark="  搜索……" CaretBrush="{DynamicResource colorFont}" FontSize="12" pu:TextBoxHelper.FocusedShadowColor="{x:Null}" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource colorFont}" Margin="0">
+                    <TextBox x:Name="SeachBox" TextChanged="Seach_TextChanged" LostFocus="SeachBox_LostFocus" GotFocus="Seach_GotFocus" pu:TextBoxHelper.Watermark="  搜索……" CaretBrush="{DynamicResource colorFont}" FontSize="12" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource colorFont}" Margin="0">
                         <TextBox.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.MergedDictionaries>
@@ -66,7 +75,28 @@
             </Grid>
             <ContentControl Name="MainCol" Padding="0" Margin="252,55,15,15"/>
         </Grid>
-        <!-- 顶栏， 拖拽区域 -->
+        <!-- 次级顶层控件 -->
+        <Grid Margin="15,55,15,15">
+            <!-- Seach 浮动区域 -->
+            <Grid x:Name="panSeach" Visibility="Collapsed">
+                <Button Click="Seach_Close" Style="{DynamicResource BCard}" Background="Transparent" Margin="224,0,0,0"/>
+                <Button Click="Seach_Close" Style="{DynamicResource BCard}" Background="Transparent" Margin="0,0,615,64"/>
+                <Border Padding="0" CornerRadius="7" Background="{DynamicResource colorCard1}" Margin="15,0,0,62" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="195">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" Opacity="0.3" BlurRadius="15" Color="#FF767676"/>
+                    </Border.Effect>
+                    <StackPanel x:Name="listSeach">
+                        <Border Height="35">
+                            <TextBlock Text="搜索结果：" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                        </Border>
+                        <Border x:Name="seachNone" Height="25">
+                            <TextBlock Text="什么都没找到欸" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+        <!-- 顶栏，拖拽区域 -->
         <Grid Grid.Row="0" VerticalAlignment="Top" MouseMove="Drag_MouseMove" Background="Transparent">
             <!-- 顶栏 -->
             <Grid Margin="15">
@@ -129,6 +159,5 @@
                 </StackPanel>
             </Grid>
         </Grid>
-
     </Grid>
 </Window>

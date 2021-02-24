@@ -15,10 +15,6 @@ namespace SS_Tool_Box.Controls
 
         public SolidColorBrush ColorBrush
         {
-            get
-            {
-                return ColorBrush;
-            }
             set
             {
                 left.Background = value;
@@ -35,15 +31,7 @@ namespace SS_Tool_Box.Controls
         }
         public string ColorName
         {
-            get
-            {
-                return ColorName;
-            }
-
-            set
-            {
-                name.Text = value;
-            }
+            set => name.Text = value;
         }
 
         public ColorView()

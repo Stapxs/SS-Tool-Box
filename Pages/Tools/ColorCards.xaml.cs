@@ -22,7 +22,10 @@ namespace SS_Tool_Box.Pages.Tools
         public ColorCard()
         {
             InitializeComponent();
+        }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
             // 获取 Suk 色表
             Thread runGetSukColors = new Thread(GetSukColors);
             MainWindow.threads.Push(runGetSukColors);

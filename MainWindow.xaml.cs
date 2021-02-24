@@ -7,6 +7,7 @@ using System.Threading;
 using SS_Tool_Box.Pages.SortPages;
 using System.Windows.Media;
 using SS_Tool_Box.Function;
+using SS_Tool_Box.Controls;
 
 namespace SS_Tool_Box
 {
@@ -40,6 +41,9 @@ namespace SS_Tool_Box
         // 线程堆栈
         public static Stack<Thread> threads = new Stack<Thread>();
 
+        // MainWindow
+        public static MainWindow main = null;
+
         #endregion
 
         // 程序基本信息
@@ -57,6 +61,8 @@ namespace SS_Tool_Box
 
             InitializeComponent();
 
+            main = this;
+
             // 亚克力模糊
             // WindowBlur.SetIsEnabled(this, true);
 
@@ -73,7 +79,7 @@ namespace SS_Tool_Box
             viewVersion.Text = verInfo.ver;
 
             // 加载主页
-            Home page = new SS_Tool_Box.Home();
+            Home page = new Home();
             page.ParentWindow = this;
             MainCol.Content = new Frame()
             {
@@ -211,6 +217,84 @@ namespace SS_Tool_Box
         }
 
         #endregion
+        #region 事件 | 搜索框
+
+        private void Seach_GotFocus(object sender, RoutedEventArgs e)
+        {
+            // 得到焦点，显示浮动搜索框
+            panSeach.Visibility = Visibility.Visible;
+        }
+
+        private void Seach_Close(object sender, RoutedEventArgs e)
+        {
+            // 关闭搜索框
+            panSeach.Visibility = Visibility.Collapsed;
+            // 去除输入框焦点
+            conColorTools.Focus();
+            // 清空输入框
+            SeachBox.Text = "";
+        }
+
+        private void SeachBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            // 失去焦点
+            // 关闭搜索框
+            panSeach.Visibility = Visibility.Collapsed;
+            // 清空输入框
+            SeachBox.Text = "";
+        }
+
+        private void Seach_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // 搜索框
+            TextBox box = (TextBox)sender;
+            // 删除已经创建过的结果控件
+            StackPanel sp = Features.GetChildObject<StackPanel>(listSeach, "seachoutpan");
+            if(sp != null)
+            {
+                listSeach.Children.Remove(sp);
+            }
+            // 检索工具目录
+            List<UI.Tools.ToolVer> toolist = new List<UI.Tools.ToolVer>();
+            foreach(UI.Tools.ToolVer info in UI.Tools.List)
+            {
+                if(info.cardInfo[0].IndexOf(box.Text) >= 0)
+                {
+                    toolist.Add(info);
+                }
+            }
+            if(toolist.Count != 0)
+            {
+                // 隐藏没有结果
+                seachNone.Visibility = Visibility.Collapsed;
+            }
+            StackPanel stack = new StackPanel();
+            stack.Name = "seachoutpan";
+            if (toolist.Count <= 5)
+            {
+                foreach(UI.Tools.ToolVer info in toolist)
+                {
+                    stack.Children.Add(new SeachToolView(info.cardInfo[0], info.cardInfo[3], info.page, main));
+                }
+            }
+            else
+            {
+                // 大于 5 条生成 ScrollViewer
+                ScrollViewer scroll = new ScrollViewer();
+                scroll.Height = 150;
+                scroll.Margin = new Thickness(0, 0, 3, 0);
+                StackPanel stackin = new StackPanel();
+                foreach (UI.Tools.ToolVer info in toolist)
+                {
+                    stackin.Children.Add(new SeachToolView(info.cardInfo[0], info.cardInfo[3], info.page, main));
+                }
+                scroll.Content = stackin;
+                stack.Children.Add(scroll);
+            }
+            listSeach.Children.Add(stack);
+        }
+
+        #endregion
 
         #region 操作 | 主窗口
 
@@ -225,6 +309,9 @@ namespace SS_Tool_Box
             Log.AddLog("ui", "切换窗口到" + pageTitle + "（ " + page + " ）");
             try
             {
+                // 关闭搜索框
+                panSeach.Visibility = Visibility.Collapsed;
+                SeachBox.Text = "";
                 // 记录上个界面（入栈）
                 pageStack.Push(new pageInfo(MainCol.Content, MainTitle.Text));
                 // 切换界面

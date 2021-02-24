@@ -61,11 +61,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\SeachToolView.xaml.cs">
+      <DependentUpon>SeachToolView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SortCard.xaml.cs">
+      <DependentUpon>SortCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Function\HttpUitls.cs" />
     <Compile Include="Windows\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\ColorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SeachToolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SortCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
