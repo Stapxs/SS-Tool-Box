@@ -223,6 +223,14 @@ namespace SS_Tool_Box
         {
             // 得到焦点，显示浮动搜索框
             panSeach.Visibility = Visibility.Visible;
+            // 删除已经创建过的结果控件
+            StackPanel sp = Features.GetChildObject<StackPanel>(listSeach, "seachoutpan");
+            if (sp != null)
+            {
+                listSeach.Children.Remove(sp);
+            }
+            // 显示没有结果
+            seachNone.Visibility = Visibility.Visible;
         }
 
         private void Seach_Close(object sender, RoutedEventArgs e)
