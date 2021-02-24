@@ -19,14 +19,12 @@ namespace SS_Tool_Box.Controls
             {
                 left.Background = value;
                 right.Background = value;
-                color.Foreground = value;
+                colorHexText.Foreground = value;
+                colorRgbText.Foreground = value;
                 name.Foreground = value;
 
-                string colorStr = "#" + new ColorConverter().ConvertToString(value.Color).Substring(3) + " / " +
-                    value.Color.R + "," +
-                    value.Color.G + "," +
-                    value.Color.B;
-                color.Text = colorStr;
+                colorHexText.Text = "#" + new ColorConverter().ConvertToString(value.Color).Substring(3);
+                colorRgbText.Text = value.Color.R + "," + value.Color.G + "," + value.Color.B;
             }
         }
         public string ColorName
@@ -45,20 +43,21 @@ namespace SS_Tool_Box.Controls
 
             left.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Color16));
             right.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Color16));
-            color.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Color16));
+            colorHexText.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Color16));
+            colorRgbText.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Color16));
             name.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Color16));
             name.Text = Name;
             SolidColorBrush colorSB = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Color16));
-            string colorStr = "#" + new ColorConverter().ConvertToString(colorSB.Color).Substring(3) + " / " +
-                    colorSB.Color.R + "," +
-                    colorSB.Color.G + "," +
-                    colorSB.Color.B;
-            color.Text = colorStr;
+            colorHexText.Text = "#" + new ColorConverter().ConvertToString(colorSB.Color).Substring(3);
+            colorRgbText.Text = colorSB.Color.R + "," + colorSB.Color.G + "," + colorSB.Color.B;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Clipboard.SetDataObject(color.Text);
+        private void Button_Hex_Click (object sender, RoutedEventArgs e) {
+            Clipboard.SetDataObject(colorHexText.Text);
+            UI.ToastHelper.Add("复制成功！");
+        }
+        private void Button_Rgb_Click (object sender, RoutedEventArgs e) {
+            Clipboard.SetDataObject(colorRgbText.Text);
             UI.ToastHelper.Add("复制成功！");
         }
     }

@@ -13,10 +13,14 @@
             <Border x:Name="left" HorizontalAlignment="Left" Width="5" Background="#FFFFFF" CornerRadius="5, 0, 0, 5"/>
             <StackPanel Orientation="Horizontal" Margin="6,0,0,0">
                 <TextBlock x:Name="name" Text="颜色名称" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="30,0,0,0" VerticalAlignment="Center"/>
-                <TextBlock x:Name="color" Text="#FFFFFF / 255,255,255" FontSize="11" Foreground="{DynamicResource colorFont1}" VerticalAlignment="Center" Margin="10,6,0,0"/>
+                <Button ToolTip="点击复制颜色代码" x:Name="colorHex" Click="Button_Hex_Click" Style="{DynamicResource BCardEx}" Background="Transparent" FontSize="11" VerticalAlignment="Center" Margin="14,6,0,0">
+                    <TextBlock x:Name="colorHexText" Text="#FFFFFF" FontSize="11" Foreground="{DynamicResource colorFont1}" VerticalAlignment="Center" Margin="6, 0" />
+                </Button>
+                <Button ToolTip="点击复制颜色代码" x:Name="colorRgb" Click="Button_Rgb_Click" Style="{DynamicResource BCardEx}" Background="Transparent" FontSize="11" VerticalAlignment="Center" Margin="0,6,0,0">
+                    <TextBlock x:Name="colorRgbText" Text="255, 255, 255" FontSize="11" Foreground="{DynamicResource colorFont1}" VerticalAlignment="Center" Margin="6, 0" />
+                </Button>
             </StackPanel>
             <Border x:Name="right" HorizontalAlignment="Right" Width="490" Background="#FFFFFF" CornerRadius="0, 5, 5, 0" Margin="310,0,0,0"/>
         </Grid>
-        <Button ToolTip="点击复制颜色代码" Style="{DynamicResource BCardEx}" Click="Button_Click" Background="Transparent" Margin="0" Height="40" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>
