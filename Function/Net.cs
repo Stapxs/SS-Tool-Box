@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace SS_Tool_Box
     /// </summary>
     public class Net
     {
+
         /// <summary>
         /// 其他网络相关操作
         /// </summary>

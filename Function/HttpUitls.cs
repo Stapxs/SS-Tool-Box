@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SS_Tool_Box.Classes
+namespace SS_Tool_Box
 {
     public class HttpUitls
     {
@@ -51,32 +51,38 @@ namespace SS_Tool_Box.Classes
 
         public static string Get(string Url)
         {
-            //System.GC.Collect();
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
-            request.Proxy = null;
-            request.KeepAlive = false;
-            request.Method = "GET";
-            request.ContentType = "application/json; charset=UTF-8";
-            request.AutomaticDecompression = DecompressionMethods.GZip;
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream myResponseStream = response.GetResponseStream();
-            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.UTF8);
-            string retString = myStreamReader.ReadToEnd();
-
-            myStreamReader.Close();
-            myResponseStream.Close();
-
-            if (response != null)
+            try
             {
-                response.Close();
-            }
-            if (request != null)
-            {
-                request.Abort();
-            }
+                //System.GC.Collect();
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                request.Proxy = null;
+                request.KeepAlive = false;
+                request.Method = "GET";
+                request.ContentType = "application/json; charset=UTF-8";
+                request.AutomaticDecompression = DecompressionMethods.GZip;
 
-            return retString;
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream myResponseStream = response.GetResponseStream();
+                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.UTF8);
+                string retString = myStreamReader.ReadToEnd();
+
+                myStreamReader.Close();
+                myResponseStream.Close();
+
+                if (response != null)
+                {
+                    response.Close();
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                }
+
+                return retString;
+            } catch (Exception e)
+            {
+                return e.Message;
+            }
         }
 
         public static string Get(string Url, string ContentType, string HeanderName, string HeanderString)
@@ -127,7 +133,7 @@ namespace SS_Tool_Box.Classes
             }
         }
 
-            public static string Post(string Url, string Data, string Referer, string ContentType)
+        public static string Post(string Url, string Data, string Referer, string ContentType)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
             request.Method = "POST";

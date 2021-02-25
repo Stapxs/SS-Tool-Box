@@ -46,6 +46,9 @@ namespace SS_Tool_Box
 
         #endregion
 
+        // 加载完成标记
+        private bool loadDone = false;
+
         // 程序基本信息
         public class verInfo
         {
@@ -93,11 +96,17 @@ namespace SS_Tool_Box
             {
                 Content = colors
             };
-
+            OtherTools others = new OtherTools();
+            others.ParentWindow = this;
+            conOtherTools.Content = new Frame()
+            {
+                Content = others
+            };
             #endregion
 
 
             Log.AddLog("main", "加载完毕，耗时" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
+            loadDone = true;
         }
 
         #region 事件 | 主按钮
@@ -191,8 +200,25 @@ namespace SS_Tool_Box
 
         private void mainTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //TabControl tab = (TabControl)sender;
-            //TabItem selected = (TabItem)tab.SelectedItem;
+            TabControl tab = (TabControl)sender;
+            // 返回主页
+            if (loadDone && MainTitle.Text != "林槐工具箱 - SS Tool Box")
+            {
+                // 加载主页
+                Home page = new Home();
+                Log.AddLog("ui", "切换窗口到" + "林槐工具箱 - SS Tool Box" + "（ " + page + " ）");
+                page.ParentWindow = this;
+                MainCol.Content = new Frame()
+                {
+                    Content = page
+                };
+                MainTitle.Text = "林槐工具箱 - SS Tool Box";
+                // 隐藏回到主页按钮
+                Home.Visibility = Visibility.Collapsed;
+                Title.Margin = new Thickness(0, 0, 0, 0);
+                // 清空堆栈
+                pageStack.Clear();
+            }
         }
 
         private void Drag_MouseMove(object sender, MouseEventArgs e)
@@ -239,15 +265,6 @@ namespace SS_Tool_Box
             panSeach.Visibility = Visibility.Collapsed;
             // 去除输入框焦点
             conColorTools.Focus();
-            // 清空输入框
-            SeachBox.Text = "";
-        }
-
-        private void SeachBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            // 失去焦点
-            // 关闭搜索框
-            panSeach.Visibility = Visibility.Collapsed;
             // 清空输入框
             SeachBox.Text = "";
         }

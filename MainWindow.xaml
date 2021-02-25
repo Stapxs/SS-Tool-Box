@@ -38,6 +38,9 @@
                     <TabItem Header="颜色工具" IsSelected="True">
                         <ContentControl x:Name="conColorTools" Padding="0" Margin="0"/>
                     </TabItem>
+                    <TabItem Header="其他工具" IsSelected="True">
+                        <ContentControl x:Name="conOtherTools" Padding="0" Margin="0"/>
+                    </TabItem>
                 </TabControl>
                 <Border Background="{DynamicResource colorBg}" BorderBrush="{DynamicResource colorBg}" BorderThickness="0" CornerRadius="999" Margin="72,20,0,0" Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Grid>
@@ -62,7 +65,7 @@
                 </Button>
                 <Grid Margin="12,0,0,12" Width="200" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorBg}"/>
-                    <TextBox x:Name="SeachBox" TextChanged="Seach_TextChanged" LostFocus="SeachBox_LostFocus" GotFocus="Seach_GotFocus" pu:TextBoxHelper.Watermark="  搜索……" CaretBrush="{DynamicResource colorFont}" FontSize="12" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource colorFont}" Margin="0">
+                    <TextBox x:Name="SeachBox" TextChanged="Seach_TextChanged" GotFocus="Seach_GotFocus" pu:TextBoxHelper.Watermark="  搜索……" CaretBrush="{DynamicResource colorFont}" FontSize="12" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource colorFont}" Margin="0">
                         <TextBox.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.MergedDictionaries>
