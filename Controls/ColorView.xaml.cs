@@ -54,11 +54,11 @@ namespace SS_Tool_Box.Controls
 
         private void Button_Hex_Click (object sender, RoutedEventArgs e) {
             Clipboard.SetDataObject(colorHexText.Text);
-            UI.ToastHelper.Add("复制成功！");
+            UI.ToastHelper.Show("复制成功！");
         }
         private void Button_Rgb_Click (object sender, RoutedEventArgs e) {
             Clipboard.SetDataObject(colorRgbText.Text);
-            UI.ToastHelper.Add("复制成功！");
+            UI.ToastHelper.Show("复制成功！");
         }
     }
 }

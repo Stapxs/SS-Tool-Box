@@ -71,8 +71,9 @@ namespace SS_Tool_Box
 
             #region 0 - 初始化基础服务
 
-            Log.StartLogOut();
-            UI.ToastHelper.StartShower();
+            Log.StartLogOut();                      // 日志
+            Options.ReadOpt();                      // 设置
+            // UI.ToastHelper.StartShower();        // 吐司
 
             #endregion
 
@@ -118,7 +119,7 @@ namespace SS_Tool_Box
             Log.AddLog("main", "正在等待所有辅助线程退出……");
             // 等待线程退出（超时2秒）
             long nowTime = long.Parse(Features.TimeHelper.GetCurrentTimestamp());
-            while (long.Parse(Features.TimeHelper.GetCurrentTimestamp()) - nowTime <= 2) { }
+            while (long.Parse(Features.TimeHelper.GetCurrentTimestamp()) - nowTime <= 1) { }
             // 超时强制退出
             while (threads.Count != 0)
             {

@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+      xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
       xmlns:local="clr-namespace:SS_Tool_Box.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="490" d:DesignWidth="800"
@@ -45,7 +45,8 @@
                         </Border>
                         <TextBlock Text="N2 Station Tools" Block.TextAlignment="Center" FontSize="16" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0"/>
                         <TextBlock x:Name="viewVersion" Block.TextAlignment="Center" Text="Version" FontSize="12" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Width="224"/>
-                        <Button Foreground="{DynamicResource colorFont}" Content="关   于" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,35,15,0"/>
+                        <Button Foreground="{DynamicResource colorFont}" Content="关于 N2 Station" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,35,15,0"/>
+                        <Button Click="Button_Click_1" Foreground="{DynamicResource colorFont}" Content="打开扩展组件" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,15,15,0"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="0,0,247,0">
@@ -126,6 +127,7 @@
                                         <TextBlock Text="Err" x:Name="panRoomErrorText" FontSize="12" Foreground="{DynamicResource colorFont1}" Margin="0,5,0,15" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Grid>
+                                <StackPanel x:Name="panRoomCard"/>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>

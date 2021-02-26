@@ -80,6 +80,9 @@
     <Compile Include="Pages\Tools\XiaoshouDoing.xaml.cs">
       <DependentUpon>XiaoshouDoing.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\N2MessageView.xaml.cs">
+      <DependentUpon>N2MessageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Tools\XiaoshouDoing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\N2MessageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

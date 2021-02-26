@@ -60,7 +60,7 @@ namespace SS_Tool_Box
             }
             catch
             {
-                return true;
+                return false;
             }
         }
 

@@ -108,6 +108,20 @@ namespace SS_Tool_Box
                 return true;
             }
 
+            public static bool DelRegKey(RegistryKey key, String way, String name)
+            {
+                try
+                {
+                    RegistryKey software = key.OpenSubKey(way, true);
+                    software.DeleteValue(name);
+                }
+                catch
+                {
+                    return false;
+                }
+                return true;
+            }
+
             /// <summary>
             /// 获取键值
             /// </summary>
