@@ -1,19 +1,7 @@
 ﻿using SS_Tool_Box.Controls;
 using SS_Tool_Box.Function;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SS_Tool_Box.Pages.SortPages
 {
@@ -31,7 +19,8 @@ namespace SS_Tool_Box.Pages.SortPages
 
             int num = 0;
             StackPanel nowStakp = new StackPanel();
-            foreach (UI.Tools.ToolVer info in UI.Tools.List)
+            UI.Tools tools = new UI.Tools();
+            foreach (UI.Tools.ToolVer info in tools.List)
             {
                 if (info.type == "OtherTools")
                 {

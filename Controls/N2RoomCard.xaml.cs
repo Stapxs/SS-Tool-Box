@@ -29,6 +29,8 @@ namespace SS_Tool_Box.Controls
         public N2RoomCard()
         {
             InitializeComponent();
+
+            warntext.Text = "此控件不支持无参调用，请传递正确的参数创建";
         }
 
         private bool _isOpen = false;
@@ -61,6 +63,7 @@ namespace SS_Tool_Box.Controls
                 button.SetResourceReference(Button.StyleProperty, "TextButtonEx");
                 button.Background = new SolidColorBrush(Color.FromArgb(255, 76, 110, 245));
                 button.Margin = new Thickness(0, 0, 3, 3);
+                button.Height = 25;
 
                 button.Content = text;
 
@@ -107,7 +110,8 @@ namespace SS_Tool_Box.Controls
                 else
                 {
                     // 显示提示
-                    UI.MessageBoxHelper.Show(new List<string>());
+                    MainWindow.main.MsgAdd(new List<string> { "N2 Station Tools", "请先关闭已打开的房间！" },
+                        new List<string> { "知道了" }, null);
                 }
             }
         }
@@ -195,7 +199,7 @@ namespace SS_Tool_Box.Controls
             catch(Exception e)
             {
                 UI.ToastHelper.Add("处理失败：" + e.Message);
-                Log.AddErr("切换房间状态失败：" + e.ToString());
+                Log.AddErr("N2", "切换房间状态失败：" + e.ToString());
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
                     change.Visibility = Visibility.Visible;

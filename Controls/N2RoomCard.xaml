@@ -30,9 +30,9 @@
                 </Grid>
             </Button>
         </StackPanel>
-        <Grid x:Name="warning" Visibility="Collapsed">
+        <Grid x:Name="warning">
             <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
-            <TextBlock FontSize="15" Text="此控件不支持 XAML 调用，请使用代码动态创建" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="warntext" FontSize="15" Text="此控件不支持 XAML 调用，请使用代码动态创建" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </UserControl>

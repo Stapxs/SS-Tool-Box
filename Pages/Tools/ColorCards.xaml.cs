@@ -25,6 +25,10 @@ namespace SS_Tool_Box.Pages.Tools
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            sukLoading.Visibility = Visibility.Visible;
+            sukError.Visibility = Visibility.Collapsed;
+            sukColorsEx.IsExpanded = true;
+            sukColors.Children.Clear();
             // 获取 Suk 色表
             Thread runGetSukColors = new Thread(GetSukColors);
             MainWindow.threads.Push(runGetSukColors);
@@ -83,7 +87,7 @@ namespace SS_Tool_Box.Pages.Tools
                     sukError.Visibility = Visibility.Visible;
                     sukLoading.Visibility = Visibility.Collapsed;
                     sukErrorText.Text = e.Message;
-                    Log.AddErr(e.ToString());
+                    Log.AddErr("ColorCard", e.ToString());
                 });
             }
         }

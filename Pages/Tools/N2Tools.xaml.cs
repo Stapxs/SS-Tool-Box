@@ -259,7 +259,7 @@ namespace SS_Tool_Box.Pages.Tools
             catch(Exception e)
             {
                 UI.ToastHelper.Show("验证登录失败：" + e.Message);
-                Log.AddErr("验证登录失败：" + e.Message);
+                Log.AddErr("N2", "验证登录失败：" + e.Message);
             }
         }
 
@@ -329,7 +329,7 @@ namespace SS_Tool_Box.Pages.Tools
             catch(Exception e)
             {
                 UI.ToastHelper.Show("获取失败：" + e.Message);
-                Log.AddErr("获取失败：" + e.Message);
+                Log.AddErr("N2", "获取失败：" + e.Message);
             }
         }
 
@@ -370,7 +370,7 @@ namespace SS_Tool_Box.Pages.Tools
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            N2MessageView view = new N2MessageView();
+            N2RoomLiveLinfo view = new N2RoomLiveLinfo();
             view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             view.Show();
         }

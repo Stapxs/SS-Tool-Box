@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SS_Tool_Box.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="115" d:DesignWidth="188">
+             Height="125" Width="199">
     <Grid>
-        <Button Click="Button_Click" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="115" Width="188">
+        <Button Click="Button_Click" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0">
             <Grid Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="188" Height="115">
                 <StackPanel Margin="20,15">
                     <Border x:Name="IconBg" Background="{DynamicResource colorBg}" HorizontalAlignment="Left" BorderBrush="{DynamicResource colorBg}" BorderThickness="0" CornerRadius="999" Margin="0" Width="40" Height="40" VerticalAlignment="Top">

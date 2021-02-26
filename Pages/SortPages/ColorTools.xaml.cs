@@ -20,7 +20,8 @@ namespace SS_Tool_Box.Pages.SortPages
 
             int num = 0;
             StackPanel nowStakp = new StackPanel();
-            foreach(UI.Tools.ToolVer info in UI.Tools.List)
+            UI.Tools tools = new UI.Tools();
+            foreach (UI.Tools.ToolVer info in tools.List)
             {
                 if(info.type == "ColorTools") {
                     if(num % 3 == 0)

@@ -44,13 +44,20 @@ namespace SS_Tool_Box.Windows
 
         private void runMove()
         {
-            while (!stop)
+            try
             {
-                App.Current.Dispatcher.Invoke((Action)delegate
+                while (!stop)
                 {
-                    Top = Owner.Top;
-                    Left = Owner.Left;
-                });
+                    App.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        Top = Owner.Top;
+                        Left = Owner.Left;
+                    });
+                }
+            }
+            catch(Exception e)
+            {
+                Log.AddErr("ui", "关闭吐司错误：" + e.ToString());
             }
         }
     }

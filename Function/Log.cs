@@ -63,7 +63,7 @@ namespace SS_Tool_Box
             while (!logExit)
             {
                 while(logList.Count != 0)
-                {;
+                {
                     // 输出日志
                     using (StreamWriter sw = new StreamWriter(@logFile, true))
                     {
@@ -76,7 +76,7 @@ namespace SS_Tool_Box
             using (StreamWriter sw = new StreamWriter(@logFile, true))
             {
                 string time = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-                sw.WriteLine("[" + time + "][log] 日志输出系统已正常退出。（积压未输出日志 " + logList.Count + " 条）");
+                sw.WriteLine("[" + time + "][log] 日志输出系统已正常退出。（积压日志 " + logList.Count + " 条）");
             }
         }
 
@@ -90,12 +90,12 @@ namespace SS_Tool_Box
             logList.Enqueue(logOut);
         }
 
-        public static void AddErr(string log)
+        public static void AddErr(string type, string log)
         {
             // 获取时间
             string time = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             // 组合字符串
-            String logOut = "[" + time + "][Error] " + log;
+            String logOut = "[" + time + "][Error][" + type + "] " + log;
             // 加入队列
             logList.Enqueue(logOut);
         }
