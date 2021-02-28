@@ -3,11 +3,15 @@ using SS_Tool_Box.Windows;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SS_Tool_Box.Function
 {
@@ -96,6 +100,63 @@ namespace SS_Tool_Box.Function
             {
                 toastList.Enqueue(says);
             }
+        }
+
+        public class Cutshot
+        {
+            /// <summary>
+            /// 获取控件截图，From https://www.cnblogs.com/likui-bookHouse/p/11114924.html
+            /// </summary>
+            /// <param name="element"></param>
+            /// <param name="width">默认控件宽度</param>
+            /// <param name="height">默认控件高度</param>
+            /// <param name="x">默认0</param>
+            /// <param name="y">默认0</param>
+            /// <returns></returns>
+            public static Bitmap GetBitmap(FrameworkElement element, int width = 0, int height = 0, int x = 0, int y = 0)
+            {
+                if (width == 0) width = (int)element.ActualWidth;
+                if (height == 0) height = (int)element.ActualHeight;
+
+                var rtb = new RenderTargetBitmap(width, height, x, y, System.Windows.Media.PixelFormats.Default);
+                rtb.Render(element);
+                var bit = Features.BitmapSourceToBitmap(rtb);
+
+                return bit;
+            }
+
+            /// <summary>
+            /// 获取窗口截图，From https://www.codenong.com/5124825/
+            /// </summary>
+            /// <param name="target"></param>
+            public static Bitmap CreateBitmapFromVisual(Visual target)
+            {
+                Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
+
+                RenderTargetBitmap renderTarget = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
+
+                DrawingVisual visual = new DrawingVisual();
+
+                using (DrawingContext context = visual.RenderOpen())
+                {
+                    VisualBrush visualBrush = new VisualBrush(target);
+                    context.DrawRectangle(visualBrush, null, new Rect(new System.Windows.Point(), bounds.Size));
+                }
+
+                renderTarget.Render(visual);
+                BitmapSource bmp = renderTarget;
+
+                return Features.BitmapSourceToBitmap(bmp);
+            }
+
+            public static Bitmap getScreen()
+            {
+                Bitmap bm = new Bitmap(Convert.ToInt32(SystemParameters.PrimaryScreenWidth), Convert.ToInt32(SystemParameters.PrimaryScreenHeight));
+                Graphics g = Graphics.FromImage(bm);
+                g.CopyFromScreen(0, 0, 0, 0, bm.Size);
+                return bm;
+            }
+
         }
 
     }

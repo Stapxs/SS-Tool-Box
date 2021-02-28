@@ -58,6 +58,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -69,6 +72,9 @@
     </ApplicationDefinition>
     <Compile Include="Controls\N2RoomCard.xaml.cs">
       <DependentUpon>N2RoomCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\N2Viewer\DefMessage.xaml.cs">
+      <DependentUpon>DefMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SeachToolView.xaml.cs">
       <DependentUpon>SeachToolView.xaml</DependentUpon>
@@ -89,9 +95,6 @@
     <Compile Include="Windows\N2MessageView.xaml.cs">
       <DependentUpon>N2MessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\N2RoomLiveLinfo.xaml.cs">
-      <DependentUpon>N2RoomLiveLinfo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
@@ -100,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\N2RoomCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\N2Viewer\DefMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,10 +167,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\N2MessageView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\N2RoomLiveLinfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

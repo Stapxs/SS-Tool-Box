@@ -46,13 +46,93 @@
                         <TextBlock Text="N2 Station Tools" Block.TextAlignment="Center" FontSize="16" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0"/>
                         <TextBlock x:Name="viewVersion" Block.TextAlignment="Center" Text="Version" FontSize="12" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Width="224"/>
                         <Button Foreground="{DynamicResource colorFont}" Content="关于 N2 Station" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,35,15,0"/>
-                        <Button Click="Button_Click_1" Foreground="{DynamicResource colorFont}" Content="打开扩展组件" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,15,15,0"/>
+                        <Button Click="Button_Click_1" Foreground="{DynamicResource colorFont}" Content="打开扩展工具" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,15,15,0"/>
                     </StackPanel>
                 </Grid>
-                <Grid Margin="0,0,247,0">
+                <StackPanel Margin="0,0,247,0">
+                    <ScrollViewer Visibility="Collapsed" x:Name="panViewerSet" Height="435" Padding="0,0,7,0">
+                        <StackPanel>
+                            <Grid Height="40">
+                                <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
+                                <TextBlock Text="扩展工具设置" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            </Grid>
+                            <Grid Margin="0,15,0,0">
+                                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+                                <StackPanel>
+                                    <TextBlock Text="窗口" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="消息窗口宽度" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="ViewerWidth" TextChanged="ViewerWidth_TextChanged" Foreground="{DynamicResource colorFont}" pu:TextBoxHelper.CornerRadius="3" BorderThickness="0" pu:TextBoxHelper.FocusedShadowColor="{x:Null}" Background="{DynamicResource colorCard1}" Margin="0" HorizontalAlignment="Right" Width="70" Height="25">
+                                            <TextBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </TextBox.Resources>
+                                        </TextBox>
+                                    </Grid>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="消息窗口高度" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="ViewerHeight" TextChanged="ViewerHeight_TextChanged" Foreground="{DynamicResource colorFont}" pu:TextBoxHelper.CornerRadius="3" BorderThickness="0" pu:TextBoxHelper.FocusedShadowColor="{x:Null}" Background="{DynamicResource colorCard1}" Margin="0" HorizontalAlignment="Right" Width="70" Height="25">
+                                            <TextBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </TextBox.Resources>
+                                        </TextBox>
+                                    </Grid>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="亚克力模糊" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <CheckBox x:Name="ViewerYKLMH" Checked="ViewerYKLMH_Checked" Unchecked="ViewerYKLMH_Unchecked" Content="关闭" IsChecked="True" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="开启" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                            <CheckBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </CheckBox.Resources>
+                                        </CheckBox>
+                                    </Grid>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="背景填充色" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="ViewerBg" TextChanged="ViewerBg_TextChanged" Foreground="{DynamicResource colorFont}" pu:TextBoxHelper.CornerRadius="3" BorderThickness="0" pu:TextBoxHelper.FocusedShadowColor="{x:Null}" Background="{DynamicResource colorCard1}" Margin="0" HorizontalAlignment="Right" Width="70" Height="25">
+                                            <TextBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </TextBox.Resources>
+                                        </TextBox>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,15,0,0">
+                                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+                                <StackPanel>
+                                    <TextBlock Text="其他" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="开发者模式" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <CheckBox Content="关闭" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="开启" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                            <CheckBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </CheckBox.Resources>
+                                        </CheckBox>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
                     <ScrollViewer Height="435" Padding="0,0,7,0">
                         <StackPanel>
-                            <Grid x:Name="panLogin" Margin="0,0,0,15">
+                            <Grid x:Name="panLogin">
                                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}"/>
                                 <StackPanel>
                                     <Grid Margin="0,15">
@@ -106,9 +186,10 @@
                                         </PasswordBox>
                                     </StackPanel>
                                 </StackPanel>
+                                <Button Visibility="Collapsed" x:Name="LoginDeclarer" Style="{DynamicResource DeclareAdmin}" IsEnabled="False"/>
                             </Grid>
                             <StackPanel x:Name="panRoom">
-                                <Grid x:Name="panRoomLoading" Margin="0,0,0,15">
+                                <Grid x:Name="panRoomLoading">
                                     <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
                                     <StackPanel>
                                         <pu:Loading Height="50" Width="50" LoadingStyle="Ring" IsRunning="True" Background="{DynamicResource colorBg}" Foreground="{DynamicResource colorFont}" Margin="15,15,15,0"/>
@@ -131,7 +212,7 @@
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
-                </Grid>
+                </StackPanel>
             </Grid>
         </StackPanel>
     </Grid>

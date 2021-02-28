@@ -8,9 +8,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace SS_Tool_Box.Pages.Tools
@@ -21,10 +23,12 @@ namespace SS_Tool_Box.Pages.Tools
     public partial class N2Tools : Page
     {
         public static bool hasOpendRoom = false;
+        public static string openRoomID = "";
 
         private bool isLogined = false;
         private string apiURL = "https://n2station.live:8443";
         private string version = "1.0.5";
+        private static bool isOpened = false;
 
         public N2Tools()
         {
@@ -35,27 +39,31 @@ namespace SS_Tool_Box.Pages.Tools
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            isLogined = false;
-            panRoomCard.Children.Clear();
-            panRoomLoading.Visibility = Visibility.Visible;
-            panRomeError.Visibility = Visibility.Collapsed;
-            try
+            if (!isOpened)
             {
-                // 检查是否存在 Token
-                if (Features.Reg.IsRegeditKeyExit(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"))
+                isOpened = true;
+                isLogined = false;
+                panRoomCard.Children.Clear();
+                panRoomLoading.Visibility = Visibility.Visible;
+                panRomeError.Visibility = Visibility.Collapsed;
+                try
                 {
-                    panLogin.Visibility = Visibility.Collapsed;
-                    // 开始验证登录
-                    Thread thread = new Thread(runtrustLogin);
-                    MainWindow.threads.Push(thread);
-                    thread.Start();
+                    // 检查是否存在 Token
+                    if (Features.Reg.IsRegeditKeyExit(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"))
+                    {
+                        panLogin.Visibility = Visibility.Collapsed;
+                        // 开始验证登录
+                        Thread thread = new Thread(runtrustLogin);
+                        MainWindow.threads.Push(thread);
+                        thread.Start();
+                    }
+                    else
+                    {
+                        panRoomLoading.Visibility = Visibility.Collapsed;
+                    }
                 }
-                else
-                {
-                    panRoomLoading.Visibility = Visibility.Collapsed;
-                }
+                catch { }
             }
-            catch { }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -91,6 +99,8 @@ namespace SS_Tool_Box.Pages.Tools
                 thread.Start();
             }
         }
+
+        #region 房间相关
 
         /// <summary>
         /// 执行登出流程
@@ -135,7 +145,7 @@ namespace SS_Tool_Box.Pages.Tools
             // 拼接 JSON，请求
             string loginInfo = "{\"email\": \"" + email + "\",\"pass\": \"" + pass + "\"}";
             List<string> back = LoginN2(loginInfo);
-            if(back[0] == "Err")
+            if (back[0] == "Err")
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
@@ -147,7 +157,7 @@ namespace SS_Tool_Box.Pages.Tools
                 UI.ToastHelper.Show("登录失败：" + back[2]);
                 return;
             }
-            if(back[1].IndexOf("Authorization") < 0)
+            if (back[1].IndexOf("Authorization") < 0)
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
@@ -162,9 +172,9 @@ namespace SS_Tool_Box.Pages.Tools
             }
             string token = back[1].Substring(back[1].IndexOf("Authorization") + "Authorization".Length + 1);
             token = token.Substring(0, token.IndexOf(";"));
-            if(!Features.Reg.IsRegeditItemExist(Registry.CurrentUser, @"SOFTWARE\SSTeam", @"SS-Tool-Box"))
+            if (!Features.Reg.IsRegeditItemExist(Registry.CurrentUser, @"SOFTWARE\SSTeam", @"SS-Tool-Box"))
             {
-                if(!Features.Reg.CreateRegItem(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box"))
+                if (!Features.Reg.CreateRegItem(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box"))
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
@@ -177,7 +187,7 @@ namespace SS_Tool_Box.Pages.Tools
                     return;
                 }
             }
-            if(!Features.Reg.CreateRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token", token))
+            if (!Features.Reg.CreateRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token", token))
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
@@ -192,9 +202,10 @@ namespace SS_Tool_Box.Pages.Tools
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
                 Login.Visibility = Visibility.Collapsed;
-                LoginWait.Visibility = Visibility.Collapsed;
-                LoginOut.Visibility = Visibility.Visible;
+                LoginOut.Visibility = Visibility.Collapsed;
+                LoginWait.Visibility = Visibility.Visible;
 
+                panLogin.Margin = new Thickness(0, 0, 0, 15);
                 panLoginInouts.Visibility = Visibility.Collapsed;
                 panLoginTitle.Text = "N2 Station 账户";
 
@@ -202,8 +213,6 @@ namespace SS_Tool_Box.Pages.Tools
 
                 // 显示房间卡片
                 panRoom.Visibility = Visibility.Visible;
-
-                LoginButton.IsEnabled = true;
             });
             UI.ToastHelper.Show("登陆成功！");
             Log.AddLog("N2", "登录完成，耗时：" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
@@ -228,19 +237,22 @@ namespace SS_Tool_Box.Pages.Tools
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
-                    // 验证登录成功，切换到登录状态
-                    isLogined = true;
+                        // 验证登录成功，切换到登录状态
+                        isLogined = true;
                         panLogin.Visibility = Visibility.Collapsed;
-                        Login.Visibility = Visibility.Collapsed;
-                        LoginWait.Visibility = Visibility.Collapsed;
                         panLoginInouts.Visibility = Visibility.Collapsed;
 
-                        panLoginTitle.Text = "N2 Station 账户";
-                        LoginOut.Visibility = Visibility.Visible;
-                    // 显示房间卡片
-                    panRoom.Visibility = Visibility.Visible;
-                        panLogin.Visibility = Visibility.Visible;
+                        Login.Visibility = Visibility.Collapsed;
+                        LoginOut.Visibility = Visibility.Collapsed;
+                        LoginWait.Visibility = Visibility.Visible;
+
                         LoginButton.IsEnabled = true;
+
+                        panLogin.Margin = new Thickness(0, 0, 0, 15);
+                        panLoginTitle.Text = "N2 Station 账户";
+                        // 显示房间卡片
+                        panRoom.Visibility = Visibility.Visible;
+                        panLogin.Visibility = Visibility.Visible;
                     });
                     UI.ToastHelper.Show("验证登录成功！");
                     Log.AddLog("N2", "验证登录完成，耗时：" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
@@ -256,7 +268,7 @@ namespace SS_Tool_Box.Pages.Tools
                     });
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 UI.ToastHelper.Show("验证登录失败：" + e.Message);
                 Log.AddErr("N2", "验证登录失败：" + e.Message);
@@ -288,7 +300,7 @@ namespace SS_Tool_Box.Pages.Tools
                 string rooms = HttpUitls.Get(apiURL + "/api/user/rooms", "DEFAULT", "Cookie",
                     "Authorization=" + Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
                 JObject obj = JObject.Parse(rooms);
-                if(obj["status"].ToString() != "0")
+                if (obj["status"].ToString() != "0")
                 {
                     panRomeError.Visibility = Visibility.Visible;
                     panRoomErrorText.Text = obj["status"].ToString();
@@ -310,23 +322,30 @@ namespace SS_Tool_Box.Pages.Tools
                     {
                         tags.Add(tagArray[i].ToString());
                     }
-                    if(itemobj["status"].ToString() == "open")
+                    if (itemobj["status"].ToString() == "open")
                     {
                         hasOpendRoom = true;
+                        openRoomID = itemobj["_id"].ToString();
                     }
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
+                        panLogin.Margin = new Thickness(0, 0, 0, 0);
                         N2RoomCard card = new N2RoomCard(info, tags,
                         Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"),
                         itemobj["status"].ToString() == "open" ? true : false);
-                        card.Margin = new Thickness(0, 0, 0, 15);
+                        card.Margin = new Thickness(0, 15, 0, 0);
                         panRoomCard.Children.Add(card);
                         panRoomLoading.Visibility = Visibility.Collapsed;
+
+                        LoginOut.Visibility = Visibility.Visible;
+                        LoginWait.Visibility = Visibility.Collapsed;
+
+                        LoginButton.IsEnabled = true;
                     });
                 }
                 Log.AddLog("N2", "获取完成，耗时：" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 UI.ToastHelper.Show("获取失败：" + e.Message);
                 Log.AddErr("N2", "获取失败：" + e.Message);
@@ -368,11 +387,159 @@ namespace SS_Tool_Box.Pages.Tools
             }
         }
 
+        #endregion
+
+        public bool viewerLoading = true;
+        public static bool isYKLMH = true;
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            N2RoomLiveLinfo view = new N2RoomLiveLinfo();
-            view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            view.Show();
+            if (isLogined && openRoomID != null && openRoomID != "")
+            {
+                panViewerSet.Visibility = Visibility.Visible;
+
+                ViewerHeight.Text = SystemParameters.WorkArea.Height.ToString();
+                ViewerWidth.Text = (SystemParameters.WorkArea.Width * 0.15).ToString();
+
+                N2MessageView view = new N2MessageView();
+                view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                view.roomID = openRoomID;
+                view.toolPage = this;
+                view.Show();
+
+                viewerLoading = false;
+            }
+            else
+            {
+                if (!isLogined)
+                {
+                    MainWindow.main.MsgAdd(new List<string> { "N2 Station Tools", "请先登录到 N2 Staticon 账户。" },
+                        new List<string> { "知道了" }, null);
+                }
+                else
+                {
+                    MainWindow.main.MsgAdd(new List<string> { "N2 Station Tools", "请等待房间信息获取完成或没有开着的房间。" },
+                        new List<string> { "知道了" }, null);
+                }
+            }
+        }
+
+        private void ViewerWidth_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((TextBox)sender).SetResourceReference(ForegroundProperty, "colorFont");
+            if (IsInt(((TextBox)sender).Text) && !viewerLoading)
+            {
+                N2MessageView.main.Width = double.Parse(((TextBox)sender).Text);
+            }
+            else
+            {
+                ((TextBox)sender).Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 84, 57));
+            }
+        }
+
+        private void ViewerHeight_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((TextBox)sender).SetResourceReference(ForegroundProperty, "colorFont");
+            if (IsInt(((TextBox)sender).Text) && !viewerLoading)
+            {
+                N2MessageView.main.Height = double.Parse(((TextBox)sender).Text);
+            }
+            else
+            {
+                ((TextBox)sender).Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 84, 57));
+            }
+        }
+
+        private void ViewerYKLMH_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!viewerLoading)
+            {
+                N2MessageView.main.Close();
+
+                panViewerSet.Visibility = Visibility.Visible;
+                isYKLMH = true;
+
+                N2MessageView view = new N2MessageView();
+                view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                view.roomID = openRoomID;
+                view.toolPage = this;
+                view.Show();
+
+                viewerLoading = false;
+            }
+        }
+
+        private void ViewerYKLMH_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!viewerLoading)
+            {
+                N2MessageView.main.Close();
+
+                panViewerSet.Visibility = Visibility.Visible;
+                isYKLMH = false;
+
+                N2MessageView view = new N2MessageView();
+                view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                view.roomID = openRoomID;
+                view.toolPage = this;
+                view.Show();
+
+                viewerLoading = false;
+            }
+        }
+
+        private void ViewerBg_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((TextBox)sender).SetResourceReference(ForegroundProperty, "colorFont");
+            string color = ((TextBox)sender).Text;
+            if (color.Length > 0 && color.Substring(0,1) != "#")
+            {
+                color = "#" + color;
+            }
+            if (IsColor(color) && !viewerLoading)
+            {
+                N2MessageView.main.mainBackground.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+            }
+            else
+            {
+                ((TextBox)sender).Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 84, 57));
+            }
+        }
+
+        /// <summary>
+        /// 判断是不是int型
+        /// </summary>
+        /// <param name="str">接收的字符串</param>
+        /// <returns></returns>
+        public bool IsInt(string str)
+        {
+            try
+            {
+                int a = Convert.ToInt32(str);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 判断是不是颜色
+        /// </summary>
+        /// <param name="str">接收的字符串</param>
+        /// <returns></returns>
+        public bool IsColor(string str)
+        {
+            try
+            {
+                Color color = (Color)ColorConverter.ConvertFromString(str);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

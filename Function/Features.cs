@@ -1,11 +1,11 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SS_Tool_Box
 {
@@ -223,9 +223,9 @@ namespace SS_Tool_Box
             DependencyObject child = null;
             T grandChild = null;
 
-            for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(obj) - 1; i++)
+            for (int i = 0; i <= System.Windows.Media.VisualTreeHelper.GetChildrenCount(obj) - 1; i++)
             {
-                child = VisualTreeHelper.GetChild(obj, i);
+                child = System.Windows.Media.VisualTreeHelper.GetChild(obj, i);
 
                 if (child is T && (((T)child).Name == name | string.IsNullOrEmpty(name)))
                 {
@@ -243,5 +243,182 @@ namespace SS_Tool_Box
 
         #endregion
 
+        #region Bitmap | 图像处理
+
+        /// <summary>
+        /// BitmapSource转Bitmap
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static Bitmap BitmapSourceToBitmap(BitmapSource source)
+        {
+            return BitmapSourceToBitmap(source, source.PixelWidth, source.PixelHeight);
+        }
+
+        /// <summary>
+        /// Convert BitmapSource to Bitmap
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static Bitmap BitmapSourceToBitmap(BitmapSource source, int width, int height)
+        {
+            Bitmap bmp = null;
+            try
+            {
+                PixelFormat format = PixelFormat.Format24bppRgb;
+                /*set the translate type according to the in param(source)*/
+                switch (source.Format.ToString())
+                {
+                    case "Rgb24":
+                    case "Bgr24": format = PixelFormat.Format24bppRgb; break;
+                    case "Bgra32": format = PixelFormat.Format32bppPArgb; break;
+                    case "Bgr32": format = PixelFormat.Format32bppRgb; break;
+                    case "Pbgra32": format = PixelFormat.Format32bppArgb; break;
+                }
+                bmp = new Bitmap(width, height, format);
+                BitmapData data = bmp.LockBits(new System.Drawing.Rectangle(System.Drawing.Point.Empty, bmp.Size),
+                    ImageLockMode.WriteOnly,
+                    format);
+                source.CopyPixels(Int32Rect.Empty, data.Scan0, data.Height * data.Stride, data.Stride);
+                bmp.UnlockBits(data);
+            }
+            catch
+            {
+                if (bmp != null)
+                {
+                    bmp.Dispose();
+                    bmp = null;
+                }
+            }
+
+            return bmp;
+        }
+
+        /// <summary>
+        /// 获取图片主题色，From https://bbs.csdn.net/topics/390773598
+        /// </summary>
+        /// <param name="bitmap"></param>
+        /// <returns></returns>
+        public static Color getMajorColor(Bitmap bitmap)
+        {
+            //色调的总和
+            var sum_hue = 0d;
+            //色差的阈值
+            var threshold = 30;
+            //计算色调总和
+            for (int h = 0; h < bitmap.Height; h++)
+            {
+                for (int w = 0; w < bitmap.Width; w++)
+                {
+                    var hue = bitmap.GetPixel(w, h).GetHue();
+                    sum_hue += hue;
+                }
+            }
+            var avg_hue = sum_hue / (bitmap.Width * bitmap.Height);
+
+            //色差大于阈值的颜色值
+            var rgbs = new List<Color>();
+            for (int h = 0; h < bitmap.Height; h++)
+            {
+                for (int w = 0; w < bitmap.Width; w++)
+                {
+                    var color = bitmap.GetPixel(w, h);
+                    var hue = color.GetHue();
+                    //如果色差大于阈值，则加入列表
+                    if (Math.Abs(hue - avg_hue) > threshold)
+                    {
+                        rgbs.Add(color);
+                    }
+                }
+            }
+            if (rgbs.Count == 0)
+                return Color.Black;
+            //计算列表中的颜色均值，结果即为该图片的主色调
+            int sum_r = 0, sum_g = 0, sum_b = 0;
+            foreach (var rgb in rgbs)
+            {
+                sum_r += rgb.R;
+                sum_g += rgb.G;
+                sum_b += rgb.B;
+            }
+            return Color.FromArgb(sum_r / rgbs.Count,
+                sum_g / rgbs.Count,
+                sum_b / rgbs.Count);
+        }
+
+        /// <summary>
+        /// 裁切 Bitmap
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public static Bitmap CutPic(Bitmap src, int x, int y,int width, int height) 
+        {
+            Rectangle cropRect = new Rectangle(x, y, width, height);
+            Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
+
+            using (Graphics g = Graphics.FromImage(target))
+            {
+                g.DrawImage(src, new Rectangle(0, 0, target.Width, target.Height),
+                      cropRect,
+                      GraphicsUnit.Pixel);
+            }
+            return target;
+        }
+
+        /// <summary>
+        /// 获取最多的颜色，From https://www.codeproject.com/Questions/677506/Csharp-find-the-majority-color-of-an-image
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <returns></returns>
+        public static List<Color> GetBaseColor(Bitmap bmp)
+        {
+            List<Color> TenMostUsedColors = new List<Color>();
+
+            // does using Dictionary<int,int> here
+            // really pay-off compared to using
+            // Dictionary<Color, int> ?
+
+            // would using a SortedDictionary be much slower, or ?
+
+            Dictionary<int, int> dctColorIncidence = new Dictionary<int, int>();
+
+            // this is what you want to speed up with unmanaged code
+            for (int row = 0; row < bmp.Size.Width; row++)
+            {
+                for (int col = 0; col < bmp.Size.Height; col++)
+                {
+                    int pixelColor = bmp.GetPixel(row, col).ToArgb();
+
+                    if (dctColorIncidence.Keys.Contains(pixelColor))
+                    {
+                        dctColorIncidence[pixelColor]++;
+                    }
+                    else
+                    {
+                        dctColorIncidence.Add(pixelColor, 1);
+                    }
+                }
+            }
+
+            // note that there are those who argue that a
+            // .NET Generic Dictionary is never guaranteed
+            // to be sorted by methods like this
+            var dctSortedByValueHighToLow = dctColorIncidence.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
+            // this should be replaced with some elegant Linq ?
+            foreach (KeyValuePair<int, int> kvp in dctSortedByValueHighToLow.Take(10))
+            {
+                TenMostUsedColors.Add(Color.FromArgb(kvp.Key));
+            }
+
+            return TenMostUsedColors;
+        }
     }
+
+    #endregion
+
 }
