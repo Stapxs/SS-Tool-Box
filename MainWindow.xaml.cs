@@ -54,8 +54,8 @@ namespace SS_Tool_Box
         // 程序基本信息
         public class verInfo
         {
-            public static string ver = "Dev-0.2.5";         // 版本号
-            public static int verBulidTimes = 7;            // 编译编号
+            public static string ver = "Dev-0.3.5";         // 版本号
+            public static int verBulidTimes = 27;            // 编译编号
         }
 
         public MainWindow()

@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SS_Tool_Box.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CalcBinding, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\CalcBinding.2.5.2\lib\net45\CalcBinding.dll</HintPath>
@@ -92,6 +95,7 @@
     <Compile Include="Pages\Tools\XiaoshouDoing.xaml.cs">
       <DependentUpon>XiaoshouDoing.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Windows\N2MessageView.xaml.cs">
       <DependentUpon>N2MessageView.xaml</DependentUpon>
     </Compile>
@@ -209,4 +213,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterResolveReferences">
+    <ItemGroup>
+      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'">
+        <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
+      </EmbeddedResource>
+    </ItemGroup>
+  </Target>
 </Project>
