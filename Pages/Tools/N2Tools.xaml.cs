@@ -71,7 +71,7 @@ namespace SS_Tool_Box.Pages.Tools
             if (!isLogined)
             {
                 // 登录
-                if (email.Text == null || password.Password == null)
+                if (email.Text == "" || password.Password == "")
                 {
                     UI.ToastHelper.Show("请输入内容！");
                     return;

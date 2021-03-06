@@ -86,8 +86,14 @@
       <DependentUpon>SortCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Function\HttpUitls.cs" />
+    <Compile Include="Pages\None.xaml.cs">
+      <DependentUpon>None.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SortPages\OtherTools.xaml.cs">
       <DependentUpon>OtherTools.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Tools\KTL.xaml.cs">
+      <DependentUpon>KTL.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tools\N2Tools.xaml.cs">
       <DependentUpon>N2Tools.xaml</DependentUpon>
@@ -150,6 +156,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\None.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SortPages\ColorTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -159,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Tools\ColorCards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Tools\KTL.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

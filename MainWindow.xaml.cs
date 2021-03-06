@@ -293,7 +293,11 @@ namespace SS_Tool_Box
             UI.Tools tools = new UI.Tools();
             foreach (UI.Tools.ToolVer info in tools.List)
             {
-                if (info.cardInfo[0].IndexOf(box.Text) >= 0)
+                if (info.cardInfo[0].IndexOf(box.Text) >= 0 && info.type != "Hidden")
+                {
+                    toolist.Add(info);
+                }
+                if(info.cardInfo[0] == box.Text && info.type == "Hidden")
                 {
                     toolist.Add(info);
                 }

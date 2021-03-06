@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SS_Tool_Box.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -75,6 +76,10 @@ namespace SS_Tool_Box.Controls
             if (pageOpen != null)
             {
                 ParentWindow.changePage(pageOpen, Info[0]);
+            }
+            else
+            { 
+                ParentWindow.changePage(new None(), Info[0]);
             }
         }
     }
