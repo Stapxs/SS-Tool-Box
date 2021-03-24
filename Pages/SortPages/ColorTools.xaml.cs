@@ -17,14 +17,26 @@ namespace SS_Tool_Box.Pages.SortPages
         public ColorTools()
         {
             InitializeComponent();
+        }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Cards.Children.Clear();
             int num = 0;
             StackPanel nowStakp = new StackPanel();
             UI.Tools tools = new UI.Tools();
             foreach (UI.Tools.ToolVer info in tools.List)
             {
-                if(info.type == "ColorTools") {
-                    if(num % 3 == 0)
+                Application app = Application.Current;
+                if ((string)Application.Current.FindResource("tool_title_" + info.name) != null)
+                {
+                    info.cardInfo[0] = (string)app.Resources["tool_title_" + info.name];
+                    info.cardInfo[1] = (string)app.Resources["tool_sub_" + info.name];
+                }
+
+                if (info.type == "ColorTools")
+                {
+                    if (num % 3 == 0)
                     {
                         nowStakp = new StackPanel();
                         nowStakp.Orientation = Orientation.Horizontal;

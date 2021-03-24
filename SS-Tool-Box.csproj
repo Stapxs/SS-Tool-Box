@@ -76,9 +76,6 @@
     <Compile Include="Controls\N2RoomCard.xaml.cs">
       <DependentUpon>N2RoomCard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\N2Viewer\DefMessage.xaml.cs">
-      <DependentUpon>DefMessage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\SeachToolView.xaml.cs">
       <DependentUpon>SeachToolView.xaml</DependentUpon>
     </Compile>
@@ -88,6 +85,9 @@
     <Compile Include="Function\HttpUitls.cs" />
     <Compile Include="Pages\None.xaml.cs">
       <DependentUpon>None.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Options.xaml.cs">
+      <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SortPages\OtherTools.xaml.cs">
       <DependentUpon>OtherTools.xaml</DependentUpon>
@@ -116,15 +116,20 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\N2Viewer\DefMessage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\SeachToolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SortCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Content Include="Lang\en_US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Page Include="Lang\zh_CN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +165,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Options.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SortPages\ColorTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Tools\XiaoshouDoing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Default.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

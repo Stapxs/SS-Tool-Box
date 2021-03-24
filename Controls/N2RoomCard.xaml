@@ -16,12 +16,12 @@
             <Button Click="openbutton_Click" x:Name="openbutton" Height="30" Style="{DynamicResource TextButtonEx}" Background="#4C6EF5" VerticalAlignment="Top" Margin="30,30,30,15">
                 <Grid>
                     <StackPanel Orientation="Horizontal" Name="change">
-                        <Path x:Name="icon" Fill="{DynamicResource colorFont}" Stretch="Fill" Width="10" Height="10" Margin="0,2,0,0"
+                        <Path x:Name="icon" Fill="#FFF" Stretch="Fill" Width="10" Height="10" Margin="0,2,0,0"
                         Data="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
-                        <TextBlock x:Name="opentext" Text="开启房间" FontSize="11" Foreground="{DynamicResource colorFont}" Margin="15,1,0,0"/>
+                        <TextBlock x:Name="opentext" Text="开启房间" FontSize="11" Foreground="#FFF" Margin="15,1,0,0"/>
                     </StackPanel>
                     <Grid x:Name="wait" Visibility="Collapsed">
-                        <pu:Loading Height="15" Width="15" LoadingStyle="Ring" IsRunning="True" Foreground="{DynamicResource colorFont}" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <pu:Loading Height="15" Width="15" LoadingStyle="Ring" IsRunning="True" Foreground="#FFF" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left">
                             <pu:Loading.Background>
                                 <SolidColorBrush Color="#2D2D2D" Opacity="0.3"/>
                             </pu:Loading.Background>

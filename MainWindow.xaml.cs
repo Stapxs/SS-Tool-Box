@@ -75,14 +75,34 @@ namespace SS_Tool_Box
 
             Log.StartLogOut();                      // 日志
             Options.ReadOpt();                      // 设置
-            // UI.ToastHelper.StartShower();        // 吐司
+                                                    // UI.ToastHelper.StartShower();        // 吐司
 
             #endregion
+            #region 1 - 初始化颜色主题
 
+            if ((Options.GetOpt("darkMode"))[0] == "false")
+            {
+                UI.Color.ChangeDark(false);
+            }
+            string langValue = "en_US";
+            foreach (UI.Localization.localVer info in UI.Localization.indexLocals)
+            {
+                if (info.value == Options.GetOpt("language")[0])
+                {
+                    langValue = info.value;
+                    break;
+                }
+            }
+            UI.Localization.ChangeLanguage(langValue, true);
+
+            #endregion
             #region 4 - 初始化页面
 
             // 版本号
             viewVersion.Text = verInfo.ver;
+#if DEBUG
+            viewVersion.Text = verInfo.ver + " DBuild " + verInfo.verBulidTimes;
+#endif
 
             // 加载主页
             Home page = new Home();
@@ -197,6 +217,9 @@ namespace SS_Tool_Box
         private void B_More(object sender, RoutedEventArgs e)
         {
             // 设置
+            Pages.Options opt = new Pages.Options();
+            Application app = Application.Current;
+            changePage(opt, (string)app.Resources["options"]);
         }
 
         #endregion

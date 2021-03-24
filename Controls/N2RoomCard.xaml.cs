@@ -44,7 +44,7 @@ namespace SS_Tool_Box.Controls
             foreach (string tag in tags)
             {
                 TextBlock text = new TextBlock();
-                text.SetResourceReference(TextBlock.ForegroundProperty, "colorFont");
+                text.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
                 text.Text = tag;
                 text.Background = new SolidColorBrush(Color.FromArgb(255, 76, 110, 245));
                 text.FontSize = 10;

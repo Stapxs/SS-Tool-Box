@@ -36,7 +36,7 @@
                     <StackPanel>
                         <Border Background="#FF4C6EF5" BorderBrush="{DynamicResource colorBg}" BorderThickness="0" CornerRadius="999" Margin="0,65,0,0" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top">
                             <Grid>
-                                <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Margin="1,1,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="35" Height="35">
+                                <Path Fill="#FFF" Stretch="Fill" Margin="1,1,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="35" Height="35">
                                     <Path.Data>
                                         <PathGeometry FillRule="Nonzero" Figures="M512 128V32c0-17.67-14.33-32-32-32h-96c-17.67 0-32 14.33-32 32H160c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v96c0 17.67 14.33 32 32 32v192c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h96c17.67 0 32-14.33 32-32h192c0 17.67 14.33 32 32 32h96c17.67 0 32-14.33 32-32v-96c0-17.67-14.33-32-32-32V160c17.67 0 32-14.33 32-32zm-96-64h32v32h-32V64zM64 64h32v32H64V64zm32 384H64v-32h32v32zm352 0h-32v-32h32v32zm-32-96h-32c-17.67 0-32 14.33-32 32v32H160v-32c0-17.67-14.33-32-32-32H96V160h32c17.67 0 32-14.33 32-32V96h192v32c0 17.67 14.33 32 32 32h32v192z" />
                                     </Path.Data>
@@ -45,8 +45,8 @@
                         </Border>
                         <TextBlock Text="N2 Station Tools" Block.TextAlignment="Center" FontSize="16" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0"/>
                         <TextBlock x:Name="viewVersion" Block.TextAlignment="Center" Text="Version" FontSize="12" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Width="224"/>
-                        <Button Foreground="{DynamicResource colorFont}" Content="关于 N2 Station" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,35,15,0"/>
-                        <Button Click="Button_Click_1" Foreground="{DynamicResource colorFont}" Content="打开扩展工具" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,15,15,0"/>
+                        <Button Foreground="#FFF" Content="关于 N2 Station" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,35,15,0"/>
+                        <Button Click="Button_Click_1" Foreground="#FFF" Content="打开扩展工具" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="30" Margin="15,15,15,0"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel Margin="0,0,247,0">
@@ -140,27 +140,27 @@
                                         <Button Click="Button_Click" x:Name="LoginButton" Style="{Binding Source={StaticResource TextButtonEx}}" Background="#FF4C6EF5" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,20,0" Height="25">
                                             <Grid>
                                                 <StackPanel Orientation="Horizontal" x:Name="Login" Margin="10,0">
-                                                    <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="13" Height="10" Margin="0,2,0,0">
+                                                    <Path Fill="#FFF" Stretch="Fill" Width="13" Height="10" Margin="0,2,0,0">
                                                         <Path.Data>
                                                             <PathGeometry FillRule="Nonzero" Figures="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z" />
                                                         </Path.Data>
                                                     </Path>
-                                                    <TextBlock Margin="5,1,0,0" Text="登录" FontSize="10" Foreground="{DynamicResource colorFont}" VerticalAlignment="Center"/>
+                                                    <TextBlock Margin="5,1,0,0" Text="登录" FontSize="10" Foreground="#FFF" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                                 <Grid x:Name="LoginWait" Visibility="Collapsed">
-                                                    <pu:Loading Height="15" Width="15" LoadingStyle="Ring" IsRunning="True" Foreground="{DynamicResource colorFont}" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                                    <pu:Loading Height="15" Width="15" LoadingStyle="Ring" IsRunning="True" Foreground="#FFF" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left">
                                                         <pu:Loading.Background>
                                                             <SolidColorBrush Color="#2D2D2D" Opacity="0.3"/>
                                                         </pu:Loading.Background>
                                                     </pu:Loading>
                                                 </Grid>
                                                 <StackPanel Visibility="Collapsed" Orientation="Horizontal" x:Name="LoginOut" Margin="10,0">
-                                                    <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="13" Height="10" Margin="0,2,0,0">
+                                                    <Path Fill="#FFF" Stretch="Fill" Width="13" Height="10" Margin="0,2,0,0">
                                                         <Path.Data>
                                                             <PathGeometry FillRule="Nonzero" Figures="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z" />
                                                         </Path.Data>
                                                     </Path>
-                                                    <TextBlock Margin="5,1,0,0" Text="登出" FontSize="10" Foreground="{DynamicResource colorFont}" VerticalAlignment="Center"/>
+                                                    <TextBlock Margin="5,1,0,0" Text="登出" FontSize="10" Foreground="#FFF" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Grid>
                                         </Button>

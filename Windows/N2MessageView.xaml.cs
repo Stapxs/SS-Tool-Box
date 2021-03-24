@@ -195,12 +195,16 @@ namespace SS_Tool_Box.Windows
                 StackPanel stack = new StackPanel();
                 stack.Orientation = Orientation.Horizontal;
 
-                Border border = new Border();
+                Button border = new Button();
                 border.SetResourceReference(BackgroundProperty, "colorCard");
+                border.Width = border.Height = 10;
+                border.SetResourceReference(StyleProperty, "ChatMsgDot");
                 border.VerticalAlignment = VerticalAlignment.Top;
                 border.Margin = new Thickness(3, 12, 0, 0);
-                border.CornerRadius = new CornerRadius(999);
-                border.Width = border.Height = 10;
+
+                Button button = new Button();
+                button.SetResourceReference(StyleProperty, "ChatMsgText");
+                Grid grid = new Grid();
 
                 TextBlock says = new TextBlock();
                 says.SetResourceReference(ForegroundProperty, "colorFont");
@@ -210,8 +214,11 @@ namespace SS_Tool_Box.Windows
                 says.TextWrapping = TextWrapping.Wrap;
                 says.Margin = new Thickness(10, 8, 0, 0);
 
+                grid.Children.Add(says);
+                button.Content = grid;
+
                 stack.Children.Add(border);
-                stack.Children.Add(says);
+                stack.Children.Add(button);
 
                 item.Content = stack;
 
@@ -361,7 +368,7 @@ namespace SS_Tool_Box.Windows
                         Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
                             Members.Visibility = Visibility.Visible;
-                            MembersText.Text = msg.User;
+                            MembersText.Text = (int.Parse(msg.User) - 1).ToString();
                         });
                         break;
                     }

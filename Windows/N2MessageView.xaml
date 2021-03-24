@@ -45,6 +45,58 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- 聊天消息动画 -->
+        <Style x:Key="ChatMsgDot" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="999">
+                            <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="999" Name="PART_Background">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Visibility" Value="Visible">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation Duration="0:0:.3" Storyboard.TargetProperty="Margin" From="3,20,0,-5" To="3,12,0,0" DecelerationRatio=".9"/>
+                                            <DoubleAnimation Duration="0:0:.4" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- 聊天消息动画 -->
+        <Style x:Key="ChatMsgText" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="999">
+                            <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="999" Name="PART_Background">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Visibility" Value="Visible">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation Duration="0:0:.3" Storyboard.TargetProperty="Margin" From="3,20,0,-5" To="3,12,0,0" DecelerationRatio=".9"/>
+                                            <DoubleAnimation Duration="0:0:.4" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Border x:Name="mainBackground" Opacity="1" BorderBrush="{DynamicResource colorBg}" BorderThickness="1">

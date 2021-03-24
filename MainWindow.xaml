@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
-        xmlns:local="clr-namespace:SS_Tool_Box.Controls"
         mc:Ignorable="d"
         Title="林槐工具箱 - SS Tool Box"
         Height="580"
@@ -35,10 +34,10 @@
                     <TabItem IsEnabled="False" Height="160"/>
                     <!-- 这边只够放下六个 TabItem -->
                     <!-- <TabItem Header="分类" IsEnabled="False"/> -->
-                    <TabItem Header="颜色工具" IsSelected="True">
+                    <TabItem Header="{DynamicResource tool_type_color}" IsSelected="True">
                         <ContentControl x:Name="conColorTools" Padding="0" Margin="0"/>
                     </TabItem>
-                    <TabItem Header="其他工具" IsSelected="True">
+                    <TabItem Header="{DynamicResource tool_type_other}">
                         <ContentControl x:Name="conOtherTools" Padding="0" Margin="0"/>
                     </TabItem>
                 </TabControl>
@@ -51,7 +50,7 @@
                         </Path>
                     </Grid>
                 </Border>
-                <TextBlock Text="林槐工具箱" Block.TextAlignment="Center" FontSize="16" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,110,0,0"/>
+                <TextBlock Text="{DynamicResource name}" Block.TextAlignment="Center" FontSize="16" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,110,0,0" Width="198"/>
                 <TextBlock x:Name="viewVersion" Block.TextAlignment="Center" Text="Version" FontSize="12" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,135,0,0" Width="224"/>
                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="5,0,0,0" Height="64" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Width="217">
                     <Button.RenderTransform>
@@ -65,7 +64,7 @@
                 </Button>
                 <Grid Margin="12,0,0,12" Width="200" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorBg}"/>
-                    <TextBox x:Name="SeachBox" TextChanged="Seach_TextChanged" GotFocus="Seach_GotFocus" pu:TextBoxHelper.Watermark="  搜索……" CaretBrush="{DynamicResource colorFont}" FontSize="12" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource colorFont}" Margin="0">
+                    <TextBox x:Name="SeachBox" TextChanged="Seach_TextChanged" GotFocus="Seach_GotFocus" pu:TextBoxHelper.Watermark="{DynamicResource main_search}" CaretBrush="{DynamicResource colorFont}" FontSize="12" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource colorFont}" Margin="0">
                         <TextBox.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.MergedDictionaries>

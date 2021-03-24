@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- Stapx Steve Tool Box Default English Language File -->
+    
+    <!-- Home -->
+    <sys:String x:Key="name">SS Tool Box</sys:String>
+    <sys:String x:Key="main_search">Search...</sys:String>
+
+    <!-- button -->
+    <sys:String x:Key="button_open">Open</sys:String>
+    <sys:String x:Key="button_close">Close</sys:String>
+
+    <!-- Tools List -->
+    <sys:String x:Key="tool_type_color">Color Tools</sys:String>
+    <sys:String x:Key="tool_type_other">Other Tools</sys:String>
+
+    <sys:String x:Key="tool_title_color">Color palette</sys:String>
+    <sys:String x:Key="tool_title_color_card">Color table</sys:String>
+    <sys:String x:Key="tool_title_xiaoshou">Doing</sys:String>
+    <sys:String x:Key="tool_title_n2_tools">N2 Tools</sys:String>
+    <sys:String x:Key="tool_title_kill_stl">Kill STL</sys:String>
+
+    <sys:String x:Key="tool_sub_color">Palette and color format conversion</sys:String>
+    <sys:String x:Key="tool_sub_color_card">Some pretty colors</sys:String>
+    <sys:String x:Key="tool_sub_xiaoshou">Xiaoshou Doing Client</sys:String>
+    <sys:String x:Key="tool_sub_n2_tools">N2 Station Tools</sys:String>
+    <sys:String x:Key="tool_sub_kill_stl">Do you wanna kill STL?</sys:String>
+    
+    <!-- Options -->
+    <sys:String x:Key="options">Soft Options</sys:String>
+
+    <sys:String x:Key="options_menu_default">General</sys:String>
+    <sys:String x:Key="options_menu_theme">Theme</sys:String>
+    <sys:String x:Key="options_menu_function">Function</sys:String>
+    <sys:String x:Key="options_menu_other">Other</sys:String>
+
+    <sys:String x:Key="options_title_theme">Color &amp; Theme</sys:String>
+    <sys:String x:Key="options_darkmode">Dark Mode</sys:String>
+    <sys:String x:Key="options_main_color">Main Color</sys:String>
+    <sys:String x:Key="options_title_localation">Localization</sys:String>
+    <sys:String x:Key="options_language">Language</sys:String>
+    
+</ResourceDictionary>

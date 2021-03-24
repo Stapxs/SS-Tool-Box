@@ -1,0 +1,203 @@
+﻿<Page x:Class="SS_Tool_Box.Pages.Options"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+      xmlns:local="clr-namespace:SS_Tool_Box.Pages"
+      mc:Ignorable="d" d:DesignWidth="633"
+      Title="Options" Height="488.113">
+    <Page.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border Name="Border" Width="80" Height="33" Margin="2,2,0,0">
+                                <Border Name="BorderOn" CornerRadius="0" Background="Transparent">
+                                    <Grid>
+                                        <Border Width="65" Name="BorderDown" Height="0" CornerRadius="0,0,2,2" VerticalAlignment="Bottom" Background="{DynamicResource colorFont}" HorizontalAlignment="Center"/>
+                                        <TextBlock Foreground="{DynamicResource colorFont}" x:Name="mHeader" FontSize="13" HorizontalAlignment="Center" Text="{TemplateBinding Header}" VerticalAlignment="Center" Margin="12,2,12,2"/>
+                                    </Grid>
+                                </Border>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
+                                <Setter TargetName="BorderDown" Property="Height" Value="2"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
+                                <Setter TargetName="BorderDown" Property="Height" Value="0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="mHeader" Property="HorizontalAlignment" Value="Center"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <StackPanel x:Name="Main" Background="{DynamicResource colorBg}">
+        <Grid Margin="0">
+            <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0" Height="40" VerticalAlignment="Top"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{DynamicResource options}" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+            <TabControl Margin="0" Background="Transparent" BorderThickness="0">
+                <TabItem IsEnabled="False" Width="300"/>
+                <TabItem Header="{DynamicResource options_menu_default}" IsSelected="True">
+
+                </TabItem>
+                <TabItem Header="{DynamicResource options_menu_theme}">
+                    <ScrollViewer Height="435" Padding="0,0,7,0" Margin="0,15,0,0" Width="629">
+                        <StackPanel>
+                            <Grid Margin="0">
+                                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+                                <StackPanel>
+                                    <Grid Width="300" Margin="0,25,0,0">
+                                        <StackPanel HorizontalAlignment="Right">
+                                            <Border Background="{DynamicResource colorCard1}" CornerRadius="0,5,0,0" Height="19" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="138">
+                                                <Grid>
+                                                    <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="10" Height="10" HorizontalAlignment="Right" Margin="0,0,7,0"/>
+                                                    <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="10" Height="10" HorizontalAlignment="Right" Margin="0,0,22,0"/>
+                                                    <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="21" Height="10" HorizontalAlignment="Right" Margin="0,4,37,5"/>
+                                                </Grid>
+                                            </Border>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="169"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="121"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="106"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="130"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="147"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="169"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="155"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="173"/>
+                                            <Border Background="{DynamicResource colorCard1}" CornerRadius="0,0,5,0" Height="19" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="135"/>
+                                        </StackPanel>
+                                        <StackPanel HorizontalAlignment="Left">
+                                            <Border Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Left" Width="95"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Left" Width="60"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="100,-1,0,0" HorizontalAlignment="Left" Width="27"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="30,-1,0,0" HorizontalAlignment="Left" Width="50"/>
+                                            <Border Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Left" Width="304"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="60,-1,0,0" HorizontalAlignment="Left" Width="41"/>
+                                            <Border Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Left" Width="199"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="20,-1,0,0" HorizontalAlignment="Left" Width="54"/>
+                                            <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="80,-1,0,0" HorizontalAlignment="Left" Width="27"/>
+                                            <Border Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Left" Width="159"/>
+                                        </StackPanel>
+                                        <Grid>
+                                            <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="70" HorizontalAlignment="Right" Margin="0,18,5,7"/>
+                                            <StackPanel Margin="0,131,81,0">
+                                                <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Height="10" Margin="162,7,0,0"/>
+                                                <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Height="10" Margin="143,7,0,0"/>
+                                                <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Height="10" Margin="177,7,0,0"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                    <StackPanel Margin="0,15,0,25">
+                                        <TextBlock Text="Border Card UI" FontSize="15" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Version - 1.5" FontSize="10" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,15,0,0">
+                                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource options_title_theme}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
+                                    <Grid Margin="20,0,20,20">
+                                        <TextBlock Text="{DynamicResource options_darkmode}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <CheckBox x:Name="darkButton" Unchecked="darkButton_Unchecked" Checked="darkButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                            <CheckBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </CheckBox.Resources>
+                                        </CheckBox>
+                                    </Grid>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="{DynamicResource options_main_color}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <CheckBox Background="{DynamicResource colorMainBlue}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="25" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="25" Height="25" Margin="10,0,0,0">
+                                                <CheckBox.Resources>
+                                                    <ResourceDictionary>
+                                                        <ResourceDictionary.MergedDictionaries>
+                                                            <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                        </ResourceDictionary.MergedDictionaries>
+                                                    </ResourceDictionary>
+                                                </CheckBox.Resources>
+                                            </CheckBox>
+                                            <CheckBox BorderThickness="0" pu:CheckBoxHelper.CornerRadius="25" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="25" Height="25" Margin="10,0,0,0">
+                                                <CheckBox.Resources>
+                                                    <ResourceDictionary>
+                                                        <ResourceDictionary.MergedDictionaries>
+                                                            <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                        </ResourceDictionary.MergedDictionaries>
+                                                    </ResourceDictionary>
+                                                </CheckBox.Resources>
+                                            </CheckBox>
+                                            <CheckBox BorderThickness="0" pu:CheckBoxHelper.CornerRadius="25" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="25" Height="25" Margin="10,0,0,0">
+                                                <CheckBox.Resources>
+                                                    <ResourceDictionary>
+                                                        <ResourceDictionary.MergedDictionaries>
+                                                            <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                        </ResourceDictionary.MergedDictionaries>
+                                                    </ResourceDictionary>
+                                                </CheckBox.Resources>
+                                            </CheckBox>
+                                            <CheckBox BorderThickness="0" pu:CheckBoxHelper.CornerRadius="25" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="25" Height="25" Margin="10,0,0,0">
+                                                <CheckBox.Resources>
+                                                    <ResourceDictionary>
+                                                        <ResourceDictionary.MergedDictionaries>
+                                                            <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                        </ResourceDictionary.MergedDictionaries>
+                                                    </ResourceDictionary>
+                                                </CheckBox.Resources>
+                                            </CheckBox>
+                                            <CheckBox BorderThickness="0" pu:CheckBoxHelper.CornerRadius="25" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="25" Height="25" Margin="10,0,0,0">
+                                                <CheckBox.Resources>
+                                                    <ResourceDictionary>
+                                                        <ResourceDictionary.MergedDictionaries>
+                                                            <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                        </ResourceDictionary.MergedDictionaries>
+                                                    </ResourceDictionary>
+                                                </CheckBox.Resources>
+                                            </CheckBox>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,15,0,0">
+                                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource options_title_localation}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="{DynamicResource options_language}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="LanguageBox" FontSize="11" SelectionChanged="LanguageBox_SelectionChanged" pu:ComboBoxHelper.HoverForeground="{DynamicResource colorFont}" pu:ComboBoxHelper.HoverBackground="{DynamicResource colorCard2}" Foreground="{DynamicResource colorFont}" pu:ComboBoxHelper.ItemHeight="25" pu:ComboBoxHelper.CornerRadius="3" BorderThickness="0" Background="{DynamicResource colorCard1}" Margin="0" HorizontalAlignment="Right" Width="140" Height="25">
+                                            <ComboBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </ComboBox.Resources>
+                                        </ComboBox>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="{DynamicResource options_menu_function}"/>
+                <TabItem Header="{DynamicResource options_menu_other}"/>
+            </TabControl>
+        </Grid>
+
+    </StackPanel>
+</Page>

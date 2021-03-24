@@ -7,12 +7,14 @@
       mc:Ignorable="d" 
       d:DesignHeight="490" d:DesignWidth="633"
       Title="ColorTools"
+      Loaded="Page_Loaded"
       >
 
-    <StackPanel x:Name="Cards">
+    <StackPanel>
         <Grid Height="40" Margin="0,0,0,15">
             <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
-            <TextBlock Text="颜色工具" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock Text="{DynamicResource tool_type_color}" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Grid>
+        <Grid x:Name="Cards"/>
     </StackPanel>
 </Page>
