@@ -1,18 +1,7 @@
-﻿using SS_Tool_Box.Function;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Win32;
+using SS_Tool_Box.Function;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SS_Tool_Box.Pages
 {
@@ -21,6 +10,9 @@ namespace SS_Tool_Box.Pages
     /// </summary>
     public partial class Options : Page
     {
+
+        private bool load = true;
+
         public Options()
         {
             InitializeComponent();
@@ -39,16 +31,25 @@ namespace SS_Tool_Box.Pages
             LanguageBox.ItemsSource = UI.Localization.indexLocals;
             LanguageBox.DisplayMemberPath = "name";
             LanguageBox.SelectedValuePath = "value";
-            string langValue = "en_US";
-            foreach(UI.Localization.localVer info in UI.Localization.indexLocals)
+            string langValue = "en_US.xaml";
+            if (SS_Tool_Box.Options.GetOpt("language")[0][0] != '~')
             {
-                if(info.value == SS_Tool_Box.Options.GetOpt("language")[0])
+                foreach (UI.Localization.localVer info in UI.Localization.indexLocals)
                 {
-                    langValue = info.value;
-                    break;
+                    if (info.value + ".xaml" == SS_Tool_Box.Options.GetOpt("language")[0] && SS_Tool_Box.Options.GetOpt("language")[0] != "diy")
+                    {
+                        langValue = info.value;
+                        break;
+                    }
                 }
             }
+            else
+            {
+                LanguageBox.SelectedValue = "diy";
+            }
             LanguageBox.SelectedValue = langValue;
+
+            load = false;
         }
 
         #region 事件 | 主题与颜色
@@ -69,9 +70,39 @@ namespace SS_Tool_Box.Pages
 
         private void LanguageBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedName = ((ComboBox)sender).SelectedValue.ToString();
-            SS_Tool_Box.Options.SetOpt("language", selectedName);
-            UI.Localization.ChangeLanguage(selectedName, false);
+            if (!load)
+            {
+                string selectedName = ((ComboBox)sender).SelectedValue.ToString() + ".xaml";
+                string back = "ERR - NONE";
+
+                if (selectedName == "diy.xaml")
+                {
+                    Application app = Application.Current;
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    dialog.Multiselect = false;  //该值确定是否可以选择多个文件
+                    dialog.Title = app.Resources["options_language_choice"].ToString();
+                    dialog.Filter = app.Resources["options_language_file_type"].ToString() + "|*.xaml";
+                    dialog.ShowDialog();
+                    string file = dialog.FileName;
+                    if (file == null || file == "")
+                    {
+                        return;
+                    }
+                    file = file.Substring(file.IndexOf("Lang") + 5);
+                    SS_Tool_Box.Options.SetOpt("language", "~" + file);
+                    selectedName = file;
+                    back = UI.Localization.ChangeLanguage(selectedName, false, true);
+                }
+                else
+                {
+                    SS_Tool_Box.Options.SetOpt("language", selectedName);
+                    back = UI.Localization.ChangeLanguage(selectedName, false);
+                }
+                if (back.IndexOf("ERR") >= 0)
+                {
+                    UI.ToastHelper.Show(back);
+                }
+            }
         }
 
         #endregion

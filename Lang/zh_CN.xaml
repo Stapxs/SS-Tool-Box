@@ -7,6 +7,8 @@
     <!-- 主页 -->
     <sys:String x:Key="name">林槐工具箱</sys:String>
     <sys:String x:Key="main_search">搜索……</sys:String>
+    <sys:String x:Key="main_search_title">搜索结果：</sys:String>
+    <sys:String x:Key="main_search_none">什么都没找到欸</sys:String>
 
     <!-- 按钮 -->
     <sys:String x:Key="button_open">开启</sys:String>
@@ -41,5 +43,7 @@
     <sys:String x:Key="options_main_color">主题色</sys:String>
     <sys:String x:Key="options_title_localation">本土化</sys:String>
     <sys:String x:Key="options_language">语言（language）</sys:String>
+    <sys:String x:Key="options_language_choice">选择语言文件</sys:String>
+    <sys:String x:Key="options_language_file_type">可扩展应用程序标记(*.xaml)</sys:String>
 
 </ResourceDictionary>

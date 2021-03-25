@@ -132,6 +132,7 @@
     <Page Include="Lang\zh_CN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>

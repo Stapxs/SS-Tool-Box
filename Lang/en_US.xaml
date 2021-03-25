@@ -7,6 +7,8 @@
     <!-- Home -->
     <sys:String x:Key="name">SS Tool Box</sys:String>
     <sys:String x:Key="main_search">Search...</sys:String>
+    <sys:String x:Key="main_search_title">search result:</sys:String>
+    <sys:String x:Key="main_search_none">Nothing was founds</sys:String>
 
     <!-- button -->
     <sys:String x:Key="button_open">Open</sys:String>
@@ -41,5 +43,7 @@
     <sys:String x:Key="options_main_color">Main Color</sys:String>
     <sys:String x:Key="options_title_localation">Localization</sys:String>
     <sys:String x:Key="options_language">Language</sys:String>
+    <sys:String x:Key="options_language_choice">Select language file</sys:String>
+    <sys:String x:Key="options_language_file_type">XAML(*.xaml)</sys:String>
     
 </ResourceDictionary>

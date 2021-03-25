@@ -4,8 +4,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -242,13 +244,20 @@ namespace SS_Tool_Box.Function
             public static ResourceDictionary langUsed = null;
             private static string usedLang = @"Lang\en_US.xaml";
 
-            public static string ChangeLanguage(string name, bool isFist)
+            public static string ChangeLanguage(string name, bool isFist, bool isOut = false)
             {
-                usedLang = @"Lang\" + name + ".xaml";
+                usedLang = @"Lang\" + name;
                 try
                 {
-                    // 根据名字载入语言文件
-                    langUsed = (ResourceDictionary)Application.LoadComponent(new Uri(@"Lang\" + name + ".xaml", UriKind.Relative));
+                    if (!isOut)
+                    {
+                        langUsed = (ResourceDictionary)Application.LoadComponent(new Uri(@"Lang\" + name, UriKind.Relative));
+                    }
+                    else
+                    {
+                        FileStream fs = new FileStream(@"Lang\" + name, FileMode.Open);
+                        langUsed = (ResourceDictionary)XamlReader.Load(fs);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -274,6 +283,10 @@ namespace SS_Tool_Box.Function
                         }
                     }
                     app.Resources.MergedDictionaries.Add(langUsed);
+                }
+                if (!File.Exists(@"Lang\" + name + ".xaml"))
+                {
+                    return "ERR - 文件不存在";
                 }
                 return "OK";
             }

@@ -17,7 +17,7 @@
                         </Grid>
                     </Border>
                     <TextBlock x:Name="MTitle" Text="这个控件" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="2,8,0,0"/>
-                    <TextBlock x:Name="MSubTitle" Text="没有好好初始化哦" FontSize="11.5" Foreground="{DynamicResource colorFont1}" Margin="2,4,0,0"/>
+                    <TextBlock x:Name="MSubTitle" Text="没有好好初始化哦" TextWrapping="Wrap" FontSize="11.5" Foreground="{DynamicResource colorFont1}" Margin="2,4,0,0"/>
                 </StackPanel>
             </Grid>
         </Button>

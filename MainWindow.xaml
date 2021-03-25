@@ -89,10 +89,10 @@
                     </Border.Effect>
                     <StackPanel x:Name="listSeach">
                         <Border Height="35">
-                            <TextBlock Text="搜索结果：" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                            <TextBlock Text="{DynamicResource main_search_title}" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0,0,0"/>
                         </Border>
                         <Border x:Name="seachNone" Height="25">
-                            <TextBlock Text="什么都没找到欸" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0"/>
+                            <TextBlock Text="{DynamicResource main_search_none}" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0"/>
                         </Border>
                     </StackPanel>
                 </Border>

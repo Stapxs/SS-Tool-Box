@@ -85,15 +85,22 @@ namespace SS_Tool_Box
                 UI.Color.ChangeDark(false);
             }
             string langValue = "en_US";
-            foreach (UI.Localization.localVer info in UI.Localization.indexLocals)
+            if (Options.GetOpt("language")[0][0] != '~')
             {
-                if (info.value == Options.GetOpt("language")[0])
+                foreach (UI.Localization.localVer info in UI.Localization.indexLocals)
                 {
-                    langValue = info.value;
-                    break;
+                    if (info.value + ".xaml" == Options.GetOpt("language")[0])
+                    {
+                        langValue = info.value;
+                        break;
+                    }
                 }
+                UI.Localization.ChangeLanguage(langValue + ".xaml", true);
             }
-            UI.Localization.ChangeLanguage(langValue, true);
+            else
+            {
+                UI.Localization.ChangeLanguage(Options.GetOpt("language")[0].Substring(1), true, true);
+            }
 
             #endregion
             #region 4 - 初始化页面
