@@ -1,0 +1,7 @@
+{
+  "Version": "1",
+  "MainVersion": "39.3",
+  "Time": "2021/03/30",
+  "Url": "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/master/Latest/SS-Tool-Box.exe",
+  "Logs": "+ 自动设置暗黑模式\r\n+ 常规优化"
+}

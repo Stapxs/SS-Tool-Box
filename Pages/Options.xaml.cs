@@ -17,7 +17,8 @@ namespace SS_Tool_Box.Pages
         {
             InitializeComponent();
 
-            // 初始化设置项目
+            #region 初始化设置项目
+
             if (SS_Tool_Box.Options.GetOpt("darkMode")[0] == "false")
             {
                 darkButton.IsChecked = false;
@@ -25,7 +26,15 @@ namespace SS_Tool_Box.Pages
             else
             {
                 darkButton.IsChecked = true;
+            }
 
+            if (SS_Tool_Box.Options.GetOpt("autoDarkMode")[0] == "false")
+            {
+                autoDarkButton.IsChecked = false;
+            }
+            else
+            {
+                autoDarkButton.IsChecked = true;
             }
 
             LanguageBox.ItemsSource = UI.Localization.indexLocals;
@@ -49,6 +58,8 @@ namespace SS_Tool_Box.Pages
             }
             LanguageBox.SelectedValue = langValue;
 
+            #endregion
+
             load = false;
         }
 
@@ -56,13 +67,62 @@ namespace SS_Tool_Box.Pages
 
         private void darkButton_Checked(object sender, RoutedEventArgs e)
         {
-            UI.Color.ChangeDark(true);
-            SS_Tool_Box.Options.SetOpt("darkMode", "true");
+            if (!load)
+            {
+                UI.Color.ChangeDark(true);
+                SS_Tool_Box.Options.SetOpt("darkMode", "true");
+            }
         }
         private void darkButton_Unchecked(object sender, RoutedEventArgs e)
         {
-            UI.Color.ChangeDark(false);
-            SS_Tool_Box.Options.SetOpt("darkMode", "false");
+            if (!load)
+            {
+                UI.Color.ChangeDark(false);
+                SS_Tool_Box.Options.SetOpt("darkMode", "false");
+            }
+        }
+
+        private void autoDarkButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!load)
+            {
+                darkButton.IsEnabled = false;
+                SS_Tool_Box.Options.SetOpt("autoDarkMode", "true");
+                // 判断颜色模式
+                string isOpen = Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
+                if (isOpen == "1")
+                {
+                    UI.Color.ChangeDark(false);
+                }
+                else
+                {
+                    UI.Color.ChangeDark(true);
+                }
+            }
+            else
+            {
+                darkButton.IsEnabled = false;
+            }
+        }
+        private void autoDarkButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!load)
+            {
+                darkButton.IsEnabled = true;
+                SS_Tool_Box.Options.SetOpt("autoDarkMode", "false");
+                if (SS_Tool_Box.Options.GetOpt("darkMode")[0] == "false")
+                {
+                    UI.Color.ChangeDark(false);
+                }
+                else
+                {
+                    UI.Color.ChangeDark(true);
+                }
+            }
+            else
+            {
+                darkButton.IsEnabled = true;
+            }
         }
 
         #endregion
@@ -105,8 +165,8 @@ namespace SS_Tool_Box.Pages
             }
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

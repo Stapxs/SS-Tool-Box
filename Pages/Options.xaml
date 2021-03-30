@@ -121,6 +121,18 @@
                                             </CheckBox.Resources>
                                         </CheckBox>
                                     </Grid>
+                                    <Grid Margin="20,0,20,20">
+                                        <TextBlock Text="{DynamicResource options_auto_darkmode}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <CheckBox x:Name="autoDarkButton" Unchecked="autoDarkButton_Unchecked" Checked="autoDarkButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                            <CheckBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </CheckBox.Resources>
+                                        </CheckBox>
+                                    </Grid>
                                     <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_main_color}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

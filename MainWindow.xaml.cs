@@ -10,6 +10,7 @@ using SS_Tool_Box.Function;
 using SS_Tool_Box.Controls;
 using System.Windows.Threading;
 using System.Collections;
+using Microsoft.Win32;
 
 namespace SS_Tool_Box
 {
@@ -54,8 +55,9 @@ namespace SS_Tool_Box
         // 程序基本信息
         public class verInfo
         {
-            public static string ver = "Dev-0.3.5";         // 版本号
-            public static int verBulidTimes = 27;            // 编译编号
+            public static string ver = "Dev-0.3.9";         // 版本号
+            public static int verBulidTimes = 3;            // 编译编号
+            public static double vernum = 39.3;             // 版本号数字
         }
 
         public MainWindow()
@@ -75,14 +77,30 @@ namespace SS_Tool_Box
 
             Log.StartLogOut();                      // 日志
             Options.ReadOpt();                      // 设置
-                                                    // UI.ToastHelper.StartShower();        // 吐司
+            // UI.ToastHelper.StartShower();        // 吐司
+
+            // 颜色模式切换事件
+            SystemEvents.UserPreferenceChanged +=
+                new UserPreferenceChangedEventHandler(Event_UserPreferenceChanged);
 
             #endregion
             #region 1 - 初始化颜色主题
 
-            if ((Options.GetOpt("darkMode"))[0] == "false")
+            if (Options.GetOpt("autoDarkMode")[0] == "true")
             {
-                UI.Color.ChangeDark(false);
+                // 判断颜色模式
+                string isOpen = Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
+                if (isOpen == "1")
+                {
+                    UI.Color.ChangeDark(false);
+                }
+            }
+            else
+            {
+                if ((Options.GetOpt("darkMode"))[0] == "false")
+                {
+                    UI.Color.ChangeDark(false);
+                }
             }
             string langValue = "en_US";
             if (Options.GetOpt("language")[0][0] != '~')
@@ -231,6 +249,23 @@ namespace SS_Tool_Box
 
         #endregion
         #region 事件 | 主窗口
+
+        private void Event_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            if (Options.GetOpt("autoDarkMode")[0] == "true")
+            {
+                // 判断颜色模式
+                string isOpen = Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
+                if (isOpen == "1")
+                {
+                    UI.Color.ChangeDark(false);
+                }
+                else
+                {
+                    UI.Color.ChangeDark(true);
+                }
+            }
+        }
 
         private void mainTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

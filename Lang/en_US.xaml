@@ -40,6 +40,7 @@
 
     <sys:String x:Key="options_title_theme">Color &amp; Theme</sys:String>
     <sys:String x:Key="options_darkmode">Dark Mode</sys:String>
+    <sys:String x:Key="options_auto_darkmode">Auto Dark Mode</sys:String>
     <sys:String x:Key="options_main_color">Main Color</sys:String>
     <sys:String x:Key="options_title_localation">Localization</sys:String>
     <sys:String x:Key="options_language">Language</sys:String>
