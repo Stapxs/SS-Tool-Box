@@ -167,7 +167,7 @@
             <Grid Visibility="Collapsed" x:Name="panMessageBox" Margin="0" Width="394" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Border CornerRadius="7" Background="{DynamicResource colorBg}">
                     <Border.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="15" Opacity="0.5"/>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.15"/>
                     </Border.Effect>
                 </Border>
                 <Grid Margin="50,55,50,65">

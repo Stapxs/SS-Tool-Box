@@ -1,6 +1,7 @@
 ﻿using SS_Tool_Box.Controls;
 using SS_Tool_Box.Function;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -46,7 +47,11 @@ namespace SS_Tool_Box.Pages
             }
             for (int i = 0; i < 3; i++)
             {
-                SortCard card = new SortCard(tools.List[nums[i]].cardInfo, tools.List[nums[i]].page, MainWindow.main)
+                Application app = Application.Current;
+                List<string> info = tools.List[nums[i]].cardInfo;
+                info[0] = (string)app.Resources["tool_title_" + tools.List[nums[i]].name];
+                info[1] = (string)app.Resources["tool_sub_" + tools.List[nums[i]].name];
+                SortCard card = new SortCard(info, tools.List[nums[i]].page, MainWindow.main)
                 {
                     Margin = new Thickness(0, 0, 17, 15)
                 };

@@ -18,6 +18,11 @@
     <sys:String x:Key="tool_type_color">Color Tools</sys:String>
     <sys:String x:Key="tool_type_other">Other Tools</sys:String>
 
+    <sys:String x:Key="tool_null_title">Page no found</sys:String>
+    <sys:String x:Key="tool_null_opppps">Oooooops!</sys:String>
+    <sys:String x:Key="tool_null_ops_says">Seems to not find this page = =</sys:String>
+    <sys:String x:Key="tool_null_other">Look at others</sys:String>
+
     <sys:String x:Key="tool_title_color">Color palette</sys:String>
     <sys:String x:Key="tool_title_color_card">Color table</sys:String>
     <sys:String x:Key="tool_title_xiaoshou">Doing</sys:String>
@@ -37,6 +42,13 @@
     <sys:String x:Key="options_menu_theme">Theme</sys:String>
     <sys:String x:Key="options_menu_function">Function</sys:String>
     <sys:String x:Key="options_menu_other">Other</sys:String>
+
+    <sys:String x:Key="options_title_def">Check for updates</sys:String>
+    <sys:String x:Key="options_main_title_def">Updates available</sys:String>
+    <sys:String x:Key="options_update">Update</sys:String>
+    <sys:String x:Key="options_update_start">Start Update</sys:String>
+    <sys:String x:Key="options_update_close">Close update</sys:String>
+    <sys:String x:Key="options_update_from">Update source</sys:String>
 
     <sys:String x:Key="options_title_theme">Color &amp; Theme</sys:String>
     <sys:String x:Key="options_darkmode">Dark Mode</sys:String>

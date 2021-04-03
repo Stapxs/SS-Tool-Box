@@ -1,7 +1,15 @@
 ﻿using Microsoft.Win32;
+using Panuon.UI.Silver;
 using SS_Tool_Box.Function;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Reflection;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace SS_Tool_Box.Pages
 {
@@ -12,30 +20,42 @@ namespace SS_Tool_Box.Pages
     {
 
         private bool load = true;
+        private bool isUpd = false;
+        private bool isUpding = false;
 
         public Options()
         {
             InitializeComponent();
+            #region 初始化常规
 
-            #region 初始化设置项目
+            updTitle.Text = MainWindow.verInfo.verType + " Version";
+            nowVersion.Text = MainWindow.verInfo.verStr + "（" + MainWindow.verInfo.verNum + "）";
 
-            if (SS_Tool_Box.Options.GetOpt("darkMode")[0] == "false")
+            if(MainWindow.back.Count != 0 && double.Parse(MainWindow.back[0]) > MainWindow.verInfo.verNum)
             {
-                darkButton.IsChecked = false;
+                isUpd = true;
+
+                updUpdate.Visibility = Visibility.Visible;
+                updWait.Visibility = Visibility.Collapsed;
+                updNew.Visibility = Visibility.Visible;
+                updNewF.Visibility = Visibility.Visible;
+                updOK.Visibility = Visibility.Collapsed;
+
+                newVersion.Text = MainWindow.back[0];
             }
             else
             {
-                darkButton.IsChecked = true;
+                updButton.Visibility = Visibility.Collapsed;
             }
+            checkupdButton.IsChecked = SS_Tool_Box.Options.GetOpt("stopUpd")[0] == "true"?true:false;
+            UpdBox.ItemsSource = MainWindow.linkList;
+            UpdBox.DisplayMemberPath = "name";
+            UpdBox.SelectedIndex = int.Parse(SS_Tool_Box.Options.GetOpt("updLink")[0] == "ERR"?"0": SS_Tool_Box.Options.GetOpt("updLink")[0]);
 
-            if (SS_Tool_Box.Options.GetOpt("autoDarkMode")[0] == "false")
-            {
-                autoDarkButton.IsChecked = false;
-            }
-            else
-            {
-                autoDarkButton.IsChecked = true;
-            }
+            #endregion
+            #region 初始化外观
+            darkButton.IsChecked = SS_Tool_Box.Options.GetOpt("darkMode")[0] == "false"?false:true;
+            autoDarkButton.IsChecked = SS_Tool_Box.Options.GetOpt("autoDarkMode")[0] == "false"?false:true;
 
             LanguageBox.ItemsSource = UI.Localization.indexLocals;
             LanguageBox.DisplayMemberPath = "name";
@@ -167,6 +187,208 @@ namespace SS_Tool_Box.Pages
 
 
         #endregion
+        #region 事件 | 常规
 
+        private void updButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(isUpding)
+            {
+                return;
+            }
+            if(isUpd)
+            {
+                updUpdate.Visibility = Visibility.Collapsed;
+                updWait.Visibility = Visibility.Visible;
+                pbDown.Visibility = Visibility.Visible;
+
+                Thread thread = new Thread(Start);
+                MainWindow.threads.Push(thread);
+                thread.Start();
+
+                Log.AddLog("update", "开始下载更新……");
+            }
+        }
+
+        private void checkupdButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SS_Tool_Box.Options.SetOpt("stopUpd", "false");
+        }
+
+        private void checkupdButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SS_Tool_Box.Options.SetOpt("stopUpd", "true");
+        }
+
+        private void UpdBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox box = (ComboBox)sender;
+            SS_Tool_Box.Options.SetOpt("updLink", box.SelectedIndex.ToString());
+        }
+
+        #endregion
+
+
+        #region 事件 | 检查更新
+
+        private long Max = 0;
+        private void Start()
+        {
+            WebRequest request = WebRequest.Create(MainWindow.back[2]);
+            WebResponse respone = request.GetResponse();
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                pbDown.Maximum = respone.ContentLength;
+                Max = respone.ContentLength;
+            });
+            ThreadPool.QueueUserWorkItem((obj) =>
+            {
+                Stream netStream = respone.GetResponseStream();
+                Stream fileStream = new FileStream(@"[Upd]SSTB.exe", FileMode.Create);
+                byte[] read = new byte[1024];
+                long progressBarValue = 0;
+                int realReadLen = netStream.Read(read, 0, read.Length);
+                while (realReadLen > 0)
+                {
+                    fileStream.Write(read, 0, realReadLen);
+                    progressBarValue += realReadLen;
+                    pbDown.Dispatcher.BeginInvoke(new ProgressBarSetter(SetProgressBar), progressBarValue);
+                    realReadLen = netStream.Read(read, 0, read.Length);
+                }
+                netStream.Close();
+                fileStream.Close();
+            }, null);
+        }
+
+        public delegate void ProgressBarSetter(double value);
+        private bool downFin = false;
+        public void SetProgressBar(double value)
+        {
+            if(downFin)
+            {
+                return;
+            }
+            ProgressBarHelper.SetAnimateTo(pbDown, value);
+            if (Convert.ToInt32(value / Max * 100) >= 100)
+            {
+                downFin = true;
+                FileInfo fileInfo = null;
+                try
+                {
+                    fileInfo = new FileInfo(@"[Upd]SSTB.exe");
+                }
+                catch (Exception ex)
+                {
+                    Log.AddLog("update", "检查更新文件大小错误：" + ex);
+                }
+                Log.AddLog("update", "下载完成，大小：" + fileInfo.Length);
+
+                Thread thread = new Thread(RunUpdate);
+                MainWindow.threads.Push(thread);
+                thread.Start();
+
+                Log.AddLog("update", "开始执行更新……");
+            }
+        }
+
+        private void RunUpdate()
+        {
+            Thread.Sleep(2000);
+            FileInfo fileInfo = null;
+            try
+            {
+                fileInfo = new FileInfo(@"[Upd]SSTB.exe");
+            }
+            catch (Exception ex)
+            {
+                Log.AddLog("update", "检查更新文件大小错误：" + ex);
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    MainWindow.main.MsgAdd(
+                    new List<string> { "更新", "检查更新文件大小错误。" },
+                    new List<string> { "知道了" }, null);
+                });
+            }
+            if (fileInfo != null && fileInfo.Exists)
+            {
+                if (fileInfo.Length != Max)
+                {
+                    Log.AddLog("update", "更新文件大小不符。");
+                    Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        MainWindow.main.MsgAdd(
+                        new List<string> { "更新", "更新文件大小不符。" },
+                        new List<string> { "知道了" }, null);
+                    });
+                }
+                else
+                {
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (File.Exists("UpdateBash.bat"))
+                        {
+                            File.Delete("UpdateBash.bat");
+                        }
+                        if (File.Exists("run.vbs"))
+                        {
+                            File.Delete("run.vbs");
+                        }
+                        try
+                        {
+                            Log.AddLog("update", "正在生成更新脚本。");
+                            string MyName = Assembly.GetEntryAssembly().Location.Substring(Assembly.GetEntryAssembly().Location.LastIndexOf("\\") + 1);
+                            File.AppendAllText("UpdateBash.bat", ":: 这是 SS Tool Box 自动生成的更新批处理");
+                            File.AppendAllText("UpdateBash.bat", "\r\n" + "@echo off");
+                            File.AppendAllText("UpdateBash.bat", "if \" % 1\" == \"h\" goto begin");
+                            File.AppendAllText("UpdateBash.bat", "mshta vbscript:createobject(\"wscript.shell\").run(\" % ~nx0 h\",0)(window.close)&&exit");
+                            File.AppendAllText("UpdateBash.bat", ":begin");
+                            File.AppendAllText("UpdateBash.bat", "\r\n" + "ping 127.1 -n 2");
+                            File.AppendAllText("UpdateBash.bat", "\r\n" + "del \"" + MyName + "\"");
+                            File.AppendAllText("UpdateBash.bat", "\r\n" + "ping 127.1 -n 2");
+                            File.AppendAllText("UpdateBash.bat", "\r\n" + "ren [Upd]SSTB.exe \"" + MyName + "\"");
+                            File.AppendAllText("UpdateBash.bat", "\r\n" + "ping 127.1 -n 2");
+                            File.AppendAllText("UpdateBash.bat", "\r\n" + "start \"\" \"" + MyName + "\"");
+
+                            File.AppendAllText("run.vbs", "set ws=WScript.CreateObject(\"WScript.Shell\")");
+                            File.AppendAllText("run.vbs", "\r\n" + "ws.Run \"UpdateBash.bat\", 0");
+
+                            MainWindow.readyExit = true;
+                            MainWindow.main.exitMain("update");
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.AddLog("update", "生成更新脚本错误：" + ex);
+                            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                            {
+                                MainWindow.main.MsgAdd(
+                                new List<string> { "更新", "生成更新脚本错误。" },
+                                new List<string> { "知道了" }, null);
+                            });
+                        }
+                    }), DispatcherPriority.SystemIdle, null);
+                }
+            }
+            else
+            {
+                Log.AddLog("update", "检查更新文件路径不存在。");
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    MainWindow.main.MsgAdd(
+                    new List<string> { "更新", "检查更新文件路径不存在。" },
+                    new List<string> { "知道了" }, null);
+                });
+            }
+
+            downFin = false;
+
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                updUpdate.Visibility = Visibility.Visible;
+                updWait.Visibility = Visibility.Collapsed;
+                pbDown.Visibility = Visibility.Collapsed;
+            });
+
+        }
+
+        #endregion
     }
 }

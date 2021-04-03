@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
+using SS_Tool_Box.Controls;
+using SS_Tool_Box.Function;
+using SS_Tool_Box.Pages.SortPages;
+using SS_Tool_Box.Windows;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Threading;
-using SS_Tool_Box.Pages.SortPages;
-using System.Windows.Media;
-using SS_Tool_Box.Function;
-using SS_Tool_Box.Controls;
 using System.Windows.Threading;
-using System.Collections;
-using Microsoft.Win32;
 
 namespace SS_Tool_Box
 {
@@ -47,6 +48,9 @@ namespace SS_Tool_Box
         // MainWindow
         public static MainWindow main = null;
 
+        // 检查更新数据
+        public static List<string> back = new List<string>();
+
         #endregion
 
         // 加载完成标记
@@ -55,14 +59,19 @@ namespace SS_Tool_Box
         // 程序基本信息
         public class verInfo
         {
-            public static string ver = "Dev-0.3.9";         // 版本号
+            public static string verStr = "Dev-0.4.0";      // 版本号
             public static int verBulidTimes = 3;            // 编译编号
-            public static double vernum = 39.3;             // 版本号数字
+            public static double verNum = 40.3;             // 版本号数字
+            #if DEBUG
+            public static string verType = "Debug";         // 版本类型
+            #else
+            public static string verType = "Dev";
+            #endif
         }
 
         public MainWindow()
         {
-            Log.AddLog("app", "感谢使用 SS Tool Box，当前版本为" + verInfo.ver + " build " + verInfo.verBulidTimes);
+            Log.AddLog("app", "感谢使用 SS Tool Box，当前版本为" + verInfo.verStr + " build " + verInfo.verBulidTimes);
             Log.AddLog("main", "开始初始化界面……");
             startRun = DateTime.Now;
 
@@ -83,7 +92,7 @@ namespace SS_Tool_Box
             SystemEvents.UserPreferenceChanged +=
                 new UserPreferenceChangedEventHandler(Event_UserPreferenceChanged);
 
-            #endregion
+#endregion
             #region 1 - 初始化颜色主题
 
             if (Options.GetOpt("autoDarkMode")[0] == "true")
@@ -120,13 +129,13 @@ namespace SS_Tool_Box
                 UI.Localization.ChangeLanguage(Options.GetOpt("language")[0].Substring(1), true, true);
             }
 
-            #endregion
+#endregion
             #region 4 - 初始化页面
 
             // 版本号
-            viewVersion.Text = verInfo.ver;
+            viewVersion.Text = verInfo.verStr;
 #if DEBUG
-            viewVersion.Text = verInfo.ver + " DBuild " + verInfo.verBulidTimes;
+            viewVersion.Text = verInfo.verStr + " DBuild " + verInfo.verBulidTimes;
 #endif
 
             // 加载主页
@@ -150,8 +159,14 @@ namespace SS_Tool_Box
             {
                 Content = others
             };
-            #endregion
+#endregion
+            #region 5 - 其他操作
 
+            // 检查更新
+            Thread thread = new Thread(getUpdate);
+            thread.Start();
+
+#endregion
 
             Log.AddLog("main", "加载完毕，耗时" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
             loadDone = true;
@@ -169,30 +184,7 @@ namespace SS_Tool_Box
 
         private void runWaitExit()
         {
-            if (!readyExit)
-            {
-
-                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-                {
-                    WindowState = WindowState.Minimized;
-                    this.ShowInTaskbar = false;
-                });
-                readyExit = true;
-                Thread.Sleep(500);
-                Log.AddLog("main", "正在结束所有辅助线程……（ " + threads.Count + " 个）");
-                // 超时强制退出
-                while (threads.Count != 0)
-                {
-                    threads.Pop().Abort();
-                }
-                // 退出日志系统
-                Log.exit();
-                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-                {
-                    // 退出主程序
-                    Application.Current.Shutdown();
-                });
-            }
+            exitMain("default");
         }
 
         private void B_SmallWin(object sender, RoutedEventArgs e)
@@ -247,8 +239,65 @@ namespace SS_Tool_Box
             changePage(opt, (string)app.Resources["options"]);
         }
 
-        #endregion
+#endregion
         #region 事件 | 主窗口
+        public void exitMain(string mode)
+        {
+            if (mode == "default")
+            {
+                if (!readyExit)
+                {
+                    Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        WindowState = WindowState.Minimized;
+                        this.ShowInTaskbar = false;
+                    });
+                    readyExit = true;
+                    Thread.Sleep(500);
+                    Log.AddLog("main", "正在结束所有辅助线程……（ " + threads.Count + " 个）");
+                    // 超时强制退出
+                    while (threads.Count != 0)
+                    {
+                        threads.Pop().Abort();
+                    }
+                    // 退出日志系统
+                    Log.exit();
+                    Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                    // 退出主程序
+                    Application.Current.Shutdown();
+                    });
+                }
+            }
+            else if(mode == "update")
+            {
+                Log.AddLog("update", "正在重启更新。");
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    WindowState = WindowState.Minimized;
+                    this.ShowInTaskbar = false;
+                });
+                readyExit = true;
+                Thread.Sleep(500);
+                Log.AddLog("main", "正在结束所有辅助线程……（ " + threads.Count + " 个）");
+                // 超时强制退出
+                while (threads.Count != 0)
+                {
+                    threads.Pop().Abort();
+                }
+                // 退出日志系统
+                Log.exit();
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    // 退出主程序
+                    string where = Directory.GetCurrentDirectory();
+                    where = where + @"\run.vbs";
+                    System.Diagnostics.Process process;
+                    process = System.Diagnostics.Process.Start(@where);
+                    Application.Current.Shutdown();
+                });
+            }
+        }
 
         private void Event_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
         {
@@ -316,7 +365,7 @@ namespace SS_Tool_Box
             // TODO 完成加载
         }
 
-        #endregion
+#endregion
         #region 事件 | 搜索框
 
         private void Seach_GotFocus(object sender, RoutedEventArgs e)
@@ -398,7 +447,7 @@ namespace SS_Tool_Box
             listSeach.Children.Add(stack);
         }
 
-        #endregion
+#endregion
         #region 事件 | 消息窗
 
         private void msgClose_Click(object sender, RoutedEventArgs e)
@@ -421,7 +470,7 @@ namespace SS_Tool_Box
             });
         }
 
-        #endregion
+#endregion
 
         #region 操作 | 主窗口
 
@@ -491,7 +540,104 @@ namespace SS_Tool_Box
             }
         }
 
-        #endregion
+        /// <summary>
+        /// 检查更新
+        /// </summary>
+        /// <returns></returns>
+        private void getUpdate()
+        {
+            Log.AddLog("update", "正在检查更新……");
+
+            if (File.Exists("UpdateBash.bat"))
+            {
+                File.Delete("UpdateBash.bat");
+                if (File.Exists("run.vbs"))
+                {
+                    File.Delete("run.vbs");
+                }
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    MsgAdd(
+                        new List<string> { "更新完成", "我们成功更新了 Stapx Steve Tool Box！开始体验全新的功能吧！" },
+                        new List<string> { "好" }, null);
+                });
+            }
+
+            if (Options.GetOpt("stopUpd")[0] == "false" || Options.GetOpt("stopUpd")[0] == "ERR")
+            {
+                try
+                {
+                    string updateVersion = "1";
+
+                    int updLink = Options.GetOpt("updLink")[0] == "ERR" ? 0 : int.Parse(Options.GetOpt("updLink")[0]);
+                    string getStr = HttpUitls.Get(linkList[updLink].link);
+                    try
+                    {
+                        JObject obj = JObject.Parse(getStr);
+                        if (obj["Version"].ToString() == updateVersion)
+                        {
+                            back.Add(obj["MainVersion"].ToString());
+                            back.Add(obj["Time"].ToString());
+                            back.Add(obj["Url"].ToString());
+                            back.Add(obj["Logs"].ToString());
+                            Log.AddLog("update", "检查更新完成。");
+                        }
+                        else
+                        {
+                            Log.AddErr("update", "检查更新失败：更新文件版本不符合，更新失败。");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Log.AddErr("update", "检查更新失败：" + e + "\n" + getStr.Replace("\n", "\\n").Replace("\t", "\\t"));
+                    }
+                    if (back.Count != 0 && double.Parse(back[0]) <= verInfo.verNum)
+                    {
+                        Log.AddLog("update", "当前版本为最新。");
+                    }
+                    else
+                    {
+                        Log.AddLog("update", "最新版本为：" + back[0] + " > " + verInfo.verNum);
+                        Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                        {
+                        // 切换到设置界面
+                        Pages.Options opt = new Pages.Options();
+                            Application app = Application.Current;
+                            changePage(opt, app.Resources["options"] + " - " + app.Resources["options_main_title_def"]);
+                        });
+                    }
+                }
+                catch(Exception e)
+                {
+                    Log.AddErr("update", "检查更新失败：" + e);
+                }
+            }
+            else
+            {
+                Log.AddLog("update", "检查更新已关闭。");
+            }
+        }
+
+        public class LinkVer
+        {
+            public string name { get; }
+            public string link { get; }
+            public string type { get; }
+
+            public LinkVer(string v1, string v2, string v3)
+            {
+                type = v1;
+                name = v2;
+                link = v3;
+            }
+        }
+
+        public static List<LinkVer> linkList = new List<LinkVer>() {
+            new LinkVer("Dev", "Github Dev", "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/dev/Latest/LatestLog.txt"),
+            new LinkVer("Release", "Blog Release", "https://stapx.chuhelan.com/api/SS-Tool-Box/getVersion.php?dev=False&type=Desktop"),
+        };
+
+#endregion
         #region 操作 | 消息窗
         public delegate void FunMsgButton();
 
@@ -639,6 +785,6 @@ namespace SS_Tool_Box
             isEnd = true;
         }
 
-        #endregion
+#endregion
     }
 }

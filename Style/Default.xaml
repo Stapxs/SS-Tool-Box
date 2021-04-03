@@ -366,8 +366,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" Height="{TemplateBinding Height}" CornerRadius="{c:Binding Height/2, RelativeSource={RelativeSource Mode=Self}}">
-                        <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" Height="{TemplateBinding Height}" CornerRadius="{c:Binding Height/2, RelativeSource={RelativeSource Mode=Self}}" Name="PART_Background">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" Height="{TemplateBinding Height}" CornerRadius="{c:Binding Height/2, RelativeSource={RelativeSource Mode=Self}}">
+                        <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" Height="{TemplateBinding Height}" CornerRadius="{c:Binding Height/2, RelativeSource={RelativeSource Mode=Self}}" Name="PART_Background">
                             <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </Border>

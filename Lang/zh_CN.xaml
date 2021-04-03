@@ -18,6 +18,11 @@
     <sys:String x:Key="tool_type_color">颜色工具</sys:String>
     <sys:String x:Key="tool_type_other">其他工具</sys:String>
 
+    <sys:String x:Key="tool_null_title">页面不存在</sys:String>
+    <sys:String x:Key="tool_null_opppps">哎呦喂</sys:String>
+    <sys:String x:Key="tool_null_ops_says">好像没有找到这个界面欸 = =</sys:String>
+    <sys:String x:Key="tool_null_other">看看别的</sys:String>
+
     <sys:String x:Key="tool_title_color">调色板</sys:String>
     <sys:String x:Key="tool_title_color_card">色卡</sys:String>
     <sys:String x:Key="tool_title_xiaoshou">Doing</sys:String>
@@ -37,6 +42,13 @@
     <sys:String x:Key="options_menu_theme">外观</sys:String>
     <sys:String x:Key="options_menu_function">功能</sys:String>
     <sys:String x:Key="options_menu_other">杂项</sys:String>
+
+    <sys:String x:Key="options_title_def">检查更新</sys:String>
+    <sys:String x:Key="options_main_title_def">有可用更新</sys:String>
+    <sys:String x:Key="options_update">更新</sys:String>
+    <sys:String x:Key="options_update_start">开始更新</sys:String>
+    <sys:String x:Key="options_update_close">关闭更新</sys:String>
+    <sys:String x:Key="options_update_from">更新源</sys:String>
 
     <sys:String x:Key="options_title_theme">颜色与主题</sys:String>
     <sys:String x:Key="options_darkmode">暗黑模式</sys:String>
