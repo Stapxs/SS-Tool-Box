@@ -1,0 +1,50 @@
+﻿<Page x:Class="SS_Tool_Box.Pages.Tools.GenshinPlay"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SS_Tool_Box.Pages.Tools"
+      mc:Ignorable="d" 
+      d:DesignHeight="490" d:DesignWidth="800"
+      Title="GenshinPlay"
+      Loaded="Page_Loaded"
+      >
+
+    <StackPanel Background="{DynamicResource colorBg}">
+        <Grid Height="40" Margin="0,0,0,15" VerticalAlignment="Top">
+            <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
+            <TextBlock Text="{DynamicResource tool_title_genshin_play}" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="fullButton" Click="Button_Click_Full" ToolTip="大窗口打开" Style="{DynamicResource TextButtonEx}" Height="30" Width="30" Background="{DynamicResource colorCard}" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="15" Height="15" Margin="0">
+                    <Path.Data>
+                        <PathGeometry FillRule="Nonzero" Figures="M0 180V56c0-13.3 10.7-24 24-24h124c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H64v84c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12zM288 44v40c0 6.6 5.4 12 12 12h84v84c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12V56c0-13.3-10.7-24-24-24H300c-6.6 0-12 5.4-12 12zm148 276h-40c-6.6 0-12 5.4-12 12v84h-84c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24V332c0-6.6-5.4-12-12-12zM160 468v-40c0-6.6-5.4-12-12-12H64v-84c0-6.6-5.4-12-12-12H12c-6.6 0-12 5.4-12 12v124c0 13.3 10.7 24 24 24h124c6.6 0 12-5.4 12-12z" />
+                    </Path.Data>
+                </Path>
+            </Button>
+        </Grid>
+        <Grid Height="435">
+            <StackPanel Name="Open" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-30,0,0">
+                <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Height="150" Width="150">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="29" Height="35" Margin="0">
+                            <Path.Data>
+                                <PathGeometry FillRule="Nonzero" Figures="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z" />
+                            </Path.Data>
+                        </Path>
+                        <TextBlock FontSize="14" Text="{DynamicResource tool_genshin_open}" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Height="150" Width="150" Margin="100,0,0,0">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="29" Height="35" Margin="0">
+                            <Path.Data>
+                                <PathGeometry FillRule="Nonzero" Figures="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-153 31V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 160v48c0 4.4-3.6 8-8 8h-56v56c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-56h-56c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h56v-56c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v56h56c4.4 0 8 3.6 8 8z" />
+                            </Path.Data>
+                        </Path>
+                        <TextBlock FontSize="14" Text="{DynamicResource tool_genshin_new}" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</Page>

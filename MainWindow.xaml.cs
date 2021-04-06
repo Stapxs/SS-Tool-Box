@@ -356,7 +356,7 @@ namespace SS_Tool_Box
             }
             catch
             {
-                //Log.Error("鼠标拖拽执行异常！", "崩溃");
+                Log.AddErr("main", "鼠标拖拽执行异常！");
             }
         }
 

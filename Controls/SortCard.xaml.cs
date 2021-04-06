@@ -1,4 +1,5 @@
 ﻿using SS_Tool_Box.Pages;
+using SS_Tool_Box.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,6 +81,22 @@ namespace SS_Tool_Box.Controls
             else
             { 
                 ParentWindow.changePage(new None(), Info[0]);
+            }
+        }
+
+        private void Button_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (pageOpen != null)
+            {
+                NewWindow newWindow = new NewWindow();
+                newWindow.page = pageOpen;
+                newWindow.Show();
+                ParentWindow.changePage(new Full(), Info[0]);
+                ParentWindow.WindowState = WindowState.Minimized;
+            }
+            else
+            {
+                Log.AddErr("card", "大窗口打开失败：page null");
             }
         }
     }

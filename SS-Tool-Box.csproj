@@ -67,6 +67,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsInput, Version=1.0.4.0, Culture=neutral, PublicKeyToken=9b287f7dc5073cad, processorArchitecture=MSIL">
+      <HintPath>packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -83,6 +86,9 @@
       <DependentUpon>SortCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Function\HttpUitls.cs" />
+    <Compile Include="Pages\Full.xaml.cs">
+      <DependentUpon>Full.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\None.xaml.cs">
       <DependentUpon>None.xaml</DependentUpon>
     </Compile>
@@ -91,6 +97,9 @@
     </Compile>
     <Compile Include="Pages\SortPages\OtherTools.xaml.cs">
       <DependentUpon>OtherTools.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Tools\GenshinPlay.xaml.cs">
+      <DependentUpon>GenshinPlay.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tools\KTL.xaml.cs">
       <DependentUpon>KTL.xaml</DependentUpon>
@@ -104,6 +113,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Windows\N2MessageView.xaml.cs">
       <DependentUpon>N2MessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NewWindow.xaml.cs">
+      <DependentUpon>NewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
@@ -133,6 +145,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Pages\Full.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
@@ -182,6 +198,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Tools\GenshinPlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Tools\KTL.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\N2MessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

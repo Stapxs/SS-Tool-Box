@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="125" Width="199">
     <Grid>
-        <Button Click="Button_Click" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0">
+        <Button MouseRightButtonUp="Button_MouseRightButtonUp" Click="Button_Click" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0">
             <Grid Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="188" Height="115">
                 <StackPanel Margin="20,15">
                     <Border x:Name="IconBg" Background="{DynamicResource colorBg}" HorizontalAlignment="Left" BorderBrush="{DynamicResource colorBg}" BorderThickness="0" CornerRadius="999" Margin="0" Width="40" Height="40" VerticalAlignment="Top">

@@ -23,17 +23,24 @@
     <sys:String x:Key="tool_null_ops_says">好像没有找到这个界面欸 = =</sys:String>
     <sys:String x:Key="tool_null_other">看看别的</sys:String>
 
+    <sys:String x:Key="tool_full_title">已在大窗口打开</sys:String>
+
     <sys:String x:Key="tool_title_color">调色板</sys:String>
     <sys:String x:Key="tool_title_color_card">色卡</sys:String>
     <sys:String x:Key="tool_title_xiaoshou">Doing</sys:String>
     <sys:String x:Key="tool_title_n2_tools">N2 Tools</sys:String>
     <sys:String x:Key="tool_title_kill_stl">Kill STL</sys:String>
+    <sys:String x:Key="tool_title_genshin_play">自动奏谱</sys:String>
 
     <sys:String x:Key="tool_sub_color">调色板和格式转换</sys:String>
     <sys:String x:Key="tool_sub_color_card">一些好康的颜色们</sys:String>
     <sys:String x:Key="tool_sub_xiaoshou">晓狩 Doing 客户端</sys:String>
     <sys:String x:Key="tool_sub_n2_tools">N2 Station Tools</sys:String>
     <sys:String x:Key="tool_sub_kill_stl">Do you wanna kill STL?</sys:String>
+    <sys:String x:Key="tool_sub_genshin_play">编辑并在原神中自动奏谱</sys:String>
+
+    <sys:String x:Key="tool_genshin_open">打开铺面</sys:String>
+    <sys:String x:Key="tool_genshin_new">新建铺面</sys:String>
 
     <!-- 设置 -->
     <sys:String x:Key="options">软件设置</sys:String>
