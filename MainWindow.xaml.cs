@@ -164,6 +164,7 @@ namespace SS_Tool_Box
 
             // 检查更新
             Thread thread = new Thread(getUpdate);
+            MainWindow.threads.Push(thread);
             thread.Start();
 
 #endregion
@@ -323,13 +324,16 @@ namespace SS_Tool_Box
             backHome();
         }
 
-        private void backHome()
+        public void backHome(bool showLog = true)
         {
             if (loadDone && MainTitle.Text != "林槐工具箱 - SS Tool Box")
             {
                 // 加载主页
                 Home page = new Home();
-                Log.AddLog("ui", "切换窗口到" + "林槐工具箱 - SS Tool Box" + "（ " + page + " ）");
+                if (showLog)
+                {
+                    Log.AddLog("ui", "切换窗口到" + "林槐工具箱 - SS Tool Box" + "（ " + page + " ）");
+                }
                 page.ParentWindow = this;
                 MainCol.Content = new Frame()
                 {
@@ -452,9 +456,23 @@ namespace SS_Tool_Box
 
         private void msgClose_Click(object sender, RoutedEventArgs e)
         {
+            // 执行取消事件
+            try
+            {
+                if (_clickFun != null && _clickFun[1] != null)
+                {
+                    _clickFun[1]();
+                }
+            }
+            catch (Exception en)
+            {
+                Log.AddErr("sms", "弹窗点击事件无效：" + en.ToString());
+            }
+            isEnd = true;
+
+            // 关闭窗口
             Shaker.IsEnabled = false;
             panMessageBox.Visibility = Visibility.Collapsed;
-
 
             Thread thread = new Thread(runCollButton);
             threads.Push(thread);
@@ -757,7 +775,7 @@ namespace SS_Tool_Box
         {
             try
             {
-                if (_clickFun != null)
+                if (_clickFun != null && _clickFun[0] != null)
                 {
                     _clickFun[0]();
                 }
@@ -773,7 +791,7 @@ namespace SS_Tool_Box
         {
             try
             {
-                if (_clickFun != null && _clickFun.Count == 2)
+                if (_clickFun != null && _clickFun[1] != null)
                 {
                     _clickFun[1]();
                 }
@@ -786,5 +804,19 @@ namespace SS_Tool_Box
         }
 
 #endregion
+
+        public class MyException : ApplicationException
+        {
+            //public MyException(){}
+            public MyException(string message) : base(message) { }
+
+            public override string Message
+            {
+                get
+                {
+                    return base.Message;
+                }
+            }
+        }
     }
 }

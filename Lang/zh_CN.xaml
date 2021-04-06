@@ -39,8 +39,12 @@
     <sys:String x:Key="tool_sub_kill_stl">Do you wanna kill STL?</sys:String>
     <sys:String x:Key="tool_sub_genshin_play">编辑并在原神中自动奏谱</sys:String>
 
-    <sys:String x:Key="tool_genshin_open">打开铺面</sys:String>
-    <sys:String x:Key="tool_genshin_new">新建铺面</sys:String>
+    <sys:String x:Key="tool_genshin_open">打开谱面</sys:String>
+    <sys:String x:Key="tool_genshin_new">新建谱面</sys:String>
+    <sys:String x:Key="tool_genshin_open_file_type">SSTB 谱面（*.tes）</sys:String>
+    <sys:String x:Key="tool_genshin_run">开始执行</sys:String>
+    <sys:String x:Key="tool_genshin_close">关闭项目</sys:String>
+    <sys:String x:Key="tool_genshin_desktop">琴盘</sys:String>
 
     <!-- 设置 -->
     <sys:String x:Key="options">软件设置</sys:String>

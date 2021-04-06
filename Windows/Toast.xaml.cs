@@ -31,6 +31,7 @@ namespace SS_Tool_Box.Windows
             Says.Content = says;
 
             Thread thread = new Thread(runMoveControler);
+            MainWindow.threads.Push(thread);
             thread.Start();
         }
 

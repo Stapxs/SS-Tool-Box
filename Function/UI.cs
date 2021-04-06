@@ -65,6 +65,7 @@ namespace SS_Tool_Box.Function
             {
                 // 运行吐司显示
                 Thread rToast = new Thread(runToast);
+                MainWindow.threads.Push(rToast);
                 rToast.Start();
             }
 

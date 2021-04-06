@@ -137,7 +137,7 @@
                                 <StackPanel>
                                     <Grid Margin="0,15">
                                         <TextBlock x:Name="panLoginTitle" Text="登录 N2 Station" FontSize="15" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                                        <Button Click="Button_Click" x:Name="LoginButton" Style="{Binding Source={StaticResource TextButtonEx}}" Background="#FF4C6EF5" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,20,0" Height="25">
+                                        <Button Click="Button_Click" x:Name="LoginButton" Style="{Binding Source={StaticResource TextButtonEx}}" Background="#FF4C6EF5" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,20,0" Height="25" MinWidth="25">
                                             <Grid>
                                                 <StackPanel Orientation="Horizontal" x:Name="Login" Margin="10,0">
                                                     <Path Fill="#FFF" Stretch="Fill" Width="13" Height="10" Margin="0,2,0,0">

@@ -34,6 +34,9 @@ namespace SS_Tool_Box.Windows
         {
             // 关闭
             MainWindow.main.WindowState = WindowState.Normal;
+            string title = MainWindow.main.MainTitle.Text;
+            MainWindow.main.backHome(false);
+            MainWindow.main.changePage(MainCol.Content, title);
             Close();
         }
 
