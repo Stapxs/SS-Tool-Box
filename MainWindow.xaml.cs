@@ -411,6 +411,8 @@ namespace SS_Tool_Box
             UI.Tools tools = new UI.Tools();
             foreach (UI.Tools.ToolVer info in tools.List)
             {
+                Application app = Application.Current;
+                info.cardInfo[0] = (string)app.Resources["tool_title_" + info.name];
                 if (info.cardInfo[0].IndexOf(box.Text) >= 0 && info.type != "Hidden")
                 {
                     toolist.Add(info);
@@ -807,7 +809,6 @@ namespace SS_Tool_Box
 
         public class MyException : ApplicationException
         {
-            //public MyException(){}
             public MyException(string message) : base(message) { }
 
             public override string Message

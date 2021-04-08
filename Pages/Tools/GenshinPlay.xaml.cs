@@ -78,9 +78,7 @@ namespace SS_Tool_Box.Pages.Tools
 
         public void runExit()
         {
-#if !DEBUG
             MainWindow.main.backHome();
-#endif
         }
 
         #endregion
@@ -143,6 +141,13 @@ namespace SS_Tool_Box.Pages.Tools
             loadedFile = "";
             tes = new TESVer();
             runList = new List<RunKeyVer>();
+        }
+
+        private void play_Click(object sender, RoutedEventArgs e)
+        {
+            Thread thread = new Thread(run);
+            MainWindow.threads.Push(thread);
+            thread.Start();
         }
 
         #endregion
@@ -250,7 +255,6 @@ namespace SS_Tool_Box.Pages.Tools
                         string[] key = info[j];
 
                         RunKeyVer addKey = new RunKeyVer(0, new List<KeyVer>());
-                        addKey.runTime = double.Parse(key[2]) * tes.tesStep;
                         addKey.runKey.Add(findKey(int.Parse(key[0]), key[1]));
                         nowTime += double.Parse(key[2]) * tes.tesStep;
 
@@ -266,13 +270,15 @@ namespace SS_Tool_Box.Pages.Tools
                                 addIndex = -1;
                                 break;
                             }
-                            else if (mainTime > nowTime)
+                            else if(mainTime > nowTime)
                             {
+                                addKey.runTime = nowTime;
                                 break;
                             }
                         }
                         if(addIndex != -1)
                         {
+                            addKey.runTime = nowTime - mainTime;
                             runList.Insert(addIndex, addKey);
                         }
                     }
@@ -280,16 +286,33 @@ namespace SS_Tool_Box.Pages.Tools
                 }
 
                 string runk = "";
+                int index = 0;
                 foreach(RunKeyVer key in runList)
                 {
-                    runk += "\t" + key.runTime + " / ";
+                    index++;
                     foreach(KeyVer x in key.runKey)
                     {
                         runk += x.keyName;
                     }
-                    runk += "\n";
+                    runk += "(" + key.runTime + ")";
+                    if (index == 5)
+                    {
+                        runk += "\n\t";
+                        index = 0;
+                    }
+                    else
+                    {
+                        runk += " -> ";
+                    }
                 }
-                Log.AddLog("genshinp", "解析运行谱完成：\n" + runk.Substring(0, runk.Length - 1));
+                if (index % 5 == 0)
+                {
+                    Log.AddLog("genshinp", "解析运行谱完成：\n\t" + runk.Substring(0, runk.Length - 2));
+                }
+                else
+                {
+                    Log.AddLog("genshinp", "解析运行谱完成：\n\t" + runk.Substring(0, runk.Length - 4));
+                }
 
                 // 切换界面
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -377,7 +400,7 @@ namespace SS_Tool_Box.Pages.Tools
         }
 
         #endregion
-
+        #region 操作 | 执行
 
         private void run()
         {
@@ -390,22 +413,17 @@ namespace SS_Tool_Box.Pages.Tools
             string all = "";
             foreach(RunKeyVer keys in runList)
             {
-                foreach(KeyVer key in keys.runKey)
+                Thread.Sleep((int)keys.runTime);
+                foreach (KeyVer key in keys.runKey)
                 {
                     all += key.keyName;
                     keyIn.Keyboard.KeyPress(key.keyVirtual);
                 }
                 all += ",";
-                Thread.Sleep((int)keys.runTime);
             }
             Log.AddLog("genshinp", "播放结束，输出统计：\n\t" + all.Substring(0, all.Length - 1));
         }
 
-        private void play_Click(object sender, RoutedEventArgs e)
-        {
-            Thread thread = new Thread(run);
-            MainWindow.threads.Push(thread);
-            thread.Start();
-        }
+        #endregion
     }
 }

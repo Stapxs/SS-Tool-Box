@@ -9,6 +9,8 @@
     <sys:String x:Key="main_search">搜索……</sys:String>
     <sys:String x:Key="main_search_title">搜索结果：</sys:String>
     <sys:String x:Key="main_search_none">什么都没找到欸</sys:String>
+    <sys:String x:Key="main_loading">少女祈祷中</sys:String>
+    <sys:String x:Key="main_get_fail">获取内容失败</sys:String>
 
     <!-- 按钮 -->
     <sys:String x:Key="button_open">开启</sys:String>
@@ -30,7 +32,7 @@
     <sys:String x:Key="tool_title_xiaoshou">Doing</sys:String>
     <sys:String x:Key="tool_title_n2_tools">N2 Tools</sys:String>
     <sys:String x:Key="tool_title_kill_stl">Kill STL</sys:String>
-    <sys:String x:Key="tool_title_genshin_play">自动奏谱</sys:String>
+    <sys:String x:Key="tool_title_genshin_play">原神自动奏谱</sys:String>
 
     <sys:String x:Key="tool_sub_color">调色板和格式转换</sys:String>
     <sys:String x:Key="tool_sub_color_card">一些好康的颜色们</sys:String>
@@ -38,6 +40,11 @@
     <sys:String x:Key="tool_sub_n2_tools">N2 Station Tools</sys:String>
     <sys:String x:Key="tool_sub_kill_stl">Do you wanna kill STL?</sys:String>
     <sys:String x:Key="tool_sub_genshin_play">编辑并在原神中自动奏谱</sys:String>
+
+    <sys:String x:Key="tool_color_card_ss">林槐色卡</sys:String>
+    <sys:String x:Key="tool_color_card_suk">Sukazyo 色卡</sys:String>
+    <sys:String x:Key="tool_color_card_click">点击访问</sys:String>
+    <sys:String x:Key="tool_color_card_copy">点击复制颜色代码</sys:String>
 
     <sys:String x:Key="tool_genshin_open">打开谱面</sys:String>
     <sys:String x:Key="tool_genshin_new">新建谱面</sys:String>

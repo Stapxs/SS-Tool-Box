@@ -16,11 +16,11 @@
             <StackPanel>
                 <Grid Height="40" Margin="0,0,0,15">
                     <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
-                    <TextBlock Text="色卡" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBlock Text="{DynamicResource tool_title_color_card}" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 </Grid>
                 <Grid Margin="0,0,0,15">
                     <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0" Height="40" VerticalAlignment="Top"/>
-                    <Expander Header="林槐色卡" pu:ExpanderHelper.HeaderPadding="20,11" pu:ExpanderHelper.HeaderForeground="{DynamicResource colorFont}" VerticalAlignment="Top" BorderThickness="0" Background="Transparent">
+                    <Expander Header="{DynamicResource tool_color_card_ss}" pu:ExpanderHelper.HeaderPadding="20,11" pu:ExpanderHelper.HeaderForeground="{DynamicResource colorFont}" VerticalAlignment="Top" BorderThickness="0" Background="Transparent">
                         <Expander.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.MergedDictionaries>
@@ -39,7 +39,7 @@
                 </Grid>
                 <Grid Margin="0,0,0,15">
                     <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0" Height="40" VerticalAlignment="Top"/>
-                    <Expander x:Name="sukColorsEx" IsExpanded="True" Header="Sukazyo 色卡" pu:ExpanderHelper.HeaderPadding="20,11" pu:ExpanderHelper.HeaderForeground="{DynamicResource colorFont}" VerticalAlignment="Top" BorderThickness="0" Background="Transparent">
+                    <Expander x:Name="sukColorsEx" IsExpanded="True" Header="{DynamicResource tool_color_card_suk}" pu:ExpanderHelper.HeaderPadding="20,11" pu:ExpanderHelper.HeaderForeground="{DynamicResource colorFont}" VerticalAlignment="Top" BorderThickness="0" Background="Transparent">
                         <Expander.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.MergedDictionaries>
@@ -48,7 +48,7 @@
                             </ResourceDictionary>
                         </Expander.Resources>
                         <StackPanel>
-                            <Grid Height="40" Margin="5,15,10,0" ToolTip="点击访问">
+                            <Grid Height="40" Margin="5,15,10,0" ToolTip="{DynamicResource tool_color_card_click}">
                                 <Button Style="{DynamicResource BCardEx}" Click="sukLink_Click" Background="{DynamicResource colorCard}" Margin="0"/>
                                 <TextBlock Text="https://srv.sukazyo.cc/style/color" HorizontalAlignment="Center" FontSize="13" Foreground="{DynamicResource colorFont}" Margin="0,12,0,0" VerticalAlignment="Top"/>
                             </Grid>
@@ -56,7 +56,7 @@
                                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
                                 <StackPanel>
                                     <pu:Loading Height="50" Width="50" LoadingStyle="Ring" IsRunning="True" Background="{DynamicResource colorBg}" Foreground="{DynamicResource colorFont}" Margin="15,15,15,0"/>
-                                    <TextBlock Text="少女祈祷中" FontSize="13" Foreground="{DynamicResource colorFont}" Margin="0,15" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{DynamicResource main_loading}" FontSize="13" Foreground="{DynamicResource colorFont}" Margin="0,15" HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Grid>
                             <Grid x:Name="sukError" Margin="5,15,10,0" Visibility="Collapsed">
@@ -67,7 +67,7 @@
                                             <PathGeometry FillRule="Nonzero" Figures="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" />
                                         </Path.Data>
                                     </Path>
-                                    <TextBlock Text="获取内容失败" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                                    <TextBlock Text="{DynamicResource main_get_fail}" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" Margin="0,15,0,0"/>
                                     <TextBlock x:Name="sukErrorText" FontSize="12" Foreground="{DynamicResource colorFont1}" Margin="0,5,0,15" HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Grid>

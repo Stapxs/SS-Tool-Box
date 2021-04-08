@@ -9,6 +9,8 @@
     <sys:String x:Key="main_search">Search...</sys:String>
     <sys:String x:Key="main_search_title">search result:</sys:String>
     <sys:String x:Key="main_search_none">Nothing was founds</sys:String>
+    <sys:String x:Key="main_loading">Loading</sys:String>
+    <sys:String x:Key="main_get_fail">Fail</sys:String>
 
     <!-- button -->
     <sys:String x:Key="button_open">Open</sys:String>
@@ -28,18 +30,25 @@
     <sys:String x:Key="tool_title_xiaoshou">Doing</sys:String>
     <sys:String x:Key="tool_title_n2_tools">N2 Tools</sys:String>
     <sys:String x:Key="tool_title_kill_stl">Kill STL</sys:String>
+    <sys:String x:Key="tool_title_genshin_play">Genshin Auto Play</sys:String>
 
     <sys:String x:Key="tool_sub_color">Palette and color format conversion</sys:String>
     <sys:String x:Key="tool_sub_color_card">Some pretty colors</sys:String>
     <sys:String x:Key="tool_sub_xiaoshou">Xiaoshou Doing Client</sys:String>
     <sys:String x:Key="tool_sub_n2_tools">N2 Station Tools</sys:String>
     <sys:String x:Key="tool_sub_kill_stl">Do you wanna kill STL?</sys:String>
+    <sys:String x:Key="tool_sub_genshin_play">Edit and Play Music in Genshin</sys:String>
+
+    <sys:String x:Key="tool_color_card_ss">Stapxs's Color table</sys:String>
+    <sys:String x:Key="tool_color_card_suk">Sukazyo's Color table</sys:String>
+    <sys:String x:Key="tool_color_card_click">Click to visit website</sys:String>
+    <sys:String x:Key="tool_color_card_copy">Click to copy color code</sys:String>
     
     <!-- Options -->
     <sys:String x:Key="options">Soft Options</sys:String>
 
     <sys:String x:Key="options_menu_default">General</sys:String>
-    <sys:String x:Key="options_menu_theme">Theme</sys:String>
+    <sys:String x:Key="options_menu_theme">Interface</sys:String>
     <sys:String x:Key="options_menu_function">Function</sys:String>
     <sys:String x:Key="options_menu_other">Other</sys:String>
 
