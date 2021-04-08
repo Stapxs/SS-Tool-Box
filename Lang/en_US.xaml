@@ -67,5 +67,8 @@
     <sys:String x:Key="options_language">Language</sys:String>
     <sys:String x:Key="options_language_choice">Select language file</sys:String>
     <sys:String x:Key="options_language_file_type">XAML(*.xaml)</sys:String>
-    
+
+    <!-- About -->
+    <sys:String x:Key="about_sstb">About SS Tool Box</sys:String>
+
 </ResourceDictionary>

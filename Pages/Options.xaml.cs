@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Panuon.UI.Silver;
 using SS_Tool_Box.Function;
+using SS_Tool_Box.Pages.AboutPages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -223,6 +224,11 @@ namespace SS_Tool_Box.Pages
         {
             ComboBox box = (ComboBox)sender;
             SS_Tool_Box.Options.SetOpt("updLink", box.SelectedIndex.ToString());
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.main.changePage(new About(), Application.Current.Resources["about_sstb"].ToString());
         }
 
         #endregion

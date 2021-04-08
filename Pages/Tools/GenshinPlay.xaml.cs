@@ -4,10 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Security.Principal;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Resources;
 using System.Windows.Threading;
 using WindowsInput;
 using WindowsInput.Native;
@@ -22,6 +25,9 @@ namespace SS_Tool_Box.Pages.Tools
         private string loadedFile = "";
         private TESVer tes = new TESVer();
         List<RunKeyVer> runList = new List<RunKeyVer>();
+        private StreamReader inReader = null;
+
+        private bool isRun = false;
 
         class RunKeyVer
         {
@@ -44,6 +50,7 @@ namespace SS_Tool_Box.Pages.Tools
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            fullButton.Visibility = Visibility.Visible;
             // 判断权限
             WindowsIdentity current = WindowsIdentity.GetCurrent();
             WindowsPrincipal windowsPrincipal = new WindowsPrincipal(current);
@@ -137,17 +144,33 @@ namespace SS_Tool_Box.Pages.Tools
         private void runClose()
         {
             Open.Visibility = Visibility.Visible;
-            mainTab.Visibility = Visibility.Collapsed;
+            songName.Text = "SongName";
+            songName.Visibility = Visibility.Collapsed;
+            inReader = null;
             loadedFile = "";
             tes = new TESVer();
             runList = new List<RunKeyVer>();
         }
 
+        Thread thread = null;
         private void play_Click(object sender, RoutedEventArgs e)
         {
-            Thread thread = new Thread(run);
-            MainWindow.threads.Push(thread);
-            thread.Start();
+            if(!isRun)
+            {
+                goRun.Visibility = Visibility.Collapsed;
+                goStop.Visibility = Visibility.Visible;
+                thread = new Thread(run);
+                MainWindow.threads.Push(thread);
+                thread.Start();
+                isRun = true;
+            }
+            else
+            {
+                goRun.Visibility = Visibility.Visible;
+                goStop.Visibility = Visibility.Collapsed;
+                thread.Abort();
+                isRun = false;
+            }
         }
 
         #endregion
@@ -162,6 +185,9 @@ namespace SS_Tool_Box.Pages.Tools
             public List<List<string[]>> tesKeys { get; set; }   // 键轴列表
         }
 
+        /// <summary>
+        /// 加载谱面
+        /// </summary>
         private void loadTES()
         {
             Log.AddLog("genshinp", "正在加载谱面……");
@@ -176,7 +202,15 @@ namespace SS_Tool_Box.Pages.Tools
                 double nowLineTime = 0;
 
                 string line;
-                StreamReader file = new StreamReader(@loadedFile);
+                StreamReader file = null;
+                if (inReader != null)
+                {
+                    file = inReader;
+                }
+                else
+                {
+                    file = new StreamReader(@loadedFile);
+                }
                 while ((line = file.ReadLine()) != null)
                 {
                     num++;
@@ -272,14 +306,22 @@ namespace SS_Tool_Box.Pages.Tools
                             }
                             else if(mainTime > nowTime)
                             {
-                                addKey.runTime = nowTime;
                                 break;
                             }
                         }
                         if(addIndex != -1)
                         {
                             addKey.runTime = nowTime - mainTime;
-                            runList.Insert(addIndex, addKey);
+                            if(addKey.runTime < 0)
+                            {
+                                addKey.runTime = runList[addIndex - 1].runTime + addKey.runTime;
+                                runList[addIndex - 1].runTime = runList[addIndex - 1].runTime - addKey.runTime;
+                                runList.Insert(addIndex - 1, addKey);
+                            }
+                            else
+                            {
+                                runList.Insert(addIndex, addKey);
+                            }
                         }
                     }
                     nowTime = 0;
@@ -305,6 +347,7 @@ namespace SS_Tool_Box.Pages.Tools
                         runk += " -> ";
                     }
                 }
+
                 if (index % 5 == 0)
                 {
                     Log.AddLog("genshinp", "解析运行谱完成：\n\t" + runk.Substring(0, runk.Length - 2));
@@ -318,7 +361,8 @@ namespace SS_Tool_Box.Pages.Tools
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
                     Open.Visibility = Visibility.Collapsed;
-                    mainTab.Visibility = Visibility.Visible;
+                    songName.Text = tes.tesName;
+                    songName.Visibility = Visibility.Visible;
                 });
             }
             catch(Exception ex)
@@ -380,6 +424,12 @@ namespace SS_Tool_Box.Pages.Tools
             },
         };
 
+        /// <summary>
+        /// 获取键位信息
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="sound"></param>
+        /// <returns></returns>
         private KeyVer findKey(int line, string sound)
         {
             string[] soundList = { "do", "re", "mi", "fa", "so", "la", "ti" };
@@ -411,19 +461,44 @@ namespace SS_Tool_Box.Pages.Tools
 
             Log.AddLog("genshinp", "开始播放铺面，共 " + tes.tesTime + " ms.");
             string all = "";
-            foreach(RunKeyVer keys in runList)
+            foreach (RunKeyVer keys in runList)
             {
-                Thread.Sleep((int)keys.runTime);
-                foreach (KeyVer key in keys.runKey)
+                try
                 {
-                    all += key.keyName;
-                    keyIn.Keyboard.KeyPress(key.keyVirtual);
+                    Thread.Sleep((int)keys.runTime);
+                    foreach (KeyVer key in keys.runKey)
+                    {
+                        all += key.keyName;
+                        keyIn.Keyboard.KeyPress(key.keyVirtual);
+                    }
+                    all += ",";
                 }
-                all += ",";
+                catch(Exception ex)
+                {
+                    Log.AddErr("genshinp", "运行时长错误：" + keys.runKey[0].keyName + " -> " + (int)keys.runTime);
+                    all = "Err    ";
+                }
             }
             Log.AddLog("genshinp", "播放结束，输出统计：\n\t" + all.Substring(0, all.Length - 1));
+
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                goRun.Visibility = Visibility.Visible;
+                goStop.Visibility = Visibility.Collapsed;
+            });
         }
 
         #endregion
+
+        private void showDemo_Click(object sender, RoutedEventArgs e)
+        {
+            Stream src = Application.GetResourceStream(new Uri("Resources/demo.txt", UriKind.Relative)).Stream;
+            inReader = new StreamReader(src, Encoding.UTF8);
+
+            // 读取初始化铺面
+            Thread thread = new Thread(loadTES);
+            MainWindow.threads.Push(thread);
+            thread.Start();
+        }
     }
 }

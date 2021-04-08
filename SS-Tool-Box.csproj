@@ -86,6 +86,9 @@
       <DependentUpon>SortCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Function\HttpUitls.cs" />
+    <Compile Include="Pages\AboutPages\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Full.xaml.cs">
       <DependentUpon>Full.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,7 @@
     <Compile Include="Windows\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
+    <Resource Include="Resources\demo.txt" />
     <Page Include="Controls\ColorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,6 +149,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Pages\AboutPages\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Full.xaml">
       <SubType>Designer</SubType>

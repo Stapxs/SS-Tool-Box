@@ -48,10 +48,14 @@
 
     <sys:String x:Key="tool_genshin_open">打开谱面</sys:String>
     <sys:String x:Key="tool_genshin_new">新建谱面</sys:String>
+    <sys:String x:Key="tool_genshin_load_demo">加载示例谱面</sys:String>
     <sys:String x:Key="tool_genshin_open_file_type">SSTB 谱面（*.tes）</sys:String>
     <sys:String x:Key="tool_genshin_run">开始执行</sys:String>
+    <sys:String x:Key="tool_genshin_stop">停止执行</sys:String>
+    <sys:String x:Key="tool_genshin_control">控制台</sys:String>
     <sys:String x:Key="tool_genshin_close">关闭项目</sys:String>
     <sys:String x:Key="tool_genshin_desktop">琴盘</sys:String>
+    <sys:String x:Key="tool_genshin_opt">选项</sys:String>
 
     <!-- 设置 -->
     <sys:String x:Key="options">软件设置</sys:String>
@@ -76,5 +80,8 @@
     <sys:String x:Key="options_language">语言（language）</sys:String>
     <sys:String x:Key="options_language_choice">选择语言文件</sys:String>
     <sys:String x:Key="options_language_file_type">可扩展应用程序标记(*.xaml)</sys:String>
+    
+    <!-- 关于 -->
+    <sys:String x:Key="about_sstb">关于林槐工具箱</sys:String>
 
 </ResourceDictionary>
