@@ -21,6 +21,19 @@ namespace SS_Tool_Box.Pages.Tools
     {
         private string loadedFile = "";
         private TESVer tes = new TESVer();
+        List<RunKeyVer> runList = new List<RunKeyVer>();
+
+        class RunKeyVer
+        {
+            public RunKeyVer(double time, List<KeyVer> key)
+            {
+                runTime = time;
+                runKey = key;
+            }
+
+            public double runTime { get; set; }
+            public List<KeyVer> runKey { get; set; }
+        }
 
         public GenshinPlay()
         {
@@ -129,6 +142,7 @@ namespace SS_Tool_Box.Pages.Tools
             mainTab.Visibility = Visibility.Collapsed;
             loadedFile = "";
             tes = new TESVer();
+            runList = new List<RunKeyVer>();
         }
 
         #endregion
@@ -138,64 +152,25 @@ namespace SS_Tool_Box.Pages.Tools
         {
             public string tesType { get; set; }                 // 类型
             public string tesName { get; set; }                 // 名字
-            public double tesLong { get; set; }                 // 单位长度
-            public List<List<string[]>> tesKeys { get; set; }       // 键轴列表
+            public double tesStep { get; set; }                 // 单位长度
+            public double tesTime { get; set; }                 // 总长度
+            public List<List<string[]>> tesKeys { get; set; }   // 键轴列表
         }
-
-        class KeyVer
-        {
-            public KeyVer(string name, string sound, VirtualKeyCode key)
-            {
-                keyName = name;
-                keySound = sound;
-                keyVirtual = key;
-            }
-
-            public string keyName { get; }
-            public string keySound { get; }
-            public VirtualKeyCode keyVirtual { get; }
-        }
-        private KeyVer[][] keyList = new KeyVer[][]
-        {
-            new KeyVer[]{ 
-                new KeyVer("Q", "do", VirtualKeyCode.VK_Q),
-                new KeyVer("W", "re", VirtualKeyCode.VK_W),
-                new KeyVer("E", "mi", VirtualKeyCode.VK_E),
-                new KeyVer("R", "fa", VirtualKeyCode.VK_R),
-                new KeyVer("T", "so", VirtualKeyCode.VK_T),
-                new KeyVer("Y", "la", VirtualKeyCode.VK_Y),
-                new KeyVer("U", "ti", VirtualKeyCode.VK_U), 
-            },
-            new KeyVer[]{
-                new KeyVer("A", "do", VirtualKeyCode.VK_A),
-                new KeyVer("S", "re", VirtualKeyCode.VK_S),
-                new KeyVer("D", "mi", VirtualKeyCode.VK_D),
-                new KeyVer("F", "fa", VirtualKeyCode.VK_F),
-                new KeyVer("G", "so", VirtualKeyCode.VK_G),
-                new KeyVer("H", "la", VirtualKeyCode.VK_H),
-                new KeyVer("J", "ti", VirtualKeyCode.VK_J),
-            },
-            new KeyVer[]{
-                new KeyVer("Z", "do", VirtualKeyCode.VK_Z),
-                new KeyVer("X", "re", VirtualKeyCode.VK_X),
-                new KeyVer("C", "mi", VirtualKeyCode.VK_C),
-                new KeyVer("V", "fa", VirtualKeyCode.VK_V),
-                new KeyVer("B", "so", VirtualKeyCode.VK_B),
-                new KeyVer("N", "la", VirtualKeyCode.VK_N),
-                new KeyVer("M", "ti", VirtualKeyCode.VK_M),
-            },
-        };
 
         private void loadTES()
         {
+            Log.AddLog("genshinp", "正在加载谱面……");
             try
             {
                 tes.tesKeys = new List<List<string[]>>();
+                tes.tesTime = 0;
                 // 逐行读取文件
-                string line;
                 int num = 0;
                 int lineNum = 0;
                 List<string[]> nowLine = new List<string[]>();
+                double nowLineTime = 0;
+
+                string line;
                 StreamReader file = new StreamReader(@loadedFile);
                 while ((line = file.ReadLine()) != null)
                 {
@@ -209,7 +184,7 @@ namespace SS_Tool_Box.Pages.Tools
                     {
                         // 铺面参数
                         tes.tesType = line.Split('-')[0].Substring(1);
-                        tes.tesLong = long.Parse(line.Split('-')[1].Substring(0, line.Split('-')[1].Length - 1));
+                        tes.tesStep = long.Parse(line.Split('-')[1].Substring(0, line.Split('-')[1].Length - 1));
                     }
                     if (num > 3)
                     {
@@ -231,10 +206,16 @@ namespace SS_Tool_Box.Pages.Tools
                             {
                                 throw new MainWindow.MyException("键轴错误，行数不正确。");
                             }
+                            if(nowLineTime > tes.tesTime)
+                            {
+                                tes.tesTime = nowLineTime;
+                            }
+                            nowLineTime = 0;
                         }
                         else
                         {
                             string[] key = line.Split('-');
+                            nowLineTime += double.Parse(key[2]) * tes.tesStep;
                             nowLine.Add(key);
                         }
 
@@ -242,7 +223,73 @@ namespace SS_Tool_Box.Pages.Tools
                 }
                 // 保存键轴
                 tes.tesKeys.Add(nowLine);
+                if (nowLineTime > tes.tesTime)
+                {
+                    tes.tesTime = nowLineTime;
+                }
                 file.Close();
+
+                Log.AddLog("genshinp", "加载谱面完成：lines-" + tes.tesKeys.Count +"，长度：" + tes.tesTime + " ms");
+                Log.AddLog("genshinp", "正在解析为运行谱……");
+
+                foreach(string[] key in tes.tesKeys[0])
+                {
+                    RunKeyVer addKey = new RunKeyVer(0, new List<KeyVer>());
+                    addKey.runTime = double.Parse(key[2]) * tes.tesStep;
+                    addKey.runKey.Add(findKey(int.Parse(key[0]), key[1]));
+                    runList.Add(addKey);
+                }
+
+                for(int i = 1;i<tes.tesKeys.Count; i++)
+                {
+
+                    List<string[]> info = tes.tesKeys[i];
+                    double nowTime = 0;
+                    for(int j=0; j<info.Count; j++)
+                    {
+                        string[] key = info[j];
+
+                        RunKeyVer addKey = new RunKeyVer(0, new List<KeyVer>());
+                        addKey.runTime = double.Parse(key[2]) * tes.tesStep;
+                        addKey.runKey.Add(findKey(int.Parse(key[0]), key[1]));
+                        nowTime += double.Parse(key[2]) * tes.tesStep;
+
+                        int addIndex = 0;
+                        double mainTime = 0;
+                        foreach(RunKeyVer allKey in runList)
+                        {
+                            addIndex++;
+                            mainTime += allKey.runTime;
+                            if(mainTime == nowTime)
+                            {
+                                runList[addIndex - 1].runKey.Add(findKey(int.Parse(key[0]), key[1]));
+                                addIndex = -1;
+                                break;
+                            }
+                            else if (mainTime > nowTime)
+                            {
+                                break;
+                            }
+                        }
+                        if(addIndex != -1)
+                        {
+                            runList.Insert(addIndex, addKey);
+                        }
+                    }
+                    nowTime = 0;
+                }
+
+                string runk = "";
+                foreach(RunKeyVer key in runList)
+                {
+                    runk += "\t" + key.runTime + " / ";
+                    foreach(KeyVer x in key.runKey)
+                    {
+                        runk += x.keyName;
+                    }
+                    runk += "\n";
+                }
+                Log.AddLog("genshinp", "解析运行谱完成：\n" + runk.Substring(0, runk.Length - 1));
 
                 // 切换界面
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -268,14 +315,97 @@ namespace SS_Tool_Box.Pages.Tools
             }
         }
 
+        class KeyVer
+        {
+            public KeyVer(string name, VirtualKeyCode key)
+            {
+                keyName = name;
+                keyVirtual = key;
+            }
+
+            public string keyName { get; }
+            public VirtualKeyCode keyVirtual { get; }
+        }
+        private KeyVer[][] keyList = new KeyVer[][]
+        {
+            new KeyVer[]{
+                new KeyVer("Q", VirtualKeyCode.VK_Q),
+                new KeyVer("W", VirtualKeyCode.VK_W),
+                new KeyVer("E", VirtualKeyCode.VK_E),
+                new KeyVer("R", VirtualKeyCode.VK_R),
+                new KeyVer("T", VirtualKeyCode.VK_T),
+                new KeyVer("Y", VirtualKeyCode.VK_Y),
+                new KeyVer("U", VirtualKeyCode.VK_U),
+            },
+            new KeyVer[]{
+                new KeyVer("A", VirtualKeyCode.VK_A),
+                new KeyVer("S", VirtualKeyCode.VK_S),
+                new KeyVer("D", VirtualKeyCode.VK_D),
+                new KeyVer("F", VirtualKeyCode.VK_F),
+                new KeyVer("G", VirtualKeyCode.VK_G),
+                new KeyVer("H", VirtualKeyCode.VK_H),
+                new KeyVer("J", VirtualKeyCode.VK_J),
+            },
+            new KeyVer[]{
+                new KeyVer("Z", VirtualKeyCode.VK_Z),
+                new KeyVer("X", VirtualKeyCode.VK_X),
+                new KeyVer("C", VirtualKeyCode.VK_C),
+                new KeyVer("V", VirtualKeyCode.VK_V),
+                new KeyVer("B", VirtualKeyCode.VK_B),
+                new KeyVer("N", VirtualKeyCode.VK_N),
+                new KeyVer("M", VirtualKeyCode.VK_M),
+            },
+        };
+
+        private KeyVer findKey(int line, string sound)
+        {
+            string[] soundList = { "do", "re", "mi", "fa", "so", "la", "ti" };
+            int soundnum = 0;
+            foreach(string soundname in soundList)
+            {
+                if(soundname == sound)
+                {
+                    break;
+                }
+                soundnum++;
+            }
+            if(soundnum > 6)
+            {
+                throw new MainWindow.MyException("谱面错误，音符不存在。");
+            }
+            return keyList[line - 1][soundnum];
+        }
+
         #endregion
 
 
         private void run()
         {
+            Thread.Sleep(2000);
+
             InputSimulator keyIn = new InputSimulator();
-            keyIn.Keyboard.KeyPress(VirtualKeyCode.VK_E);
+            // keyIn.Keyboard.KeyPress(VirtualKeyCode.VK_E);
+
+            Log.AddLog("genshinp", "开始播放铺面，共 " + tes.tesTime + " ms.");
+            string all = "";
+            foreach(RunKeyVer keys in runList)
+            {
+                foreach(KeyVer key in keys.runKey)
+                {
+                    all += key.keyName;
+                    keyIn.Keyboard.KeyPress(key.keyVirtual);
+                }
+                all += ",";
+                Thread.Sleep((int)keys.runTime);
+            }
+            Log.AddLog("genshinp", "播放结束，输出统计：\n\t" + all.Substring(0, all.Length - 1));
         }
 
+        private void play_Click(object sender, RoutedEventArgs e)
+        {
+            Thread thread = new Thread(run);
+            MainWindow.threads.Push(thread);
+            thread.Start();
+        }
     }
 }
