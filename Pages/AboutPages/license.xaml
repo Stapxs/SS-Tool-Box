@@ -1,0 +1,41 @@
+﻿<Page x:Class="SS_Tool_Box.Pages.AboutPages.license"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SS_Tool_Box.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="490" d:DesignWidth="633"
+      xmlns:s="clr-namespace:SS_Tool_Box.Controls.Custom"
+      Title="license">
+
+    <Grid Background="{DynamicResource colorBg}">
+        <s:ScrollViewer Padding="0,0,10,0" IsInertiaEnabled="{DynamicResource IsInertiaEnabled}" PanningMode="Both">
+            <StackPanel>
+                <Grid Margin="0,0,0,15">
+                    <Button Foreground="Transparent" Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+                    <StackPanel Margin="15">
+                        <Grid>
+                            <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="15" Height="15" HorizontalAlignment="Left">
+                                <Path.Data>
+                                    <PathGeometry FillRule="Nonzero" Figures="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z" />
+                                </Path.Data>
+                            </Path>
+                            <TextBlock Text="{DynamicResource about_LICENSE}" FontSize="13" Foreground="{DynamicResource colorFont}" Margin="25,0,0,0" VerticalAlignment="Center"/>
+                        </Grid>
+                        <TextBlock Margin="25,5,0,0" FontSize="11" Foreground="{DynamicResource colorFont1}" Text="软件许可协议是一种具有法律性质的合同或指导，目的在规范受著作权保护的软件的使用或散布行为。" TextWrapping="Wrap"/>
+                        <TextBlock Margin="25,0,0,0" FontSize="11" Foreground="{DynamicResource colorFont1}" Text="这里是本程序使用到的库的相关软件许可声明。" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+                
+                <local:LicenseCard Title="CalcBinding" Auther="Alexander Zinchenko" License="Apache-2.0 License" URL="https://github.com/Alex141/CalcBinding" Margin="0,0,0,15"/>
+                <local:LicenseCard Title="HandyControl / ScrollViewer.cs" Auther="NaBian" License="MIT License" URL="https://github.com/NaBian/HandyControl" Margin="0,0,0,15"/>
+                <local:LicenseCard Title="InputSimulator" Auther="Michael Noonan" License="MIT License" URL="https://github.com/michaelnoonan/inputsimulator" Margin="0,0,0,15"/>
+                <local:LicenseCard Title="Newtonsoft.Json" Auther="James Newton-King" License="MIT License" URL="https://github.com/JamesNK/Newtonsoft.Json" Margin="0,0,0,15"/>
+                <local:LicenseCard Title="Panuon.UI.Silver" Auther="Zeoun" License="MIT License" URL="https://github.com/Panuon/PanuonUI.Silver" Margin="0,0,0,15"/>
+                <local:LicenseCard Title="WebSocketSharp" Auther="sta" License="MIT License" URL="https://github.com/sta/websocket-sharp" Margin="0,0,0,15"/>
+            </StackPanel>
+        </s:ScrollViewer>
+    </Grid>
+
+</Page>

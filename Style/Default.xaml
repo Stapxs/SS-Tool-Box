@@ -5,7 +5,7 @@
             ///////////////////////////////
             颜色样式
             ///////////////////////////////
-        -->
+    -->
 
     <!-- 默认初始化暗黑主题色 -->
     <!-- 画笔 -->
@@ -27,11 +27,54 @@
             ///////////////////////////////
             全局样式
             ///////////////////////////////
-        -->
+    -->
 
     <!-- 滚动控件 -->
-    <Style TargetType="{x:Type ScrollViewer}">
+    <Style TargetType="ScrollViewer">
         <Setter Property="PanningMode" Value="Both"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer">
+                    <Border CornerRadius="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ScrollContentPresenter x:Name="ScrollContentPresenter"
+                                                  Cursor="{TemplateBinding Cursor}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+                            <Rectangle Grid.Column="1" Grid.Row="1" Fill="Transparent"/>
+
+                            <ScrollBar x:Name="VerticalScrollBar" Width="8"
+                                     IsTabStop="False"
+                                     Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                     Grid.Column="1" Grid.Row="0" Orientation="Vertical"
+                                     ViewportSize="{TemplateBinding ViewportHeight}"
+                                     Maximum="{TemplateBinding ScrollableHeight}"
+                                     Minimum="0"
+                                     Value="{TemplateBinding VerticalOffset}"/>
+
+                            <ScrollBar x:Name="HorizontalScrollBar" Height="8"
+                                     IsTabStop="False"
+                                     Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                     Grid.Column="0" Grid.Row="1" Orientation="Horizontal"
+                                     ViewportSize="{TemplateBinding ViewportWidth}"
+                                     Maximum="{TemplateBinding ScrollableWidth}"
+                                     Minimum="0"
+                                     Value="{TemplateBinding HorizontalOffset}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- 滚动条 -->
@@ -80,12 +123,12 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type ScrollBar}">
-        <Setter Property="Background" Value="AliceBlue"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
         <!--滚动条宽度-->
         <Setter Property="Width" Value="8"/>
-        <Setter Property="MinWidth" Value="6"/>
+        <Setter Property="MinWidth" Value="8"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
@@ -115,13 +158,13 @@
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto"/>
                 <Setter Property="MinWidth" Value="0"/>
-                <Setter Property="Height" Value="6"/>
-                <Setter Property="MinHeight" Value="6"/>
-                <Setter Property="Background" Value="AliceBlue"/>
+                <Setter Property="Height" Value="8"/>
+                <Setter Property="MinHeight" Value="8"/>
+                <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="Bg" Background="Red" SnapsToDevicePixels="true">
+                            <Grid x:Name="Bg" Background="{DynamicResource colorBg}" SnapsToDevicePixels="true">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
@@ -226,7 +269,7 @@
             ///////////////////////////////
             控件样式
             ///////////////////////////////
-        -->
+    -->
 
     <!-- 普通圆形图标按钮 -->
     <Style x:Key="IconButton" TargetType="{x:Type Button}">

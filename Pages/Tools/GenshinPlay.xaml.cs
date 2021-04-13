@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using SS_Tool_Box.Function;
 using SS_Tool_Box.Windows;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,10 @@ namespace SS_Tool_Box.Pages.Tools
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            mainScroll.Width = scrollGrid.Width;
+#if DEBUG
+            Open.Visibility = Visibility.Collapsed;
+#endif
             fullButton.Visibility = Visibility.Visible;
             // 判断权限
             WindowsIdentity current = WindowsIdentity.GetCurrent();
@@ -171,6 +176,17 @@ namespace SS_Tool_Box.Pages.Tools
                 thread.Abort();
                 isRun = false;
             }
+        }
+
+        private void showDemo_Click(object sender, RoutedEventArgs e)
+        {
+            Stream src = Application.GetResourceStream(new Uri("Resources/demo.txt", UriKind.Relative)).Stream;
+            inReader = new StreamReader(src, Encoding.UTF8);
+
+            // 读取初始化铺面
+            Thread thread = new Thread(loadTES);
+            MainWindow.threads.Push(thread);
+            thread.Start();
         }
 
         #endregion
@@ -454,51 +470,49 @@ namespace SS_Tool_Box.Pages.Tools
 
         private void run()
         {
-            Thread.Sleep(2000);
-
-            InputSimulator keyIn = new InputSimulator();
-            // keyIn.Keyboard.KeyPress(VirtualKeyCode.VK_E);
-
-            Log.AddLog("genshinp", "开始播放铺面，共 " + tes.tesTime + " ms.");
-            string all = "";
-            foreach (RunKeyVer keys in runList)
+            try
             {
-                try
+                Thread.Sleep(2000);
+
+                InputSimulator keyIn = new InputSimulator();
+                // keyIn.Keyboard.KeyPress(VirtualKeyCode.VK_E);
+
+                Log.AddLog("genshinp", "开始播放铺面，共 " + tes.tesTime + " ms.");
+                string all = "";
+                foreach (RunKeyVer keys in runList)
                 {
-                    Thread.Sleep((int)keys.runTime);
-                    foreach (KeyVer key in keys.runKey)
+                    try
                     {
-                        all += key.keyName;
-                        keyIn.Keyboard.KeyPress(key.keyVirtual);
+                        Thread.Sleep((int)keys.runTime);
+                        foreach (KeyVer key in keys.runKey)
+                        {
+                            all += key.keyName;
+                            keyIn.Keyboard.KeyPress(key.keyVirtual);
+                        }
+                        all += ",";
                     }
-                    all += ",";
+                    catch (Exception ex)
+                    {
+                        Log.AddErr("genshinp", "运行时长错误：" + keys.runKey[0].keyName + " -> " + (int)keys.runTime);
+                        all = "Err    ";
+                    }
                 }
-                catch(Exception ex)
-                {
-                    Log.AddErr("genshinp", "运行时长错误：" + keys.runKey[0].keyName + " -> " + (int)keys.runTime);
-                    all = "Err    ";
-                }
+                Log.AddLog("genshinp", "播放结束，输出统计：\n\t" + all.Substring(0, all.Length - 1));
             }
-            Log.AddLog("genshinp", "播放结束，输出统计：\n\t" + all.Substring(0, all.Length - 1));
+            catch(Exception ex)
+            {
+                Log.AddErr("genshinp", "运行统计错误：" + ex);
+            }
 
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
                 goRun.Visibility = Visibility.Visible;
                 goStop.Visibility = Visibility.Collapsed;
             });
+
+            UI.ToastHelper.Show("播放完成");
         }
 
         #endregion
-
-        private void showDemo_Click(object sender, RoutedEventArgs e)
-        {
-            Stream src = Application.GetResourceStream(new Uri("Resources/demo.txt", UriKind.Relative)).Stream;
-            inReader = new StreamReader(src, Encoding.UTF8);
-
-            // 读取初始化铺面
-            Thread thread = new Thread(loadTES);
-            MainWindow.threads.Push(thread);
-            thread.Start();
-        }
     }
 }

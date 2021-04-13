@@ -159,6 +159,13 @@ namespace SS_Tool_Box
             {
                 Content = others
             };
+
+            // 初始化 Home 按钮
+            if(Options.GetOpt("alwaysShowHome")[0] == "true")
+            {
+                Home.Visibility = Visibility.Visible;
+                Title.Margin = new Thickness(10, 0, 0, 0);
+            }
 #endregion
             #region 5 - 其他操作
 
@@ -209,7 +216,7 @@ namespace SS_Tool_Box
                 // 出栈
                 pageStack.Pop();
                 // 判断是否显示回到主页按钮
-                if (pageStack.Count > 1)
+                if (pageStack.Count > 1 || Options.GetOpt("alwaysShowHome")[0] == "true")
                 {
                     Home.Visibility = Visibility.Visible;
                 }
@@ -517,7 +524,7 @@ namespace SS_Tool_Box
                 };
                 MainTitle.Text = pageTitle;
                 // 判断是否显示回到主页按钮和刷新按钮
-                if (pageStack.Count > 1)
+                if (pageStack.Count > 1 || Options.GetOpt("alwaysShowHome")[0] == "true")
                 {
                     Home.Visibility = Visibility.Visible;
                     // Flash.Visibility = Visibility.Visible;
@@ -610,6 +617,7 @@ namespace SS_Tool_Box
                     catch (Exception e)
                     {
                         Log.AddErr("update", "检查更新失败：" + e + "\n" + getStr.Replace("\n", "\\n").Replace("\t", "\\t"));
+                        UI.ToastHelper.Show("检查更新失败");
                     }
                     if (back.Count != 0 && double.Parse(back[0]) <= verInfo.verNum)
                     {
@@ -630,6 +638,7 @@ namespace SS_Tool_Box
                 catch(Exception e)
                 {
                     Log.AddErr("update", "检查更新失败：" + e);
+                    UI.ToastHelper.Show("检查更新失败");
                 }
             }
             else

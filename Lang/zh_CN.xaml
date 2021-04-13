@@ -80,8 +80,12 @@
     <sys:String x:Key="options_language">语言（language）</sys:String>
     <sys:String x:Key="options_language_choice">选择语言文件</sys:String>
     <sys:String x:Key="options_language_file_type">可扩展应用程序标记(*.xaml)</sys:String>
+    <sys:String x:Key="options_title_control">强迫症选项</sys:String>
+    <sys:String x:Key="options_scroll">禁用非线性滚动</sys:String>
+    <sys:String x:Key="options_home">始终显示主页按钮</sys:String>
     
     <!-- 关于 -->
     <sys:String x:Key="about_sstb">关于林槐工具箱</sys:String>
+    <sys:String x:Key="about_LICENSE">许可版权声明</sys:String>
 
 </ResourceDictionary>

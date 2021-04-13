@@ -5,10 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SS_Tool_Box.Pages.AboutPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="490" d:DesignWidth="633"
       Title="About">
 
-    <Grid Background="{DynamicResource colorBg}">
-        
-    </Grid>
+    <StackPanel Background="{DynamicResource colorBg}">
+        <Grid Height="258" Margin="0,0,0,15">
+            <Grid HorizontalAlignment="Left" Width="190">
+                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+            </Grid>
+        </Grid>
+        <Grid>
+            <Button Click="Button_Click" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0" Height="40"/>
+            <TextBlock Text="{DynamicResource about_LICENSE}" FontSize="13" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="5" Height="7" HorizontalAlignment="right" Margin="0,0,15,0">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
+                </Path.Data>
+            </Path>
+        </Grid>
+    </StackPanel>
 </Page>

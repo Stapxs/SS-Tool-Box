@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style\Default.xaml"/>
                 <ResourceDictionary Source="Lang\zh_CN.xaml"/>
+                <ResourceDictionary Source="Style\UIOptions.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

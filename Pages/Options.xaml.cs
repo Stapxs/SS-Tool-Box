@@ -55,8 +55,10 @@ namespace SS_Tool_Box.Pages
 
             #endregion
             #region 初始化外观
-            darkButton.IsChecked = SS_Tool_Box.Options.GetOpt("darkMode")[0] == "false"?false:true;
-            autoDarkButton.IsChecked = SS_Tool_Box.Options.GetOpt("autoDarkMode")[0] == "false"?false:true;
+            darkButton.IsChecked = SS_Tool_Box.Options.GetOpt("darkMode")[0] == "true" ? true : false;
+            autoDarkButton.IsChecked = SS_Tool_Box.Options.GetOpt("autoDarkMode")[0] == "true" ? true : false;
+            rollButton.IsChecked = SS_Tool_Box.Options.GetOpt("nonLinearScrolling")[0] == "true" ? true : false;
+            homeButton.IsChecked = SS_Tool_Box.Options.GetOpt("alwaysShowHome")[0] == "true" ? true : false;
 
             LanguageBox.ItemsSource = UI.Localization.indexLocals;
             LanguageBox.DisplayMemberPath = "name";
@@ -144,6 +146,36 @@ namespace SS_Tool_Box.Pages
             {
                 darkButton.IsEnabled = true;
             }
+        }
+
+        private void rollButton_Checked(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Resources.Remove("IsInertiaEnabled");
+            Application.Current.Resources.Add("IsInertiaEnabled", false);
+
+            SS_Tool_Box.Options.SetOpt("nonLinearScrolling", "true");
+        }
+
+        private void rollButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Resources.Remove("IsInertiaEnabled");
+            Application.Current.Resources.Add("IsInertiaEnabled", true);
+
+            SS_Tool_Box.Options.SetOpt("nonLinearScrolling", "false");
+        }
+
+        private void homeButton_Checked(object sender, RoutedEventArgs e)
+        {
+            MainWindow.main.Home.Visibility = Visibility.Visible;
+            MainWindow.main.Title.Margin = new Thickness(10, 0, 0, 0);
+            SS_Tool_Box.Options.SetOpt("alwaysShowHome", "true");
+        }
+
+        private void homeButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            MainWindow.main.Home.Visibility = Visibility.Collapsed;
+            MainWindow.main.Title.Margin = new Thickness(0, 0, 0, 0);
+            SS_Tool_Box.Options.SetOpt("alwaysShowHome", "false");
         }
 
         #endregion

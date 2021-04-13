@@ -76,6 +76,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\LicenseCard.xaml.cs">
+      <DependentUpon>LicenseCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\N2RoomCard.xaml.cs">
       <DependentUpon>N2RoomCard.xaml</DependentUpon>
     </Compile>
@@ -85,9 +88,15 @@
     <Compile Include="Controls\SortCard.xaml.cs">
       <DependentUpon>SortCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Function\AnimationHelper.cs" />
+    <Compile Include="Function\Ext\StringExtension.cs" />
     <Compile Include="Function\HttpUitls.cs" />
+    <Compile Include="Controls\Custom\ScrollViewer.cs" />
     <Compile Include="Pages\AboutPages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AboutPages\license.xaml.cs">
+      <DependentUpon>license.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Full.xaml.cs">
       <DependentUpon>Full.xaml</DependentUpon>
@@ -128,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\LicenseCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\N2RoomCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +164,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Pages\AboutPages\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AboutPages\license.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -226,6 +243,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Style\UIOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\N2MessageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -272,6 +293,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">
     <ItemGroup>

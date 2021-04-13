@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace SS_Tool_Box.Pages.AboutPages
 {
     /// <summary>
-    /// About.xaml 的交互逻辑
+    /// license.xaml 的交互逻辑
     /// </summary>
-    public partial class About : Page
+    public partial class license : Page
     {
-        public About()
+        public license()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.changePage(new license(), "许可版权声明");
         }
     }
 }

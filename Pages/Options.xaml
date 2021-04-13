@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
-      xmlns:local="clr-namespace:SS_Tool_Box.Pages"
+      xmlns:s="clr-namespace:SS_Tool_Box.Controls.Custom"
       mc:Ignorable="d" d:DesignWidth="633"
       Title="Options" Height="488.113">
     <Page.Resources>
@@ -139,7 +139,7 @@
                                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
                                 <StackPanel>
                                     <TextBlock Text="{DynamicResource options_title_def}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
-                                    <Grid Margin="20,0,20,20">
+                                    <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_update_close}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                         <CheckBox x:Name="checkupdButton" Unchecked="checkupdButton_Unchecked" Checked="checkupdButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
                                             <CheckBox.Resources>
@@ -169,7 +169,7 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="{DynamicResource options_menu_theme}">
-                    <ScrollViewer Height="435" Padding="0,0,7,0" Margin="0,15,0,0" Width="629">
+                    <s:ScrollViewer PanningMode="Both" IsInertiaEnabled="{DynamicResource IsInertiaEnabled}" Height="435" Padding="0,0,7,0" Margin="0,15,0,0" Width="629">
                         <StackPanel>
                             <Grid Margin="0">
                                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
@@ -223,8 +223,26 @@
                             <Grid Margin="0,15,0,0">
                                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
                                 <StackPanel>
+                                    <TextBlock Text="{DynamicResource options_title_localation}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="{DynamicResource options_language}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="LanguageBox" FontSize="11" SelectionChanged="LanguageBox_SelectionChanged" pu:ComboBoxHelper.HoverForeground="{DynamicResource colorFont}" pu:ComboBoxHelper.HoverBackground="{DynamicResource colorCard2}" Foreground="{DynamicResource colorFont}" pu:ComboBoxHelper.ItemHeight="25" pu:ComboBoxHelper.CornerRadius="3" BorderThickness="0" Background="{DynamicResource colorCard1}" Margin="0" HorizontalAlignment="Right" Width="140" Height="25">
+                                            <ComboBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </ComboBox.Resources>
+                                        </ComboBox>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,15,0,0">
+                                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+                                <StackPanel>
                                     <TextBlock Text="{DynamicResource options_title_theme}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
-                                    <Grid Margin="20,0,20,20">
+                                    <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_darkmode}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                         <CheckBox x:Name="darkButton" Unchecked="darkButton_Unchecked" Checked="darkButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
                                             <CheckBox.Resources>
@@ -236,7 +254,7 @@
                                             </CheckBox.Resources>
                                         </CheckBox>
                                     </Grid>
-                                    <Grid Margin="20,0,20,20">
+                                    <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_auto_darkmode}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                         <CheckBox x:Name="autoDarkButton" Unchecked="autoDarkButton_Unchecked" Checked="autoDarkButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
                                             <CheckBox.Resources>
@@ -303,23 +321,35 @@
                             <Grid Margin="0,15,0,0">
                                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
                                 <StackPanel>
-                                    <TextBlock Text="{DynamicResource options_title_localation}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
+                                    <TextBlock Text="{DynamicResource options_title_control}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
                                     <Grid Margin="20,0,20,15">
-                                        <TextBlock Text="{DynamicResource options_language}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                        <ComboBox x:Name="LanguageBox" FontSize="11" SelectionChanged="LanguageBox_SelectionChanged" pu:ComboBoxHelper.HoverForeground="{DynamicResource colorFont}" pu:ComboBoxHelper.HoverBackground="{DynamicResource colorCard2}" Foreground="{DynamicResource colorFont}" pu:ComboBoxHelper.ItemHeight="25" pu:ComboBoxHelper.CornerRadius="3" BorderThickness="0" Background="{DynamicResource colorCard1}" Margin="0" HorizontalAlignment="Right" Width="140" Height="25">
-                                            <ComboBox.Resources>
+                                        <TextBlock Text="{DynamicResource options_scroll}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <CheckBox x:Name="rollButton" Unchecked="rollButton_Unchecked" Checked="rollButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                            <CheckBox.Resources>
                                                 <ResourceDictionary>
                                                     <ResourceDictionary.MergedDictionaries>
                                                         <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
                                                     </ResourceDictionary.MergedDictionaries>
                                                 </ResourceDictionary>
-                                            </ComboBox.Resources>
-                                        </ComboBox>
+                                            </CheckBox.Resources>
+                                        </CheckBox>
+                                    </Grid>
+                                    <Grid Margin="20,0,20,15">
+                                        <TextBlock Text="{DynamicResource options_home}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <CheckBox x:Name="homeButton" Checked="homeButton_Checked" Unchecked="homeButton_Unchecked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="#FF4C6EF5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                            <CheckBox.Resources>
+                                                <ResourceDictionary>
+                                                    <ResourceDictionary.MergedDictionaries>
+                                                        <ResourceDictionary Source="pack://application:,,,/Panuon.UI.Silver;component/Control.xaml" />
+                                                    </ResourceDictionary.MergedDictionaries>
+                                                </ResourceDictionary>
+                                            </CheckBox.Resources>
+                                        </CheckBox>
                                     </Grid>
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
-                    </ScrollViewer>
+                    </s:ScrollViewer>
                 </TabItem>
                 <TabItem Header="{DynamicResource options_menu_function}"/>
                 <TabItem Header="{DynamicResource options_menu_other}"/>

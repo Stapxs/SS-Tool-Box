@@ -137,7 +137,7 @@
                 </Button>
             </Grid>
         </Grid>
-        <Grid Height="448" Name="Open" Background="{DynamicResource colorBg}" Margin="0,-15,0,0">
+        <Grid Height="448" Visibility="Collapsed" Name="Open" Background="{DynamicResource colorBg}" Margin="0,-15,0,0">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-30,0,0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0">
                     <Button x:Name="OpenPane" Click="OpenPane_Click" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Height="150" Width="150">
@@ -165,8 +165,13 @@
             </StackPanel>
         </Grid>
         <Grid Height="435">
-            <Grid Margin="0,240,0,0">
-                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+            <Grid x:Name="scrollGrid" Height="195" VerticalAlignment="Bottom">
+                <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0,0,15,15"/>
+                <ScrollViewer x:Name="mainScroll" Height="195" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel Margin="0,0,10,0">
+                        <Grid Height="300" Width="700"></Grid>
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </Grid>
     </StackPanel>
