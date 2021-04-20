@@ -213,7 +213,7 @@ namespace SS_Tool_Box.Pages
                 }
                 if (back.IndexOf("ERR") >= 0)
                 {
-                    UI.ToastHelper.Show(back);
+                    UI.ToastHelper.Add(back);
                 }
             }
         }
@@ -261,6 +261,34 @@ namespace SS_Tool_Box.Pages
         private void About_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.main.changePage(new About(), Application.Current.Resources["about_sstb"].ToString());
+        }
+
+        #endregion
+        #region 事件 | 其他
+
+        private void ShowTost_Click(object sender, RoutedEventArgs e)
+        {
+            // 随机吐司
+            List<string> list = new List<string>(){
+                "这个吐司看起来有好好初始化哦。",
+                "¯\\_(ツ)_/¯",
+                "来个吐司？",
+                "吐司超好吃 ——",
+                "这是个没有感情的吐司。",
+                "Also try LMB Music Box!",
+                "Toast",
+                "不想说话。",
+                "SS!",
+                "隔壁小孩都馋哭了。",
+                "正在烤吐司。",
+                "超文本烤箱控制协议",
+                "419 I'm a Microwave Oven.",
+                "{\"status\":200, \"message\":\"Bake Finished.\"}"
+            };
+
+            Random rd = new Random();
+
+            UI.ToastHelper.Add(list[rd.Next(0, list.Count)]);
         }
 
         #endregion

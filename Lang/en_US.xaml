@@ -3,7 +3,10 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     
     <!-- Stapx Steve Tool Box Default English Language File -->
-    
+
+    <sys:String x:Key="me">Stapx Steve</sys:String>
+    <sys:String x:Key="aboutme">所有代码都是这一个人敲的！</sys:String>
+
     <!-- Home -->
     <sys:String x:Key="name">SS Tool Box</sys:String>
     <sys:String x:Key="main_search">Search...</sys:String>
@@ -67,8 +70,14 @@
     <sys:String x:Key="options_language">Language</sys:String>
     <sys:String x:Key="options_language_choice">Select language file</sys:String>
     <sys:String x:Key="options_language_file_type">XAML(*.xaml)</sys:String>
+    <sys:String x:Key="options_title_control">Refined Settings</sys:String>
+    <sys:String x:Key="options_scroll">Disable non-linear scrolling</sys:String>
+    <sys:String x:Key="options_home">Always show home button</sys:String>
 
     <!-- About -->
     <sys:String x:Key="about_sstb">About SS Tool Box</sys:String>
+    <sys:String x:Key="about_LICENSE">Licenses</sys:String>
+    <sys:String x:Key="about_LICENSE_1">软件许可协议是一种具有法律性质的合同或指导，目的在规范受著作权保护的软件的使用或散布行为。</sys:String>
+    <sys:String x:Key="about_LICENSE_2">这里是本程序使用到的库的相关软件许可声明。</sys:String>
 
 </ResourceDictionary>

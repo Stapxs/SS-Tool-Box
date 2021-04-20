@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SS_Tool_Box.Function;
+using System;
 using System.Collections;
 using System.IO;
 using System.Threading;
@@ -16,6 +17,7 @@ namespace SS_Tool_Box
         public static void StartLogOut()
         {
             AddLog("log", "正在初始化日志输出功能……");
+            AddLog("log", "正在初始化烤吐司功能……");
             Directory.CreateDirectory("Data");
             Directory.CreateDirectory(@logDc);
             // 遍历log文件夹处理多次log
@@ -62,7 +64,13 @@ namespace SS_Tool_Box
             // 循环输出日志
             while (!logExit)
             {
-                while(logList.Count != 0)
+                // 日志线程辅助弹窗
+                while(UI.ToastHelper.toastList.Count != 0)
+                {
+                    UI.ToastHelper.Show(UI.ToastHelper.toastList.Dequeue().ToString());
+                }
+
+                while (logList.Count != 0)
                 {
                     // 输出日志
                     using (StreamWriter sw = new StreamWriter(@logFile, true))

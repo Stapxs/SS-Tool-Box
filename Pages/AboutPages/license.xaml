@@ -23,8 +23,8 @@
                             </Path>
                             <TextBlock Text="{DynamicResource about_LICENSE}" FontSize="13" Foreground="{DynamicResource colorFont}" Margin="25,0,0,0" VerticalAlignment="Center"/>
                         </Grid>
-                        <TextBlock Margin="25,5,0,0" FontSize="11" Foreground="{DynamicResource colorFont1}" Text="软件许可协议是一种具有法律性质的合同或指导，目的在规范受著作权保护的软件的使用或散布行为。" TextWrapping="Wrap"/>
-                        <TextBlock Margin="25,0,0,0" FontSize="11" Foreground="{DynamicResource colorFont1}" Text="这里是本程序使用到的库的相关软件许可声明。" TextWrapping="Wrap"/>
+                        <TextBlock Margin="25,5,0,0" FontSize="11" Foreground="{DynamicResource colorFont1}" Text="{DynamicResource about_LICENSE_1}" TextWrapping="Wrap"/>
+                        <TextBlock Margin="25,0,0,0" FontSize="11" Foreground="{DynamicResource colorFont1}" Text="{DynamicResource about_LICENSE_2}" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Grid>
                 

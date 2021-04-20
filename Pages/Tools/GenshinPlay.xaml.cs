@@ -510,7 +510,7 @@ namespace SS_Tool_Box.Pages.Tools
                 goStop.Visibility = Visibility.Collapsed;
             });
 
-            UI.ToastHelper.Show("播放完成");
+            UI.ToastHelper.Add("播放完成");
         }
 
         #endregion

@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SS_Tool_Box.Pages.Tools"
+      xmlns:local="clr-namespace:SS_Tool_Box.Pages.Tools" 
+      xmlns:s="clr-namespace:SS_Tool_Box.Controls.Custom"
       mc:Ignorable="d" 
       d:DesignHeight="490" d:DesignWidth="633"
       Title="GenshinPlay"
@@ -168,8 +169,14 @@
             <Grid x:Name="scrollGrid" Height="195" VerticalAlignment="Bottom">
                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0,0,15,15"/>
                 <ScrollViewer x:Name="mainScroll" Height="195" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel Margin="0,0,10,0">
-                        <Grid Height="300" Width="700"></Grid>
+                    <StackPanel Width="609" Margin="15,15,0,0">
+                        <StackPanel Height="35" Orientation="Horizontal">
+                            <Border Width="50" BorderBrush="{DynamicResource colorMainBlue}" BorderThickness="0,0,3,0">
+                                <Button Background="{DynamicResource colorMainBlue}" FontSize="12" Foreground="{DynamicResource colorFont}" Style="{DynamicResource TextButtonEx}" Width="25" Height="25" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="1" Foreground="{DynamicResource colorFont}" Margin="2,2,0,0"/>
+                                </Button>
+                            </Border>
+                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>

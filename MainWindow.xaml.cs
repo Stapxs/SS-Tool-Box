@@ -59,9 +59,9 @@ namespace SS_Tool_Box
         // 程序基本信息
         public class verInfo
         {
-            public static string verStr = "Dev-0.4.0";      // 版本号
-            public static int verBulidTimes = 3;            // 编译编号
-            public static double verNum = 40.3;             // 版本号数字
+            public static string verStr = "Dev-0.4.1";      // 版本号
+            public static int verBulidTimes = 13;            // 编译编号
+            public static double verNum = 41.113;             // 版本号数字
             #if DEBUG
             public static string verType = "Debug";         // 版本类型
             #else
@@ -202,6 +202,19 @@ namespace SS_Tool_Box
         }
 
         private void B_Back(object sender, RoutedEventArgs e)
+        {
+            backPage();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.XButton1)
+            {
+                backPage();
+            }
+        }
+
+        private void backPage()
         {
             // 返回上级
             if (MainTitle.Text != "林槐工具箱 - SS Tool Box")
@@ -617,7 +630,7 @@ namespace SS_Tool_Box
                     catch (Exception e)
                     {
                         Log.AddErr("update", "检查更新失败：" + e + "\n" + getStr.Replace("\n", "\\n").Replace("\t", "\\t"));
-                        UI.ToastHelper.Show("检查更新失败");
+                        UI.ToastHelper.Add("检查更新失败");
                     }
                     if (back.Count != 0 && double.Parse(back[0]) <= verInfo.verNum)
                     {
@@ -638,7 +651,7 @@ namespace SS_Tool_Box
                 catch(Exception e)
                 {
                     Log.AddErr("update", "检查更新失败：" + e);
-                    UI.ToastHelper.Show("检查更新失败");
+                    UI.ToastHelper.Add("检查更新失败");
                 }
             }
             else

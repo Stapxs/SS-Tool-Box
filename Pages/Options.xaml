@@ -352,7 +352,26 @@
                     </s:ScrollViewer>
                 </TabItem>
                 <TabItem Header="{DynamicResource options_menu_function}"/>
-                <TabItem Header="{DynamicResource options_menu_other}"/>
+                <TabItem Header="{DynamicResource options_menu_other}">
+                    <StackPanel>
+                        <Grid Margin="0,15,0,0">
+                            <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+                            <StackPanel>
+                                <TextBlock Text="{DynamicResource options_title_dev}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
+                                <Grid Margin="20,0,20,15">
+                                    <TextBlock Text="{DynamicResource options_show_tost}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <Button Name="ShowTost" Click="ShowTost_Click"  Foreground="#FFF" Style="{DynamicResource BCardEx}" Background="#FF4C6EF5" Height="25" Margin="0" HorizontalAlignment="Right" Width="70">
+                                        <Path Fill="#FFF" Stretch="Fill" Width="5" Height="8" HorizontalAlignment="Left" Margin="3,2,0,0">
+                                            <Path.Data>
+                                                <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
+                                            </Path.Data>
+                                        </Path>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
             </TabControl>
         </Grid>
 

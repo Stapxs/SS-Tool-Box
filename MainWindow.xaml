@@ -14,6 +14,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         ContentRendered="Window_ContentRendered"
+        MouseDown="Window_MouseDown"
         >
     <!-- 窗口框架 -->
     <WindowChrome.WindowChrome>

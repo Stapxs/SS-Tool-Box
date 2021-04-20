@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -355,7 +358,7 @@ namespace SS_Tool_Box
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static Bitmap CutPic(Bitmap src, int x, int y,int width, int height) 
+        public static Bitmap CutPic(Bitmap src, int x, int y, int width, int height)
         {
             Rectangle cropRect = new Rectangle(x, y, width, height);
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
@@ -417,8 +420,47 @@ namespace SS_Tool_Box
 
             return TenMostUsedColors;
         }
+
+        #endregion
+
+        #region Net | 网络操作
+
+        /// <summary>
+        /// Ping 测试
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public static PingReply PingTest(string ip)
+        {
+            PingReply reply = null;
+            Ping pingSender = null;
+            try
+            {
+                pingSender = new Ping();
+
+                PingOptions options = new PingOptions();
+                options.DontFragment = true;
+
+                string data = "hello world";
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
+                int timeout = 1000;
+
+                IPAddress ipa = IPAddress.Parse(ip);
+                PingReply replyPing = pingSender.Send(ip, timeout, buffer, options);
+                reply = replyPing;
+            }
+            catch (Exception ex)
+            {
+                reply = null;
+            }
+            finally
+            {
+                pingSender.Dispose();
+            }
+            return reply;
+        }
+
+        #endregion
+
     }
-
-    #endregion
-
 }

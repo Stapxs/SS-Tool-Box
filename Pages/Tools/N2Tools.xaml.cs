@@ -73,7 +73,7 @@ namespace SS_Tool_Box.Pages.Tools
                 // 登录
                 if (email.Text == "" || password.Password == "")
                 {
-                    UI.ToastHelper.Show("请输入内容！");
+                    UI.ToastHelper.Add("请输入内容！");
                     return;
                 }
 
@@ -154,7 +154,7 @@ namespace SS_Tool_Box.Pages.Tools
 
                     LoginButton.IsEnabled = true;
                 });
-                UI.ToastHelper.Show("登录失败：" + back[2]);
+                UI.ToastHelper.Add("登录失败：" + back[2]);
                 return;
             }
             if (back[1].IndexOf("Authorization") < 0)
@@ -166,7 +166,7 @@ namespace SS_Tool_Box.Pages.Tools
 
                     LoginButton.IsEnabled = true;
                 });
-                UI.ToastHelper.Show("登录失败：" + JObject.Parse(back[2])["status"]);
+                UI.ToastHelper.Add("登录失败：" + JObject.Parse(back[2])["status"]);
                 return;
 
             }
@@ -183,7 +183,7 @@ namespace SS_Tool_Box.Pages.Tools
 
                         LoginButton.IsEnabled = true;
                     });
-                    UI.ToastHelper.Show("注册表操作失败！");
+                    UI.ToastHelper.Add("注册表操作失败！");
                     return;
                 }
             }
@@ -196,7 +196,7 @@ namespace SS_Tool_Box.Pages.Tools
 
                     LoginButton.IsEnabled = true;
                 });
-                UI.ToastHelper.Show("注册表操作失败！");
+                UI.ToastHelper.Add("注册表操作失败！");
                 return;
             }
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -214,7 +214,7 @@ namespace SS_Tool_Box.Pages.Tools
                 // 显示房间卡片
                 panRoom.Visibility = Visibility.Visible;
             });
-            UI.ToastHelper.Show("登陆成功！");
+            UI.ToastHelper.Add("登陆成功！");
             Log.AddLog("N2", "登录完成，耗时：" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
             isLogined = true;
             // 开始获取后续数据
@@ -254,14 +254,14 @@ namespace SS_Tool_Box.Pages.Tools
                         panRoom.Visibility = Visibility.Visible;
                         panLogin.Visibility = Visibility.Visible;
                     });
-                    UI.ToastHelper.Show("验证登录成功！");
+                    UI.ToastHelper.Add("验证登录成功！");
                     Log.AddLog("N2", "验证登录完成，耗时：" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
                     // 获取后续数据
                     getingStart();
                 }
                 else
                 {
-                    UI.ToastHelper.Show("验证登录失败！");
+                    UI.ToastHelper.Add("验证登录失败！");
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
                         panLogin.Visibility = Visibility.Visible;
@@ -270,7 +270,7 @@ namespace SS_Tool_Box.Pages.Tools
             }
             catch (Exception e)
             {
-                UI.ToastHelper.Show("验证登录失败：" + e.Message);
+                UI.ToastHelper.Add("验证登录失败：" + e.Message);
                 Log.AddErr("N2", "验证登录失败：" + e.Message);
             }
         }
@@ -347,7 +347,7 @@ namespace SS_Tool_Box.Pages.Tools
             }
             catch (Exception e)
             {
-                UI.ToastHelper.Show("获取失败：" + e.Message);
+                UI.ToastHelper.Add("获取失败：" + e.Message);
                 Log.AddErr("N2", "获取失败：" + e.Message);
             }
         }

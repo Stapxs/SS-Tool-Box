@@ -145,7 +145,7 @@ namespace SS_Tool_Box.Controls
                     }
                     else
                     {
-                        UI.ToastHelper.Show("处理失败：" + JObject.Parse(back)["status"].ToString());
+                        UI.ToastHelper.Add("处理失败：" + JObject.Parse(back)["status"].ToString());
                         Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
                             change.Visibility = Visibility.Visible;
@@ -179,7 +179,7 @@ namespace SS_Tool_Box.Controls
                     }
                     else
                     {
-                        UI.ToastHelper.Show("处理失败：" + JObject.Parse(back)["status"].ToString());
+                        UI.ToastHelper.Add("处理失败：" + JObject.Parse(back)["status"].ToString());
                         Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
                             change.Visibility = Visibility.Visible;
@@ -191,7 +191,7 @@ namespace SS_Tool_Box.Controls
             }
             catch(Exception e)
             {
-                UI.ToastHelper.Show("处理失败：" + e.Message);
+                UI.ToastHelper.Add("处理失败：" + e.Message);
                 Log.AddErr("N2", "切换房间状态失败：" + e.ToString());
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {

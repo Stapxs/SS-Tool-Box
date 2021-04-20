@@ -55,7 +55,7 @@ namespace SS_Tool_Box.Function
         public class ToastHelper
         {
 
-            private static Queue toastList = new Queue();
+            public static Queue toastList = new Queue();
             static Toast toast;
 
             /// <summary>
