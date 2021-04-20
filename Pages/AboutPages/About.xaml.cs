@@ -51,11 +51,7 @@ namespace SS_Tool_Box.Pages.AboutPages
                 {
                     ip = ipadd[i].ToString();
                 }
-            }
-            catch
-            {
-                UI.ToastHelper.Add("域名解析错误！");
-            }
+            } catch { }
             if(ip != null)
             {
                 PingReply rep = Features.PingTest(ip);
@@ -63,8 +59,9 @@ namespace SS_Tool_Box.Pages.AboutPages
             }
             else
             {
-                mainStr1 += "5 - err\n";
+                mainStr1 += "5 - Err\n";
             }
+
             // Ping Github Raw
             ip = null;
             try
@@ -74,11 +71,7 @@ namespace SS_Tool_Box.Pages.AboutPages
                 {
                     ip = ipadd[i].ToString();
                 }
-            }
-            catch
-            {
-                UI.ToastHelper.Add("域名解析错误！");
-            }
+            } catch { }
             if (ip != null)
             {
                 PingReply rep = Features.PingTest(ip);
@@ -86,7 +79,7 @@ namespace SS_Tool_Box.Pages.AboutPages
             }
             else
             {
-                mainStr1 += "6 - err\n";
+                mainStr1 += "6 - Err\n";
             }
             // 显示结果
             this.Dispatcher.BeginInvoke(new Action(() =>

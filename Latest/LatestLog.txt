@@ -1,7 +1,7 @@
 {
   "Version": "1",
-  "MainVersion": "40.3",
-  "Time": "2021/04/03",
-  "Url": "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/dev/Latest/SS-Tool-Box.exe",
-  "Logs": "+ 完整的自动更新功能\r\n* None 界面完整多语言支持"
+  "MainVersion": "41.113",
+  "Time": "2021/04/20",
+  "Url": "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/master/Latest/SS-Tool-Box.exe",
+  "Logs": "+ 大窗口打开\r\n+ 原神自动奏谱（半成品）\r\n* 修复弹窗跳转错误\r\n* 修复退出程序时 Toast 无法正常退出\r\n* 修复因为 Style 改动导致的 N2Tools 圆形按钮样式异常\r\n* GenshinPlay 读谱逻辑错误\r\n* 搜索框功能不支持多语言\r\n* GenshinPlay 谱面解析逻辑错误\r\n+ 完成 About 界面基础内容"
 }
