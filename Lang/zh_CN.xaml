@@ -1,0 +1,80 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- Stapx Steve Tool Box 默认中文语言文件 -->
+
+    <sys:String x:Key="me">林小槐</sys:String>
+    <sys:String x:Key="aboutme">所有代码都是这一个人敲的！呜呜呜！</sys:String>
+    <sys:String x:Key="name">林槐工具箱</sys:String>
+    <sys:String x:Key="main_search">搜索……</sys:String>
+    <sys:String x:Key="main_search_title">搜索结果：</sys:String>
+    <sys:String x:Key="main_search_none">什么都没找到欸</sys:String>
+    <sys:String x:Key="main_loading">少女祈祷中</sys:String>
+    <sys:String x:Key="main_get_fail">获取内容失败</sys:String>
+    <sys:String x:Key="button_open">开启</sys:String>
+    <sys:String x:Key="button_close">关闭</sys:String>
+    <sys:String x:Key="tool_type_color">颜色工具</sys:String>
+    <sys:String x:Key="tool_type_other">其他工具</sys:String>
+    <sys:String x:Key="tool_null_title">页面不存在</sys:String>
+    <sys:String x:Key="tool_null_opppps">哎呦喂</sys:String>
+    <sys:String x:Key="tool_null_ops_says">好像没有找到这个界面欸 = =</sys:String>
+    <sys:String x:Key="tool_null_other">看看别的</sys:String>
+    <sys:String x:Key="tool_full_title">已在大窗口打开</sys:String>
+    <sys:String x:Key="tool_title_color">调色板</sys:String>
+    <sys:String x:Key="tool_title_color_card">色卡</sys:String>
+    <sys:String x:Key="tool_title_xiaoshou">Doing</sys:String>
+    <sys:String x:Key="tool_title_n2_tools">N2 Tools</sys:String>
+    <sys:String x:Key="tool_title_kill_stl">Kill STL</sys:String>
+    <sys:String x:Key="tool_title_genshin_play">原神自动奏谱</sys:String>
+    <sys:String x:Key="tool_sub_color">调色板和格式转换</sys:String>
+    <sys:String x:Key="tool_sub_color_card">一些好康的颜色们</sys:String>
+    <sys:String x:Key="tool_sub_xiaoshou">晓狩 Doing 客户端</sys:String>
+    <sys:String x:Key="tool_sub_n2_tools">N2 Station Tools</sys:String>
+    <sys:String x:Key="tool_sub_kill_stl">Do you wanna kill STL?</sys:String>
+    <sys:String x:Key="tool_sub_genshin_play">编辑并在原神中自动奏谱</sys:String>
+    <sys:String x:Key="tool_color_card_ss">林槐色卡</sys:String>
+    <sys:String x:Key="tool_color_card_suk">Sukazyo 色卡</sys:String>
+    <sys:String x:Key="tool_color_card_click">点击访问</sys:String>
+    <sys:String x:Key="tool_color_card_copy">点击复制颜色代码</sys:String>
+    <sys:String x:Key="tool_genshin_open">打开谱面</sys:String>
+    <sys:String x:Key="tool_genshin_new">新建谱面</sys:String>
+    <sys:String x:Key="tool_genshin_load_demo">加载示例谱面</sys:String>
+    <sys:String x:Key="tool_genshin_open_file_type">SSTB 谱面（*.tes）</sys:String>
+    <sys:String x:Key="tool_genshin_run">开始执行</sys:String>
+    <sys:String x:Key="tool_genshin_stop">停止执行</sys:String>
+    <sys:String x:Key="tool_genshin_control">控制台</sys:String>
+    <sys:String x:Key="tool_genshin_close">关闭项目</sys:String>
+    <sys:String x:Key="tool_genshin_desktop">琴盘</sys:String>
+    <sys:String x:Key="tool_genshin_opt">选项</sys:String>
+    <sys:String x:Key="options">软件设置</sys:String>
+    <sys:String x:Key="options_menu_default">常规</sys:String>
+    <sys:String x:Key="options_menu_theme">外观</sys:String>
+    <sys:String x:Key="options_menu_function">功能</sys:String>
+    <sys:String x:Key="options_menu_other">杂项</sys:String>
+    <sys:String x:Key="options_title_def">检查更新</sys:String>
+    <sys:String x:Key="options_main_title_def">有可用更新</sys:String>
+    <sys:String x:Key="options_update">更新</sys:String>
+    <sys:String x:Key="options_update_start">开始更新</sys:String>
+    <sys:String x:Key="options_update_close">关闭更新</sys:String>
+    <sys:String x:Key="options_update_from">更新源</sys:String>
+    <sys:String x:Key="options_title_theme">颜色与主题</sys:String>
+    <sys:String x:Key="options_darkmode">暗黑模式</sys:String>
+    <sys:String x:Key="options_auto_darkmode">自动设置暗黑模式</sys:String>
+    <sys:String x:Key="options_main_color">主题色</sys:String>
+    <sys:String x:Key="options_title_localation">本土化</sys:String>
+    <sys:String x:Key="options_language">语言（language）</sys:String>
+    <sys:String x:Key="options_language_choice">选择语言文件</sys:String>
+    <sys:String x:Key="options_language_file_type">可扩展应用程序标记(*.xaml)</sys:String>
+    <sys:String x:Key="options_title_control">强迫症选项</sys:String>
+    <sys:String x:Key="options_scroll">禁用非线性滚动</sys:String>
+    <sys:String x:Key="options_home">始终显示主页按钮</sys:String>
+    <sys:String x:Key="options_title_dev">开发者功能</sys:String>
+    <sys:String x:Key="options_show_tost">显示一个吐司</sys:String>
+    <sys:String x:Key="about_sstb">关于林槐工具箱</sys:String>
+    <sys:String x:Key="about_LICENSE">许可版权声明</sys:String>
+    <sys:String x:Key="about_verinfo">版本信息（提交以下信息以用于报告错误）</sys:String>
+    <sys:String x:Key="about_LICENSE_1">软件许可协议是一种具有法律性质的合同或指导，目的在规范受著作权保护的软件的使用或散布行为。</sys:String>
+    <sys:String x:Key="about_LICENSE_2">这里是本程序使用到的库的相关软件许可声明。</sys:String>
+
+</ResourceDictionary>

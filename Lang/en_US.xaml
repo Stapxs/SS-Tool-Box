@@ -1,0 +1,83 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- Stapx Steve Tool Box Default English Language File -->
+
+    <sys:String x:Key="me">Stapx Steve</sys:String>
+    <sys:String x:Key="aboutme">所有代码都是这一个人敲的！</sys:String>
+
+    <!-- Home -->
+    <sys:String x:Key="name">SS Tool Box</sys:String>
+    <sys:String x:Key="main_search">Search...</sys:String>
+    <sys:String x:Key="main_search_title">search result:</sys:String>
+    <sys:String x:Key="main_search_none">Nothing was founds</sys:String>
+    <sys:String x:Key="main_loading">Loading</sys:String>
+    <sys:String x:Key="main_get_fail">Fail</sys:String>
+
+    <!-- button -->
+    <sys:String x:Key="button_open">Open</sys:String>
+    <sys:String x:Key="button_close">Close</sys:String>
+
+    <!-- Tools List -->
+    <sys:String x:Key="tool_type_color">Color Tools</sys:String>
+    <sys:String x:Key="tool_type_other">Other Tools</sys:String>
+
+    <sys:String x:Key="tool_null_title">Page no found</sys:String>
+    <sys:String x:Key="tool_null_opppps">Oooooops!</sys:String>
+    <sys:String x:Key="tool_null_ops_says">Seems to not find this page = =</sys:String>
+    <sys:String x:Key="tool_null_other">Look at others</sys:String>
+
+    <sys:String x:Key="tool_title_color">Color palette</sys:String>
+    <sys:String x:Key="tool_title_color_card">Color table</sys:String>
+    <sys:String x:Key="tool_title_xiaoshou">Doing</sys:String>
+    <sys:String x:Key="tool_title_n2_tools">N2 Tools</sys:String>
+    <sys:String x:Key="tool_title_kill_stl">Kill STL</sys:String>
+    <sys:String x:Key="tool_title_genshin_play">Genshin Auto Play</sys:String>
+
+    <sys:String x:Key="tool_sub_color">Palette and color format conversion</sys:String>
+    <sys:String x:Key="tool_sub_color_card">Some pretty colors</sys:String>
+    <sys:String x:Key="tool_sub_xiaoshou">Xiaoshou Doing Client</sys:String>
+    <sys:String x:Key="tool_sub_n2_tools">N2 Station Tools</sys:String>
+    <sys:String x:Key="tool_sub_kill_stl">Do you wanna kill STL?</sys:String>
+    <sys:String x:Key="tool_sub_genshin_play">Edit and Play Music in Genshin</sys:String>
+
+    <sys:String x:Key="tool_color_card_ss">Stapxs's Color table</sys:String>
+    <sys:String x:Key="tool_color_card_suk">Sukazyo's Color table</sys:String>
+    <sys:String x:Key="tool_color_card_click">Click to visit website</sys:String>
+    <sys:String x:Key="tool_color_card_copy">Click to copy color code</sys:String>
+    
+    <!-- Options -->
+    <sys:String x:Key="options">Soft Options</sys:String>
+
+    <sys:String x:Key="options_menu_default">General</sys:String>
+    <sys:String x:Key="options_menu_theme">Interface</sys:String>
+    <sys:String x:Key="options_menu_function">Function</sys:String>
+    <sys:String x:Key="options_menu_other">Other</sys:String>
+
+    <sys:String x:Key="options_title_def">Check for updates</sys:String>
+    <sys:String x:Key="options_main_title_def">Updates available</sys:String>
+    <sys:String x:Key="options_update">Update</sys:String>
+    <sys:String x:Key="options_update_start">Start Update</sys:String>
+    <sys:String x:Key="options_update_close">Close update</sys:String>
+    <sys:String x:Key="options_update_from">Update source</sys:String>
+
+    <sys:String x:Key="options_title_theme">Color &amp; Theme</sys:String>
+    <sys:String x:Key="options_darkmode">Dark Mode</sys:String>
+    <sys:String x:Key="options_auto_darkmode">Auto Dark Mode</sys:String>
+    <sys:String x:Key="options_main_color">Main Color</sys:String>
+    <sys:String x:Key="options_title_localation">Localization</sys:String>
+    <sys:String x:Key="options_language">Language</sys:String>
+    <sys:String x:Key="options_language_choice">Select language file</sys:String>
+    <sys:String x:Key="options_language_file_type">XAML(*.xaml)</sys:String>
+    <sys:String x:Key="options_title_control">Refined Settings</sys:String>
+    <sys:String x:Key="options_scroll">Disable non-linear scrolling</sys:String>
+    <sys:String x:Key="options_home">Always show home button</sys:String>
+
+    <!-- About -->
+    <sys:String x:Key="about_sstb">About SS Tool Box</sys:String>
+    <sys:String x:Key="about_LICENSE">Licenses</sys:String>
+    <sys:String x:Key="about_LICENSE_1">软件许可协议是一种具有法律性质的合同或指导，目的在规范受著作权保护的软件的使用或散布行为。</sys:String>
+    <sys:String x:Key="about_LICENSE_2">这里是本程序使用到的库的相关软件许可声明。</sys:String>
+
+</ResourceDictionary>

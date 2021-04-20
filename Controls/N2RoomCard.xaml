@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="SS_Tool_Box.Controls.N2RoomCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+             xmlns:local="clr-namespace:SS_Tool_Box.Controls"
+             mc:Ignorable="d" d:DesignHeight="238" d:DesignWidth="360">
+    <Grid>
+        <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+        <StackPanel>
+            <TextBlock x:Name="id" Text="房间 ID" FontSize="14" Foreground="{DynamicResource colorFont1}" Margin="15,15,0,0"/>
+            <TextBlock x:Name="title" Text="房间标题" FontSize="20" Foreground="{DynamicResource colorFont}" Margin="15,5,15,0"/>
+            <WrapPanel x:Name="tagView" Orientation="Horizontal" Margin="15,10,15,0"/>
+            <TextBlock x:Name="subtitle" Text="&gt; 房间简介" Foreground="{DynamicResource colorFont1}" Margin="25,10,15,0"/>
+            <Button Click="openbutton_Click" x:Name="openbutton" Height="30" Style="{DynamicResource TextButtonEx}" Background="#4C6EF5" VerticalAlignment="Top" Margin="30,30,30,15">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" Name="change">
+                        <Path x:Name="icon" Fill="#FFF" Stretch="Fill" Width="10" Height="10" Margin="0,2,0,0"
+                        Data="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
+                        <TextBlock x:Name="opentext" Text="开启房间" FontSize="11" Foreground="#FFF" Margin="15,1,0,0"/>
+                    </StackPanel>
+                    <Grid x:Name="wait" Visibility="Collapsed">
+                        <pu:Loading Height="15" Width="15" LoadingStyle="Ring" IsRunning="True" Foreground="#FFF" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <pu:Loading.Background>
+                                <SolidColorBrush Color="#2D2D2D" Opacity="0.3"/>
+                            </pu:Loading.Background>
+                        </pu:Loading>
+                    </Grid>
+                </Grid>
+            </Button>
+        </StackPanel>
+        <Grid x:Name="warning">
+            <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+            <TextBlock x:Name="warntext" FontSize="15" Text="此控件不支持 XAML 调用，请使用代码动态创建" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</UserControl>

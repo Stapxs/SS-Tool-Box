@@ -1,0 +1,42 @@
+﻿<Page x:Class="SS_Tool_Box.Pages.None"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+      xmlns:local="clr-namespace:SS_Tool_Box.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="None"
+      Loaded="Page_Loaded"
+      >
+
+    <StackPanel x:Name="Main" Background="{DynamicResource colorBg}">
+        <Grid Height="40" Margin="0">
+            <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{DynamicResource tool_null_title}" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock x:Name="pageName" Text="PageName" FontSize="11" Foreground="{DynamicResource colorFont1}" Margin="10,0,0,9" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </Grid>
+        <Grid Margin="0,15,0,0">
+            <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
+            <StackPanel>
+                <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Margin="0,18,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="47" Height="47">
+                    <Path.Data>
+                        <PathGeometry FillRule="Nonzero" Figures="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm-33.8-217.9c7.8-7.8 7.8-20.5 0-28.3L196.3 192l17.9-17.9c7.8-7.8 7.8-20.5 0-28.3-7.8-7.8-20.5-7.8-28.3 0L168 163.7l-17.8-17.8c-7.8-7.8-20.5-7.8-28.3 0-7.8 7.8-7.8 20.5 0 28.3l17.9 17.9-17.9 17.9c-7.8 7.8-7.8 20.5 0 28.3 7.8 7.8 20.5 7.8 28.3 0l17.8-17.8 17.8 17.8c7.9 7.7 20.5 7.7 28.4-.2zm160-92.2c-7.8-7.8-20.5-7.8-28.3 0L328 163.7l-17.8-17.8c-7.8-7.8-20.5-7.8-28.3 0-7.8 7.8-7.8 20.5 0 28.3l17.9 17.9-17.9 17.9c-7.8 7.8-7.8 20.5 0 28.3 7.8 7.8 20.5 7.8 28.3 0l17.8-17.8 17.8 17.8c7.8 7.8 20.5 7.8 28.3 0 7.8-7.8 7.8-20.5 0-28.3l-17.8-18 17.9-17.9c7.7-7.8 7.7-20.4 0-28.2zM248 272c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z" />
+                    </Path.Data>
+                </Path>
+                <TextBlock Text="{DynamicResource tool_null_opppps}" FontSize="13" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                <TextBlock Text="{DynamicResource tool_null_ops_says}" FontSize="12" Foreground="{DynamicResource colorFont1}" Margin="0,5,0,15" HorizontalAlignment="Center" TextAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        <Grid Height="40" Margin="0,15,0,0">
+            <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{DynamicResource tool_null_other}" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel x:Name="CardSt" Orientation="Horizontal" Margin="0,15,0,0"/>
+    </StackPanel>
+</Page>
