@@ -98,7 +98,7 @@ namespace SS_Tool_Box
                 // Win10
                 if(int.Parse(Environment.OSVersion.Version.Build.ToString()) >= 21996)
                 {
-                    // Win11
+                    // Win11，关闭自绘圆角，使用系统圆角
                     mainWindow.AllowsTransparency = false;
                     mainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
                     mainWindow.Height = mainWindow.Height - 20;
