@@ -60,8 +60,8 @@ namespace SS_Tool_Box
         public class verInfo
         {
             public static string verStr = "Dev-0.4.1";      // 版本号
-            public static int verBulidTimes = 13;            // 编译编号
-            public static double verNum = 41.113;             // 版本号数字
+            public static int verBulidTimes = 16;            // 编译编号
+            public static double verNum = 41.116;             // 版本号数字
             #if DEBUG
             public static string verType = "Debug";         // 版本类型
             #else
@@ -91,6 +91,23 @@ namespace SS_Tool_Box
             // 颜色模式切换事件
             SystemEvents.UserPreferenceChanged +=
                 new UserPreferenceChangedEventHandler(Event_UserPreferenceChanged);
+
+            // 判断系统版本
+            if(int.Parse(Environment.OSVersion.Version.Major.ToString()) == 10)
+            {
+                // Win10
+                if(int.Parse(Environment.OSVersion.Version.Build.ToString()) >= 21996)
+                {
+                    // Win11
+                    mainWindow.AllowsTransparency = false;
+                    mainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+                    mainWindow.Height = mainWindow.Height - 20;
+                    mainWindow.Width = mainWindow.Width - 20;
+                    mainAway.Margin = new Thickness(0);
+                    mainBg.CornerRadius = new CornerRadius(0);
+                    mainBg.Effect = null;
+                }
+            }
 
 #endregion
             #region 1 - 初始化颜色主题
