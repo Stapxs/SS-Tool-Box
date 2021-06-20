@@ -2,6 +2,6 @@
   "Version": "1",
   "MainVersion": "41.116",
   "Time": "2021/06/20",
-  "Url": "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/master/Latest/SS-Tool-Box.exe",
+  "Url": "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/dev/Latest/SS-Tool-Box.exe",
   "Logs": "+ 兼容 Windows11 原生圆角"
 }
