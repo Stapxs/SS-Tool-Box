@@ -81,6 +81,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Helper\ToastHelper.cs" />
+    <Compile Include="Classes\Structure\SortInfo.cs" />
     <Compile Include="Classes\Structure\ToolInfo.cs" />
     <Compile Include="Classes\Helper\ToolHelper.cs" />
     <Compile Include="Controls\LicenseCard.xaml.cs">
@@ -114,9 +115,6 @@
     </Compile>
     <Compile Include="Pages\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SortPages\OtherTools.xaml.cs">
-      <DependentUpon>OtherTools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tools\GenshinPlay.xaml.cs">
       <DependentUpon>GenshinPlay.xaml</DependentUpon>
@@ -219,14 +217,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SortPages\ColorTools.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\SortPages\OtherTools.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Tools\ColorCards.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -269,9 +259,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\SortPages\ColorTools.xaml.cs">
-      <DependentUpon>ColorTools.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Tools\ColorCards.xaml.cs">
       <DependentUpon>ColorCards.xaml</DependentUpon>
     </Compile>

@@ -14,12 +14,13 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
+        x:Name="mainWindow"
         >
     <!-- 窗口框架 -->
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="1,0,0,0" CornerRadius="7" ResizeBorderThickness="0,0,0,0" CaptionHeight="0" NonClientFrameEdges="None"/>
     </WindowChrome.WindowChrome>
-    <Grid Margin="10">
+    <Grid x:Name="mainAway" Margin="10">
         <!-- 主背景，窗口阴影 -->
         <Border x:Name="mainBg" CornerRadius="7" Background="{DynamicResource colorBg}">
             <Border.Effect>

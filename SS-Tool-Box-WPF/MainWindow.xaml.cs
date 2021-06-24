@@ -1,10 +1,10 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
+using SS_Tool_Box.Classes.Structure;
 using SS_Tool_Box.Controls;
 using SS_Tool_Box.Function;
 using SS_Tool_Box.Helper;
-using SS_Tool_Box.Pages.SortPages;
-using SS_Tool_Box.Windows;
+using SS_Tool_Box.Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -157,26 +157,26 @@ namespace SS_Tool_Box
 #endif
 
             // 加载主页
-            Home page = new Home();
+            Home page = new Home(0);
             page.ParentWindow = this;
             MainCol.Content = new Frame()
             {
                 Content = page
             };
 
-            // 初始化 Tab
-            ColorTools colors = new ColorTools();
-            colors.ParentWindow = this;
-            conColorTools.Content = new Frame()
+            // 初始化 Tab 标签
+            ToolHelper toolHelper = new ToolHelper();
+            foreach(SortInfo info in toolHelper.Sorts)
             {
-                Content = colors
-            };
-            OtherTools others = new OtherTools();
-            others.ParentWindow = this;
-            conOtherTools.Content = new Frame()
-            {
-                Content = others
-            };
+                Application app = Application.Current;
+                TabItem item = new TabItem();
+                item.Header = (string)Application.Current.FindResource("sort_type_" + info.name);
+                if(info.index == 0)
+                {
+                    item.IsSelected = true;
+                }
+                mainTab.Items.Add(item);
+            }
 
             // 初始化 Home 按钮
             if(Options.GetOpt("alwaysShowHome")[0] == "true")
@@ -237,6 +237,9 @@ namespace SS_Tool_Box
             // 返回上级
             if (MainTitle.Text != "林槐工具箱 - SS Tool Box")
             {
+                // 清空
+                MainCol.Content = null;
+                GC.Collect();
                 // 加载上一个界面
                 Log.AddLog("ui", "返回窗口到" + pageStack.Peek().lastPageName);
                 MainCol.Content = new Frame()
@@ -255,9 +258,6 @@ namespace SS_Tool_Box
                 {
                     Home.Visibility = Visibility.Collapsed;
                 }
-                // 删除对象
-                Object obj = MainCol.Content;
-                ((IDisposable)obj).Dispose();
             }
         }
 
@@ -276,9 +276,8 @@ namespace SS_Tool_Box
         private void B_More(object sender, RoutedEventArgs e)
         {
             // 设置
-            Pages.Options opt = new Pages.Options();
             Application app = Application.Current;
-            changePage(opt, (string)app.Resources["options"]);
+            changePage(typeof(Pages.Options), (string)app.Resources["options"]);
         }
 
 #endregion
@@ -360,17 +359,21 @@ namespace SS_Tool_Box
 
         private void mainTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabControl tab = (TabControl)sender;
-            // 返回主页
-            backHome();
+            if (loadDone)
+            {
+                TabControl tab = (TabControl)sender;
+                // 返回主页
+                changePage(typeof(Full), "切换中间页");
+                backHome(true, tab.SelectedIndex - 1);
+            }
         }
 
-        public void backHome(bool showLog = true)
+        public void backHome(bool showLog = true, int index = 0)
         {
             if (loadDone && MainTitle.Text != "林槐工具箱 - SS Tool Box")
             {
                 // 加载主页
-                Home page = new Home();
+                Home page = new Home(index);
                 if (showLog)
                 {
                     Log.AddLog("ui", "切换窗口到" + "林槐工具箱 - SS Tool Box" + "（ " + page + " ）");
@@ -431,8 +434,6 @@ namespace SS_Tool_Box
         {
             // 关闭搜索框
             panSeach.Visibility = Visibility.Collapsed;
-            // 去除输入框焦点
-            conColorTools.Focus();
             // 清空输入框
             SeachBox.Text = "";
         }
@@ -448,17 +449,17 @@ namespace SS_Tool_Box
                 listSeach.Children.Remove(sp);
             }
             // 检索工具目录
-            List<UI.Tools.ToolVer> toolist = new List<UI.Tools.ToolVer>();
-            UI.Tools tools = new UI.Tools();
-            foreach (UI.Tools.ToolVer info in tools.List)
+            List<ToolInfo> toolist = new List<ToolInfo>();
+            ToolHelper toolHelper = new ToolHelper();
+            foreach (ToolInfo info in toolHelper.Tools)
             {
                 Application app = Application.Current;
-                info.cardInfo[0] = (string)app.Resources["tool_title_" + info.name];
-                if (info.cardInfo[0].IndexOf(box.Text) >= 0 && info.type != "Hidden")
+                info.Info.Name = (string)app.Resources["tool_title_" + info.Name];
+                if (info.Name.IndexOf(box.Text) >= 0 && info.Type != "Hidden")
                 {
                     toolist.Add(info);
                 }
-                if(info.cardInfo[0] == box.Text && info.type == "Hidden")
+                if (info.Name == box.Text && info.Type == "Hidden")
                 {
                     toolist.Add(info);
                 }
@@ -472,9 +473,9 @@ namespace SS_Tool_Box
             stack.Name = "seachoutpan";
             if (toolist.Count <= 5)
             {
-                foreach (UI.Tools.ToolVer info in toolist)
+                foreach (ToolInfo info in toolist)
                 {
-                    stack.Children.Add(new SeachToolView(info.cardInfo[0], info.cardInfo[3], info.page, main));
+                    stack.Children.Add(new SeachToolView(info, main));
                 }
             }
             else
@@ -484,9 +485,9 @@ namespace SS_Tool_Box
                 scroll.Height = 150;
                 scroll.Margin = new Thickness(0, 0, 3, 0);
                 StackPanel stackin = new StackPanel();
-                foreach (UI.Tools.ToolVer info in toolist)
+                foreach (ToolInfo info in toolist)
                 {
-                    stackin.Children.Add(new SeachToolView(info.cardInfo[0], info.cardInfo[3], info.page, main));
+                    stackin.Children.Add(new SeachToolView(info, main));
                 }
                 scroll.Content = stackin;
                 stack.Children.Add(scroll);
@@ -551,10 +552,14 @@ namespace SS_Tool_Box
                 SeachBox.Text = "";
                 // 记录上个界面（入栈）
                 pageStack.Push(new pageInfo(MainCol.Content, MainTitle.Text));
+                // 清空
+                MainCol.Content = null;
+                GC.Collect();
                 // 切换界面
+                Page changePage = Activator.CreateInstance(page as Type) as Page;
                 MainCol.Content = new Frame()
                 {
-                    Content = page
+                    Content = changePage
                 };
                 MainTitle.Text = pageTitle;
                 // 判断是否显示回到主页按钮和刷新按钮
@@ -589,7 +594,7 @@ namespace SS_Tool_Box
                 // 不计入堆栈
                 object now = MainCol.Content;
                 string title = MainTitle.Text;
-                Home page = new Home();
+                Home page = new Home(0);
                 changePage(page, MainTitle.Text);
                 changePage(now, title);
                 Log.AddLog("ui", "刷新界面" + pageStack.Peek().lastPageName + "（ " + pageStack.Peek().lastPage + " ）");

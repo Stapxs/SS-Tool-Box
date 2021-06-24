@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SS_Tool_Box.Classes.Structure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,25 +32,20 @@ namespace SS_Tool_Box.Controls
             set => SvgPic.Data = Geometry.Parse(value);
         }
 
-        public SeachToolView()
-        {
-            InitializeComponent();
-        }
-
         private object mpage = null;
         private string mmtitle = "";
         private MainWindow ParentWindow = null;
 
-        public SeachToolView(string mtitle, string msvg, object page, MainWindow main)
+        public SeachToolView(ToolInfo info, MainWindow main)
         {
             InitializeComponent();
 
-            mpage = page;
-            mmtitle = mtitle;
+            mpage = info.Page;
+            mmtitle = info.Info.Name;
             ParentWindow = main;
 
-            title.Text = mtitle;
-            SvgPic.Data = Geometry.Parse(msvg);
+            title.Text = info.Info.Name;
+            SvgPic.Data = Geometry.Parse(info.Info.Icon);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

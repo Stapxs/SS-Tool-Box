@@ -2,7 +2,7 @@
 
 namespace SS_Tool_Box.Classes.Structure
 {
-    class ToolInfo
+    public class ToolInfo
     {
         public CardInfo Info { get; set; }
         public Type Page { get; set; }

@@ -5,9 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SS_Tool_Box"
       mc:Ignorable="d" 
-      d:DesignHeight="490" d:DesignWidth="860"
-      Title="Home">
-    <Grid>
-        
-    </Grid>
+      d:DesignHeight="490" d:DesignWidth="633"
+      Title="Home"
+      Loaded="Page_Loaded">
+    <StackPanel>
+        <Grid Height="40" Margin="0,0,0,15">
+            <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
+            <TextBlock x:Name="main_title" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid x:Name="Cards"/>
+    </StackPanel>
 </Page>

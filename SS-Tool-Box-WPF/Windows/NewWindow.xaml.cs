@@ -26,6 +26,23 @@ namespace SS_Tool_Box.Windows
         public NewWindow()
         {
             InitializeComponent();
+
+            // 判断系统版本
+            if (int.Parse(Environment.OSVersion.Version.Major.ToString()) == 10)
+            {
+                // Win10
+                if (int.Parse(Environment.OSVersion.Version.Build.ToString()) >= 21996)
+                {
+                    // Win11，关闭自绘圆角，使用系统圆角
+                    mainWindow.AllowsTransparency = false;
+                    mainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+                    mainWindow.Height = mainWindow.Height - 20;
+                    mainWindow.Width = mainWindow.Width - 20;
+                    mainAway.Margin = new Thickness(0);
+                    mainBg.CornerRadius = new CornerRadius(0);
+                    mainBg.Effect = null;
+                }
+            }
         }
 
         #region 事件 | 按钮
@@ -36,7 +53,7 @@ namespace SS_Tool_Box.Windows
             MainWindow.main.WindowState = WindowState.Normal;
             string title = MainWindow.main.MainTitle.Text;
             MainWindow.main.backHome(false);
-            MainWindow.main.changePage(MainCol.Content, title);
+            MainWindow.main.changePage(page, title);
             Close();
         }
 
@@ -76,9 +93,10 @@ namespace SS_Tool_Box.Windows
             }
             else
             {
+                Page changePage = Activator.CreateInstance(page as Type) as Page;
                 MainCol.Content = new Frame()
                 {
-                    Content = page
+                    Content = changePage
                 };
             }
         }

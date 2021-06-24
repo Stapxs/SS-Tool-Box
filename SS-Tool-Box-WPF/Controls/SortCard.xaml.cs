@@ -1,4 +1,5 @@
-﻿using SS_Tool_Box.Pages;
+﻿using SS_Tool_Box.Classes.Structure;
+using SS_Tool_Box.Pages;
 using SS_Tool_Box.Windows;
 using System;
 using System.Collections.Generic;
@@ -43,44 +44,36 @@ namespace SS_Tool_Box.Controls
             set => IconBg.Background = value;
         }
 
-        public SortCard()
-        {
-            InitializeComponent();
-        }
-
         private object pageOpen = null;
         private MainWindow ParentWindow = null;
-        private List<string> Info;
+        private ToolInfo.CardInfo Info;
 
-        public SortCard(List<string> MInfo, object page, MainWindow Main)
+        public SortCard(ToolInfo.CardInfo MInfo, object page, MainWindow Main)
         {
             InitializeComponent();
 
-            if(!(MInfo.Count != 4))
-            {
-                // 执行初始化
-                ParentWindow = Main;
-                pageOpen = page;
-                Info = MInfo;
+            // 执行初始化
+            ParentWindow = Main;
+            pageOpen = page;
+            Info = MInfo;
 
-                IconBg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Info[2]));
+            IconBg.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(Info.Color));
 
-                MTitle.Text = MInfo[0];
-                MSubTitle.Text = MInfo[1];
+            MTitle.Text = MInfo.Name;
+            MSubTitle.Text = MInfo.Info;
 
-                SvgPic.Data = Geometry.Parse(MInfo[3]);
-            }
+            SvgPic.Data = Geometry.Parse(MInfo.Icon);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (pageOpen != null)
             {
-                ParentWindow.changePage(pageOpen, Info[0]);
+                ParentWindow.changePage(pageOpen, Info.Name);
             }
             else
             { 
-                ParentWindow.changePage(new None(), Info[0]);
+                ParentWindow.changePage(typeof(None), Info.Name);
             }
         }
 
@@ -91,7 +84,7 @@ namespace SS_Tool_Box.Controls
                 NewWindow newWindow = new NewWindow();
                 newWindow.page = pageOpen;
                 newWindow.Show();
-                ParentWindow.changePage(new Full(), Info[0]);
+                ParentWindow.changePage(typeof(Full), Info.Name);
                 ParentWindow.WindowState = WindowState.Minimized;
             }
             else

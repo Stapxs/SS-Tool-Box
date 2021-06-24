@@ -32,16 +32,11 @@
         <Grid x:Name="mainBackground">
             <Grid Margin="15,55,15,15">
                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="2,2,0,0" Width="220" HorizontalAlignment="Left"/>
-                <TabControl x:Name="mainTab" SelectionChanged="mainTab_SelectionChanged"  TabStripPlacement="Left" Background="Transparent" BorderThickness="0" Height="490">
+                <TabControl x:Name="mainTab" SelectionChanged="mainTab_SelectionChanged" TabStripPlacement="Left" Background="Transparent" BorderThickness="0" Height="490">
                     <TabItem IsEnabled="False" Height="160"/>
                     <!-- 这边只够放下六个 TabItem -->
                     <!-- <TabItem Header="分类" IsEnabled="False"/> -->
-                    <TabItem Header="{DynamicResource tool_type_color}" IsSelected="True">
-                        <ContentControl x:Name="conColorTools" Padding="0" Margin="0"/>
-                    </TabItem>
-                    <TabItem Header="{DynamicResource tool_type_other}">
-                        <ContentControl x:Name="conOtherTools" Padding="0" Margin="0"/>
-                    </TabItem>
+                    <!-- TabItem 已改为后端生成 -->
                 </TabControl>
                 <Border Background="{DynamicResource colorBg}" BorderBrush="{DynamicResource colorBg}" BorderThickness="0" CornerRadius="999" Margin="72,20,0,0" Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Grid>
