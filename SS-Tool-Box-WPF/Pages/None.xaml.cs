@@ -31,7 +31,7 @@ namespace SS_Tool_Box.Pages
             bool isShowHidden = isSInt == 0;
             Log.AddLog("None", "隐藏常数：" + isSInt);
 
-            ToolHelper toolHelper = new ToolHelper();
+            ToolList toolHelper = new ToolList();
             for (int i = 0; i < 3; i++)
             {
                 nums[i] = rd.Next(0, toolHelper.Tools.Count);

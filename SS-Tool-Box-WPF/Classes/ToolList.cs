@@ -5,7 +5,7 @@ using System;
 
 namespace SS_Tool_Box.Helper
 {
-    class ToolHelper
+    class ToolList
     {
         private List<ToolInfo> tools = new List<ToolInfo>
         {

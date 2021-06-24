@@ -280,7 +280,7 @@ namespace SS_Tool_Box.Windows
                             ChangeMessage(e.Data);
                         }
                     };
-                    ws.SetCookie(new Cookie("Authorization", Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token")));
+                    ws.SetCookie(new Cookie("Authorization", new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token")));
                     ws.Connect();
                     while (!isExit)
                     {
@@ -425,10 +425,10 @@ namespace SS_Tool_Box.Windows
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
                     // WindowState = WindowState.Minimized;
-                    map = UI.Cutshot.getScreen();
+                    map = new UI.Cutshot().getScreen();
                     // WindowState = WindowState.Normal;
                     // 裁剪窗口位置
-                    map = Features.CutPic(map,
+                    map = new UI.ImageChange().CutPic(map,
                                          (int)PointToScreen(new System.Windows.Point(0, 0)).X,
                                          (int)PointToScreen(new System.Windows.Point(0, 0)).Y,
                                          (int)Width, (int)Height);

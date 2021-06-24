@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
 using Panuon.UI.Silver;
+using SS_Tool_Box.Classes.Helper;
+using SS_Tool_Box.Classes.Structure;
 using SS_Tool_Box.Function;
 using SS_Tool_Box.Helper;
 using SS_Tool_Box.Pages.AboutPages;
@@ -38,7 +40,7 @@ namespace SS_Tool_Box.Pages
         {
             if (!load)
             {
-                UI.Color.ChangeDark(true);
+                new WindowsHelper.Color().ChangeDark(true);
                 SS_Tool_Box.Options.SetOpt("darkMode", "true");
             }
         }
@@ -46,7 +48,7 @@ namespace SS_Tool_Box.Pages
         {
             if (!load)
             {
-                UI.Color.ChangeDark(false);
+                new WindowsHelper.Color().ChangeDark(false);
                 SS_Tool_Box.Options.SetOpt("darkMode", "false");
             }
         }
@@ -58,14 +60,14 @@ namespace SS_Tool_Box.Pages
                 darkButton.IsEnabled = false;
                 SS_Tool_Box.Options.SetOpt("autoDarkMode", "true");
                 // 判断颜色模式
-                string isOpen = Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
+                string isOpen = new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
                 if (isOpen == "1")
                 {
-                    UI.Color.ChangeDark(false);
+                    new WindowsHelper.Color().ChangeDark(false);
                 }
                 else
                 {
-                    UI.Color.ChangeDark(true);
+                    new WindowsHelper.Color().ChangeDark(true);
                 }
             }
             else
@@ -81,11 +83,11 @@ namespace SS_Tool_Box.Pages
                 SS_Tool_Box.Options.SetOpt("autoDarkMode", "false");
                 if (SS_Tool_Box.Options.GetOpt("darkMode")[0] == "false")
                 {
-                    UI.Color.ChangeDark(false);
+                    new WindowsHelper.Color().ChangeDark(false);
                 }
                 else
                 {
-                    UI.Color.ChangeDark(true);
+                    new WindowsHelper.Color().ChangeDark(true);
                 }
             }
             else
@@ -150,16 +152,16 @@ namespace SS_Tool_Box.Pages
                     file = file.Substring(file.IndexOf("Lang") + 5);
                     SS_Tool_Box.Options.SetOpt("language", "~" + file);
                     selectedName = file;
-                    back = UI.Localization.ChangeLanguage(selectedName, false, true);
+                    back = new LocalHelper().ChangeLanguage(selectedName, false, true);
                 }
                 else
                 {
                     SS_Tool_Box.Options.SetOpt("language", selectedName);
-                    back = UI.Localization.ChangeLanguage(selectedName, false);
+                    back = new LocalHelper().ChangeLanguage(selectedName, false);
                 }
                 if (back.IndexOf("ERR") >= 0)
                 {
-                    ToastHelper.Add(back);
+                    Toast.Add(back);
                 }
             }
         }
@@ -206,7 +208,7 @@ namespace SS_Tool_Box.Pages
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.changePage(new About(), Application.Current.Resources["about_sstb"].ToString());
+            WindowsHelper.changePage(typeof(About), Application.Current.Resources["about_sstb"].ToString());
         }
 
         #endregion
@@ -234,7 +236,7 @@ namespace SS_Tool_Box.Pages
 
             Random rd = new Random();
 
-            ToastHelper.Add(list[rd.Next(0, list.Count)]);
+            Toast.Add(list[rd.Next(0, list.Count)]);
         }
 
         private void LoadMod_Click(object sender, RoutedEventArgs e)
@@ -425,10 +427,10 @@ namespace SS_Tool_Box.Pages
 
             #region 初始化常规
 
-            updTitle.Text = MainWindow.verInfo.verType + " Version";
-            nowVersion.Text = MainWindow.verInfo.verStr + "（" + MainWindow.verInfo.verNum + "）";
+            updTitle.Text = AppInfo.verType + " Version";
+            nowVersion.Text = AppInfo.verStr + "（" + AppInfo.verNum + "）";
 
-            if (MainWindow.back.Count != 0 && double.Parse(MainWindow.back[0]) > MainWindow.verInfo.verNum)
+            if (MainWindow.back.Count != 0 && double.Parse(MainWindow.back[0]) > AppInfo.verNum)
             {
                 isUpd = true;
 
@@ -456,17 +458,18 @@ namespace SS_Tool_Box.Pages
             rollButton.IsChecked = SS_Tool_Box.Options.GetOpt("nonLinearScrolling")[0] == "true" ? true : false;
             homeButton.IsChecked = SS_Tool_Box.Options.GetOpt("alwaysShowHome")[0] == "true" ? true : false;
 
-            LanguageBox.ItemsSource = UI.Localization.indexLocals;
-            LanguageBox.DisplayMemberPath = "name";
-            LanguageBox.SelectedValuePath = "value";
+            
+            LanguageBox.ItemsSource = new LocalHelper().indexLocals;
+            LanguageBox.DisplayMemberPath = "Name";
+            LanguageBox.SelectedValuePath = "Value";
             string langValue = "en_US.xaml";
             if (SS_Tool_Box.Options.GetOpt("language")[0][0] != '~')
             {
-                foreach (UI.Localization.localVer info in UI.Localization.indexLocals)
+                foreach (LangInfo info in new LocalHelper().indexLocals)
                 {
-                    if (info.value + ".xaml" == SS_Tool_Box.Options.GetOpt("language")[0] && SS_Tool_Box.Options.GetOpt("language")[0] != "diy")
+                    if (info.Value + ".xaml" == SS_Tool_Box.Options.GetOpt("language")[0] && SS_Tool_Box.Options.GetOpt("language")[0] != "diy")
                     {
-                        langValue = info.value;
+                        langValue = info.Value;
                         break;
                     }
                 }

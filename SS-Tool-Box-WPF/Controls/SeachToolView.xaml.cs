@@ -1,4 +1,5 @@
-﻿using SS_Tool_Box.Classes.Structure;
+﻿using SS_Tool_Box.Classes.Helper;
+using SS_Tool_Box.Classes.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace SS_Tool_Box.Controls
         {
             if(mpage != null)
             {
-                ParentWindow.changePage(mpage, mmtitle);
+                WindowsHelper.changePage(mpage, mmtitle);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using SS_Tool_Box.Function;
+﻿using SS_Tool_Box.Classes.Helper;
+using SS_Tool_Box.Function;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,10 +38,10 @@ namespace SS_Tool_Box.Pages.AboutPages
 
         private void run()
         {
-            string mainStr = "1 - " + MainWindow.verInfo.verStr + "\n" +
-                             "2 - " + MainWindow.verInfo.verNum + "\n" +
-                             "3 - " + MainWindow.verInfo.verBulidTimes + "\n" +
-                             "4 - " + MainWindow.verInfo.verType;
+            string mainStr = "1 - " + AppInfo.verStr + "\n" +
+                             "2 - " + AppInfo.verNum + "\n" +
+                             "3 - " + AppInfo.verBulidTimes + "\n" +
+                             "4 - " + AppInfo.verType;
             string mainStr1 = "";
             // Ping Blog
             string ip = null;
@@ -54,7 +55,7 @@ namespace SS_Tool_Box.Pages.AboutPages
             } catch { }
             if(ip != null)
             {
-                PingReply rep = Features.PingTest(ip);
+                PingReply rep = new NetHelper().PingTest(ip);
                 mainStr1 += "5 - " + rep.Status + "(" + rep.RoundtripTime + ")\n";
             }
             else
@@ -74,7 +75,7 @@ namespace SS_Tool_Box.Pages.AboutPages
             } catch { }
             if (ip != null)
             {
-                PingReply rep = Features.PingTest(ip);
+                PingReply rep = new NetHelper().PingTest(ip);
                 mainStr1 += "6 - " + rep.Status + "(" + rep.RoundtripTime + ")\n";
             }
             else
@@ -91,7 +92,7 @@ namespace SS_Tool_Box.Pages.AboutPages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.changePage(new license(), App.Current.Resources["about_LICENSE"].ToString());
+            WindowsHelper.changePage(typeof(license), Application.Current.Resources["about_LICENSE"].ToString());
         }
     }
 }

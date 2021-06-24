@@ -1,4 +1,5 @@
-﻿using SS_Tool_Box.Pages;
+﻿using SS_Tool_Box.Classes.Helper;
+using SS_Tool_Box.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,8 +53,8 @@ namespace SS_Tool_Box.Windows
             // 关闭
             MainWindow.main.WindowState = WindowState.Normal;
             string title = MainWindow.main.MainTitle.Text;
-            MainWindow.main.backHome(false);
-            MainWindow.main.changePage(page, title);
+            WindowsHelper.backHome(false);
+            WindowsHelper.changePage(page, title);
             Close();
         }
 

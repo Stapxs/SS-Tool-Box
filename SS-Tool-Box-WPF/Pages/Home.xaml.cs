@@ -23,7 +23,7 @@ namespace SS_Tool_Box
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ToolHelper toolHelper = new ToolHelper();
+            ToolList toolHelper = new ToolList();
             Cards.Children.Clear();
             int num = 0;
             string type = "";

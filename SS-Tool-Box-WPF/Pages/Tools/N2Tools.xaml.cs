@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
+using SS_Tool_Box.Classes.Helper;
 using SS_Tool_Box.Controls;
 using SS_Tool_Box.Function;
 using SS_Tool_Box.Helper;
@@ -50,7 +51,7 @@ namespace SS_Tool_Box.Pages.Tools
                 try
                 {
                     // 检查是否存在 Token
-                    if (Features.Reg.IsRegeditKeyExit(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"))
+                    if (new Reg().IsRegeditKeyExit(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"))
                     {
                         panLogin.Visibility = Visibility.Collapsed;
                         // 开始验证登录
@@ -74,7 +75,7 @@ namespace SS_Tool_Box.Pages.Tools
                 // 登录
                 if (email.Text == "" || password.Password == "")
                 {
-                    ToastHelper.Add("请输入内容！");
+                    Helper.Toast.Add("请输入内容！");
                     return;
                 }
 
@@ -110,8 +111,8 @@ namespace SS_Tool_Box.Pages.Tools
         {
             Log.AddLog("N2", "开始登出……");
             DateTime startRun = DateTime.Now;
-            string rooms = HttpUitls.Get(apiURL + "/api/auth/destroyToken", "DEFAULT", "Cookie",
-                "Authorization=" + Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
+            string rooms = new NetHelper.HttpUitls().Get(apiURL + "/api/auth/destroyToken", "DEFAULT", "Cookie",
+                "Authorization=" + new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
                 panRoomCard.Children.Clear();
@@ -122,7 +123,7 @@ namespace SS_Tool_Box.Pages.Tools
                 LoginOut.Visibility = Visibility.Collapsed;
                 LoginWait.Visibility = Visibility.Collapsed;
             });
-            Features.Reg.DelRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token");
+            new Reg().DelRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token");
             isLogined = false;
             Log.AddLog("N2", "登出完成，耗时：" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
         }
@@ -155,7 +156,7 @@ namespace SS_Tool_Box.Pages.Tools
 
                     LoginButton.IsEnabled = true;
                 });
-                ToastHelper.Add("登录失败：" + back[2]);
+                Helper.Toast.Add("登录失败：" + back[2]);
                 return;
             }
             if (back[1].IndexOf("Authorization") < 0)
@@ -167,15 +168,15 @@ namespace SS_Tool_Box.Pages.Tools
 
                     LoginButton.IsEnabled = true;
                 });
-                ToastHelper.Add("登录失败：" + JObject.Parse(back[2])["status"]);
+                Helper.Toast.Add("登录失败：" + JObject.Parse(back[2])["status"]);
                 return;
 
             }
             string token = back[1].Substring(back[1].IndexOf("Authorization") + "Authorization".Length + 1);
             token = token.Substring(0, token.IndexOf(";"));
-            if (!Features.Reg.IsRegeditItemExist(Registry.CurrentUser, @"SOFTWARE\SSTeam", @"SS-Tool-Box"))
+            if (!new Reg().IsRegeditItemExist(Registry.CurrentUser, @"SOFTWARE\SSTeam", @"SS-Tool-Box"))
             {
-                if (!Features.Reg.CreateRegItem(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box"))
+                if (!new Reg().CreateRegItem(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box"))
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
@@ -184,11 +185,11 @@ namespace SS_Tool_Box.Pages.Tools
 
                         LoginButton.IsEnabled = true;
                     });
-                    ToastHelper.Add("注册表操作失败！");
+                    Helper.Toast.Add("注册表操作失败！");
                     return;
                 }
             }
-            if (!Features.Reg.CreateRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token", token))
+            if (!new Reg().CreateRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token", token))
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {
@@ -197,7 +198,7 @@ namespace SS_Tool_Box.Pages.Tools
 
                     LoginButton.IsEnabled = true;
                 });
-                ToastHelper.Add("注册表操作失败！");
+                Helper.Toast.Add("注册表操作失败！");
                 return;
             }
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -215,7 +216,7 @@ namespace SS_Tool_Box.Pages.Tools
                 // 显示房间卡片
                 panRoom.Visibility = Visibility.Visible;
             });
-            ToastHelper.Add("登陆成功！");
+            Helper.Toast.Add("登陆成功！");
             Log.AddLog("N2", "登录完成，耗时：" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
             isLogined = true;
             // 开始获取后续数据
@@ -232,8 +233,8 @@ namespace SS_Tool_Box.Pages.Tools
             try
             {
                 // 执行验证登陆（随便请求个需要验证的 API）
-                string rooms = HttpUitls.Get(apiURL + "/api/user/rooms", "DEFAULT", "Cookie",
-                    "Authorization=" + Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
+                string rooms = new NetHelper.HttpUitls().Get(apiURL + "/api/user/rooms", "DEFAULT", "Cookie",
+                    "Authorization=" + new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
                 if (rooms != null && JObject.Parse(rooms)["status"].ToString() == "0")
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -255,14 +256,14 @@ namespace SS_Tool_Box.Pages.Tools
                         panRoom.Visibility = Visibility.Visible;
                         panLogin.Visibility = Visibility.Visible;
                     });
-                    ToastHelper.Add("验证登录成功！");
+                    Helper.Toast.Add("验证登录成功！");
                     Log.AddLog("N2", "验证登录完成，耗时：" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
                     // 获取后续数据
                     getingStart();
                 }
                 else
                 {
-                    ToastHelper.Add("验证登录失败！");
+                    Helper.Toast.Add("验证登录失败！");
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
                         panLogin.Visibility = Visibility.Visible;
@@ -271,7 +272,7 @@ namespace SS_Tool_Box.Pages.Tools
             }
             catch (Exception e)
             {
-                ToastHelper.Add("验证登录失败：" + e.Message);
+                Helper.Toast.Add("验证登录失败：" + e.Message);
                 Log.AddErr("N2", "验证登录失败：" + e.Message);
             }
         }
@@ -298,8 +299,8 @@ namespace SS_Tool_Box.Pages.Tools
             DateTime startRun = DateTime.Now;
             try
             {
-                string rooms = HttpUitls.Get(apiURL + "/api/user/rooms", "DEFAULT", "Cookie",
-                    "Authorization=" + Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
+                string rooms = new NetHelper.HttpUitls().Get(apiURL + "/api/user/rooms", "DEFAULT", "Cookie",
+                    "Authorization=" + new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
                 JObject obj = JObject.Parse(rooms);
                 if (obj["status"].ToString() != "0")
                 {
@@ -332,7 +333,7 @@ namespace SS_Tool_Box.Pages.Tools
                     {
                         panLogin.Margin = new Thickness(0, 0, 0, 0);
                         N2RoomCard card = new N2RoomCard(info, tags,
-                        Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"),
+                        new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"),
                         itemobj["status"].ToString() == "open" ? true : false);
                         card.Margin = new Thickness(0, 15, 0, 0);
                         panRoomCard.Children.Add(card);
@@ -348,7 +349,7 @@ namespace SS_Tool_Box.Pages.Tools
             }
             catch (Exception e)
             {
-                ToastHelper.Add("获取失败：" + e.Message);
+                Helper.Toast.Add("获取失败：" + e.Message);
                 Log.AddErr("N2", "获取失败：" + e.Message);
             }
         }

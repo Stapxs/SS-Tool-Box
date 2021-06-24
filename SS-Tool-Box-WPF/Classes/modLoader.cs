@@ -82,10 +82,10 @@ namespace SS_Tool_Box.Function
                         MethodInfo mi = ty.GetMethod("Get");
                         object infoFun = mi.Invoke(magicClassObject, null);
                         List<string> info = (List<string>)infoFun;
-                        if (double.Parse(info[0]) > MainWindow.verInfo.verNum)
+                        if (double.Parse(info[0]) > AppInfo.verNum)
                         {
-                            Log.AddErr("modLoader", "验证扩展包失败，扩展包要求版本：" + info[2] + "，当前客户端版本：" + MainWindow.verInfo.verNum);
-                            ToastHelper.Add("验证扩展包失败：过时的客户端");
+                            Log.AddErr("modLoader", "验证扩展包失败，扩展包要求版本：" + info[2] + "，当前客户端版本：" + AppInfo.verNum);
+                            Toast.Add("验证扩展包失败：过时的客户端");
                             return false;
                         }
                         // 添加到列表

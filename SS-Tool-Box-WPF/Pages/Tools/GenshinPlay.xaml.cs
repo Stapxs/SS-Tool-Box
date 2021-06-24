@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using SS_Tool_Box.Classes.Helper;
 using SS_Tool_Box.Function;
 using SS_Tool_Box.Helper;
 using SS_Tool_Box.Windows;
@@ -85,13 +86,13 @@ namespace SS_Tool_Box.Pages.Tools
                 MainWindow.main.MsgAdd(
                     new List<string> { "自动奏谱", "提权失败：" + ex.Message },
                     new List<string> { "知道了" }, null);
-                MainWindow.main.backHome();
+                WindowsHelper.backHome();
             }
         }
 
         public void runExit()
         {
-            MainWindow.main.backHome();
+            WindowsHelper.backHome();
         }
 
         #endregion
@@ -104,7 +105,7 @@ namespace SS_Tool_Box.Pages.Tools
             NewWindow newWindow = new NewWindow();
             newWindow.page = MainWindow.main.MainCol.Content;
             newWindow.Show();
-            MainWindow.main.changePage(new Full(), MainWindow.main.MainTitle.Text);
+            WindowsHelper.changePage(new Full(), MainWindow.main.MainTitle.Text);
             MainWindow.main.WindowState = WindowState.Minimized;
         }
 
@@ -511,7 +512,7 @@ namespace SS_Tool_Box.Pages.Tools
                 goStop.Visibility = Visibility.Collapsed;
             });
 
-            ToastHelper.Add("播放完成");
+            Helper.Toast.Add("播放完成");
         }
 
         #endregion

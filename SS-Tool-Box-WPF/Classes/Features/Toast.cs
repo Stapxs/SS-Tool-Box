@@ -6,15 +6,15 @@ using System.Windows;
 
 namespace SS_Tool_Box.Helper
 {
-    class ToastHelper
+    class Toast
     {
         public static Queue toastList = new Queue();
-        static Toast toast;
+        static Windows.Toast toast;
 
         /// <summary>
         /// 吐司管理器
         /// </summary>
-        public static void StartShower()
+        public void StartShower()
         {
             // 运行吐司显示
             Thread rToast = new Thread(runToast);
@@ -22,7 +22,7 @@ namespace SS_Tool_Box.Helper
             rToast.Start();
         }
 
-        private static void runToast()
+        private void runToast()
         {
             while (!MainWindow.readyExit)
             {
@@ -33,13 +33,13 @@ namespace SS_Tool_Box.Helper
             }
         }
 
-        public static void Show(string says)
+        public void Show(string says)
         {
-            Toast.says = says;
-            Log.AddLog("ui", "显示了一条吐司：" + Toast.says);
+            Windows.Toast.says = says;
+            Log.AddLog("ui", "显示了一条吐司：" + Windows.Toast.says);
             App.Current.Dispatcher.Invoke((Action)delegate
             {
-                toast = new Toast();
+                toast = new Windows.Toast();
                 toastList.TrimToSize();
                 toast.Owner = Application.Current.MainWindow;
                 toast.WindowStartupLocation = WindowStartupLocation.CenterOwner;

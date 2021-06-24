@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
+using SS_Tool_Box.Classes.Helper;
 using SS_Tool_Box.Classes.Structure;
 using SS_Tool_Box.Controls;
 using SS_Tool_Box.Function;
@@ -52,27 +53,14 @@ namespace SS_Tool_Box
         // 检查更新数据
         public static List<string> back = new List<string>();
 
-        #endregion
-
         // 加载完成标记
-        private bool loadDone = false;
+        public bool loadDone = false;
 
-        // 程序基本信息
-        public class verInfo
-        {
-            public static string verStr = "Dev-0.4.1";      // 版本号
-            public static int verBulidTimes = 16;            // 编译编号
-            public static double verNum = 41.116;             // 版本号数字
-            #if DEBUG
-            public static string verType = "Debug";         // 版本类型
-            #else
-            public static string verType = "Dev";
-            #endif
-        }
+        #endregion
 
         public MainWindow()
         {
-            Log.AddLog("app", "感谢使用 SS Tool Box，当前版本为" + verInfo.verStr + " build " + verInfo.verBulidTimes);
+            Log.AddLog("app", "感谢使用 SS Tool Box，当前版本为" + AppInfo.verStr + " build " + AppInfo.verBulidTimes);
             Log.AddLog("main", "开始初始化界面……");
             startRun = DateTime.Now;
 
@@ -116,44 +104,44 @@ namespace SS_Tool_Box
             if (Options.GetOpt("autoDarkMode")[0] == "true")
             {
                 // 判断颜色模式
-                string isOpen = Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
+                string isOpen = new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
                 if (isOpen == "1")
                 {
-                    UI.Color.ChangeDark(false);
+                    new WindowsHelper.Color().ChangeDark(false);
                 }
             }
             else
             {
                 if ((Options.GetOpt("darkMode"))[0] == "false")
                 {
-                    UI.Color.ChangeDark(false);
+                    new WindowsHelper.Color().ChangeDark(false);
                 }
             }
             string langValue = "en_US";
             if (Options.GetOpt("language")[0][0] != '~')
             {
-                foreach (UI.Localization.localVer info in UI.Localization.indexLocals)
+                foreach (LangInfo info in new LocalHelper().indexLocals)
                 {
-                    if (info.value + ".xaml" == Options.GetOpt("language")[0])
+                    if (info.Value + ".xaml" == Options.GetOpt("language")[0])
                     {
-                        langValue = info.value;
+                        langValue = info.Value;
                         break;
                     }
                 }
-                UI.Localization.ChangeLanguage(langValue + ".xaml", true);
+                new LocalHelper().ChangeLanguage(langValue + ".xaml", true);
             }
             else
             {
-                UI.Localization.ChangeLanguage(Options.GetOpt("language")[0].Substring(1), true, true);
+                new LocalHelper().ChangeLanguage(Options.GetOpt("language")[0].Substring(1), true, true);
             }
 
 #endregion
             #region 4 - 初始化页面
 
             // 版本号
-            viewVersion.Text = verInfo.verStr;
+            viewVersion.Text = AppInfo.verStr;
 #if DEBUG
-            viewVersion.Text = verInfo.verStr + " DBuild " + verInfo.verBulidTimes;
+            viewVersion.Text = AppInfo.verStr + " DBuild " + AppInfo.verBulidTimes;
 #endif
 
             // 加载主页
@@ -165,7 +153,7 @@ namespace SS_Tool_Box
             };
 
             // 初始化 Tab 标签
-            ToolHelper toolHelper = new ToolHelper();
+            ToolList toolHelper = new ToolList();
             foreach(SortInfo info in toolHelper.Sorts)
             {
                 Application app = Application.Current;
@@ -264,7 +252,7 @@ namespace SS_Tool_Box
         private void B_Home(object sender, RoutedEventArgs e)
         {
             // 返回主页
-            backHome();
+            WindowsHelper.backHome();
         }
 
         private void B_Flash(object sender, RoutedEventArgs e)
@@ -277,7 +265,7 @@ namespace SS_Tool_Box
         {
             // 设置
             Application app = Application.Current;
-            changePage(typeof(Pages.Options), (string)app.Resources["options"]);
+            WindowsHelper.changePage(typeof(Pages.Options), (string)app.Resources["options"]);
         }
 
 #endregion
@@ -345,14 +333,14 @@ namespace SS_Tool_Box
             if (Options.GetOpt("autoDarkMode")[0] == "true")
             {
                 // 判断颜色模式
-                string isOpen = Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
+                string isOpen = new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
                 if (isOpen == "1")
                 {
-                    UI.Color.ChangeDark(false);
+                    new WindowsHelper.Color().ChangeDark(false);
                 }
                 else
                 {
-                    UI.Color.ChangeDark(true);
+                    new WindowsHelper.Color().ChangeDark(true);
                 }
             }
         }
@@ -363,32 +351,8 @@ namespace SS_Tool_Box
             {
                 TabControl tab = (TabControl)sender;
                 // 返回主页
-                changePage(typeof(Full), "切换中间页");
-                backHome(true, tab.SelectedIndex - 1);
-            }
-        }
-
-        public void backHome(bool showLog = true, int index = 0)
-        {
-            if (loadDone && MainTitle.Text != "林槐工具箱 - SS Tool Box")
-            {
-                // 加载主页
-                Home page = new Home(index);
-                if (showLog)
-                {
-                    Log.AddLog("ui", "切换窗口到" + "林槐工具箱 - SS Tool Box" + "（ " + page + " ）");
-                }
-                page.ParentWindow = this;
-                MainCol.Content = new Frame()
-                {
-                    Content = page
-                };
-                MainTitle.Text = "林槐工具箱 - SS Tool Box";
-                // 隐藏回到主页按钮
-                Home.Visibility = Visibility.Collapsed;
-                Title.Margin = new Thickness(0, 0, 0, 0);
-                // 清空堆栈
-                pageStack.Clear();
+                WindowsHelper.changePage(typeof(Full), "切换中间页");
+                WindowsHelper.backHome(true, tab.SelectedIndex - 1);
             }
         }
 
@@ -421,7 +385,7 @@ namespace SS_Tool_Box
             // 得到焦点，显示浮动搜索框
             panSeach.Visibility = Visibility.Visible;
             // 删除已经创建过的结果控件
-            StackPanel sp = Features.GetChildObject<StackPanel>(listSeach, "seachoutpan");
+            StackPanel sp = new UI().GetChildObject<StackPanel>(listSeach, "seachoutpan");
             if (sp != null)
             {
                 listSeach.Children.Remove(sp);
@@ -443,14 +407,14 @@ namespace SS_Tool_Box
             // 搜索框
             TextBox box = (TextBox)sender;
             // 删除已经创建过的结果控件
-            StackPanel sp = Features.GetChildObject<StackPanel>(listSeach, "seachoutpan");
+            StackPanel sp = new UI().GetChildObject<StackPanel>(listSeach, "seachoutpan");
             if (sp != null)
             {
                 listSeach.Children.Remove(sp);
             }
             // 检索工具目录
             List<ToolInfo> toolist = new List<ToolInfo>();
-            ToolHelper toolHelper = new ToolHelper();
+            ToolList toolHelper = new ToolList();
             foreach (ToolInfo info in toolHelper.Tools)
             {
                 Application app = Application.Current;
@@ -537,53 +501,6 @@ namespace SS_Tool_Box
         #region 操作 | 主窗口
 
         /// <summary>
-        /// 更改嵌入页面
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="pageTitle"></param>
-        /// <returns>操作是否成功</returns>
-        public bool changePage(object page, string pageTitle)
-        {
-            Log.AddLog("ui", "切换窗口到" + pageTitle + "（ " + page + " ）");
-            try
-            {
-                // 关闭搜索框
-                panSeach.Visibility = Visibility.Collapsed;
-                SeachBox.Text = "";
-                // 记录上个界面（入栈）
-                pageStack.Push(new pageInfo(MainCol.Content, MainTitle.Text));
-                // 清空
-                MainCol.Content = null;
-                GC.Collect();
-                // 切换界面
-                Page changePage = Activator.CreateInstance(page as Type) as Page;
-                MainCol.Content = new Frame()
-                {
-                    Content = changePage
-                };
-                MainTitle.Text = pageTitle;
-                // 判断是否显示回到主页按钮和刷新按钮
-                if (pageStack.Count > 1 || Options.GetOpt("alwaysShowHome")[0] == "true")
-                {
-                    Home.Visibility = Visibility.Visible;
-                    // Flash.Visibility = Visibility.Visible;
-                    Title.Margin = new Thickness(10, 0, 0, 0);
-                }
-                else
-                {
-                    Home.Visibility = Visibility.Collapsed;
-                    // Flash.Visibility = Visibility.Collapsed;
-                    Title.Margin = new Thickness(0, 0, 0, 0);
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// 刷新嵌入界面
         /// </summary>
         /// <returns></returns>
@@ -595,8 +512,8 @@ namespace SS_Tool_Box
                 object now = MainCol.Content;
                 string title = MainTitle.Text;
                 Home page = new Home(0);
-                changePage(page, MainTitle.Text);
-                changePage(now, title);
+                WindowsHelper.changePage(page, MainTitle.Text);
+                WindowsHelper.changePage(now, title);
                 Log.AddLog("ui", "刷新界面" + pageStack.Peek().lastPageName + "（ " + pageStack.Peek().lastPage + " ）");
                 return true;
             }
@@ -636,7 +553,7 @@ namespace SS_Tool_Box
                     string updateVersion = "1";
 
                     int updLink = Options.GetOpt("updLink")[0] == "ERR" ? 0 : int.Parse(Options.GetOpt("updLink")[0]);
-                    string getStr = HttpUitls.Get(linkList[updLink].link);
+                    string getStr = new NetHelper.HttpUitls().Get(linkList[updLink].link);
                     try
                     {
                         JObject obj = JObject.Parse(getStr);
@@ -656,28 +573,28 @@ namespace SS_Tool_Box
                     catch (Exception e)
                     {
                         Log.AddErr("update", "检查更新失败：" + e + "\n" + getStr.Replace("\n", "\\n").Replace("\t", "\\t"));
-                        ToastHelper.Add("检查更新失败");
+                        Toast.Add("检查更新失败");
                     }
-                    if (back.Count != 0 && double.Parse(back[0]) <= verInfo.verNum)
+                    if (back.Count != 0 && double.Parse(back[0]) <= AppInfo.verNum)
                     {
                         Log.AddLog("update", "当前版本为最新。");
                     }
                     else
                     {
-                        Log.AddLog("update", "最新版本为：" + back[0] + " > " + verInfo.verNum);
+                        Log.AddLog("update", "最新版本为：" + back[0] + " > " + AppInfo.verNum);
                         Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
                         // 切换到设置界面
                         Pages.Options opt = new Pages.Options();
                             Application app = Application.Current;
-                            changePage(opt, app.Resources["options"] + " - " + app.Resources["options_main_title_def"]);
+                            WindowsHelper.changePage(opt, app.Resources["options"] + " - " + app.Resources["options_main_title_def"]);
                         });
                     }
                 }
                 catch(Exception e)
                 {
                     Log.AddErr("update", "检查更新失败：" + e);
-                    ToastHelper.Add("检查更新失败");
+                    Toast.Add("检查更新失败");
                 }
             }
             else

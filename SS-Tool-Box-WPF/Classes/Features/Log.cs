@@ -65,9 +65,9 @@ namespace SS_Tool_Box
             while (!logExit)
             {
                 // 日志线程辅助弹窗
-                while(ToastHelper.toastList.Count != 0)
+                while(Toast.toastList.Count != 0)
                 {
-                    ToastHelper.Show(ToastHelper.toastList.Dequeue().ToString());
+                    new Toast().Show(Toast.toastList.Dequeue().ToString());
                 }
 
                 while (logList.Count != 0)

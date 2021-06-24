@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
+using SS_Tool_Box.Classes.Helper;
 using SS_Tool_Box.Function;
 using SS_Tool_Box.Helper;
 using SS_Tool_Box.Pages.Tools;
@@ -127,8 +128,8 @@ namespace SS_Tool_Box.Controls
                 {
                     Log.AddLog("N2", "正在修改房间状态……（关闭）");
                     // 关
-                    string back = HttpUitls.Post(apiURL + "/api/user/closeRoom", "{ \"id\": \"" + id + "\" }", "DEFAULT", "Cookie",
-                        "Authorization=" + Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
+                    string back = new NetHelper.HttpUitls().Post(apiURL + "/api/user/closeRoom", "{ \"id\": \"" + id + "\" }", "DEFAULT", "Cookie",
+                        "Authorization=" + new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
                     if (JObject.Parse(back)["status"].ToString() == "0")
                     {
                         _isOpen = false;
@@ -146,7 +147,7 @@ namespace SS_Tool_Box.Controls
                     }
                     else
                     {
-                        ToastHelper.Add("处理失败：" + JObject.Parse(back)["status"].ToString());
+                        Toast.Add("处理失败：" + JObject.Parse(back)["status"].ToString());
                         Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
                             change.Visibility = Visibility.Visible;
@@ -159,8 +160,8 @@ namespace SS_Tool_Box.Controls
                 {
                     Log.AddLog("N2", "正在修改房间状态……（打开）");
                     // 开
-                    string back = HttpUitls.Post(apiURL + "/api/user/openRoom", "{ \"id\": \"" + id + "\" }", "DEFAULT", "Cookie",
-                        "Authorization=" + Features.Reg.GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
+                    string back = new NetHelper.HttpUitls().Post(apiURL + "/api/user/openRoom", "{ \"id\": \"" + id + "\" }", "DEFAULT", "Cookie",
+                        "Authorization=" + new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\SSTeam\SS-Tool-Box", "N2Token"));
                     if (JObject.Parse(back)["status"].ToString() == "0")
                     {
                         _isOpen = true;
@@ -180,7 +181,7 @@ namespace SS_Tool_Box.Controls
                     }
                     else
                     {
-                        ToastHelper.Add("处理失败：" + JObject.Parse(back)["status"].ToString());
+                        Toast.Add("处理失败：" + JObject.Parse(back)["status"].ToString());
                         Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
                             change.Visibility = Visibility.Visible;
@@ -192,7 +193,7 @@ namespace SS_Tool_Box.Controls
             }
             catch(Exception e)
             {
-                ToastHelper.Add("处理失败：" + e.Message);
+                Toast.Add("处理失败：" + e.Message);
                 Log.AddErr("N2", "切换房间状态失败：" + e.ToString());
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                 {

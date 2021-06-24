@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using SS_Tool_Box.Classes.Helper;
 using SS_Tool_Box.Controls;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace SS_Tool_Box.Pages.Tools
             try
             {
                 string url = "https://srv.sukazyo.cc/api/color?version=1";
-                string GetJson = HttpUitls.Get(url, "DEFALT");
+                string GetJson = new NetHelper.HttpUitls().Get(url, "DEFALT");
 
                 JObject obj = JObject.Parse(GetJson);
                 JArray jList = JArray.Parse(obj["colors"].ToString());

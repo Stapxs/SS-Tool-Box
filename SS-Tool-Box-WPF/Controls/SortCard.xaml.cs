@@ -1,4 +1,5 @@
-﻿using SS_Tool_Box.Classes.Structure;
+﻿using SS_Tool_Box.Classes.Helper;
+using SS_Tool_Box.Classes.Structure;
 using SS_Tool_Box.Pages;
 using SS_Tool_Box.Windows;
 using System;
@@ -69,11 +70,11 @@ namespace SS_Tool_Box.Controls
         {
             if (pageOpen != null)
             {
-                ParentWindow.changePage(pageOpen, Info.Name);
+                WindowsHelper.changePage(pageOpen, Info.Name);
             }
             else
-            { 
-                ParentWindow.changePage(typeof(None), Info.Name);
+            {
+                WindowsHelper.changePage(typeof(None), Info.Name);
             }
         }
 
@@ -84,7 +85,7 @@ namespace SS_Tool_Box.Controls
                 NewWindow newWindow = new NewWindow();
                 newWindow.page = pageOpen;
                 newWindow.Show();
-                ParentWindow.changePage(typeof(Full), Info.Name);
+                WindowsHelper.changePage(typeof(Full), Info.Name);
                 ParentWindow.WindowState = WindowState.Minimized;
             }
             else
