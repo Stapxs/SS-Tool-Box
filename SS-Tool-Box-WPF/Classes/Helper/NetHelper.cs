@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SS_Tool_Box.Classes.Helper
 {
-    class NetHelper
+    public class NetHelper
     {
         /// <summary>
         /// Ping 测试

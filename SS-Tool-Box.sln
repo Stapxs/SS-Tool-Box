@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS-Tool-Box", "SS-Tool-Box.csproj", "{7BB38813-BAE4-4807-8B60-548C5FA492B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS-Tool-BoxTests", "SS-Tool-BoxTests\SS-Tool-BoxTests.csproj", "{75B22BC5-A620-4339-B015-09FDBFA44ED9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS-Tool-BoxTests", "..\SS-Tool-BoxTests\SS-Tool-BoxTests.csproj", "{75B22BC5-A620-4339-B015-09FDBFA44ED9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS-Tool-Box", "SS-Tool-Box-WPF\SS-Tool-Box.csproj", "{7BB38813-BAE4-4807-8B60-548C5FA492B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS-Tool-BoxDemoMod", "..\SS-Tool-BoxDemoMod\SS-Tool-BoxDemoMod.csproj", "{03D49D4B-2565-4A3D-BC1E-EC1946913843}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS-Tool-BoxDemoMod", "SS-Tool-BoxDemoMod\SS-Tool-BoxDemoMod.csproj", "{03D49D4B-2565-4A3D-BC1E-EC1946913843}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,14 +15,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7BB38813-BAE4-4807-8B60-548C5FA492B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BB38813-BAE4-4807-8B60-548C5FA492B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BB38813-BAE4-4807-8B60-548C5FA492B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BB38813-BAE4-4807-8B60-548C5FA492B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75B22BC5-A620-4339-B015-09FDBFA44ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75B22BC5-A620-4339-B015-09FDBFA44ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75B22BC5-A620-4339-B015-09FDBFA44ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75B22BC5-A620-4339-B015-09FDBFA44ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB38813-BAE4-4807-8B60-548C5FA492B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BB38813-BAE4-4807-8B60-548C5FA492B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB38813-BAE4-4807-8B60-548C5FA492B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BB38813-BAE4-4807-8B60-548C5FA492B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03D49D4B-2565-4A3D-BC1E-EC1946913843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03D49D4B-2565-4A3D-BC1E-EC1946913843}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D49D4B-2565-4A3D-BC1E-EC1946913843}.Release|Any CPU.ActiveCfg = Release|Any CPU

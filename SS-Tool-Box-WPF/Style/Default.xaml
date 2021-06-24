@@ -215,7 +215,8 @@
                             <Border Name="BorderOver" CornerRadius="5" Background="Transparent">
                                 <Border Name="BorderOn" CornerRadius="0" Background="Transparent">
                                     <Grid>
-                                        <TextBlock Foreground="{DynamicResource colorFont}" x:Name="mHeader" FontSize="13" HorizontalAlignment="Left" Text="{TemplateBinding Header}" VerticalAlignment="Center" Margin="12,2,12,2"/>
+                                        <Border x:Name="mLeft" Visibility="Collapsed" Width="3" CornerRadius="1.5" Background="{DynamicResource colorFont2}" HorizontalAlignment="Left" Margin="5,12,0,12"></Border>
+                                        <TextBlock Foreground="{DynamicResource colorFont}" x:Name="mHeader" FontSize="13" HorizontalAlignment="Left" Text="{TemplateBinding Header}" VerticalAlignment="Center" Margin="18,2,12,2"/>
                                         <Grid x:Name="mRight">
                                             <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="7" Height="9" HorizontalAlignment="right" Margin="12,2,17,2">
                                                 <Path.Data>
@@ -235,6 +236,14 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="BorderOn" Property="Background" Value="#20000000"/>
                             <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
+                            <Setter TargetName="mLeft" Property="Visibility" Value="Visible"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Duration="0:0:0.100" From="5,22,0,22" To="5,12,0,12" Storyboard.TargetProperty="Margin" Storyboard.TargetName="mLeft"></ThicknessAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
                             <Setter TargetName="BorderOn" Property="Background" Value="#00000000"/>

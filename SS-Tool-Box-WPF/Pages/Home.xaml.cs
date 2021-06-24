@@ -1,8 +1,10 @@
 ﻿using SS_Tool_Box.Classes.Structure;
 using SS_Tool_Box.Controls;
 using SS_Tool_Box.Helper;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace SS_Tool_Box
 {
@@ -23,9 +25,24 @@ namespace SS_Tool_Box
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            DoubleAnimation opacAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.3)
+            };
+            ThicknessAnimation topAnimation = new ThicknessAnimation
+            {
+                From = new Thickness(0, -2, 0, 15),
+                To = new Thickness(0, 0, 0, 15),
+                Duration = TimeSpan.FromSeconds(0.3)
+            };
+            top.BeginAnimation(MarginProperty, topAnimation);
+
             ToolList toolHelper = new ToolList();
             Cards.Children.Clear();
             int num = 0;
+            int stakpNum = -1;
             string type = "";
 
             // 获取当前显示的类型
@@ -38,6 +55,7 @@ namespace SS_Tool_Box
                 }
             }
             main_title.Text = (string)Application.Current.FindResource("sort_type_" + type);
+            main_title.BeginAnimation(OpacityProperty, opacAnimation);
 
             // 创建卡片
             StackPanel nowStakp = new StackPanel();
@@ -57,11 +75,23 @@ namespace SS_Tool_Box
                         nowStakp = new StackPanel();
                         nowStakp.Orientation = Orientation.Horizontal;
                         Cards.Children.Add(nowStakp);
+                        stakpNum++;
                     }
                     SortCard card = new SortCard(info.Info, info.Page, MainWindow.main)
                     {
                         Margin = new Thickness(0, 0, 17, 15)
                     };
+
+                    ThicknessAnimation marginAnimation = new ThicknessAnimation
+                    {
+                        From = new Thickness(5),
+                        To = new Thickness(0, 0, 17, 15),
+                        Duration = TimeSpan.FromSeconds(0.2 * (num + 1))
+                    };
+                    opacAnimation.Duration = TimeSpan.FromSeconds(0.2 * (num + 1));
+                    card.BeginAnimation(OpacityProperty, opacAnimation);
+                    card.BeginAnimation(MarginProperty, marginAnimation);
+
                     nowStakp.Children.Add(card);
                     num++;
                 }

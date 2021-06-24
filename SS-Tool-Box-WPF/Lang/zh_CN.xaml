@@ -79,5 +79,6 @@
     <sys:String x:Key="options_mod_file_type">插件包</sys:String>
     <sys:String x:Key="sort_type_ColorTools">颜色工具</sys:String>
     <sys:String x:Key="sort_type_OtherTools">其他工具</sys:String>
+    <sys:String x:Key="options_Show_Msg">弹出一条消息</sys:String>
 
 </ResourceDictionary>

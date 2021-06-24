@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\SS-Tool-Box\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\SS-Tool-Box\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2CCCC1A6-2F7B-4DA3-B6F7-BFA5FEB41365}</ProjectGuid>
+    <ProjectGuid>{75B22BC5-A620-4339-B015-09FDBFA44ED9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SS_Tool_BoxTests</RootNamespace>
@@ -39,14 +38,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\SS-Tool-Box\packages\MSTest.TestFramework.2.1.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\SS-Tool-Box\packages\MSTest.TestFramework.2.1.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="Windows">
+      <HintPath>..\..\..\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -57,10 +52,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Classes\NetTests.cs" />
+    <Compile Include="Classes\OtherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SS-Tool-Box-WPF\SS-Tool-Box.csproj">
@@ -69,7 +63,37 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies">
+      <Version>1.0.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472">
+      <Version>1.0.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
+      <Version>7.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts">
+      <Version>10.0.19041.1</Version>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestAdapter">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestFramework">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.WindowsRuntime">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml">
+      <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -91,14 +115,6 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\SS-Tool-Box\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\SS-Tool-Box\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.props'))" />
-    <Error Condition="!Exists('..\SS-Tool-Box\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\SS-Tool-Box\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets'))" />
-  </Target>
-  <Import Project="..\SS-Tool-Box\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\SS-Tool-Box\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

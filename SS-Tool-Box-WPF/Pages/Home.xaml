@@ -9,7 +9,7 @@
       Title="Home"
       Loaded="Page_Loaded">
     <StackPanel>
-        <Grid Height="40" Margin="0,0,0,15">
+        <Grid x:Name="top" Height="40" Margin="0,0,0,15">
             <Button Style="{DynamicResource BCardEx}" Background="{DynamicResource colorCard}" Margin="0"/>
             <TextBlock x:Name="main_title" FontSize="15" Foreground="{DynamicResource colorFont}" Margin="17,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Grid>

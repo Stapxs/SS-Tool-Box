@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using Microsoft.Win32;
 using Panuon.UI.Silver;
 using SS_Tool_Box.Classes.Helper;
 using SS_Tool_Box.Classes.Structure;
@@ -239,6 +240,16 @@ namespace SS_Tool_Box.Pages
             Toast.Add(list[rd.Next(0, list.Count)]);
         }
 
+
+        private void ShowMsg_Click(object sender, RoutedEventArgs e)
+        {
+            string txt = new NetHelper.HttpUitls().Get("https://api.stapxs.cn/SS-Ana/Get/");
+            new ToastContentBuilder()
+                .AddText("林槐语录")
+                .AddText(txt)
+                .Show();
+        }
+
         private void LoadMod_Click(object sender, RoutedEventArgs e)
         {
             // 装载 spk 插件包
@@ -424,7 +435,6 @@ namespace SS_Tool_Box.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
             #region 初始化常规
 
             updTitle.Text = AppInfo.verType + " Version";

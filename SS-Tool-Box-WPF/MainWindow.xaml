@@ -80,7 +80,7 @@
             <Grid x:Name="panSeach" Visibility="Collapsed">
                 <Button Click="Seach_Close" Style="{DynamicResource BCard}" Background="Transparent" Margin="224,0,0,0"/>
                 <Button Click="Seach_Close" Style="{DynamicResource BCard}" Background="Transparent" Margin="0,0,615,64"/>
-                <Border Padding="0" CornerRadius="7" Background="{DynamicResource colorCard1}" Margin="15,0,0,62" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="195">
+                <Border x:Name="panSearchBox" Padding="0" CornerRadius="7" Background="{DynamicResource colorCard1}" Margin="15,0,0,62" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="195">
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="0" Opacity="0.3" BlurRadius="15" Color="#FF767676"/>
                     </Border.Effect>

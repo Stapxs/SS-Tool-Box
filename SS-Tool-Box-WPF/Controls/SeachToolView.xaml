@@ -6,7 +6,53 @@
              xmlns:local="clr-namespace:SS_Tool_Box.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="400">
-    <Grid Height="30">
+    <UserControl.Resources>
+        <Style x:Key="BCardExEx" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="7">
+                            <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="7" Name="PART_Background">
+                                <Grid>
+                                    <Border x:Name="mLeft" Width="3" CornerRadius="1.5" Background="{DynamicResource colorFont2}" HorizontalAlignment="Left" Margin="5,15,0,15"></Border>
+                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.300" To="#20FFFFFF" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                            <ThicknessAnimation Duration="0:0:0.200" From="5,15,0,15" To="5,7,0,7" Storyboard.TargetProperty="Margin" Storyboard.TargetName="mLeft"></ThicknessAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.200" To="#00000000" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="PART_Background"></ColorAnimation>
+                                            <ThicknessAnimation Duration="0:0:0.200" From="5,7,0,7" To="5,15,0,15" Storyboard.TargetProperty="Margin" Storyboard.TargetName="mLeft"></ThicknessAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="ButtonBase.IsPressed" Value="True">
+                                <Setter Property="UIElement.Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" Color="{DynamicResource colorShaderNP}" Direction="0" Opacity="0.4" RenderingBias="Performance" ShadowDepth="0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Height="30" Margin="10,0,10,0">
         <StackPanel Orientation="Horizontal" Margin="0,0,36,0">
             <Path x:Name="SvgPic" Fill="{DynamicResource colorFont}" Stretch="Fill" Margin="15,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="10" Height="10"
                                   Data="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"/>
@@ -17,6 +63,6 @@
                 Data = "M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z">
             </Path>
         </Grid>
-        <Button Click="Button_Click" Style="{DynamicResource BCardEx}" Background="Transparent"/>
+        <Button Click="Button_Click" Style="{DynamicResource BCardExEx}" Background="Transparent"/>
     </Grid>
 </UserControl>

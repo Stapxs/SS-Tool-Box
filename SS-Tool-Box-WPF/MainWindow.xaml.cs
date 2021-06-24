@@ -13,6 +13,8 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace SS_Tool_Box
@@ -384,6 +386,20 @@ namespace SS_Tool_Box
         {
             // 得到焦点，显示浮动搜索框
             panSeach.Visibility = Visibility.Visible;
+            ThicknessAnimation showAnimation = new ThicknessAnimation
+            {
+                From = new Thickness(15, 0, 0, 50),
+                To = new Thickness(15, 0, 0, 62),
+                Duration = TimeSpan.FromSeconds(0.2)
+            };
+            DoubleAnimation opacAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.1)
+            };
+            panSearchBox.BeginAnimation(MarginProperty, showAnimation);
+            panSearchBox.BeginAnimation(OpacityProperty, opacAnimation);
             // 删除已经创建过的结果控件
             StackPanel sp = new UI().GetChildObject<StackPanel>(listSeach, "seachoutpan");
             if (sp != null)
@@ -412,6 +428,13 @@ namespace SS_Tool_Box
             {
                 listSeach.Children.Remove(sp);
             }
+            panSearchBox.Padding = new Thickness(0);
+            // 判断输入
+            if (box.Text == "" || box.Text == null)
+            {
+                seachNone.Visibility = Visibility.Visible;
+                return;
+            }
             // 检索工具目录
             List<ToolInfo> toolist = new List<ToolInfo>();
             ToolList toolHelper = new ToolList();
@@ -419,7 +442,7 @@ namespace SS_Tool_Box
             {
                 Application app = Application.Current;
                 info.Info.Name = (string)app.Resources["tool_title_" + info.Name];
-                if (info.Name.IndexOf(box.Text) >= 0 && info.Type != "Hidden")
+                if (info.Info.Name.IndexOf(box.Text) >= 0 && info.Type != "Hidden")
                 {
                     toolist.Add(info);
                 }
@@ -432,6 +455,7 @@ namespace SS_Tool_Box
             {
                 // 隐藏没有结果
                 seachNone.Visibility = Visibility.Collapsed;
+                panSearchBox.Padding = new Thickness(0, 0, 0, 10);
             }
             StackPanel stack = new StackPanel();
             stack.Name = "seachoutpan";
