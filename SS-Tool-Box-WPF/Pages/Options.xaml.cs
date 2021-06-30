@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace SS_Tool_Box.Pages
@@ -31,8 +32,6 @@ namespace SS_Tool_Box.Pages
         public Options()
         {
             InitializeComponent();
-
-            load = false;
         }
 
         #region 事件 | 主题与颜色
@@ -125,6 +124,38 @@ namespace SS_Tool_Box.Pages
             MainWindow.main.Home.Visibility = Visibility.Collapsed;
             MainWindow.main.Title.Margin = new Thickness(0, 0, 0, 0);
             SS_Tool_Box.Options.SetOpt("alwaysShowHome", "false");
+        }
+
+        private void Color_Click(object sender, RoutedEventArgs e)
+        {
+            if (!load)
+            {
+                // 处理颜色修改
+                RadioButton button = (RadioButton)sender;
+                if (button.Name == "FollowSysColor")
+                {
+                    RegistryKey colorKey = new Reg().GetRegKey(Registry.CurrentUser, @"Software\Microsoft\Windows\DWM", "AccentColor", true);
+                    if (colorKey != null)
+                    {
+                        int accentColor = (int)colorKey.GetValue("AccentColor");
+                        Color colorMain = Color.FromArgb(
+                            180,
+                            (byte)(accentColor & 0xFF),
+                            (byte)((accentColor >> 8) & 0xFF),
+                            (byte)((accentColor >> 16) & 0xFF));
+                        Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorMain);
+                        Application.Current.Resources["colorSystem"] = new SolidColorBrush(colorMain);
+                        SS_Tool_Box.Options.SetOpt("autoColor", "true");
+                    }
+                }
+                else
+                {
+                    Application.Current.Resources["colorMainBlue"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString(button.Background.ToString()));
+
+                    SS_Tool_Box.Options.SetOpt("autoColor", "false");
+                    SS_Tool_Box.Options.SetOpt("seleColor", button.ToolTip.ToString());
+                }
+            }
         }
 
         #endregion
@@ -468,7 +499,7 @@ namespace SS_Tool_Box.Pages
             rollButton.IsChecked = SS_Tool_Box.Options.GetOpt("nonLinearScrolling")[0] == "true" ? true : false;
             homeButton.IsChecked = SS_Tool_Box.Options.GetOpt("alwaysShowHome")[0] == "true" ? true : false;
 
-            
+            // 语言相关
             LanguageBox.ItemsSource = new LocalHelper().indexLocals;
             LanguageBox.DisplayMemberPath = "Name";
             LanguageBox.SelectedValuePath = "Value";
@@ -490,7 +521,39 @@ namespace SS_Tool_Box.Pages
             }
             LanguageBox.SelectedValue = langValue;
 
+            // 主题色相关
+            foreach(ColorInfo color in new WindowsHelper.Color().colors)
+            {
+                RadioButton radioButton = new RadioButton();
+                radioButton.Resources = demoRadio.Resources;
+                radioButton.Click += Color_Click;
+                radioButton.ToolTip = color.name;
+                radioButton.GroupName = "MainColor";
+                radioButton.Background = new SolidColorBrush(color.color);
+                radioButton.BorderThickness = new Thickness(0);
+                radioButton.Width = 25;
+                radioButton.Height = 25;
+                radioButton.Margin = new Thickness(10, 0, 0, 0);
+
+                RadioButtonHelper.SetCheckedBackground(radioButton, new SolidColorBrush(color.color));
+                RadioButtonHelper.SetBoxHeight(radioButton, 25);
+                RadioButtonHelper.SetBoxWidth(radioButton, 25);
+
+                if(color.name == SS_Tool_Box.Options.GetOpt("seleColor")[0] && SS_Tool_Box.Options.GetOpt("autoColor")[0] != "true")
+                {
+                    radioButton.IsChecked = true;
+                }
+
+                colorsPan.Children.Add(radioButton);
+            }
+            if(SS_Tool_Box.Options.GetOpt("autoColor")[0] == "true")
+            {
+                FollowSysColor.IsChecked = true;
+            }
+
             #endregion
+
+            load = false;
         }
     }
 }

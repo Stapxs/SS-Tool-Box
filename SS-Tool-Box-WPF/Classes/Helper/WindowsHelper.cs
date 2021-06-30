@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SS_Tool_Box.Classes.Structure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -96,6 +97,15 @@ namespace SS_Tool_Box.Classes.Helper
         /// </summary>
         public class Color
         {
+            public ColorInfo[] colors = new ColorInfo[]
+            {
+                new ColorInfo("林槐蓝", (System.Windows.Media.Color)ColorConverter.ConvertFromString("#4C6EF5")),
+                new ColorInfo("坏猫黄", (System.Windows.Media.Color)ColorConverter.ConvertFromString("#FFCC00")),
+                new ColorInfo("墨竹绿", (System.Windows.Media.Color)ColorConverter.ConvertFromString("#546E36")),
+                new ColorInfo("天牧红", (System.Windows.Media.Color)ColorConverter.ConvertFromString("#DE373F")),
+                new ColorInfo("玄素黑", (System.Windows.Media.Color)ColorConverter.ConvertFromString("#31343B")),
+            };
+
             private SolidColorBrush brush = (SolidColorBrush)Application.Current.FindResource("colorMainBlue");
 
             private List<string[]> colorUIDark = new List<string[]> {
@@ -134,7 +144,7 @@ namespace SS_Tool_Box.Classes.Helper
                 {
                     Application.Current.Resources.Remove(info[0]);
                     Application.Current.Resources.Add(info[0],
-                        new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(info[1])));
+                        new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString(info[1])));
                 }
                 return false;
             }

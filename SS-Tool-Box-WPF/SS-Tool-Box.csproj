@@ -68,6 +68,7 @@
     <Compile Include="Classes\Features\Toast.cs" />
     <Compile Include="Classes\Helper\LocalHelper.cs" />
     <Compile Include="Classes\Features\Reg.cs" />
+    <Compile Include="Classes\Structure\ColorInfo.cs" />
     <Compile Include="Classes\Structure\LangInfo.cs" />
     <Compile Include="Classes\Structure\SortInfo.cs" />
     <Compile Include="Classes\Structure\ToolInfo.cs" />

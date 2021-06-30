@@ -127,5 +127,22 @@ namespace SS_Tool_Box
                 return "ERR";
             }
         }
+        /// <summary>
+        /// 获取键值
+        /// </summary>
+        /// <param name="way">键的父路径</param>
+        /// <param name="name">键名</param>
+        /// <returns></returns>
+        public RegistryKey GetRegKey(RegistryKey key, String way, String name, bool backKey)
+        {
+            try
+            {
+                return key.OpenSubKey(way, true); //该项必须已存在
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

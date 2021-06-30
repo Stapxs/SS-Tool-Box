@@ -1,7 +1,7 @@
 {
   "Version": "1",
-  "MainVersion": "41.116",
-  "Time": "2021/06/20",
+  "MainVersion": "43.06",
+  "Time": "2021/06/30",
   "Url": "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/dev/Latest/SS-Tool-Box.exe",
-  "Logs": "+ 兼容 Windows11 原生圆角"
+  "Logs": "+ 完整的主题色功能"
 }

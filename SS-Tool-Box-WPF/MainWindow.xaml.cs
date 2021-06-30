@@ -84,10 +84,10 @@ namespace SS_Tool_Box
                 new UserPreferenceChangedEventHandler(Event_UserPreferenceChanged);
 
             // 判断系统版本
-            if(int.Parse(Environment.OSVersion.Version.Major.ToString()) == 10)
+            if (int.Parse(Environment.OSVersion.Version.Major.ToString()) == 10)
             {
                 // Win10
-                if(int.Parse(Environment.OSVersion.Version.Build.ToString()) >= 21996)
+                if (int.Parse(Environment.OSVersion.Version.Build.ToString()) >= 21996)
                 {
                     // Win11，关闭自绘圆角，使用系统圆角
                     mainWindow.AllowsTransparency = false;
@@ -100,9 +100,44 @@ namespace SS_Tool_Box
                 }
             }
 
-#endregion
+            #endregion
             #region 1 - 初始化颜色主题
 
+            // 初始化主题色
+            RegistryKey color = new Reg().GetRegKey(Registry.CurrentUser, @"Software\Microsoft\Windows\DWM", "AccentColor", true);
+            if (color != null)
+            {
+                int accentColor = (int)color.GetValue("AccentColor");
+                Color colorMain = Color.FromArgb(
+                    180,
+                    (byte)(accentColor & 0xFF),
+                    (byte)((accentColor >> 8) & 0xFF),
+                    (byte)((accentColor >> 16) & 0xFF));
+
+                if (Options.GetOpt("autoColor")[0] != "false")
+                {
+                    Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorMain);
+                }
+                else
+                {
+                    // 加载自定义的主题色
+                    bool get = false;
+                    foreach(ColorInfo colorInfo in new WindowsHelper.Color().colors)
+                    {
+                        if(colorInfo.name == Options.GetOpt("seleColor")[0])
+                        {
+                            get = true;
+                            Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorInfo.color);
+                        }
+                    }
+                    if(!get)
+                    {
+                        Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorMain);
+                        Options.SetOpt("autoColor", "true");
+                    }
+                }
+                Application.Current.Resources["colorSystem"] = new SolidColorBrush(colorMain);
+            }
             if (Options.GetOpt("autoDarkMode")[0] == "true")
             {
                 // 判断颜色模式
@@ -114,7 +149,7 @@ namespace SS_Tool_Box
             }
             else
             {
-                if ((Options.GetOpt("darkMode"))[0] == "false")
+                if (Options.GetOpt("darkMode")[0] == "false")
                 {
                     new WindowsHelper.Color().ChangeDark(false);
                 }
@@ -137,7 +172,7 @@ namespace SS_Tool_Box
                 new LocalHelper().ChangeLanguage(Options.GetOpt("language")[0].Substring(1), true, true);
             }
 
-#endregion
+            #endregion
             #region 4 - 初始化页面
 
             // 版本号
@@ -156,12 +191,12 @@ namespace SS_Tool_Box
 
             // 初始化 Tab 标签
             ToolList toolHelper = new ToolList();
-            foreach(SortInfo info in toolHelper.Sorts)
+            foreach (SortInfo info in toolHelper.Sorts)
             {
                 Application app = Application.Current;
                 TabItem item = new TabItem();
                 item.Header = (string)Application.Current.FindResource("sort_type_" + info.name);
-                if(info.index == 0)
+                if (info.index == 0)
                 {
                     item.IsSelected = true;
                 }
@@ -169,12 +204,12 @@ namespace SS_Tool_Box
             }
 
             // 初始化 Home 按钮
-            if(Options.GetOpt("alwaysShowHome")[0] == "true")
+            if (Options.GetOpt("alwaysShowHome")[0] == "true")
             {
                 Home.Visibility = Visibility.Visible;
                 Title.Margin = new Thickness(10, 0, 0, 0);
             }
-#endregion
+            #endregion
             #region 5 - 其他操作
 
             // 检查更新
@@ -182,7 +217,7 @@ namespace SS_Tool_Box
             MainWindow.threads.Push(thread);
             thread.Start();
 
-#endregion
+            #endregion
 
             Log.AddLog("main", "加载完毕，耗时" + DateTime.Now.Subtract(startRun).TotalSeconds + "秒");
             loadDone = true;
@@ -332,7 +367,7 @@ namespace SS_Tool_Box
 
         private void Event_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
         {
-            if (Options.GetOpt("autoDarkMode")[0] == "true")
+            if (Options.GetOpt("autoDarkMode")[0] != "true")
             {
                 // 判断颜色模式
                 string isOpen = new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
@@ -344,6 +379,23 @@ namespace SS_Tool_Box
                 {
                     new WindowsHelper.Color().ChangeDark(true);
                 }
+            }
+            // 判断主题色
+            RegistryKey color = new Reg().GetRegKey(Registry.CurrentUser, @"Software\Microsoft\Windows\DWM", "AccentColor", true);
+            if (color != null)
+            {
+                int accentColor = (int)color.GetValue("AccentColor");
+                Color colorMain = Color.FromArgb(
+                    180,
+                    (byte)(accentColor & 0xFF),
+                    (byte)((accentColor >> 8) & 0xFF),
+                    (byte)((accentColor >> 16) & 0xFF));
+
+                if (Options.GetOpt("autoColor")[0] != "false")
+                {
+                    Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorMain);
+                }
+                Application.Current.Resources["colorSystem"] = new SolidColorBrush(colorMain);
             }
         }
 
@@ -642,8 +694,8 @@ namespace SS_Tool_Box
         }
 
         public static List<LinkVer> linkList = new List<LinkVer>() {
-            new LinkVer("Dev", "Github Dev", "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/dev/Latest/LatestLog.txt"),
-            new LinkVer("Release", "Blog Release", "https://stapx.chuhelan.com/api/SS-Tool-Box/getVersion.php?dev=False&type=Desktop"),
+            new LinkVer("Dev", "Github Dev", "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/dev/SS-Tool-Box-WPF/Latest/LatestLog.txt"),
+            new LinkVer("Release", "Blog Release", "https://api.stapxs.cn/SS-Tool-Box/getVersion.php?dev=False&type=Desktop"),
         };
 
 #endregion
