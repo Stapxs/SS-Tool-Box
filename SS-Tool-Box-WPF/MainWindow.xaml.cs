@@ -80,8 +80,7 @@ namespace SS_Tool_Box
             // UI.ToastHelper.StartShower();        // 吐司
 
             // 颜色模式切换事件
-            SystemEvents.UserPreferenceChanged +=
-                new UserPreferenceChangedEventHandler(Event_UserPreferenceChanged);
+            SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(Event_UserPreferenceChanged);
 
             // 判断系统版本
             if (int.Parse(Environment.OSVersion.Version.Major.ToString()) == 10)
@@ -104,56 +103,40 @@ namespace SS_Tool_Box
             #region 1 - 初始化颜色主题
 
             // 初始化主题色
-            RegistryKey color = new Reg().GetRegKey(Registry.CurrentUser, @"Software\Microsoft\Windows\DWM", "AccentColor", true);
-            if (color != null)
+            if (Options.GetOpt("autoColor")[0] == "false")
             {
-                int accentColor = (int)color.GetValue("AccentColor");
-                Color colorMain = Color.FromArgb(
-                    180,
-                    (byte)(accentColor & 0xFF),
-                    (byte)((accentColor >> 8) & 0xFF),
-                    (byte)((accentColor >> 16) & 0xFF));
-
-                if (Options.GetOpt("autoColor")[0] != "false")
+                // 加载自定义的主题色
+                bool get = false;
+                foreach (ColorInfo colorInfo in new WindowsHelper.Color().colors)
                 {
-                    Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorMain);
-                }
-                else
-                {
-                    // 加载自定义的主题色
-                    bool get = false;
-                    foreach(ColorInfo colorInfo in new WindowsHelper.Color().colors)
+                    if (colorInfo.name == Options.GetOpt("seleColor")[0])
                     {
-                        if(colorInfo.name == Options.GetOpt("seleColor")[0])
-                        {
-                            get = true;
-                            Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorInfo.color);
-                        }
-                    }
-                    if(!get)
-                    {
-                        Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorMain);
-                        Options.SetOpt("autoColor", "true");
+                        get = true;
+                        Application.Current.Resources["colorMain"] = new SolidColorBrush(new WindowsHelper.Color().ChangeColor(colorInfo.color, (int)(255 * 0.4)));
                     }
                 }
-                Application.Current.Resources["colorSystem"] = new SolidColorBrush(colorMain);
-            }
-            if (Options.GetOpt("autoDarkMode")[0] == "true")
-            {
-                // 判断颜色模式
-                string isOpen = new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
-                if (isOpen == "1")
+                if (!get)
                 {
-                    new WindowsHelper.Color().ChangeDark(false);
+                    Options.SetOpt("autoColor", "true");
+                    new WindowsHelper.Color().GetASaveSysColor();
                 }
             }
             else
             {
-                if (Options.GetOpt("darkMode")[0] == "false")
-                {
-                    new WindowsHelper.Color().ChangeDark(false);
-                }
+                new WindowsHelper.Color().GetASaveSysColor();
             }
+
+            // 暗黑模式
+            if (new WindowsHelper.Color().isNowDark())
+            {
+                new WindowsHelper.Color().changeMainColorDark();
+            }
+            else
+            {
+                new WindowsHelper.Color().ChangeDark(false);
+            }
+
+            // 语言
             string langValue = "en_US";
             if (Options.GetOpt("language")[0][0] != '~')
             {
@@ -367,35 +350,14 @@ namespace SS_Tool_Box
 
         private void Event_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
         {
-            if (Options.GetOpt("autoDarkMode")[0] != "true")
+            // 判断颜色模式
+            if (new WindowsHelper.Color().isNowDark())
             {
-                // 判断颜色模式
-                string isOpen = new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
-                if (isOpen == "1")
-                {
-                    new WindowsHelper.Color().ChangeDark(false);
-                }
-                else
-                {
-                    new WindowsHelper.Color().ChangeDark(true);
-                }
+                new WindowsHelper.Color().ChangeDark(true);
             }
-            // 判断主题色
-            RegistryKey color = new Reg().GetRegKey(Registry.CurrentUser, @"Software\Microsoft\Windows\DWM", "AccentColor", true);
-            if (color != null)
+            else
             {
-                int accentColor = (int)color.GetValue("AccentColor");
-                Color colorMain = Color.FromArgb(
-                    180,
-                    (byte)(accentColor & 0xFF),
-                    (byte)((accentColor >> 8) & 0xFF),
-                    (byte)((accentColor >> 16) & 0xFF));
-
-                if (Options.GetOpt("autoColor")[0] != "false")
-                {
-                    Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorMain);
-                }
-                Application.Current.Resources["colorSystem"] = new SolidColorBrush(colorMain);
+                new WindowsHelper.Color().ChangeDark(false);
             }
         }
 
@@ -417,7 +379,7 @@ namespace SS_Tool_Box
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
-                    this.DragMove();
+                    DragMove();
                 }
             }
             catch
@@ -660,10 +622,9 @@ namespace SS_Tool_Box
                         Log.AddLog("update", "最新版本为：" + back[0] + " > " + AppInfo.verNum);
                         Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
-                        // 切换到设置界面
-                        Pages.Options opt = new Pages.Options();
+                            // 切换到设置界面
                             Application app = Application.Current;
-                            WindowsHelper.changePage(opt, app.Resources["options"] + " - " + app.Resources["options_main_title_def"]);
+                            WindowsHelper.changePage(typeof(Pages.Options), app.Resources["options"] + " - " + app.Resources["options_main_title_def"]);
                         });
                     }
                 }
@@ -694,7 +655,7 @@ namespace SS_Tool_Box
         }
 
         public static List<LinkVer> linkList = new List<LinkVer>() {
-            new LinkVer("Dev", "Github Dev", "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/dev/SS-Tool-Box-WPF/Latest/LatestLog.txt"),
+            new LinkVer("Dev", "Github Dev", "https://raw.githubusercontent.com/Stapxs/SS-Tool-Box/dev/Latest/LatestLog.txt"),
             new LinkVer("Release", "Blog Release", "https://api.stapxs.cn/SS-Tool-Box/getVersion.php?dev=False&type=Desktop"),
         };
 

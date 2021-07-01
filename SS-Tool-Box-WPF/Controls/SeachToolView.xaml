@@ -14,7 +14,7 @@
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="7">
                             <Border Background="#00000000" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" MinWidth="25" MinHeight="25" CornerRadius="7" Name="PART_Background">
                                 <Grid>
-                                    <Border x:Name="mLeft" Width="3" CornerRadius="1.5" Background="{DynamicResource colorMainBlue}" HorizontalAlignment="Left" Margin="5,15,0,15"></Border>
+                                    <Border x:Name="mLeft" Width="3" CornerRadius="1.5" Background="{DynamicResource colorMain}" HorizontalAlignment="Left" Margin="5,15,0,15"></Border>
                                     <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </Border>

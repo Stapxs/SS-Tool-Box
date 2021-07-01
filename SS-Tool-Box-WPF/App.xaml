@@ -6,9 +6,14 @@
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- 默认主题 -->
                 <ResourceDictionary Source="Style\Default.xaml"/>
+                <!-- 语言文件 -->
                 <ResourceDictionary Source="Lang\zh_CN.xaml"/>
+                <!-- UI 设置项 -->
                 <ResourceDictionary Source="Style\UIOptions.xaml"/>
+                <!-- 固定中间变量 -->
+                <ResourceDictionary Source="Style\Fixed.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

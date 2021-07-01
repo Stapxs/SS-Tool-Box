@@ -55,9 +55,9 @@ namespace SS_Tool_Box.Pages
 
         private void autoDarkButton_Checked(object sender, RoutedEventArgs e)
         {
+            darkButton.IsEnabled = false;
             if (!load)
             {
-                darkButton.IsEnabled = false;
                 SS_Tool_Box.Options.SetOpt("autoDarkMode", "true");
                 // 判断颜色模式
                 string isOpen = new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
@@ -69,10 +69,6 @@ namespace SS_Tool_Box.Pages
                 {
                     new WindowsHelper.Color().ChangeDark(true);
                 }
-            }
-            else
-            {
-                darkButton.IsEnabled = false;
             }
         }
         private void autoDarkButton_Unchecked(object sender, RoutedEventArgs e)
@@ -103,7 +99,6 @@ namespace SS_Tool_Box.Pages
 
             SS_Tool_Box.Options.SetOpt("nonLinearScrolling", "true");
         }
-
         private void rollButton_Unchecked(object sender, RoutedEventArgs e)
         {
             Application.Current.Resources.Remove("IsInertiaEnabled");
@@ -118,7 +113,6 @@ namespace SS_Tool_Box.Pages
             MainWindow.main.Title.Margin = new Thickness(10, 0, 0, 0);
             SS_Tool_Box.Options.SetOpt("alwaysShowHome", "true");
         }
-
         private void homeButton_Unchecked(object sender, RoutedEventArgs e)
         {
             MainWindow.main.Home.Visibility = Visibility.Collapsed;
@@ -128,32 +122,23 @@ namespace SS_Tool_Box.Pages
 
         private void Color_Click(object sender, RoutedEventArgs e)
         {
+            RadioButton button = (RadioButton)sender;
             if (!load)
             {
                 // 处理颜色修改
-                RadioButton button = (RadioButton)sender;
+                Application.Current.Resources["colorMain"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString(button.Background.ToString()));
                 if (button.Name == "FollowSysColor")
                 {
-                    RegistryKey colorKey = new Reg().GetRegKey(Registry.CurrentUser, @"Software\Microsoft\Windows\DWM", "AccentColor", true);
-                    if (colorKey != null)
-                    {
-                        int accentColor = (int)colorKey.GetValue("AccentColor");
-                        Color colorMain = Color.FromArgb(
-                            180,
-                            (byte)(accentColor & 0xFF),
-                            (byte)((accentColor >> 8) & 0xFF),
-                            (byte)((accentColor >> 16) & 0xFF));
-                        Application.Current.Resources["colorMainBlue"] = new SolidColorBrush(colorMain);
-                        Application.Current.Resources["colorSystem"] = new SolidColorBrush(colorMain);
                         SS_Tool_Box.Options.SetOpt("autoColor", "true");
-                    }
                 }
                 else
                 {
-                    Application.Current.Resources["colorMainBlue"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString(button.Background.ToString()));
-
                     SS_Tool_Box.Options.SetOpt("autoColor", "false");
                     SS_Tool_Box.Options.SetOpt("seleColor", button.ToolTip.ToString());
+                }
+                if(new WindowsHelper.Color().isNowDark())
+                {
+                    new WindowsHelper.Color().changeMainColorDark();
                 }
             }
         }
@@ -466,6 +451,8 @@ namespace SS_Tool_Box.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            load = true;
+
             #region 初始化常规
 
             updTitle.Text = AppInfo.verType + " Version";
@@ -521,39 +508,74 @@ namespace SS_Tool_Box.Pages
             }
             LanguageBox.SelectedValue = langValue;
 
-            // 主题色相关
-            foreach(ColorInfo color in new WindowsHelper.Color().colors)
-            {
-                RadioButton radioButton = new RadioButton();
-                radioButton.Resources = demoRadio.Resources;
-                radioButton.Click += Color_Click;
-                radioButton.ToolTip = color.name;
-                radioButton.GroupName = "MainColor";
-                radioButton.Background = new SolidColorBrush(color.color);
-                radioButton.BorderThickness = new Thickness(0);
-                radioButton.Width = 25;
-                radioButton.Height = 25;
-                radioButton.Margin = new Thickness(10, 0, 0, 0);
+            #endregion
+            #region 初始化主题色模块
 
-                RadioButtonHelper.SetCheckedBackground(radioButton, new SolidColorBrush(color.color));
-                RadioButtonHelper.SetBoxHeight(radioButton, 25);
-                RadioButtonHelper.SetBoxWidth(radioButton, 25);
-
-                if(color.name == SS_Tool_Box.Options.GetOpt("seleColor")[0] && SS_Tool_Box.Options.GetOpt("autoColor")[0] != "true")
-                {
-                    radioButton.IsChecked = true;
-                }
-
-                colorsPan.Children.Add(radioButton);
-            }
-            if(SS_Tool_Box.Options.GetOpt("autoColor")[0] == "true")
+            // 遍历添加内置颜色
+            addInnerColors();
+            // 选中按钮
+            if (SS_Tool_Box.Options.GetOpt("autoColor")[0] == "true")
             {
                 FollowSysColor.IsChecked = true;
+            }
+            // 自动按钮背景色
+            Color color = (Color)ColorConverter.ConvertFromString(Application.Current.Resources["colorMainDef"].ToString());
+            if (new WindowsHelper.Color().isNowDark())
+            {
+                FollowSysColor.Background = new SolidColorBrush(new WindowsHelper.Color().ChangeColor(color, (double)0.6));
+                RadioButtonHelper.SetCheckedBackground(FollowSysColor, new SolidColorBrush(new WindowsHelper.Color().ChangeColor(color, (double)0.6)));
+            }
+            else
+            {
+                FollowSysColor.Background = new SolidColorBrush(new WindowsHelper.Color().ChangeColor(color, (int)(255 * 0.4)));
+                RadioButtonHelper.SetCheckedBackground(FollowSysColor, new SolidColorBrush(new WindowsHelper.Color().ChangeColor(color, (int)(255 * 0.4))));
             }
 
             #endregion
 
             load = false;
+        }
+
+        public void addInnerColors()
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                // 清空
+                colorsPan.Children.Clear();
+                // 遍历添加内置颜色
+                foreach (ColorInfo color in new WindowsHelper.Color().colors)
+                {
+                    RadioButton radioButton = new RadioButton();
+                    radioButton.Resources = demoRadio.Resources;
+                    radioButton.Click += Color_Click;
+                    radioButton.ToolTip = color.name;
+                    radioButton.GroupName = "MainColor";
+                    if (new WindowsHelper.Color().isNowDark())
+                    {
+                        radioButton.Background = new SolidColorBrush(new WindowsHelper.Color().ChangeColor(color.color, (double)0.6));
+                        RadioButtonHelper.SetCheckedBackground(radioButton, new SolidColorBrush(new WindowsHelper.Color().ChangeColor(color.color, (double)0.6)));
+                    }
+                    else
+                    {
+                        radioButton.Background = new SolidColorBrush(new WindowsHelper.Color().ChangeColor(color.color, (int)(255 * 0.4)));
+                        RadioButtonHelper.SetCheckedBackground(radioButton, new SolidColorBrush(new WindowsHelper.Color().ChangeColor(color.color, (int)(255 * 0.4))));
+                    }
+                    radioButton.BorderThickness = new Thickness(0);
+                    radioButton.Width = 25;
+                    radioButton.Height = 25;
+                    radioButton.Margin = new Thickness(10, 0, 0, 0);
+
+                    RadioButtonHelper.SetBoxHeight(radioButton, 25);
+                    RadioButtonHelper.SetBoxWidth(radioButton, 25);
+
+                    if (color.name == SS_Tool_Box.Options.GetOpt("seleColor")[0] && SS_Tool_Box.Options.GetOpt("autoColor")[0] != "true")
+                    {
+                        radioButton.IsChecked = true;
+                    }
+
+                    colorsPan.Children.Add(radioButton);
+                }
+            });
         }
     }
 }

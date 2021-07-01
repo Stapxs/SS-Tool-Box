@@ -13,7 +13,7 @@
                 <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
             </Path.Data>
         </Path>
-        <Button Style="{DynamicResource TextButtonEx}" Background="{DynamicResource colorMainBlue}" HorizontalAlignment="Right" Height="20" MinWidth="60" Margin="0,0,55,0">
+        <Button Style="{DynamicResource TextButtonEx}" Background="{DynamicResource colorMain}" HorizontalAlignment="Right" Height="20" MinWidth="60" Margin="0,0,55,0">
             <TextBlock x:Name="lis" Text="GPL v3" FontSize="10" Foreground="#FFF" Margin="10,0"/>
         </Button>
         <StackPanel Margin="25,0,0,0" VerticalAlignment="Center">

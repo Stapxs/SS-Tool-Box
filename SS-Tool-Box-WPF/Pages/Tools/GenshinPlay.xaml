@@ -171,8 +171,8 @@
                 <ScrollViewer x:Name="mainScroll" Height="195" HorizontalScrollBarVisibility="Auto">
                     <StackPanel Width="609" Margin="15,15,0,0">
                         <StackPanel Height="35" Orientation="Horizontal">
-                            <Border Width="50" BorderBrush="{DynamicResource colorMainBlue}" BorderThickness="0,0,3,0">
-                                <Button Background="{DynamicResource colorMainBlue}" FontSize="12" Foreground="{DynamicResource colorFont}" Style="{DynamicResource TextButtonEx}" Width="25" Height="25" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border Width="50" BorderBrush="{DynamicResource colorMain}" BorderThickness="0,0,3,0">
+                                <Button Background="{DynamicResource colorMain}" FontSize="12" Foreground="{DynamicResource colorFont}" Style="{DynamicResource TextButtonEx}" Width="25" Height="25" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="1" Foreground="{DynamicResource colorFont}" Margin="2,2,0,0"/>
                                 </Button>
                             </Border>

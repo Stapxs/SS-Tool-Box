@@ -1,9 +1,8 @@
-﻿using SS_Tool_Box.Classes.Structure;
+﻿using Microsoft.Win32;
+using SS_Tool_Box.Classes.Structure;
+using SS_Tool_Box.Function;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -106,7 +105,7 @@ namespace SS_Tool_Box.Classes.Helper
                 new ColorInfo("玄素黑", (System.Windows.Media.Color)ColorConverter.ConvertFromString("#31343B")),
             };
 
-            private SolidColorBrush brush = (SolidColorBrush)Application.Current.FindResource("colorMainBlue");
+            private SolidColorBrush brush = (SolidColorBrush)Application.Current.FindResource("colorMain");
 
             private List<string[]> colorUIDark = new List<string[]> {
                 new string[] { "colorBg", "#2D2D2D"},
@@ -129,22 +128,164 @@ namespace SS_Tool_Box.Classes.Helper
                 new string[] { "colorFont2", "#969FB3"},
             };
 
+            public static bool isDark = true;
+
+            /// <summary>
+            /// 切换颜色模式
+            /// </summary>
+            /// <param name="isDark"></param>
+            /// <returns></returns>
             public bool ChangeDark(bool isDark)
             {
+                if(Color.isDark == isDark)
+                {
+                    return false;
+                }
                 List<string[]> colorUI;
                 if (isDark)
                 {
+                    Color.isDark = true;
                     colorUI = colorUIDark;
+                    // 处理主题色
+                    changeMainColorDark();
                 }
                 else
                 {
+                    Color.isDark = false;
                     colorUI = colorUILight;
+                    // 处理主题色
+                    if (Options.GetOpt("autoColor")[0] == "true")
+                    {
+                        GetASaveSysColor();
+                    }
+                    else
+                    {
+                        bool get = false;
+                        foreach (ColorInfo colorInfo in colors)
+                        {
+                            if (colorInfo.name == Options.GetOpt("seleColor")[0])
+                            {
+                                get = true;
+                                Application.Current.Resources["colorMain"] = new SolidColorBrush(ChangeColor(colorInfo.color, (int)(255 * 0.4)));
+                            }
+                        }
+                        if (!get)
+                        {
+                            Options.SetOpt("autoColor", "true");
+                            GetASaveSysColor();
+                        }
+                    }
                 }
+                // 刷新页面颜色
                 foreach (string[] info in colorUI)
                 {
                     Application.Current.Resources.Remove(info[0]);
                     Application.Current.Resources.Add(info[0],
                         new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString(info[1])));
+                }
+                return true;
+            }
+
+            
+            /// <summary>
+            /// 修改颜色亮度
+            /// </summary>
+            /// <param name="addLightPer"></param>
+            /// <returns></returns>
+            public System.Windows.Media.Color ChangeColor(System.Windows.Media.Color nowColor, double addLightPer)
+            {
+                double[] hsl = new UI.ColorChange().RGBToHSL(nowColor);
+                double[] rgb = new UI.ColorChange().HslToRgb(hsl[0], hsl[1], hsl[2] + ((255 - hsl[2]) * addLightPer));
+                return System.Windows.Media.Color.FromArgb(255, (byte)(int)rgb[0], (byte)(int)rgb[1], (byte)(int)rgb[2]);
+            }
+            public System.Windows.Media.Color ChangeColor(System.Windows.Media.Color nowColor, int light)
+            {
+                double[] hsl = new UI.ColorChange().RGBToHSL(nowColor);
+                double[] rgb = new UI.ColorChange().HslToRgb(hsl[0], hsl[1], light);
+                return System.Windows.Media.Color.FromArgb(255, (byte)(int)rgb[0], (byte)(int)rgb[1], (byte)(int)rgb[2]);
+            }
+            public void changeMainColorDark()
+            {
+                if (Options.GetOpt("autoColor")[0] == "true")
+                {
+                    GetASaveSysColor();
+                }
+                else
+                {
+                    bool get = false;
+                    foreach (ColorInfo colorInfo in colors)
+                    {
+                        if (colorInfo.name == Options.GetOpt("seleColor")[0])
+                        {
+                            get = true;
+                            Application.Current.Resources["colorMain"] = new SolidColorBrush(ChangeColor(colorInfo.color, (int)(255 * 0.4)));
+                        }
+                    }
+                    if (!get)
+                    {
+                        Options.SetOpt("autoColor", "true");
+                        GetASaveSysColor();
+                    }
+                }
+                System.Windows.Media.Color color = ChangeColor((System.Windows.Media.Color)ColorConverter.ConvertFromString(Application.Current.Resources["colorMain"].ToString()), 0.6);
+                Application.Current.Resources["colorMain"] = new SolidColorBrush(color);
+            }
+
+            /// <summary>
+            /// 获取系统主题颜色
+            /// </summary>
+            /// <returns></returns>
+            private System.Windows.Media.Color GetSystemColor()
+            {
+                RegistryKey color = new Reg().GetRegKey(Registry.CurrentUser, @"Software\Microsoft\Windows\DWM", "AccentColor", true);
+                if (color != null)
+                {
+                    int accentColor = (int)color.GetValue("AccentColor");
+                    return System.Windows.Media.Color.FromArgb(
+                        255,
+                        (byte)(accentColor & 0xFF),
+                        (byte)((accentColor >> 8) & 0xFF),
+                        (byte)((accentColor >> 16) & 0xFF));
+                }
+                return System.Windows.Media.Color.FromArgb(255, 255, 255, 255);
+            }
+            public void GetASaveSysColor()
+            {
+                // 系统主题色
+                System.Windows.Media.Color sysColor = GetSystemColor();
+                if(sysColor.R != 255 && sysColor.G != 255 && sysColor.B != 255)
+                {
+                    // 保存系统颜色
+                    Application.Current.Resources["colorMainDef"] = new SolidColorBrush(sysColor);
+                    // 对颜色进行平衡亮度（将亮度改为 40%）
+                    if (Options.GetOpt("autoColor")[0] != "false")
+                    {
+                        // 应用颜色
+                        Application.Current.Resources["colorMain"] = new SolidColorBrush(ChangeColor(sysColor, (int)(255 * 0.4)));
+                    }
+                }
+                else
+                {
+                    Log.AddErr("main", "获取系统主题色错误！");
+                }
+            }
+
+            public bool isNowDark()
+            {
+                string isOpen = new Reg().GetRegKey(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme");
+                if (Options.GetOpt("autoDarkMode")[0] == "true")
+                {
+                    if(isOpen != "1")
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if(Options.GetOpt("darkMode")[0] == "true")
+                    {
+                        return true;
+                    }
                 }
                 return false;
             }

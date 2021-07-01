@@ -19,7 +19,7 @@
                             <Border Name="Border" Width="80" Height="33" Margin="2,2,0,0">
                                 <Border Name="BorderOn" CornerRadius="0" Background="Transparent">
                                     <Grid>
-                                        <Border Width="65" Name="BorderDown" Height="0" CornerRadius="0,0,2,2" VerticalAlignment="Bottom" Background="{DynamicResource colorFont}" HorizontalAlignment="Center"/>
+                                        <Border Name="BorderDown" Height="3" CornerRadius="1.5" VerticalAlignment="Bottom" Background="{DynamicResource colorMain}" HorizontalAlignment="Center"/>
                                         <TextBlock Foreground="{DynamicResource colorFont}" x:Name="mHeader" FontSize="13" HorizontalAlignment="Center" Text="{TemplateBinding Header}" VerticalAlignment="Center" Margin="12,2,12,2"/>
                                     </Grid>
                                 </Border>
@@ -27,12 +27,22 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="mHeader" Property="Foreground" Value="{DynamicResource colorMain}"/>
                                 <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
-                                <Setter TargetName="BorderDown" Property="Height" Value="2"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
-                                <Setter TargetName="BorderDown" Property="Height" Value="0"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.100" From="0" To="45" Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderDown"></DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.100" From="45" To="0" Storyboard.TargetProperty="Width" Storyboard.TargetName="BorderDown"></DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="mHeader" Property="HorizontalAlignment" Value="Center"/>
@@ -57,7 +67,7 @@
                         <StackPanel>
                             <Grid>
                                 <Button Style="{DynamicResource BCard}" Background="{DynamicResource colorCard}" Margin="0"/>
-                                <ProgressBar x:Name="pbDown" Visibility="Collapsed" Height="20" VerticalAlignment="Top" Foreground="{DynamicResource colorMainBlue}" Background="{DynamicResource colorCard1}" pu:ProgressBarHelper.CornerRadius="7">
+                                <ProgressBar x:Name="pbDown" Visibility="Collapsed" Height="20" VerticalAlignment="Top" Foreground="{DynamicResource colorMain}" Background="{DynamicResource colorCard1}" pu:ProgressBarHelper.CornerRadius="7">
                                     <ProgressBar.Resources>
                                         <ResourceDictionary>
                                             <ResourceDictionary.MergedDictionaries>
@@ -70,7 +80,7 @@
                                 <StackPanel>
                                     <Grid>
                                         <Grid Margin="15">
-                                            <Border Background="{DynamicResource colorMainBlue}" BorderBrush="{DynamicResource colorBg}" BorderThickness="0" CornerRadius="999" Margin="10" Width="55" Height="55" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                            <Border Background="{DynamicResource colorMain}" BorderBrush="{DynamicResource colorBg}" BorderThickness="0" CornerRadius="999" Margin="10" Width="55" Height="55" HorizontalAlignment="Left" VerticalAlignment="Top">
                                                 <Grid>
                                                     <Path Fill="#FFF" Stretch="Fill" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25">
                                                         <Path.Data>
@@ -85,14 +95,14 @@
                                                     <TextBlock x:Name="updTitle" Text="Version Type" FontSize="12" Foreground="{DynamicResource colorFont1}" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Style="{DynamicResource TextButtonEx}" Background="{DynamicResource colorMainBlue}" HorizontalAlignment="Left" Height="20" MinWidth="60" Margin="0,5,0,0">
+                                                    <Button Style="{DynamicResource TextButtonEx}" Background="{DynamicResource colorMain}" HorizontalAlignment="Left" Height="20" MinWidth="60" Margin="0,5,0,0">
                                                         <TextBlock x:Name="nowVersion" Text="v1.0" Foreground="#FFF" Margin="10,0"/>
                                                     </Button>
                                                     <Button x:Name="updNewF" Visibility="Collapsed" Style="{DynamicResource TextButtonEx}" Background="Transparent" Height="20" Margin="5,5,0,0" Width="20" HorizontalAlignment="Left">
                                                         <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="5" Height="7" HorizontalAlignment="Left" Margin="0,1,0,0"
                                                               Data="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
                                                     </Button>
-                                                    <Button x:Name="updNew" Visibility="Collapsed" Style="{DynamicResource TextButtonEx}" Background="{DynamicResource colorMainBlue}" HorizontalAlignment="Left" Height="20" MinWidth="60" Margin="5,5,0,0">
+                                                    <Button x:Name="updNew" Visibility="Collapsed" Style="{DynamicResource TextButtonEx}" Background="{DynamicResource colorMain}" HorizontalAlignment="Left" Height="20" MinWidth="60" Margin="5,5,0,0">
                                                         <TextBlock x:Name="newVersion" Text="v1.0" Foreground="#FFF" Margin="10,0"/>
                                                     </Button>
                                                 </StackPanel>
@@ -143,7 +153,7 @@
                                     <TextBlock Text="{DynamicResource options_title_def}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
                                     <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_update_close}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                        <CheckBox x:Name="checkupdButton" Unchecked="checkupdButton_Unchecked" Checked="checkupdButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMainBlue}" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                        <CheckBox x:Name="checkupdButton" Unchecked="checkupdButton_Unchecked" Checked="checkupdButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMain}" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
                                             <CheckBox.Resources>
                                                 <ResourceDictionary>
                                                     <ResourceDictionary.MergedDictionaries>
@@ -182,7 +192,7 @@
                                                 <Grid>
                                                     <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="10" Height="10" HorizontalAlignment="Right" Margin="0,0,7,0"/>
                                                     <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="10" Height="10" HorizontalAlignment="Right" Margin="0,0,22,0"/>
-                                                    <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="21" Height="10" HorizontalAlignment="Right" Margin="0,4,37,5"/>
+                                                    <Border CornerRadius="5" Background="{DynamicResource colorMain}" Width="21" Height="10" HorizontalAlignment="Right" Margin="0,4,37,5" Opacity="0.4"/>
                                                 </Grid>
                                             </Border>
                                             <Border Background="{DynamicResource colorCard1}" Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Right" Width="169"/>
@@ -208,9 +218,21 @@
                                             <Border Height="20" VerticalAlignment="Top" Margin="0,-1,0,0" HorizontalAlignment="Left" Width="159"/>
                                         </StackPanel>
                                         <Grid>
-                                            <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="70" HorizontalAlignment="Right" Margin="0,18,5,7"/>
+                                            <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Width="70" HorizontalAlignment="Right" Margin="0,18,5,7">
+                                                <StackPanel Margin="0,10,0,0">
+                                                    <Grid>
+                                                        <Border CornerRadius="5" Background="{DynamicResource colorMain}" Height="10" Margin="4,3,56,0" Opacity="0.4"/>
+                                                        <Border CornerRadius="5" Background="{DynamicResource colorCard1}" Height="10" Margin="16,3,4,0"/>
+                                                    </Grid>
+                                                    <Border CornerRadius="5" Background="{DynamicResource colorCard1}" Height="10" Margin="4,3,4,0"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border CornerRadius="5" Background="{DynamicResource colorCard1}" Height="10" Margin="228,170,8,10"/>
                                             <StackPanel Margin="0,131,81,0">
-                                                <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Height="10" Margin="162,7,0,0"/>
+                                                <Grid>
+                                                    <Border CornerRadius="5" Background="{DynamicResource colorMain}" Height="10" Margin="209,7,0,0" Opacity="0.4"/>
+                                                    <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Height="10" Margin="147,7,13,0"/>
+                                                </Grid>
                                                 <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Height="10" Margin="143,7,0,0"/>
                                                 <Border CornerRadius="5" Background="{DynamicResource colorCard2}" Height="10" Margin="177,7,0,0"/>
                                             </StackPanel>
@@ -218,7 +240,7 @@
                                     </Grid>
                                     <StackPanel Margin="0,15,0,25">
                                         <TextBlock Text="Border Card UI" FontSize="15" Foreground="{DynamicResource colorFont}" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Version - 1.5" FontSize="10" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Version - 1.7" FontSize="10" Foreground="{DynamicResource colorFont1}" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
@@ -246,7 +268,7 @@
                                     <TextBlock Text="{DynamicResource options_title_theme}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
                                     <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_darkmode}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                        <CheckBox pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMainBlue}" x:Name="darkButton" Unchecked="darkButton_Unchecked" Checked="darkButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                        <CheckBox pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMain}" x:Name="darkButton" Unchecked="darkButton_Unchecked" Checked="darkButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
                                             <CheckBox.Resources>
                                                 <ResourceDictionary>
                                                     <ResourceDictionary.MergedDictionaries>
@@ -258,7 +280,7 @@
                                     </Grid>
                                     <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_auto_darkmode}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                        <CheckBox pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMainBlue}" x:Name="autoDarkButton" Unchecked="autoDarkButton_Unchecked" Checked="autoDarkButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                        <CheckBox pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMain}" x:Name="autoDarkButton" Unchecked="autoDarkButton_Unchecked" Checked="autoDarkButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
                                             <CheckBox.Resources>
                                                 <ResourceDictionary>
                                                     <ResourceDictionary.MergedDictionaries>
@@ -270,8 +292,8 @@
                                     </Grid>
                                     <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_main_color}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                        <StackPanel x:Name="colorsPan" Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <RadioButton pu:RadioButtonHelper.CheckedBackground="{DynamicResource colorSystem}" Click="Color_Click" x:Name="FollowSysColor" GroupName="MainColor" ToolTip="跟随系统" Background="{DynamicResource colorSystem}" BorderThickness="0" pu:RadioButtonHelper.BoxHeight="25" pu:RadioButtonHelper.BoxWidth="25" Margin="10,0,0,0">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <RadioButton Click="Color_Click" x:Name="FollowSysColor" GroupName="MainColor" ToolTip="跟随系统" Background="{DynamicResource colorSystem}" BorderThickness="0" pu:RadioButtonHelper.BoxHeight="25" pu:RadioButtonHelper.BoxWidth="25" Margin="10,0,0,0">
                                                 <RadioButton.Resources>
                                                     <ResourceDictionary>
                                                         <ResourceDictionary.MergedDictionaries>
@@ -281,8 +303,8 @@
                                                 </RadioButton.Resources>
                                             </RadioButton>
                                             
-                                            <Border Background="{DynamicResource colorCard2}" Width="2" CornerRadius="1" Margin="10,0,0,0"></Border>
-
+                                            <Border Background="{DynamicResource colorCard2}" Width="2" CornerRadius="1"></Border>
+                                            
                                             <RadioButton x:Name="demoRadio" Visibility="Collapsed">
                                                 <RadioButton.Resources>
                                                     <ResourceDictionary>
@@ -292,6 +314,9 @@
                                                     </ResourceDictionary>
                                                 </RadioButton.Resources>
                                             </RadioButton>
+
+                                            <StackPanel x:Name="colorsPan" Orientation="Horizontal"/>
+                                            
                                         </StackPanel>
                                     </Grid>
                                 </StackPanel>
@@ -302,7 +327,7 @@
                                     <TextBlock Text="{DynamicResource options_title_control}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
                                     <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_scroll}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                        <CheckBox x:Name="rollButton" Unchecked="rollButton_Unchecked" Checked="rollButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMainBlue}" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                        <CheckBox x:Name="rollButton" Unchecked="rollButton_Unchecked" Checked="rollButton_Checked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMain}" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
                                             <CheckBox.Resources>
                                                 <ResourceDictionary>
                                                     <ResourceDictionary.MergedDictionaries>
@@ -314,7 +339,7 @@
                                     </Grid>
                                     <Grid Margin="20,0,20,15">
                                         <TextBlock Text="{DynamicResource options_home}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                        <CheckBox x:Name="homeButton" Checked="homeButton_Checked" Unchecked="homeButton_Unchecked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMainBlue}" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
+                                        <CheckBox x:Name="homeButton" Checked="homeButton_Checked" Unchecked="homeButton_Unchecked" Content="{DynamicResource button_close}" Foreground="{DynamicResource colorFont}" Background="{DynamicResource colorCard1}" pu:CheckBoxHelper.CheckedContent="{DynamicResource button_open}" BorderThickness="0" pu:CheckBoxHelper.CornerRadius="5" pu:CheckBoxHelper.CheckedBackground="{DynamicResource colorMain}" FontSize="10" HorizontalAlignment="Right" pu:CheckBoxHelper.CheckBoxStyle="Button" Width="70" Height="25">
                                             <CheckBox.Resources>
                                                 <ResourceDictionary>
                                                     <ResourceDictionary.MergedDictionaries>
@@ -338,7 +363,7 @@
                                 <TextBlock Text="{DynamicResource options_title_dev}" FontSize="14" Foreground="{DynamicResource colorFont}" Margin="15,15,15,10"/>
                                 <Grid Margin="20,0,20,15">
                                     <TextBlock Text="{DynamicResource options_show_tost}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                    <Button Name="ShowTost" Click="ShowTost_Click"  Foreground="#FFF" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorMainBlue}" Height="25" Margin="0" HorizontalAlignment="Right" Width="70">
+                                    <Button Name="ShowTost" Click="ShowTost_Click"  Foreground="#FFF" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorMain}" Height="25" Margin="0" HorizontalAlignment="Right" Width="70">
                                         <Path Fill="#FFF" Stretch="Fill" Width="5" Height="8" HorizontalAlignment="Left" Margin="3,2,0,0">
                                             <Path.Data>
                                                 <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
@@ -348,7 +373,7 @@
                                 </Grid>
                                 <Grid Margin="20,0,20,15">
                                     <TextBlock Text="{DynamicResource options_Show_Msg}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                    <Button Name="ShowMsg" Click="ShowMsg_Click" Foreground="#FFF" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorMainBlue}" Height="25" Margin="0" HorizontalAlignment="Right" Width="70">
+                                    <Button Name="ShowMsg" Click="ShowMsg_Click" Foreground="#FFF" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorMain}" Height="25" Margin="0" HorizontalAlignment="Right" Width="70">
                                         <Path Fill="#FFF" Stretch="Fill" Width="5" Height="8" HorizontalAlignment="Left" Margin="3,2,0,0">
                                             <Path.Data>
                                                 <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
@@ -358,7 +383,7 @@
                                 </Grid>
                                 <Grid Margin="20,0,20,15">
                                     <TextBlock Text="{DynamicResource options_Load_mod}" FontSize="12" Foreground="{DynamicResource colorFont}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                    <Button Name="LoadMod" Click="LoadMod_Click" Foreground="#FFF" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorMainBlue}" Height="25" Margin="0" HorizontalAlignment="Right" Width="70">
+                                    <Button Name="LoadMod" Click="LoadMod_Click" Foreground="#FFF" Style="{DynamicResource BCardEx}" Background="{DynamicResource colorMain}" Height="25" Margin="0" HorizontalAlignment="Right" Width="70">
                                         <Path Fill="#FFF" Stretch="Fill" Width="5" Height="8" HorizontalAlignment="Left" Margin="3,2,0,0">
                                             <Path.Data>
                                                 <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>

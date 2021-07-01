@@ -20,9 +20,6 @@
     <SolidColorBrush x:Key="colorFont1" Color="#FFCFCFCF"/>
     <SolidColorBrush x:Key="colorFont2" Color="#FFB0B0B0"/>
 
-    <SolidColorBrush x:Key="colorMainBlue" Color="#4C6EF5"/>
-    <SolidColorBrush x:Key="colorSystem" Color="#FFFFFF"/>
-
     <!-- 颜色 -->
     <Color x:Key="colorShader">#5F5F5F</Color>
 
@@ -105,7 +102,7 @@
                     <!--鼠标拉动滚动条时的颜色 -->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Fill" Value="{DynamicResource colorCard1}" TargetName="thumbRect" />
+                            <Setter Property="Fill" Value="{DynamicResource colorCard1}" TargetName="thumbRect"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -217,10 +214,10 @@
                             <Border Name="BorderOver" CornerRadius="5" Background="Transparent">
                                 <Border Name="BorderOn" CornerRadius="0" Background="Transparent">
                                     <Grid>
-                                        <Border x:Name="mLeft" Visibility="Collapsed" Width="3" CornerRadius="1.5" Background="{DynamicResource colorMainBlue}" HorizontalAlignment="Left" Margin="5,12,0,12"></Border>
+                                        <Border x:Name="mLeft" Visibility="Collapsed" Width="3" CornerRadius="1.5" Background="{DynamicResource colorMain}" HorizontalAlignment="Left" Margin="5,12,0,12"></Border>
                                         <TextBlock Foreground="{DynamicResource colorFont}" x:Name="mHeader" FontSize="13" HorizontalAlignment="Left" Text="{TemplateBinding Header}" VerticalAlignment="Center" Margin="18,2,12,2"/>
                                         <Grid x:Name="mRight">
-                                            <Path Fill="{DynamicResource colorFont}" Stretch="Fill" Width="7" Height="9" HorizontalAlignment="right" Margin="12,2,17,2">
+                                            <Path x:Name="icon" Fill="{DynamicResource colorFont}" Stretch="Fill" Width="7" Height="9" HorizontalAlignment="right" Margin="12,2,17,2">
                                                 <Path.Data>
                                                     <PathGeometry FillRule="Nonzero" Figures="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/>
                                                 </Path.Data>
@@ -236,6 +233,8 @@
                             <Setter TargetName="mRight" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="mHeader" Property="Foreground" Value="{DynamicResource colorMain}"/>
+                            <Setter TargetName="icon" Property="Fill" Value="{DynamicResource colorMain}"/>
                             <!--<Setter TargetName="BorderOn" Property="Background" Value="#20000000"/>-->
                             <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
                             <Setter TargetName="mLeft" Property="Visibility" Value="Visible"/>
@@ -248,6 +247,8 @@
                             </Trigger.EnterActions>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="mHeader" Property="Foreground" Value="{DynamicResource colorFont}"/>
+                            <Setter TargetName="icon" Property="Fill" Value="{DynamicResource colorFont}"/>
                             <Setter TargetName="BorderOn" Property="Background" Value="#00000000"/>
                             <Setter TargetName="BorderOn" Property="CornerRadius" Value="5"/>
                         </Trigger>
